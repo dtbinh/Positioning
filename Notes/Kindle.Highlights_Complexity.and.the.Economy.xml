@@ -1,0 +1,1289 @@
+<!--
+    The "isNoteOnly" attribute on the highlight element indicates that the child
+    text element contains automatically selected context around a user's note, but
+    was not text explicitly highlighted by the user.
+-->
+<book>
+  <title>Complexity and the Economy</title>
+  <authors>W. Brian Arthur</authors>
+  <highlights>
+    <highlight isNoteOnly="false">
+      <text>The Economy as an Evolving Complex System II</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4">4</location>
+      <note>!Ref: Book</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Increasing Returns and Path Dependence in the Economy</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=5">5</location>
+      <note>!Ref: Book</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>perfect rationality, equilibrium, diminishing returns, and of independent agents always facing well-defined problems</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=57">57</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>behavioral rationality, nonequilibrium, increasing returns, and of interconnected agents facing fundamental uncertainty in problems of decision-making.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=58">58</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>nonlinear dynamics, nonlinear stochastic processes, agent-based computation, and computational theory</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=69">69</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>agents constantly change their actions and strategies in response to the outcome they mutually create, a system where agents are constantly creating an “ecology” of behaviors they must mutually adapt to.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=75">75</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>could decide what to do next not just based on the current situation of themselves and other elements, but on what they thought those other elements might do given what they might do.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=102">102</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>What would it be like to do economics out of equilibrium?</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=129">129</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>classifier systems, basically systems that are concatenations of condition-action rules.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=135">135</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>The system could learn and evolve.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=141">141</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>a computer-based model of the stock market.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=162">162</location>
+      <note>!Model: Santa Fe Artificial Stock Market (chapter 3)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>differed from other computerized rule-based models that had begun to appear from about 1986 onward. Their rules were few and were fixed—laid down in advance—and tested in competition with each other. Our rules could change, mutate, and indeed “get smart.”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=187">187</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“agent-based modeling</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=194">194</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>John Rust and Richard Palmer were looking at the double auction market</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=197">197</location>
+      <note>!Ref: Article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>information contagion,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=197">197</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Minority Game and El Farol</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=218">218</location>
+      <note>!Model: See chapter 2</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>combinations of technologies that already existed.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=223">223</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Darwinian.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=242">242</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Evolution by Combination, or Combinatorial Evolution.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=245">245</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>experiment</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=259">259</location>
+      <note>!Model: Generic algorithm that creates digital circuits (See chapter 7)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>complexity economics</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=291">291</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>The economy is not necessarily in equilibrium; in fact it is usually in nonequilibrium. Agents are not all knowing and perfectly rational; they must make sense of the situations they are in and explore strategies as they do this. The economy is not given, not a simple container of its technologies; it forms from them and changes in structure as this happens. In this way the economy is organic, one layer forms on top of the previous ones; it is ever changing, it shows perpetual novelty; and structures within it appear, persist for a while, and melt back into it again.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=292">292</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Neoclassical economics</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=303">303</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>stiffness in thinking,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=310">310</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>righteousness in what was permitted as economic theory</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=310">310</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Shut out were the effects on the economy of politics, of power, of class, of society, of fundamental uncertainty, and of formation and creation and development.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=311">311</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>hyper-rational</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=312">312</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>reduce anything to pure logic</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=319">319</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>reveal its true messiness,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=322">322</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>fit well with ideas in Schumpeter, and Smith, and Mill, and Marx, and Keynes, and with the ideas of the institutionalists and political economists</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=327">327</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>not necessarily</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=392">392</location>
+      <note>!Definition (defined as negation of current state of economics)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>beliefs and strategies are constantly being “</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=394">394</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>patterns or phenomena not visible to equilibrium analysis. These emerge probabilistically, last for some time and dissipate,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=396">396</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“meso-level</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=397">397</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>aggregate patterns form from individual behavior, and individual behavior in turn responds to these aggregate patterns:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=426">426</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Complexity is not a theory but a movement in the sciences</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=428">428</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>formation of structures</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=431">431</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>how individual agents’ behaviors together form some outcome and how this might in turn alter their behavior as a result.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=433">433</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>how individual behaviors might react to the pattern they together create, and how that pattern would alter itself as a result.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=434">434</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>what behaviors (actions, strategies, expectations) would be upheld by—would be consistent with—the aggregate patterns these caused.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=437">437</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>(General equilibrium theory thus asked what prices and quantities of goods produced and consumed would be consistent with—would pose no incentives for change to—the overall pattern of prices and quantities in the economy’s markets.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=439">439</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Classical game theory asked what strategies, moves, or allocations would be consistent with—would be the best course of action for an agent (under some criterion)—given the strategies, moves, allocations his rivals might choose.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=440">440</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>rational expectations economics asked what expectations would be consistent with—would on average be validated by—the outcomes these expectations together created.)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=442">442</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>it re-composes it in our minds, gives us a way to picture it,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=446">446</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>comprehend the economy in its wholeness.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=447">447</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>(Colander and Kupers, 2012; Louça, 2010</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=454">454</location>
+      <note>!Ref: articles on historical “richer view of the economy”</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Under equilibrium</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=456">456</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>anything in the economy that takes adjustment—adaptation, innovation, structural change, history itself—must be bypassed or dropped from theory.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=458">458</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>ENDOGENOUSLY GENERATED NONEQUILIBRIUM</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=461">461</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>implicitly assuming nonequilibrium,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=463">463</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>nonequilibrium arises endogenously in the economy.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=470">470</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>fundamental (or Knightian) uncertainty, the other is technological innovation.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=471">471</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Behavioral economics tells us that often the context determines how people decide,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=488">488</location>
+      <note>Behavioural economics</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>if a decision is important, people may stand back from the situation and attempt to make sense out of it by surmising, making guesses, using past knowledge and experience. They use their imaginations</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=489">489</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>induction</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=496">496</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Brownian</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=499">499</location>
+      <note>Wikipedia: Brownian motion or pedesis (from Greek: &amp;quot;leaping&amp;quot;) is the random motion of particles suspended in a fluid (a liquid or a gas) resulting from their collision with the quick atoms or molecules in the gas or liquid. The term &amp;quot;Brownian motion&amp;quot; can also refer to the mathematical model used to describe such random movements, which is often called a particle theory.</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>combinations of technology.)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=503">503</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>It follows that</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=509">509</location>
+      <note>Not clear/evident that this cannot be simplified and modelled as once-in-a-while changes to equilibrium. What is the fundamental effect of the smaller or less disruptive innovations on the aggregate equilibrium that an equilibrium-approach cannot reasonably capture?
+
+Answer: Self-reinforcing process, where as in standard economics the technology shocks would be exogenous to the model, and you have a return to equilibrium (or explosion i.e. no solution)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>permanent state of disruption.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=513">513</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Technological disruption acts on a somewhat slower timescale than the Brownian motion of uncertainty.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=514">514</location>
+      <note>!!! The concept of different timescales</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>formally, we can say that the economy is an ongoing computation—a vast, distributed, massively parallel, stochastic one.11 Viewed this way, the economy becomes a system that evolves procedurally in a series of events; it becomes algorithmic.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=535">535</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>there is no analytical method to decide in advance what a given algorithm will do.13 All we can do is follow the computation and see what it brings.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=545">545</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>For highly interconnected systems, equilibrium and closed-form solutions are not the default outcomes; if they exist they require justification.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=549">549</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>pre-analysis of the qualitative properties of nonequilibrium systems, and understand the mechanisms behind these;</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=551">551</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Kristian Lindgren</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=570">570</location>
+      <note>!Model: computerised tournament (repeated prisoner’s dilemma game).</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>ecology of strategies,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=580">580</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Working with equations allows us to follow an argument step by step and reveals conditions a solution must adhere to, whereas computation does not.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=599">599</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Computation in other words is an aid to thought, and it joins earlier aids in economics—algebra, calculus, statistics, topology, stochastic processes—each of which was resisted in its time.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=602">602</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>and their further unfolding, and of any dynamic phenomena that appear.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=611">611</location>
+      <note>How do expectations enter computation? Is it possible?
+
+Answer: 
+There are different approaches. One approach is to led agents hold several hypothesis or mental models in the head at once, and then act on the one most credible. This differs from standard economic theory, in that expectations are not exogenous — i.e. you don’t assume a specific distribution and shared equation of motion that agents use predict the future. Instead you have heterogeneous agents with each their private expectation and mental model that influence how they act.</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>consider a simple model of something slightly outside the economy, traffic</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=615">615</location>
+      <note>!Model: Traffic flow</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>self-reinforcing asset-price changes</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=628">628</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>To see how these are generated consider the Santa Fe artificial</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=629">629</location>
+      <note>!Model: Santa Fe Artificial Stock Market (See chapter 3)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>clustered volatility</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=645">645</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Low volatility reigns when agents’ forecasts are working reasonably well mutually;</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=646">646</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>sudden percolation</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=652">652</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Generally in complex systems, phenomena do not appear until some underlying parameter of the model that depicts the intensity of adjustment or the degree of connection passes some point and reaches some critical level. The overall behavior then undergoes a phase transition</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=660">660</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>If we tune the rate of exploration still higher, individual behavior cannot adjust usefully to the rapidly changing behaviors of others, and chaotic behavior reigns.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=665">665</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>regime transitions from equilibrium to complexity to chaos, or from equilibrium to complexity to multiple equilibria</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=667">667</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>such changes play out. Or, to put it another way, complexity</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=675">675</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>cascade of events:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=677">677</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>propagations of events causing further events show characteristic properties such as power laws (caused by many and frequent small propagations, few and infrequent large ones), heavy tailed probability distributions (lengthy propagations though rare appear more frequently than normal distributions would predict),20 and long correlations (events can and do propagate for long distances and times).</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=679">679</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>self-reinforcing behavior in the interactions.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=709">709</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>If a system contains only negative feedbacks (in economics, diminishing returns) it quickly converges to equilibrium and shows “dead” behavior. If it contains only positive feedbacks, it runs away and shows explosive behavior. With a mixture of both it shows “interesting” or “complex” behavior.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=716">716</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>they lead to a set of characteristic properties: multiple attractors, unpredictability, lock-in, possible inefficiencies, and path-dependence.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=730">730</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>The standard story of economic change equates technologies with production functions and sees the economy as a container for these. As new industrial technologies enter, production functions change, output increases and labor or other resources are released; this provides further wealth that can be invested in further technologies. The economy shifts smoothly from one equilibrium to another and endogenously grows.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=743">743</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>economy structurally over time.     To start, we can define individual technologies</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=753">753</location>
+      <note>!Definition: technology</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>out. The steps involved yield the following algorithm for the formation</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=769">769</location>
+      <note>!Model: Technology (See chapter 7-8)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>New technologies often enter in groups</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=788">788</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>autopoietic</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=802">802</location>
+      <note>!Word</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>algorithmic:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=814">814</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>how this can be theory?</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=814">814</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Even now, 150 years after Darwin’s Origin, no one has succeeded in reducing to an equation-based system the process by which novel species are created, form ecologies, and bring into being whole eras dominated by characteristic species. The reason is that the evolutionary process is based on mechanisms that work in steps and trigger each other, and it continually defines new categories—new species.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=815">815</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Equations do well with changes in number or quantities within given categories, but poorly with the appearance of new categories themselves.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=818">818</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>process-based, not quantity-based.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=821">821</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>procedural</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=821">821</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>creative formation: of new elements forming from existing elements, new structure forming from existing structure, formation itself proceeding from earlier formation.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=827">827</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>formation, exploration, adaptation, and qualitative change</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=848">848</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>neoclassical economics handles time poorly</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=856">856</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>getting meta conditions right.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=871">871</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>equilibrium is a condition where no agent has any incentive to diverge from its present behavior, therefore exploitive behavior cannot happen.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=877">877</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Complexity economics is neither an add-on to standard economics (see Fontana, 2010), nor does it consist of adding agent-based behavior to standard models. It is a different way of thinking about the economy.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=886">886</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>it redefines what constitutes a solution in economics. A solution is no longer necessarily a set of mathematical conditions but a pattern, a set of emergent phenomena, a set of changes that may induce further changes, a set of existing entities creating novel entities. Theory in turn becomes not the discovery of theorems of undying generality, but the deep understanding of mechanisms that create these patterns and propagations of change.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=894">894</location>
+      <note>!!! (solution)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“The computer,” he says, “is not just a tremendously useful technology, it is a revolutionary new kind of mathematics with profound philosophical consequences. It reveals a new world.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=902">902</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>ACM Ubiquity Symposium: What Is Computation? 2010.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=914">914</location>
+      <note>!Ref: book</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Arthur, W. B., The Nature of Technology: What It Is and How It Evolves, The Free Press, New York, 2009.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=932">932</location>
+      <note>!Ref: book</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Smolin, L., “Time and Symmetry in Models of Economic Markets,” Mss., Feb 2009. Smolin, L., Time Reborn. Houghton, Mifflin, Harcourt, New York, 2013.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1021">1021</location>
+      <note>!Ref: Article — time!Ref: Article — time</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Current circumstances would of course include relevant past history or memory of past history.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1069">1069</location>
+      <note>How about expectations of future?
+
+Answer: these are endogenous to the models.</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>What Is Computation?</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1071">1071</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>For other complexity approaches to formation see Hildago and Hausmann (2009), and Lane et al. (2009). On structural change see North (1981).</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1109">1109</location>
+      <note>!Ref: articles</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>simple ones via random combination of earlier combinations (circuits).     31. See</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1127">1127</location>
+      <note>!Ref: articles</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>they are forced to guess their behavior. This lands them in a world of subjective beliefs, and subjective beliefs about subjective beliefs.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1153">1153</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>In problems of complication then, we look for patterns;</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1163">1163</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>humans tend to hold in mind many hypotheses and act on the most plausible one</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1187">1187</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>system of temporarily fulfilled expectations</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1194">1194</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>agents differ, and each uses several subjective models instead of a continuum of one commonly held model.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1198">1198</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>coevolutionary.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1201">1201</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Where do the hypotheses or mental models come from?</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1205">1205</location>
+      <note>Recognisable patterns. Fear of unknown. Trust in known. (Race/stereotypes/heuristics). Perhaps similar to &amp;quot;picking up&amp;quot; or generic algorithm.</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>focal models:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1208">1208</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>genetic algorithm or some similar intelligent search device to generate ever “smarter” models.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1209">1209</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“picking up” mental models</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1210">1210</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>transfer</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1211">1211</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>After some initial learning time,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1286">1286</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>positioning products in the market</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1290">1290</location>
+      <note>!!! (location model/positioning products)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>assumptions were not realistic.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1333">1333</location>
+      <note>vs. realistic predictions (Milton Friedman and the irrelevance of assumptions, see The methodology of Positive Economics)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>noise-trader approach,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1372">1372</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Actual noise-trader markets, assumed stationary in theory, would start to unravel;</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1386">1386</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>under heterogeneity, expectations have a recursive character: agents have to form their expectations from their anticipations of other agents’ expectations, and this self-reference precludes expectations being formed by deductive means. So, in the absence of being able to deduce expectations, agents—no matter how rational—are forced to hypothesize them.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1396">1396</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>trade on the ones that predict best.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1399">1399</location>
+      <note>What would happen if agents the majority of the time were observers: hypothesise models/expectations, observe outcomes, but did not act upon their expectations unless significantly certain of the validity of their expectation. I.e. agents are not continuously interacting with the market, but discreetly.
+Would this be similar to explicitly modeling risk attitudes? Would there be periods of no trade or low trading? Would it stabilise the model and lead to less volatile market behaviour (no chaotic regime?)
+
+Correspondingly, what if agents only occasionally hypothesise models/expectations (non-professional traders in market)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>if our agents very slowly adapt their forecasts to new observations of the market’s behavior, the market converges to a rational-expectations regime.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1411">1411</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>Suppose we summarize the state of the market by J = 13</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1575">1575</location>
+      <note>!!! (these 13 focal points are the weak point of model. i.e. that they are pre-imposed rather than be formed by the agents of the model). This is also noted at the end of this section that this is a limitation in terms of the forecasts.</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>which should be ignored. And it happens on a slower time</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1599">1599</location>
+      <note>!!! example of different time scales in model</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>and activate appropriate forecasts. This enables agents to make swift gestalt-like</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1606">1606</location>
+      <note>!Word</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>(Forecasting is, of course, limited by the choice of the binary descriptors that represent market conditions.)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1610">1610</location>
+      <note>!</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>this chapter, all agents see all market information equally.)     A neural</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=1621">1621</location>
+      <note>Wikipedia: 
+In machine learning and cognitive science, artificial neural networks (ANNs) are a family of statistical learning models inspired by biological neural networks (the central nervous systems of animals, in particular the brain) and are used to estimate or approximate functions that can depend on a large number of inputs and are generally unknown. Artificial neural networks are generally presented as systems of interconnected &amp;quot;neurons&amp;quot; which send messages to each other. The connections have numeric weights that can be tuned based on experience, making neural nets adaptive to inputs and capable of learning.
+
+For example, a neural network for handwriting recognition is defined by a set of input neurons which may be activated by the pixels of an input image. After being weighted and transformed by a function (determined by the network&#x27;s designer), the activations of these neurons are then passed on to other neurons. This process is repeated until finally, an output neuron is activated. This determines which character was read.</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>term in equation (1) disappears and that xn tends to 0·</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2172">2172</location>
+      <note>0.5</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>a barrier with probability one. Therefore the two technologies cannot coexist</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2178">2178</location>
+      <note>How does this result related to the “Rabbits vs. Sheep” model (Lotka-Volterra model of competition)? Two technologies competing for a limited ressource. I.e. early adopters is a limited ressource. (There are infinitely many adopters, but the EARLY adopters are finite).</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>exchange for potential monopoly profits later, and all but one firm</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2222">2222</location>
+      <note>!Ref: Article (Firm entry/exit. Industrial Organisation.)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Hanson, W. (1985). “Bandwagons and orphans: dynamic pricing of competing systems subject to decreasing costs.” Ph.D. Dissertation, Stanford.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2468">2468</location>
+      <note>!Ref: Article (Firm entry/exit. Industrial Organisation.)</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>guaranteed.         7. For similar findings see the literature on the dynamics</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2509">2509</location>
+      <note>!Ref: Articles (firm entry/exit)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>manifesto.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2534">2534</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the economy consists of heterogeneous agents acting in parallel and responding to the aggregate states they together co-create. In doing so they continually adapt to a perpetually changing world in which there is no global controller, a world in which human cognition, hierarchy, and interaction are important.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2536">2536</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Durlauf (on inequality)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2571">2571</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Krugman (on economic geography),</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2571">2571</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>North (development)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2572">2572</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>In the equilibrium approach, the problem of interest is to derive, from the rational choices of individual optimizers, aggregate-level “states of the economy”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2577">2577</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>In the dynamical systems approach, the state of the economy is represented by a set of variables, and a system of difference equations or differential equations describes how these variables change over time. The problem is to examine the resulting trajectories, mapped over the state space.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2580">2580</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the equilibrium approach does not describe the mechanism whereby the state of the economy changes over time—nor indeed how an equilibrium comes into being.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2582">2582</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the dynamical system approach generally fails to accommodate the distinction between agent- and aggregate-levels</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2584">2584</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>adaptive nonlinear networks</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2604">2604</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>do not act simply in terms of stimulus and response. Instead they anticipate.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2606">2606</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>combinatorial mathematics</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2611">2611</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>population-level stochastic processes,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2611">2611</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>computer modeling.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2612">2612</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>any “common knowledge” agents might have about one another must be attained from concrete, specified cognitive processes operating on experiences obtained through concrete interactions. Common knowledge cannot simply be assumed into existence.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2628">2628</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>In general equilibrium analysis, agents do not interact with one another directly, but only through impersonal markets. By contrast, in game theory all players interact with all other players, with outcomes specified by the game’s payoff matrix. So interaction structures are simple and often extreme—one-with-all or all-with-all.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2631">2631</location>
+      <note>Construct one-with-all network and all-with-all network. Compare these two network structures with something in between, a random graph, and a scale-free random network. (Similar to Lindgren)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>if we posit a world of perpetual novelty, then outcomes cannot correspond to steady-state equilibria, whether Walrasian, Nash, or dynamic-systems-theoretical.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2648">2648</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>evolution of trading networks (Ioannides, Kirman, and Tesfatsion),</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2658">2658</location>
+      <note>!Ref: Article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the origin and spatial distribution of cities (Krugman),</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2659">2659</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>persistent differences in income between different neighborhoods or countries (Durlauf).</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2660">2660</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“the interpretation of data is critical. It is not what the numbers are, but what they mean.”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2668">2668</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>deductive indeterminacy.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2674">2674</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Expectations in the market therefore become endogenous—</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2681">2681</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>How individual agents decide what to do may not matter very much. What happens as a result of their actions may depend much more on the interaction structure through which they act—who interacts with whom, according to which rules.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2718">2718</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>standard theory typically ignores where values and information come from. It treats agents’ values and information as exogenous and autonomous.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2731">2731</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Kirman’s paper reviews a number of models that derive economic consequences from interaction networks.     Ioannides, Kirman, and Tesfatsion consider the problems of how networks emerge from initially random patterns of dyadic interaction and what kinds of structure the resulting networks exhibit.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2736">2736</location>
+      <note>!!!Ref: Article!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>markets actually function by means of networks of traders, and what happens in markets may reflect the structure of these networks, which in turn may depend on how the networks emerge.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2743">2743</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Lindgren’s agents only interact with neighbors in a prespecified interaction network. Lindgren studies the emergence of spatiotemporal structure in agent space—metastable ecologies of strategies that maintain themselves for many agent-generations against “invasion” by new strategy types or “competing” ecologies at their spatial borders.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2748">2748</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Though Lindgren’s model is not explicitly economic, the contrast he draws between an agent space in which interactions are structured by (relatively sparse) social networks and an agent space in which all interactions are possible (as is the case, at least in principle, with the impersonal markets featured in general equilibrium analysis) is suggestive.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2754">2754</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>geographical segregation.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2758">2758</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Kollman, Miller, and Page explore a related theme in their work on political platforms and institutions in multiple jurisdictions. In their agent-based model, agents may relocate between jurisdictions. They show that when there are more than three jurisdictions, two-party competition outperforms democratic referenda. The opposite is the case when there is only one jurisdiction and, hence, no agent mobility. They also find that two-party competition results</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2763">2763</location>
+      <note>!Ref: Article (Political model)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>North’s essay focuses on institutions and economic growth,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2776">2776</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>In whichever sense institutions are construed, the three authors agree that they cannot be adequately understood from a purely economic, purely political, or purely social point of view. Economics, politics, and society are inextricably mixed in the processes whereby institutions come into being.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2781">2781</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>modern economies depend upon institutions that provide low transaction costs in impersonal markets.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2787">2787</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>processes of change are generally driven by the inhabitants of the extreme tails of some relevant distribution.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2797">2797</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Fontana, W., and L. Buss. “The Arrival of the Fittest: Toward a Theory of Biological Organization.” Bull. Math. Biol. 56 (1994): 1–64.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2820">2820</location>
+      <note>!Ref: Article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>methodological survey of Wasserman and Faust.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2846">2846</location>
+      <note>!Ref: Article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>exploitive behavior within the economy is not rare</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2856">2856</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Economic analysis assumes equilibrium of the system in question, and by definition equilibrium is a condition where no agent has any incentive to diverge from its present behavior.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2880">2880</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>had a “failure mode analysis” tradition in economics for assessing policy systems. Such a tradition exists in other disciplines where life or safety or well-being are at stake: Failure mode analysis in engineering investigates the ways in which structures have failed in the past and might fail or not function as intended; preventive medicine and disease control investigates the causes of diseases, death, and epidemics and looks to their future prevention.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2926">2926</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the parties under surveillance adjust their behavior to appear virtuous under the stated performance measures, while their actual behavior may be anywhere from satisfactory to reprehensible.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2963">2963</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Campbell’s law (1976): “the more any quantitative social indicator is used for social decision-making, the more subject it will be to corruption pressures and the more apt it will be to distort and corrupt the social processes it is intend to monitor.”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2965">2965</location>
+      <note>!Definition: Campbell’s law</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Goodhart’s law (1975): “Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes.”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2967">2967</location>
+      <note>!Definition: Goodhart’s law</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Any performance criterion will be optimized against, and will thereby lose its value.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=2969">2969</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>places of high “stress”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3007">3007</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>tend to be the points that present strong incentives for agents to do something different from their prescribed behavior.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3007">3007</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“discovery.”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3104">3104</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>(Holland, 1975; Holland et al., 1986</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3105">3105</location>
+      <note>!Ref: articles (methods on how agents generate strategies)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“Economic safety”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3155">3155</location>
+      <note>“In whichever sense institutions are constructed, the three authors agree that they cannot be adequately understood from a purely economic, purely political, or purely social point of view.” 
+… A research institute that focuses on “Economic safety” or decides to build a database of previous “failures” also needs to consider politics and society.</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>I call this mechanism of evolution by the creation of novel combinations and selection of those that work well combinatorial evolution,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3235">3235</location>
+      <note>!Definition Technology</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>complex features can be created only if simpler ones are first favored and act as stepping stones.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3244">3244</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>technology (the collection of mechanical devices and methods available to a culture) builds itself out of itself.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3250">3250</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>This evolution is driven not just by the availability of previous technologies. It is driven by the large collection of human needs and also by needs brought into being by technologies themselves.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3258">3258</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>new elements not only add to the network but engender</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3262">3262</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“gales of destruction”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3262">3262</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>agency of the economy</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3263">3263</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>an organizational structure for arranging how technologies meet needs)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3264">3264</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Do some technologies emerge as enabling ones (like ore smelting or the transistor) that have many uses in further combination, so that usefulness in generating further technologies is highly skewed?</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3278">3278</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>We find avalanches of replacement—Schumpeter’s “gales of destruction.” These follow a power law, so that the collective of technology shows evidence that it exists at self-organized criticality.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3294">3294</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>run of our artificial system as an experiment. Each experiment starts</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3299">3299</location>
+      <note>!Timing</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>randomly wiring together several components</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3299">3299</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>A component can be a primitive logic gate or another circuit</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3300">3300</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>needs or goals, useful logical functions to be achieved possible by the combinations.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3301">3301</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Ideally we would like these needs to be generated by agents who occupy an artificial world in which logical functions such as adders or comparators have proved useful.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3303">3303</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Each need for a particular logical functionality can be represented by a specific truth table: a set of desired output values for every possible set of input values presented.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3306">3306</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>truth table:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3308">3308</location>
+      <note>A table of all possible combinations of inputs and their respective outputs</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>easily match experimental technologies with our list of needs.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3309">3309</location>
+      <note>What will happen with technology that is not easily comparable to “needs”? Where it is difficult to evaluate its usefulness? Fore example penicillin or x-ray technology that were discovered by coincidence.</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>randomly wiring together between 2 and 12 circuits selected from all previously existing technologies according to a choice function that specifies probabilities of selection.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3314">3314</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>(have least incorrect entries in their truth tables).</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3317">3317</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>(The cost of a circuit is determined by the number of its components and by their respective cost.)</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3319">3319</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>it replaces the circuit it has improved upon both directly and in all circuits where that circuit is used as a component.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3320">3320</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Loosely however we can think of each step in our process as a set of laboratory tests that investigates a novel idea.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3327">3327</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Our experiment starts from the NAND primitive. In other versions of the experiment we used “implication” as the primitive.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3355">3355</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>The likelihood of such a circuit being discovered by random combinations</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3365">3365</location>
+      <note>But this is not random combinations. 
+It should be the probability of something like; getting a 1-bit adder followed by a 2-bit adder followed by … a 8-bit adder in 250,000 steps. Because the 1-bit adder, 2-bit adder, etc, are also on our list of “needs”. This conditionality would take the “probability cloud” surrounding each technology into account.
+If the probability of getting this “conditional” combination is also negligible, then — and first then — could you say that the 8-bit emerged from the process, as opposed to the experiment being designed to discover it.
+
+The model also confirms that the probability of randomly find a 8-bit adder is negligible. If the list of needs only contain the the 8-bit adder then the model does not discover it in 250,000 steps.
+
+A 1-bit adder: 256 combinations
+A 2-bit adder: ~10^14 combinations
+A 3-bit adder: ~10^77 combinations
+A 4-bit adder: ~10^385 combinations
+A 8-bit adder: ~10^177554 combinations</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>size? Again, these also do not perform as well. The algorithm</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3419">3419</location>
+      <note>This is the weak point of the model</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>(yielding a scale-free network) but by no means perfectly. Figure 6:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3427">3427</location>
+      <note>Not scale-free / power law. Way too few observations to significantly determine the appropriate curvature/slope. Besides the exponential and power law distribution look alike. The power law follows the straight line along all powers. The exponential also follows the straight line, but only for the first couple of powers. This plot only goes to the POWER of 2. It only has 10^2 on the axis e.g. not enough to distinguish between power and exponential.
+
+Which of these technologies are “needs”/“goal” technologies, and which are not? Impossible to see if this figure is “designed”, e.g. purely a result of the “needs” (how would the figure look if “goal” technologies where excluded), or if it is actually the case that only few technologies are crucial corner stones for other technologies.</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>because the number of technologies in the network is never large.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3442">3442</location>
+      <note>Problematic. Then not possible to determine power law (scale-free network/self-organised criticality).</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>clearly signaled economically and technically; and existing technologies form a substrate</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3449">3449</location>
+      <note>!Word</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Schumpeter, J. A. The Theory of Economic Development; Transaction Publishers: New Brunswick, NJ, 1911/1934/1996.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3497">3497</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>what brings what into existence—what makes what possible—</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3531">3531</location>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>look at the economy in a different way.     I will define</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3563">3563</location>
+      <note>!Definition</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>and decides which new technologies will enter it. Notice the circular</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3594">3594</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>of arrangements but called for a new kind of person. Factory discipline,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3662">3662</location>
+      <note>Concept: “Factory discipline” — That new organisational sets of arrangements call for a new kind of person.
+
+Somehow seems related to Webb’s theory of the “Protestant Work Ethic”. Although not with a focus on relegion, but highlighting that people from different cultures do not have “empty minds”, but bring with them their experience/psyche/discipline/work ethics from their previous organisational arrangements. May be interesting when considering Africa.
+Also slightly related to Acemoglu and Robinson, although here the new political elite adopt the extractive economic and political system (organisational arrangement) from the previous elite (approach of colonial Spain in Central and South America).</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>of this constant roiling at any time. This is because the</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3696">3696</location>
+      <note>Different time scales. The features operating on a time scale with slow revolt (high degree of continuity), can appear static or fixed.</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>are lucky we experience a net benefit that we call progress.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3711">3711</location>
+      <note>Quote</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>unceasing change.     Is there anything constant about structural change? Well, the</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3725">3725</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>The Lever of Riches, Oxford University Press, New York, 1990. Rapp,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3747">3747</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>and evolutionary game theory. This paper appeared in the book Complexity:</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3774">3774</location>
+      <note>!Ref: Book</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>can be observed in several artificial evolution contexts: for example, Tom</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3831">3831</location>
+      <note>!Models</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>will be created. And so the system will be largely quiescent.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3856">3856</location>
+      <note>!Word</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>software programs.     One laboratory for observing real-time structural deepening is John</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3904">3904</location>
+      <note>!Model: Genetic algorithm</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>several times in the course of the algorithmic search.      John</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3913">3913</location>
+      <note>!Model: Genetic programming algorithm</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>alternate, and even compete.     This can be seen clearly in Kristian</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3937">3937</location>
+      <note>!Ref: Article</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>laws that are, within the human time frame at least, immutable.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=3969">3969</location>
+      <note>!Word</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>history, not just economic theory.         The essay appeared in The Complexity</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4090">4090</location>
+      <note>!Ref: Book</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>performance of each. When the time comes to make choices, the agent acts upon his currently most credible (or possibly most profitable) one.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4235">4235</location>
+      <note>Maybe a combination depending an risk attitudes. I.e. a risk averse agent might choose the most profitable when his/hers confidence in the most credible hypothesis is below some threshold. And visa versa.</note>
+    </highlight>
+    <highlight isNoteOnly="true">
+      <text>El Farol problem (Arthur 1994); the Santa Fe stock market study</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4255">4255</location>
+      <note>What if there are several markets and agents switch between markets. Ie. an agent trades/observes in one market, and then switches to the other market (randomly or deterministically). How do hypothesis in one market perform in other markets, and how do they affect the market? How does learning take place across markets? Will profitable strategies be spread to other markets by a single agent (the discoverer) or by different agents (the imitators)? Will other markets be immune to outside newly discovered profitable strategies? How quickly do markets “catch up”, ie. if a exploitive strategy spreads to a different (under-evolved) market, how long before other agents in that market developed strategies that are immune to this exploitive strategy?</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>theory fits if a narrow and precise set of conditions is fulfilled; and the entailments are also narrow and precise.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4267">4267</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Its power lies in its width of coverage and its suggestiveness.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4276">4276</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>associations arrange themselves on a spectrum from narrowness and precision to width and suggestiveness.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4280">4280</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>There’s been a tendency in many graduate schools to increase teaching in theory at the expense of teaching in economic history and in case example.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4291">4291</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>free association comes from a study of history, not theory.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4303">4303</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the history of economic thought—another</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4311">4311</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>empty minds</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4334">4334</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>they possess old structures both economic and political,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4334">4334</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Economic agents bring to their actions not just their preferences and endowments, but also their understandings—the associations and meanings they have derived from their history of previous actions and experiences.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4339">4339</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>a fundamental indeterminacy in the economy.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4366">4366</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Without knowledge of others’ expectations, or knowledge that everyone has knowledge of others’ expectations, an agent’s expectations become impossible to formulate logically and so do others’ expectations.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4367">4367</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>From the axioms of rational human behavior, a theory of the consumer could be constructed. From this and a corresponding theory of the firm a consistent microeconomics could be constructed. From this, somehow, an aggregate theory of the economy, macroeconomics, could be constructed. All this would constitute a Grand Unified Theory of the economy.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4409">4409</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>two embarrassments to this hope of constructing a theory of the economy from its reductionist parts.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4412">4412</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the economy relies on human beings, not on orderly machine components.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4413">4413</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Technology destroys the neatness because it keeps the economy changing.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4414">4414</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>This approach works.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4419">4419</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>late-1970s literature on industrial organization.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4422">4422</location>
+      <note>!Model: Airline location model on 24-hour clock (product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>dynamic programming,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4439">4439</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>multi-agent choice problem</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4453">4453</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>self-referential loop</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4461">4461</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>The outcome each airline is trying to predict depends on the predictions it and others might form. In other words, predictions are forming a world those predictions are trying to forecast.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4461">4461</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>capital markets, from asset pricing theory.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4475">4475</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Expectations become indeterminate, and the theory fails.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4529">4529</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“floors” and “ceilings.” If, for example, the price is 894, many investors believe that at 900 there is some sort of membrane, a ceiling, and when the price reaches this ceiling it will bounce back down with a certain probability or it may “break through.”</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4536">4536</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>“Sequential Location among Firms with Foresight,” E. C. Prescott and M, Visscher, Bell Journal of Economics, 8, 2, 378–393, 1977.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4606">4606</location>
+      <note>!Ref: Article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>As the elements react, the aggregate changes; as the aggregate changes, elements react anew. Barring the reaching of some asymptotic state or equilibrium, complex systems are systems in process that constantly evolve and unfold over time.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4618">4618</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>But unlike ions in a spin glass, which always react in a simple way to their local magnetic field, economic elements (human agents) react with strategy and foresight</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4622">4622</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>but rather to simplify its questions in order to seek analytical solutions.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4626">4626</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>What economists call multiple equilibria, nonpredictability, lock-in, inefficiency, historical path dependence, and asymmetry, physicists call multiple metastable states, unpredictability, phase or mode locking, high-energy ground states, non-ergodicity, and symmetry breaking</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4648">4648</location>
+      <note>!!! physics thesaurus or synonyms</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Alfred Marshall (6) noted that if firms gain advantage as their market share increases, “whatever firm first gets a good start will obtain a monopoly.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4651">4651</location>
+      <note>!Ref: book, or specific section book (location model/product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>increasing returns problems in economics are best seen as dynamic processes with random events and natural positive feedbacks—as nonlinear stochastic processes.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4656">4656</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>market allocation theory</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4658">4658</location>
+      <note>!Ref: book, or specific chapter in book (market allocation/location model/product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>economic geography</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4659">4659</location>
+      <note>!Ref: article (location model/product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>push the system gently toward favored structures that can grow and emerge naturally. Not a heavy hand, not an invisible hand, but a nudging hand.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4662">4662</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>expectational economy with complex dynamics</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4692">4692</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the evolution of trading networks</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4721">4721</location>
+      <note>!Ref: article</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>political economy</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4722">4722</location>
+      <note>!Ref: article (political economy)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>the emergence of monopolies,</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4723">4723</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>W. B. Arthur, Increasing Returns and Path Dependence in the Economy (Univ. of Michigan Press, Ann Arbor, Ml, 1994).</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4733">4733</location>
+      <note>!Ref: book, or specific chapter in book (market allocation/location model/product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>6. A. Marshall, Principles of Economics (Macmillan, London, ed. 8, 1920), p. 459.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4738">4738</location>
+      <note>!Ref: book, or specific section book (location model/product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>W. B. Arthur, Math. Soc. Sci. 19, 235 (1990); P. R. Krugman, J. Polit. Econ. 99, 483 (1991); in (2), p. 239; Geography and Trade (MIT Press, Cambridge, MA, 1991).</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4742">4742</location>
+      <note>!Ref: article (location model/product positioning)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Y. M. loannides, in (2), p. 129; A. Kirman, in (2), p. 491; L. Tesfatsion, in (2), p. 533.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4756">4756</location>
+      <note>!!!Ref: articles</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>R. Axelrod, Am. Pol. Sci. Rev. 80, 1095 (1986); K. Kollman, J. H. Miller, S. E. Page, in (2), p. 461.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4759">4759</location>
+      <note>!Ref: article (political economy)</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Brussels and Stuttgart groups on self-organizing systems.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4765">4765</location>
+      <note>!Ref</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>ECONOMICS OLD AND NEW</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4769">4769</location>
+      <note>!!!</note>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Time. Treated not at all (Debreu) Treated superficially (growth theory) Time. Becomes central Closely tied to age</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4780">4780</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>jerky motion</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4793">4793</location>
+    </highlight>
+    <highlight isNoteOnly="false">
+      <text>Questions remain hard to answer. But assumptions clearly spelled out.</text>
+      <location url="kindle://book?action=open&amp;asin=B00NJQ20KU&amp;location=4796">4796</location>
+    </highlight>
+  </highlights>
+</book>
