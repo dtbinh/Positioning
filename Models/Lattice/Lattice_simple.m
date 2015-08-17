@@ -17,9 +17,9 @@ pref.N = 4; % Number of firms
 pref.iterations = 400;
 
 % Setup
-lattice = zeros(pref.height,pref.length);
-rng('default'); % Seed such that the randomly generated results are repeatable
 firm = 1:pref.N; % Gives each firm an ID/name
+rng('default'); % Seed such that the randomly generated results are repeatable
+lattice = zeros(pref.height,pref.length);
 % TODO: Can the firms initially overlap, ie. have the same position?
 x0 = randi([1 pref.length], 1, pref.N); % Initial x-position of firm
 y0 = randi([1 pref.height], 1, pref.N); % Initial y-position of firm
@@ -89,9 +89,6 @@ for i = 2:pref.iterations
         [maxShare, maxInd] = max(shareSum);
         
         % Compare this with the current share
-        %share = shares(:,:,i-1);
-        %currentShare = mean(share(:) == n);
-        %xy(:,:,2) = xy(:,:,1);
         if maxShare < shares_mean(n,:,i-1)
             % Stay
             xy(n,:,i,:) = xy(n,:,i-1,:);
