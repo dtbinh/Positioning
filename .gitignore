@@ -3,3 +3,15 @@ Articles/**.pdf
 
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
+Statement/Images/Structures.psd
+
+Statement/References/Ref.bbl
+# Do not include latex support files
+Statement/References/*.aux
+Statement/References/*.bbl
+Statement/References/*.blg
+Statement/References/*.log
+Statement/References/*.out
+Statement/References/*.spl
+Statement/References/*.gz
+Statement/References/*.toc
