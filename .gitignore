@@ -1,5 +1,6 @@
-# Do to copyright issuses, I don’t include PDFs.
+# Do to copyright issuses, I don’t include PDFs, or Netlogo files.
 Articles/**.pdf
+Articles/**.nlogo
 
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
