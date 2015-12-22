@@ -1,218 +1,142 @@
+% Population
+% version 0.01
+% Jonas K. Sekamane
 
-% mean of subpopulation
-mu = 1.5;
-% relative size of subpopulation
-n_ration = 2; % n_l / n_r;
+% Inspired in part by: 
+%   Lever and Sergenti (2011)
 
-% Grid
-x1 = -5:1:5;
-x2 = -5:1:5;
-[X1,X2] = meshgrid(x1,x2);
+clearvars;
 
+rng('default'); % Seed such that the randomly generated results are repeatable
+
+% Preferences
+pref.boundary = 10; % Number of standard deviations
+pref.resolution = 70; % Length of the square (even number to include (0,0))
+pref.N = 5; % Number of firms
+pref.mu = 1.5; % mean of subpopulation
+pref.n_ratio = 2; % relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
+
+% Setup
+unit = pref.resolution/pref.boundary;rng('default'); % Seed such that the randomly generated results are repeatable
+
+% Preferences
+pref.boundary = 10; % Number of standard deviations
+pref.resolution = 70; % Length of the square (even number to include (0,0))
+pref.N = 5; % Number of firms
+pref.mu = 1.5; % mean of subpopulation
+pref.n_ratio = 2; % relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
+
+% Setup
+unit = pref.resolution/pref.boundary; % 1 standard deviation
+firms = 1:pref.N; % Gives each firm an ID/name
+color = linspecer(pref.N); % Generates a color for each of the firms that is evenly space out in / distinguishable.
 sd = 0.5; % standard deviation of each subpopulation
+b = pref.boundary/2;
+
+% Grid / Square
+[x,y] = deal( -b : pref.boundary/(pref.resolution-1) : b ); % Square with center at (0,0) and with length pref.boundary
+[X,Y] = meshgrid(x,y);
 
 % Subpopulation right
-mu_r = [mu 0]; % subpopulation mean only deviate on x-axis
-sigma_r = [sd^2 0; 0 sd^2]; % subpopulation sd only deviate on x-axis. Uncorrelated bivariate distribution, pho=0;
-F_r = mvnpdf([X1(:) X2(:)],mu_r,sigma_r);
-F_r = reshape(F_r,length(x2),length(x1));
+mu_r = [pref.mu 0]; % subpopulation mean only deviate on x-axis
+sigma_r = [sd^2 0; 0 sd^2]; % subpopulation sd. Uncorrelated bivariate distribution, rho=0;
+F_r = mvnpdf([X(:) Y(:)],mu_r,sigma_r);
+F_r = reshape(F_r,length(y),length(x));
 
 % Subpopulation left
-mu_l = [-mu 0];
+mu_l = [-pref.mu 0];
 sigma_l = [sd^2 0; 0 sd^2];
-F_l = mvnpdf([X1(:) X2(:)],mu_l,sigma_l);
-F_l = reshape(F_l,length(x2),length(x1));
+F_l = mvnpdf([X(:) Y(:)],mu_l,sigma_l);
+F_l = reshape(F_l,length(y),length(x));
 
 % Total population 
-share = n_ration/(1+n_ration);
-F = F_l*share + F_r*(1-share);
-%F = F_l*(n_ration/(1+n_ration)) + F_r*(1/(1+n_ration));
-%F = F_l*n_ration + F_r;
+weight = pref.n_ratio/(1+pref.n_ratio);
+F = F_l*weight + F_r*(1-weight);
+% Population mean and covariance ? Johnson (1987)
+pop_mu = mu_l*weight + mu_r*(1-weight)
+pop_sigma = sigma_l*weight + sigma_r*(1-weight) + weight*(1-weight)*(mu_l-mu_r)*(mu_l-mu_r)';
+pop_sd_x = sqrt(pop_sigma(1,1))
+
+
+% Randomy draw initial position of firms
+%xy0 = (cos(rand(2,pref.N)*2*pi) .* (rand(2,pref.N) * 3))'; % start at (0,0) move uniformly up to 3 std. dev. in random direction
+xy0 = normrnd(0,1,[2 pref.N])'; % bivariate normal distribution, mean 0, std. dev. 1, uncorrelated (rho=0)
+%xy0 = (rand(2, pref.N)*pref.boundary-pref.boundary/2)'; % uniformly distributed on boundary
 
 % 3D plot of density function
-surf(x1,x2,F);%,'EdgeColor','none');
+figure(10);
+surf(x,y,F);%,'EdgeColor','none');
 caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
 axis([-5 5 -5 5 0 .5])
 xlabel('x1'); ylabel('x2'); zlabel('Probability Density');
 
-firm1 = [2.25683, 0.952177];
-firm2 = [-1.98716, 3.75343];
-firm3 = [-3.39219, -1.477];
-firm4 = flip([-3.39219, -1.477]);
-firm5 = [0, 0];
-xy = [firm1; firm2; firm3; firm4];
-
-% random firm locations
-n = 5;
-x0 = rand(1, n)*10-5; % Initial x-position of firm
-y0 = rand(1, n)*10-5; % Initial y-position of firm
-xy = [x0' y0'];
-
-test
-
-test2 = [-5 5; -2.5 5; -2.5 -5; -5 -5];
-mvncdf([-5 -5],[-2.5 5],mu_l,sigma_l)
-
-in = inpolygon(X1,X2, test2(:,1),test2(:,2));
-
-sum(F_l(in))/sum(F_l(:))
-
 % 2D plot of contours
-contour(x1,x2,F,[.0001 .001 .01 .05:.1:.95 .99 .999 .9999]);
+figure(11);
+contour(x,y,F,[.0001 .001 .01 .05:.1:.95 .99 .999 .9999]);
 hold on;
-scatter( xy(:,1)' , xy(:,2)', 'filled'); % Plot the firms with respective colors.
-xlim([-6 6]); ylim([-6 6]);
-xlabel('x'); ylabel('y');
-%hold on;
-%voronoi(xy(:,1)' , xy(:,2)');
-plot(vx,vy);
-plot(bbox(:,1),bbox(:,2));
-scatter(xi, yi);
-h = patch(test2(:,1),test2(:,2),3);
-set(h,'EdgeColor','none','FaceAlpha',0.25);
+scatter( xy0(:,1)' , xy0(:,2)', [], color, 'filled'); % Plot the firms with respective colors.
+xlim([-5 5]); ylim([-5 5]);
+xlabel('x1'); ylabel('x2');
 hold off;
 
-%h = voronoi(xy(:,1)' , xy(:,2)');
+bbox = [-b b b -b -b; b b -b -b b]'; % boundary box
 
-
-% [V,C] = voronoin(xy);
-% 
-for i = 1:length(C3)
-     C3{i}
+[vx,vy] = voronoi(xy0(:,1)' , xy0(:,2)');
+[V,C] = voronoin(xy0);
+% line intersect with boundary box
+bbx = []; bby = []; %bbii = [];
+for j = 2:length(vx)
+    [xi, yi] = polyxpoly(bbox(:,1), bbox(:,2), vx(:,j), vy(:,j));
+    bbx = [bbx; xi];
+    bby = [bby; yi];
+    %%bbii = [bbii; ii];
 end
+V3 = [bbx bby];
 
-% for i = 1:length(C)
-%     if all(C{i}~=1) % If at least one of the indices is 1,
-%         % then it is an open region and we can't
-%         % patch that.
-%         h = patch(V(C{i},1),V(C{i},2),i); % use color i.
-%         get(h)
-%     end
-% end
+%patches = [-5 5; -5 1.2361; -2.0479 0.1954; -0.8703 0.9957; -2.5539 5.0000; -5 5];
+%patches = [-0.8703 0.9957; 5.0000 1.7739; 5 -5; 0.8111 -5.0000; -2.2700 -1.6330; -2.0479 0.1954; -0.8703 0.9957];
+%in = inpolygon(X,Y, patches(:,1)', patches(:,2)');
 
-% voronoi(xy(:,1), xy(:,2));
-% xlim([-5 5]); ylim([-5 5]);
-% hold on;
-% C5 = V(C{4},:);
-% C5(end+1,:) = C5(1,:);
-% plot(C5(:,1),C5(:,2),'.-');
-% scatter(V(:,1),V(:,2));
-% %xlim([-5 5]); ylim([-5 5]);
-% hold off;
+figure(12);
+voronoi(xy0(:,1)' , xy0(:,2)');
+xlim([-pref.boundary/2 pref.boundary/2]); ylim([-pref.boundary/2 pref.boundary/2]);
+hold on;
+%h = patch(patches(:,1)', patches(:,2)', 'red');
+%set(h,'EdgeColor','none','FaceAlpha',0.25);
+hold off;
 
+[market, utility] = marketshare3(xy0, [X(:) Y(:)]);
+F_firm = arrayfun(@(firm) sum(F(find(market==firm))), firms);
+shares = F_firm/sum(F(:)); % Calculate share for each firm
 
+[~,rank] = sort(shares, 'descend');
 
+% Eccentricity (euclidean from center/mean of voter distribution).
+eccentricity = pdist2(xy0, pop_mu, 'euclidean'); % in std. dev.
+%eccentricity = sqrt( sum( (xy0-repmat(pop_mu, pref.N,1)).^2 ,2))/10; 
+mean(eccentricity);
+%mean(pdist2([X(:) Y(:)],pop_mu,'euclidean')); % eccentricity population
 
-% population pdf
-pop_F = reshape(F, flip(size(x1).*size(x2)));
+% Effective number of firms (ENP) ? Lever and Sergenti (2011), Laakso and Taagepera (1979)
+ENP = sum(F(:))^2 / sum(F_firm(:).^2);
+% Herfindahl-Hirschman Index (HHI) ? Eiselt and Marianov (2011)
+% HHI = sum( ( F_firm/sum(F(:)) ).^2 ); % 1/ENP
 
-% population mean
-pop_mu = mu_l*share + mu_r*(1-share)
+% Misery (quadratic loss function)
+%misery = arrayfun(@(firm) sum( pdist2([X(find(market==firm)) Y(find(market==firm))], xy0(firm,:), 'euclidean') .* F(find(market==firm)) )/100, firms);
+%misery = arrayfun(@(firm) sum( utility(find(market==firm)).* F(find(market==firm)) )/100, firms);
+misery = sum(utility(:).*F(:))/sum(F(:));
 
-%sqrt(sigma_l^2 + sigma_r^2)
+figure(14);
+imagesc(utility)
+set(gca,'ydir', 'normal');
+cm=flipud(jet);
+colormap(cm);
 
-%pop_sigma = sigma_l*share^2 + sigma_r*(1-share)^2
+figure(13);
+imagesc(market);
+set(gca,'ydir', 'normal');
+colormap(color); % Set the respective firm colors on each market share.
+hold on;
 
-%pop_sigma = (sigma_l + mu_l*mu_l')*share + (sigma_r + mu_r*mu_r')*(1-share) - pop_mu*pop_mu'
-
-%median(F,2)
-
-%sqrt(pop_sigma)
-%C*(K1+m1*m1') + (C-1)*(K2+m2*m2') -m*m',
-
-%sum(F(:))
-
-%x_dim = x1.*mean(F,1);
-%mu_x = x1*mean(F,1)'
-
-%mu_y = x2*mean(F,2) % should be very close to zero
-
-%((x1.^2).*mean(F,1))'-mu_x
-%sum(((x1.^2).*mean(F,1))'-mu_x)
-%sd_x = sqrt( sum( (x1-mu_x).^2 .*mean(F,1) ) )
-%sd_x = sqrt( sum(((x1.^2).*mean(F,1))'-mu_x))
-
-%sd_x = sqrt(1/length(x1) * sum((x_dim'-mu_x).^2) )
-
-%dim(x1)
-%test = (x1 .* mean(F,1))'
-
-%size(F)
-
-%mvncdf(F)
-%mvncdf([-5 -5],[0 0],mu_l,sigma_l)
-
-%test = ;
-%size(test)
-%integrand = @(x1, x2) reshape(F_l, size(x1));
-%integral2(integrand,0,5,0,5)
-
-%integrand2 = @(x, y) reshape(mvnpdf([(0,5), (0,5)],[0,0],[1,0;0,1]), size(x));
-%integral2(integrand2,0,5,0,5)
-%integrand2 = @(x, y) reshape(mvnpdf([x(:), y(:)],[0,0],[1,0;0,1]), size(x));
-%integral2(integrand2,0,5,0,5)
-
-%integrand2 = @(x, y) reshape(F, size(x));
-%integral2(integrand2,0,5,0,5)
-
-% test = @(x, y) size(x);
-% 
-% test(0,5,0,5)
-% 
-% sum(F(:))
-% 
-% numel(F)
-% 
-% 
-% F_r = mvnpdf([X1(:) X2(:)],mu_r,sigma_r)
-% 
-% mvncdf([-5 5],mu_r,sigma_r)
-% 
-% 
-% F_r(5:6,7)
-% X1(5:6,7)
-% X2(5:6,7)
-% 71
-
-
-
-
-%mvncdf(F)
-%mvncdf([0 0],[1 1],mu,Sigma)
-%mvncdf([-.1 -5],[.1 5],mu_r,sigma_r)
-%mvncdf([-5 -.1],[5 .1],mu_r,sigma_r)
-%mean(sum(F,1))
-%image(F*10000)
-
-
-% surf(x1,x2,F_l);
-% hold on;
-% surf(x1,x2,F_r);
-% caxis([min(F_l(:))-.5*range(F_l(:)),max(F_l(:))]);
-% axis([-3 3 -3 3 0 .4])
-% xlabel('x1'); ylabel('x2'); zlabel('Probability Density');
-% hold off;
-
-%mvncdf([0 0],[1 1],mu,Sigma);
-%contour(x1,x2,F1,[.0001 .001 .01 .05:.1:.95 .99 .999 .9999]);
-%hold on;
-%contour(x1,x2,F2,[.0001 .001 .01 .05:.1:.95 .99 .999 .9999]);
-%xlabel('x'); ylabel('y');
-%hold off;
-
-
-
-
-
-% random population
-%sd_1 = 5;
-%sd_2 = 5;
-%y_mean1 = 0;
-%y_mean2 = 0;
-
-%x_mean2 = rand * 15;
-%x_mean1 = 0 - x_mean2;
-
-%subpop1 = 500000 + rand * 166667;
-%subpop2 = 1000000 - subpop1;
 
