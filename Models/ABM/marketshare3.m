@@ -1,4 +1,4 @@
-function [M, U, C, D] = marketshare(firms, customers)
+function [M, U] = marketshare(firms, customers)
 %MARKETSHARE   calculate the marketshare of each firm
 %   MARKETSHARE(FIRMS, CUSTOMERS) 
 %   where CUSTOMERS is a matrix of all the coordinates of the market and
@@ -58,24 +58,24 @@ function [M, U, C, D] = marketshare(firms, customers)
 %                     )' ...
 %                );
     
-    for firm=1:length(firms)
-        % Index for each customer of the firm.
-        idx = find(minInd==firm);
-        % Calculate the mean xy-coordinates / centroid of each firms market
-        centroid(firm,:) = mean(customers(idx,:),1);
-        % Calculate the distance form each customer to the respective market centroid.
-        distance_c(idx) = pdist2(centroid(firm,:), customers(idx,:), 'euclidean');
-    end
+%     for firm=1:length(firms)
+%         % Index for each customer of the firm.
+%         idx = find(minInd==firm);
+%         % Calculate the mean xy-coordinates / centroid of each firms market
+%         centroid(firm,:) = mean(customers(idx,:),1);
+%         % Calculate the distance form each customer to the respective market centroid.
+%         distance_c(idx) = pdist2(centroid(firm,:), customers(idx,:), 'euclidean');
+%     end
 
     %% Shape output variables
     l = sqrt(length(customers));
     customers = reshape(minInd,[l l]);
     utility = reshape(minVal,[l l]);
-    distance_centroid = reshape(distance_c,[l l]);
+%     distance_centroid = reshape(distance_c,[l l]);
     
     % Output variables
     M = customers;
     U = utility;
-    C = centroid;
-    D = distance_centroid;
+%     C = centroid;
+%     D = distance_centroid;
 end
