@@ -1,5 +1,6 @@
 # Do to copyright issuses, I don’t include PDFs, or Netlogo files.
 Articles/**.pdf
+Articles/**.alias
 Articles/**.nlogo
 
 # Miscellaneous 
