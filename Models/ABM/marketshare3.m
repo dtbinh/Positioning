@@ -1,17 +1,15 @@
-function [M, U] = marketshare(firms, customers)
-%MARKETSHARE   calculate the marketshare of each firm
-%   MARKETSHARE(FIRMS, CUSTOMERS) 
+function [M, U] = marketshare3(firms, customers)
+%MARKETSHARE3   calculate the marketshare of each firm
+%   MARKETSHARE3(FIRMS, CUSTOMERS) 
 %   where CUSTOMERS is a matrix of all the coordinates of the market and
 %   FIRMS contains the coordinates of the firm.
 %
 %   Output variables:
 %   * M is a matrix of the entire market where the value of each cell is the closest firm.
 %   * U is a matrix of the disutility in the entire market.
-%   * C is the coordinates of each firms market centroid.
-%   * D is a matrix of the distance to the respective centroids in the entrie market
 %   
 %   Jonas K. Sekamane. 
-%   Version 0.01
+%   Version 0.03
 
     %% Setup
 
@@ -38,7 +36,7 @@ function [M, U] = marketshare(firms, customers)
     for idx = 1:size(distance,2)
         rows = find(distance(:,idx)==minVal(idx));
         if size(rows,1) > 1
-            minInd(idx) = randsample(rows,1);
+            minInd(idx) = rows(randi(length(rows))); % use rows(randi(length(rows))) rather than randsample(rows,1) since it relies on seed from rnd()
         end
     end
     
