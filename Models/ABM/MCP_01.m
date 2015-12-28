@@ -33,12 +33,12 @@
 %
 % # Specify Markov Chain representation; Specify vector of state space and summary variables.
 % # Identify those runs that require most iterations to burn in.
-% # Run several test repetitions of these; Use "second halves" to calculate R-hat (should be below 1.05) and estimate.
+% # Run several test repetitions of these; Use "second halves" to calculate R-hat (should be below 1.05) and calculate the estimate.
 % # From estimate determine maximum burn-in of test repetition: within 1. std. dev. of estimate. 
 
 
 %%% Monte Carlo parameterizations
-% Rando sample parameters from uniform distribution of the range of the parameters
+% Randomly sample parameters from uniform distribution of the range of the parameters
 
 clearvars;
 
@@ -49,11 +49,11 @@ for run=1:pref.runs
     pref.run = run;
     
     % Number of firms
-    pref.N = randi([2,12]); % N ? [2,12]
+    pref.N = randi([2,12]); % N in [2,12]
     % Mean of subpopulation
-    pref.mu = rand * 1.5; % mu ? [0,1.5]
+    pref.mu = rand * 1.5; % mu in [0,1.5]
     % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-    pref.n_ratio = 1 + rand; % n_ratio ? [1,2]
+    pref.n_ratio = 1 + rand; % n_ratio in [1,2]
     
     %pref.seed = rng(21037635, 'twister'); % Seed such that the randomly generated results are repeatable
     pref.rules = repmat( {'HUNTER'}, 1, pref.N); % Decision rules: All-hunter

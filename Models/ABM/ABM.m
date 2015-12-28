@@ -138,17 +138,17 @@ for i = 1:pref.iterations
                     % Continue same direction, if previous move proved fruitful,
                     % otherwise head the oppersite direction.
                      if(i==2)
-                        % 1 std. dev. move in same direction, away from from (0,0)
+                        % 0.1 std. dev. move in same direction, away from from (0,0)
                         [direction_in, ~] = cart2pol(xy(n,1,i-1), xy(n,2,i-1));
-                        [dx_in, dy_in] = pol2cart(direction_in, 1);
+                        [dx_in, dy_in] = pol2cart(direction_in, 0.1);
                      else
                          [direction_in, ~] = cart2pol(xy(n,1,i-1)-xy(n,1,i-2), xy(n,2,i-1)-xy(n,2,i-2));
                          if(shares(i-1,n) > shares(i-2,n))
-                             % 1 std. dev. move in same direction as previous move
-                             [dx_in, dy_in] = pol2cart(direction_in, 1);
+                             % 0.1 std. dev. move in same direction as previous move
+                             [dx_in, dy_in] = pol2cart(direction_in, 0.1);
                          else
-                             % 1 std. dev. move in oppersite direction (90 degree + random 180 degree)
-                             [dx_in, dy_in] = pol2cart(direction_in + pi/2 + rand * pi, 1);
+                             % 0.1 std. dev. move in oppersite direction (90 degree + random 180 degree)
+                             [dx_in, dy_in] = pol2cart(direction_in + pi/2 + rand * pi, 0.1);
                          end
                      end
                      heading(i-1,n) = direction_in;
@@ -160,8 +160,8 @@ for i = 1:pref.iterations
                     if(rank(i-1,1) ~= n)
                         % Direction of most profitable competitor
                         [direction_in, rho] = cart2pol(xy(rank(i-1,1),1,i-1)-xy(n,1,i-1), xy(rank(i-1,1),2,i-1)-xy(n,2,i-1));
-                        % 1 std. dev. move in direction of most profitable competitor, 
-                        % if distance is less than 1 std. dev.
+                        % 0.1 std. dev. move in direction of most profitable competitor, 
+                        % if distance is less than 0.1 std. dev.
                         [dx_in, dy_in] = pol2cart(direction_in, 1);
                         if(rho>1)    
                             xy(n,:,i) = xy(n,:,i-1) + [dx_in dy_in];

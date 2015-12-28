@@ -21,15 +21,16 @@ for i = 1:pref.iterations
 %        line(n_xy(1,:)', n_xy(2,:)', 'Color', color(n,:), 'LineStyle', ':');
 %     end
     hold off; % Don't place anymore plots on top of figure.
-    pause(.15);
+    pause(.1);
 end
 
 
 % 3D plot of population density function
 figure(10);
-surf(x,y,F);%,'EdgeColor','none');
+surf(x,y,F, 'EdgeColor', 'none');%,'EdgeColor','none');
 caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
 axis([-5 5 -5 5 0 .5])
+title('Population density');
 xlabel('x1'); ylabel('x2'); zlabel('Probability Density');
 
 
@@ -39,6 +40,7 @@ contour(x,y,F,[.0001 .001 .01 .05:.1:.95 .99 .999 .9999]);
 hold on;
 scatter( xy_0(:,1)' , xy_0(:,2)', [], color, 'filled'); % Plot the firms with respective colors.
 xlim([-5 5]); ylim([-5 5]);
+title('Population contours and initial firm position');
 xlabel('x1'); ylabel('x2');
 hold off;
 
@@ -49,6 +51,7 @@ voronoi(xy_0(:,1)' , xy_0(:,2)');
 xlim([-pref.boundary/2 pref.boundary/2]); ylim([-pref.boundary/2 pref.boundary/2]);
 hold on;
 scatter(centroid(:,1,1)',centroid(:,2,1)', [], color, 'x');
+title('Voronoi diagram of initial market (with centroids)');
 hold off;
 
 
@@ -58,6 +61,7 @@ imagesc(utility_i)
 set(gca,'ydir', 'normal');
 cm=flipud(jet);
 colormap(cm);
+title('Customer (dis)utility at final interation');
 
 
 % Final market
@@ -70,6 +74,7 @@ hold on;
 scatter( centroid(:,1,pref.iterations)' , centroid(:,2,pref.iterations)', [], color, 'x');
 scatter( xy(:,1,pref.iterations,:)' , xy(:,2,pref.iterations,:)' , [], color, 'filled');
 hold off;
+title('Final market');
 
 
 % Compass of the direction of the firm's movement
@@ -87,8 +92,57 @@ hold off;
 % 2. Show the current direction:
 for i = 1:pref.iterations
     figure(15);
-    [compass_x, compass_y] = pol2cart(heading(i,:), ones(1,5));
+    [compass_x, compass_y] = pol2cart(heading(i,:), ones(1,pref.N));
     h = compass(compass_x, compass_y);
-    set(h, {'Color'}, num2cell(color,2), 'LineWidth',2)
+    set(h, {'Color'}, num2cell(color,2), 'LineWidth',2);
+    title(sprintf('Heading (iteration %d)',i)); % Add title
     pause(.1);
 end
+
+
+% Draw market share
+figure(3);
+clf reset; % Reset figure.
+hold on;
+title('Share of market'); % Add title
+for n = 1:pref.N
+    plot(shares(:,n,:), 'Color', color(n,:));
+end
+plot(repmat(1/pref.N, 1, pref.iterations), 'Color', 'k', 'LineStyle', ':'); % Equal shares
+hold off;
+
+figure(4);
+clf reset; % Reset figure.
+hold on;
+title('Share of market moving average (lagged approx. 10% of number of iterations)'); % Add title
+for n = 1:pref.N
+    simple = tsmovavg(shares(:,n,:), 's', round(pref.iterations*0.1), 1);
+    plot(simple, 'Color', color(n,:));
+end
+plot(repmat(1/pref.N, 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+hold off;
+
+
+% Draw distance to centroids
+figure(6);
+clf reset; % Reset figure.
+hold on;
+title('Firm distance to the firm`s market centroid'); % Add title
+for n = 1:pref.N
+    plot(centroid_distance(:,n,:), 'Color', color(n,:));
+end
+hold off;
+
+
+% Mean eccentricity
+figure(16);
+clf reset; % Reset figure.
+plot(mean_eccentricity);
+title('Mean eccentricity'); % Add title
+
+
+% Effective Number of Parties/Players/Firms (ENP)
+figure(17);
+clf reset; % Reset figure.
+plot(ENP);
+title('ENP'); % Add title
