@@ -10,13 +10,14 @@
 clearvars;
 
 %% 1. PREFERENCES
-pref.seed = rng('default');
+%pref.seed = rng('default');
+pref.seed = rng(17796749, 'twister');
 pref.boundary = 10; % Number of standard deviations
 pref.resolution = 70; % Length of the square (even number to include (0,0))
 pref.N = 12; % Number of firms
 pref.mu = 1.5; % Mean of subpopulation
 pref.n_ratio = 2; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-pref.iterations = 200;
+pref.iterations = 5000;
 
 % Decision rules
 %pref.rules = repmat({'STICKER'},1,pref.N);
@@ -70,9 +71,10 @@ b = pref.boundary/2;
     % Randomy draw initial position of firms
     
     % start at (0,0) move uniformly up to 3 std. dev. in random direction
-    %xy_0 = (cos(rand(2,pref.N)*2*pi) .* (rand(2,pref.N) * 3))';
+    [x_0, y_0] = pol2cart( rand(pref.N,1)*2*pi , rand(pref.N,1)*3 );
+    xy_0 = [x_0 y_0];
     % bivariate normal distribution, mean 0, std. dev. 1, uncorrelated (rho=0)
-    xy_0 = normrnd(0,1,[2 pref.N])';
+    %xy_0 = normrnd(0,1,[2 pref.N])';
     % uniformly distributed on boundary
     %xy_0 = (rand(2, pref.N)*pref.boundary-pref.boundary/2)';
     

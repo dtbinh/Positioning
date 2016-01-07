@@ -1,4 +1,4 @@
-function ABM(pref)
+function [o_mean_eccentricity, o_ENP] = ABM(pref)
 %ABM   runs the Agent-Based model with given parameters and saves result in
 % 'data' subfolder.
 %   ABM(PREF) 
@@ -76,9 +76,10 @@ b = pref.boundary/2;
     % Randomy draw initial position of firms
     
     % start at (0,0) move uniformly up to 3 std. dev. in random direction
-    %xy_0 = (cos(rand(2,pref.N)*2*pi) .* (rand(2,pref.N) * 3))';
+    [x_0, y_0] = pol2cart( rand(pref.N,1)*2*pi , rand(pref.N,1)*3 );
+    xy_0 = [x_0 y_0];
     % bivariate normal distribution, mean 0, std. dev. 1, uncorrelated (rho=0)
-    xy_0 = normrnd(0,1,[2 pref.N])';
+    %xy_0 = normrnd(0,1,[2 pref.N])';
     % uniformly distributed on boundary
     %xy_0 = (rand(2, pref.N)*pref.boundary-pref.boundary/2)';
     
@@ -250,7 +251,54 @@ end
     % in the subfolder 'data'. Each file has unique name (avoids overwriting
     % existing files). The unique name is the timestamp of execution and the
     % ordinal number of the run.
-    save(strcat('data/data_', char(pref.timestamp, 'yyyyMMdd_HHmm'), '_run', sprintf('%04d', pref.run)));
+    if(pref.export_data)
+        save(strcat('data/data_', char(pref.timestamp, 'yyyyMMdd_HHmm'), '_rep', sprintf('%03d', pref.rep), '_run', sprintf('%04d', pref.run)));
+    end
+    
+    %%% 4.3 Save figures
+    
+    if(pref.export_fig)
+        
+        % Mean eccentricity
+        fig16 = figure('Name', '16', 'Visible', 'Off');
+        %figure(16);
+        %clf reset; % Reset figure.
+        plot(mean_eccentricity);
+        title({'Mean eccentricity', ['N: ' num2str(pref.N) ',   \mu: ', num2str(pref.mu) ',   n_l/n_r: ' num2str(pref.n_ratio)]}); % Add title
+        hold on;
+        m2nd_mean_eccentricity = mean(mean_eccentricity(length(mean_eccentricity)/2:end));
+        sd2nd_mean_eccentricity = std(mean_eccentricity(length(mean_eccentricity)/2:end));
+        plot(repmat( m2nd_mean_eccentricity , 1, pref.iterations), 'k');
+        plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+        plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+        hold off;
+        ylim([0 2.5]);
+        clear m2nd_mean_eccentricity sd2nd_mean_eccentricity;
+        
+        %saveas(fig16, strcat('fig/', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '/fig_', 'run', sprintf('%04d', pref.run), '_16'), 'png');
+        saveas(fig16, strcat('fig/fig_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_rep', sprintf('%03d', pref.rep), '_run', sprintf('%04d', pref.run), '_16'), 'png');
 
+        % Effective Number of Parties/Players/Firms (ENP)
+        fig17 = figure('Name', '17', 'Visible', 'off');
+        %figure(17);
+        %clf reset; % Reset figure.
+        plot(ENP);
+        title({'ENP', ['N: ' num2str(pref.N) ',   \mu: ', num2str(pref.mu) ',   n_l/n_r: ' num2str(pref.n_ratio)]}); % Add title
+        hold on;
+        m2nd_ENP = mean(ENP(length(ENP)/2:end));
+        sd2nd_ENP = std(ENP(length(ENP)/2:end));
+        plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
+        plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
+        plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
+        hold off;
+        ylim([1 12]);
+        clear m2nd_ENP sd2nd_ENP;
+        
+        saveas(fig17, strcat('fig/fig_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_rep', sprintf('%03d', pref.rep), '_run', sprintf('%04d', pref.run), '_17'), 'png');
+    end
+    
+    %%% 4.4 Function output
+    o_mean_eccentricity = mean_eccentricity;
+    o_ENP = ENP;
 
 end

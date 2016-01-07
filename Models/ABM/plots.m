@@ -13,15 +13,15 @@ for i = 1:pref.iterations
     axis image; % Scale to fit the dimensions of customers/lattice.
     set(gca,'ydir', 'normal'); % By default image() reverese the y-axis. This reinstates the normal ordering.
     hold on; % Place following scatter/plots on top of image.
-    scatter( xy(:,1,i,:)' , xy(:,2,i,:)' , [], color, 'filled'); % Plot the firms with respective colors.
 %    scatter(centroid(:,1,i)',centroid(:,2,i)', [], color, 'x'); % Plot current market centroid point
-%     for n = 1:pref.N % Trace the firm movement over time
-%        n_xy = xy(n,:,1:i,:);
-%        n_xy = reshape(n_xy, [size(n_xy,2) size(n_xy,3) 1]);
-%        line(n_xy(1,:)', n_xy(2,:)', 'Color', color(n,:), 'LineStyle', ':');
-%     end
+    for n = 1:pref.N % Trace the firm movement over time
+       n_xy = xy(n,:,1:i,:);
+       n_xy = reshape(n_xy, [size(n_xy,2) size(n_xy,3) 1]);
+       line(n_xy(1,:)', n_xy(2,:)', 'Color', color(n,:), 'LineStyle', ':');
+    end
+    scatter( xy(:,1,i,:)' , xy(:,2,i,:)' , [], color, 'filled'); % Plot the firms with respective colors.
     hold off; % Don't place anymore plots on top of figure.
-    pause(.1);
+    pause(.03);
 end
 
 
@@ -96,7 +96,7 @@ for i = 1:pref.iterations
     h = compass(compass_x, compass_y);
     set(h, {'Color'}, num2cell(color,2), 'LineWidth',2);
     title(sprintf('Heading (iteration %d)',i)); % Add title
-    pause(.1);
+    pause(.02);
 end
 
 
@@ -139,10 +139,98 @@ figure(16);
 clf reset; % Reset figure.
 plot(mean_eccentricity);
 title('Mean eccentricity'); % Add title
+hold on;
+m2nd_mean_eccentricity = mean(mean_eccentricity(length(mean_eccentricity)/2+1:end));
+sd2nd_mean_eccentricity = std(mean_eccentricity(length(mean_eccentricity)/2+1:end));
+plot(repmat( m2nd_mean_eccentricity , 1, pref.iterations), 'k');
+plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+hold off;
 
 
 % Effective Number of Parties/Players/Firms (ENP)
 figure(17);
 clf reset; % Reset figure.
 plot(ENP);
+title('ENP'); % Add title
+hold on;
+m2nd_ENP = mean(ENP(length(mean_eccentricity)/2:end));
+sd2nd_ENP = std(ENP(length(mean_eccentricity)/2:end));
+plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
+plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
+hold off;
+
+
+% Mean eccentricity
+figure(18);
+clf reset; % Reset figure.
+plot(mean_eccentricity_1(3,:)');
+title('Mean eccentricity'); % Add title
+hold on;
+m2nd_mean_eccentricity = mean(mean_eccentricity(length(mean_eccentricity)/2+1:end));
+sd2nd_mean_eccentricity = std(mean_eccentricity(length(mean_eccentricity)/2+1:end));
+plot(repmat( m2nd_mean_eccentricity , 1, pref.iterations), 'k');
+plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+hold off;
+
+% Effective Number of Parties/Players/Firms (ENP)
+figure(180);
+clf reset; % Reset figure.
+plot(ENP);
+title('ENP'); % Add title
+hold on;
+m2nd_ENP = mean(ENP(length(ENP)/2:end));
+sd2nd_ENP = std(ENP(length(ENP)/2:end));
+plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
+plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
+hold off;
+
+% Effective Number of Parties/Players/Firms (ENP)
+figure(181);
+clf reset; % Reset figure.
+plot(ENP_1(13,:)');
+title('ENP'); % Add title
+hold on;
+m2nd_ENP = mean(ENP(length(ENP)/2:end));
+sd2nd_ENP = std(ENP(length(ENP)/2:end));
+plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
+plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
+hold off;
+
+% Mean eccentricity kdensity
+figure(19);
+for rep = 1:pref.repetitions
+    [f,xi] = ksdensity(mean_eccentricity_1(rep,:));
+    plot(xi,f);
+    hold on;
+end
+title('Mean eccentricity'); % Add title
+hold off;
+
+figure(20);
+for rep = 1:pref.repetitions
+    [f,xi] = ksdensity(ENP_1(rep,:));
+    plot(xi,f);
+    hold on;
+end
+title('ENP'); % Add title
+hold off;
+
+figure(21);
+[f,xi] = ksdensity(ENP);
+plot(xi,f);
+title('ENP'); % Add title
+
+figure(22);
+[f,xi] = ksdensity(mean_eccentricity);
+plot(xi,f);
+title('Mean eccentricity'); % Add title
+
+figure(210);
+[f,xi] = ksdensity(ENP_1(3,:));
+plot(xi,f);
 title('ENP'); % Add title

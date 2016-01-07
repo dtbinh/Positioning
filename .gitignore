@@ -3,6 +3,10 @@ Articles/**.pdf
 Articles/**.alias
 Articles/**.nlogo
 
+# Output files
+Models/ABM/data/**
+Models/ABM/fig/**
+
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
 Statement/Images/Structures.psd
