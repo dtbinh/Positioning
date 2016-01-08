@@ -219,7 +219,7 @@ clearvars;
     pref.runs = length(test.N); % Number of runs of the experiment
     pref.export_data = 0; % Exports the data
     pref.export_fig = 0; % Exports figures
-    pref.iterations = pref.burnin + 100; % Number of post-burnin iterations
+    pref.iterations = pref.burnin + 1000; % Number of post-burnin iterations
     pref.repetitions = 1; % Number of repetitions of run
 
     % Mean of subpopulation
@@ -308,8 +308,8 @@ clearvars;
     % Have all summary variables been estimated with the same level of
     % precisions? This is (trivially) satisfied when the summary variables
     % have been estimated using the same number of post-burnin iterations,
-    % since the SE/SD ratio simply returns the squareroot of the number of 
-    % post-burnin iterations. 
+    % since the SE/SD ratio simply returns one over the squareroot of the 
+    % number of post-burnin iterations. 
    
    
    
@@ -325,13 +325,20 @@ clearvars;
     writetable(export_ENP, strcat('data/GS_hunter_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '.csv'),'Delimiter',',');
 
     % Preliminary conclusion
+    %
     % With 100 post-burnin iterations the model satisfingly passes check 3 
     % and check 5. The model only passes check 4 for ENP, but not for mean 
     % eccentricity. Specifically for N = 6,8,12 the powers are below 0.8 
     % (and as low as 0.34 for N=8). Check 2 is not applicable. 
     % TO-DO: How to calculate R-hat when there is only 1 repetition of
     % model ???
-   
+    %
+    % With 1000 post-burnin iterations the model satisfingly passes check 3 
+    % and check 5. The model only passes check 4 for ENP, but not for mean 
+    % eccentricity. Specifically for N = 6,9 the powers are below 0.8 
+    % (and as low as 0.05 for N=6). Check 2 is not applicable. 
+    % TO-DO: How to calculate R-hat when there is only 1 repetition of
+    % model ???
     
     
     
