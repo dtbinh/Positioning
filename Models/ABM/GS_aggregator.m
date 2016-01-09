@@ -18,11 +18,11 @@
 % time-homogenous Markov chain since the transition probabilities are
 % independent of time / iteration.
 %
-% The All-hunter model does not contain random components (besides the 
+% The All-aggregator model does not contain random components (besides the 
 % initial position of firms). 
 %
-% Additionally the All-hunter model is in essence an implimatation of the 
-% Lloyd?s Algorithm. The continoues move to the centroid of the firm's 
+% Additionally the All-aggregator model is in essence an implimatation of the 
+% Lloyd's Algorithm. The continoues move to the centroid of the firm's 
 % market will eventually lead to a Centroidal Voronoi Tessellation (CVT).
 % The CVT is an optimal tessellation / partition. For a given set of 
 % generating points / consumers / market there may exsist multiple CVT. 
@@ -68,7 +68,7 @@ clearvars;
         % Number of firms
         pref.N = test.N(run);
         
-        % Decision rules: All-hunter
+        % Decision rules: All-aggregator
         pref.rules = repmat( {'AGGREGATOR'}, 1, pref.N);
         
         % Repetitions
@@ -136,8 +136,8 @@ clearvars;
         % Number of firms
         pref.N = test.N(run);
 
-        % Decision rules: All-hunter
-        pref.rules = repmat( {'HUNTER'}, 1, pref.N);
+        % Decision rules: All-aggregator
+        pref.rules = repmat( {'AGGREGATOR'}, 1, pref.N);
 
         % Repetitions
         for rep=1:pref.repetitions
@@ -177,7 +177,7 @@ clearvars;
     
     
     %%% 3.2 Check 2 -- Convergence / F-test p-value
-    % Not applicable. There is no prior expectation for ENP or mean eccentricty for the all-hunter model. 
+    % Not applicable. There is no prior expectation for ENP or mean eccentricty for the all-aggregator model. 
     
     
     %%% 3.3 Check 3 -- Power zero
