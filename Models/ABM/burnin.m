@@ -30,8 +30,8 @@ function O = burnin(M, varargin)
         case 3
             % BURNIN(M, ESTIMATE, STDDEV)
             
-            estimate = varargin{2};
-            stddev = varargin{3};
+            estimate = varargin{1};
+            stddev = varargin{2};
             
             [repetitions, iterations, runs] = size(M);
             burnin = zeros(runs,repetitions);
