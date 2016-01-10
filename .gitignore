@@ -6,6 +6,11 @@ Articles/**.nlogo
 # Output files
 Models/ABM/data/**
 Models/ABM/fig/**
+Figures/data/**
+
+# Rstudio system files
+**/.RData
+**/.Rhistory
 
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
