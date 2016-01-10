@@ -55,9 +55,18 @@ b = pref.boundary/2;
     F_l = reshape(F_l,length(y),length(x)); % Formated as grid
 
     % Total population 
-    weight = pref.n_ratio/(1+pref.n_ratio); % The left subpopulation share of total population
-    F = F_l*weight + F_r*(1-weight); % Population pdf
-
+    % The left subpopulation share of total population
+    weight = pref.n_ratio/(1+pref.n_ratio);
+    % Population probability density function (PDF). Left subpopulation is 
+    % left unchanged, while the right subpopulation will scale according to 
+    % n_ratio. Deviding by 2^2 has no effect on results, but scales PDF so 
+    % its comparable to the baseline distribution with mean (0,0) and 
+    % std. dev. (1,1). The subpopulations halves the std dev., thus their 
+    % variance will be one-fourth.
+    F = (F_l + F_r*1/pref.n_ratio)/4;
+    %F = F_l*weight + F_r*(1-weight); % Population pdf
+    
+    
     
     %%% 2.2 Population descriptive statistics
     % Mean and covariance -- Johnson (1987)
