@@ -219,11 +219,11 @@ clearvars;
 
     % Preliminary conclusion
     %
-    % With 1000 repetitions the model satisfingly passes check 3 
-    % and check 5. The model only passes check 4 for ENP, but not for mean 
-    % eccentricity. Specifically for N = 4,5,8,12 the powers are below 0.8 
-    % (and as low as 0.16 for N=4). Check 1 and check 2 are not applicable. 
+    % With 1000 repetitions the model satisfingly passes check 3, check 4 
+    % and check 5. Check 1 and check 2 are not applicable. 
     %
- 
+    % The estimates for mean eccentricity are half of the estimates found
+    % by Lever and Sergenti (2011).
+    %
     
     

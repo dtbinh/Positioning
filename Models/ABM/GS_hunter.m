@@ -339,6 +339,9 @@ clearvars;
     % (and as low as 0.05 for N=6). Check 2 is not applicable. 
     % TO-DO: How to calculate R-hat when there is only 1 repetition of
     % model ???
-    
+    %
+    % The estimates for approximately mean eccentricity are half of the 
+    % estimates found by Lever and Sergenti (2011).
+    %
     
     

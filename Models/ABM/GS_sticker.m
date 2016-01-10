@@ -168,6 +168,8 @@ clearvars;
     % eccentricity check 4 is almost statisfied (the power is still quite 
     % high for N=11. It is 0.26).
     %
+    % The ENP estimates are quite low compared with the results from 
+    % Lever and Sergenti (2011).
  
     
     
