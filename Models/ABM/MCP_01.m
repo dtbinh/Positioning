@@ -1,51 +1,53 @@
-%% Monte Carlo Parameterization
+%% Monte Carlo Parameterization -- All-hunter
 % version 0.01
 % Jonas K. Sekamane
 %
-% Exogenous number of firms (and thus decision rules).
+% Free paramter: N, mu, n_ratio
+%
+% Exogenous number of firms.
 %
 % Inspired in part by: 
 %   Lever and Sergenti (2011)
 
 
-%% All-Hunter
+
+%% 1. Introduction
+% The All-hunter model can be representent as a stationary Markov chain / 
+% time-homogenous Markov chain since the transition probabilities are
+% independent of time / iteration.
 %
-% Time-homogenous Markov Chain:
-% # The run enviroment: computational rules of the model, the run input parameters.
-% # The run Markoc process: state space, transition matrix, initial state space vector
-% # The run output variables
+% The All-hunter model contains random components. More specifically, if
+% the previous move of the hunter-firm did not increase it's market share, 
+% then it will head in a random oppersite direction (randomly drawn from a 
+% 180 dregree arc oppersite of the current direction).
 %
-% Vector of variables: ???
-% * coordinates of each firm
+% So the Markov chain is stationary and stocastic, which implies that the
+% Markov chain is ergodic (the process tends to a unquie limiting 
+% distribution that is independent of the initial conditions).
 %
-% ----------
+% And since the state space is not too large and since the (off-diagonal) 
+% transition probabilities are fairly high, we can use the time-average to 
+% calculate representative estimates.
 %
-% * Time-homogenous Markov Chain / Markov Chain with stationary transition probabilities.
-% * Random component: the oppersite direction (range of 180 degrees) + starting position of firms ???
-% * Small state space, or High off-diagonal transition probabilities.
-%
-% --> Ergodic process (Eisenhardt 1989; Ljungqvist and Sargent 2004)
-% --> Stochastic processes for which a time average provides a representative estimate of ?
-%
-% * Repetition: 1.
-% * Iteration: more than 1 (determined by diagnostic checks).
-% * Burn-in: (determined by four steps below).
-%
+
+clearvars;
+
+%% 2. Determining Burn-In
+% Summary of procedure:
 % # Specify Markov Chain representation; Specify vector of state space and summary variables.
 % # Identify those runs that require most iterations to burn in.
 % # Run several test repetitions of these; Use "second halves" to calculate R-hat (should be below 1.05) and calculate the estimate.
 % # From estimate determine maximum burn-in of test repetition: within 1. std. dev. of estimate. 
 
-clearvars;
 
-%% 1. Determining burn in
-
-    %%% 1.1 Markov Chain representation
+    %%% 2.1 Markov Chain representation
+    % TO-DO: Specify Markov Chain
+    %
     % Summary variables: mean eccentricity and ENP
 
     
     
-    %%% 1.2 Idenfying runs that require most iteration
+    %%% 2.2 Idenfying runs that require most iteration
     % Idenfying from 500 runs with 200 iterations and 1 repetition.
     pref.seed = rng('default'); % Seed such that the randomly generated results are repeatable
     pref.timestamp = datetime('now');  % Create time stamp so exported files don't overwrite exsisting files.
@@ -112,7 +114,7 @@ clearvars;
     
  
     
-    %%% 1.3 Test repetitions
+    %%% 2.3 Test repetitions
     % Making 10 runs with follow parameters setings
     test.N       = [2 2 3 3 10 10 11 11 12 12];
     test.mu      = [1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5 1.5];
@@ -181,7 +183,7 @@ clearvars;
     % Should be below 1.05
 
     
-    %%% 1.4 Maximum burn-in of test repetitions
+    %%% 2.4 Maximum burn-in of test repetitions
     % within 1. std. dev. of estimate.
     
     burnin_ENP = burnin(data_ENP, est_ENP, est_std_ENP);
@@ -198,7 +200,7 @@ clearvars;
 
     
     
-%% 2. Final model
+%% 3. Final model
 % Using time-average so a single repetition. Use 1000 runs of the model.
 % Start with 100 post-burnin iterations. If this is not enough to pass our
 % five sample size checks, then increase the number of post-burnin
@@ -269,26 +271,26 @@ clearvars;
 
     
     
-    %%# 2.1 Check 1 -- Mapping / R-Hat statistics
+    %%# 3.1 Check 1 -- Mapping / R-Hat statistics
     % TO-DO: ??? There is only 1 repetition here ???
     
     
-    %%# 2.2 Check 2 -- Convergence / F-test p-value
+    %%# 3.2 Check 2 -- Convergence / F-test p-value
     % Does not apply. There is no prior expectation for ENP or mean eccentricty for the all-hunter model. 
     
     
-    %%# 2.3 Check 3 -- Power zero
+    %%# 3.3 Check 3 -- Power zero
     % Calculating the power of the t-test where H_0: estimate is equal zero, H_A: different from zero
     power_zero_mean_eccentricity = powerzero(squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), pref.iterations-pref.burnin);
     power_zero_ENP = powerzero(squeeze(est_ENP), squeeze(est_std_ENP), pref.iterations-pref.burnin);
     % The power of the t-test should be at least 0.8
     
     
-    %%# 2.4 Check 4 -- Power difference (grid sweep)
+    %%# 3.4 Check 4 -- Power difference (grid sweep)
     % Not applicable. Using Monte Carlo parameterisation and not the grid 
     % sweep method, so there is no adjacent grid/cell to compare with.
     
-    %%# 2.5 Check 5 -- SE/SD ratio
+    %%# 3.5 Check 5 -- SE/SD ratio
     % 
     SESD_ratio_mean_eccentricity = squeeze(est_se_mean_eccentricity) ./ squeeze(est_std_mean_eccentricity);
     SESD_ratio_ENP = squeeze(est_se_ENP) ./ squeeze(est_std_ENP);
@@ -301,7 +303,7 @@ clearvars;
     % Reshape the data to required format before exporting
     export_temp_fmt = reshape(permute(export_temp,[1 3 2]), [pref.runs, 3]);
     
-    %%% 2.6 Export results
+    %%% 3.6 Export results
     % Format table before saving file
     export_mean_eccentricity = table(export_temp_fmt(:,1), export_temp_fmt(:,2), export_temp_fmt(:,3), squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), squeeze(est_se_mean_eccentricity), NaN(pref.runs,1), NaN(pref.runs,1), power_zero_mean_eccentricity, NaN(pref.runs,1), SESD_ratio_mean_eccentricity, ...
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
@@ -312,6 +314,4 @@ clearvars;
     writetable(export_mean_eccentricity, strcat('data/MCP_hunter_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '.csv'),'Delimiter',',');
     writetable(export_ENP, strcat('data/MCP_hunter_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '.csv'),'Delimiter',',');
 
-    
-% repetition use same input parameter but different random seed.
-% iterations is length of a repetition.
+
