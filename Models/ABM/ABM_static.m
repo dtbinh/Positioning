@@ -92,24 +92,24 @@ b = pref.boundary/2;
     
     % Creating a 3D matrix of firms. 
     % 1st dimension is firm, 2nd is (x,y) coordinates, and 3rd is iteration.
-    xy                      = zeros(pref.N, 2, pref.iterations); 
-    heading                 = zeros(pref.iterations, pref.N);  
+    xy                      = NaN(pref.N, 2, pref.iterations); 
+    heading                 = NaN(pref.iterations, pref.N);  
     
     % Creating a 3D matrix of market and utility.
     % 1st dimension is x, 2nd is y, and 3rd is iteration.
-    market = zeros(pref.resolution, pref.resolution, pref.iterations); % The cell/value is the closest firm
-    utility = zeros(pref.resolution, pref.resolution, pref.iterations); % The cell/value is utility
+    market = NaN(pref.resolution, pref.resolution, pref.iterations); % The cell/value is the closest firm
+    utility = NaN(pref.resolution, pref.resolution, pref.iterations); % The cell/value is utility
 
-    shares                  = zeros(pref.iterations, pref.N);
-    rank                    = zeros(pref.iterations, pref.N);
-    eccentricity            = zeros(pref.iterations, pref.N);
-    mean_eccentricity       = zeros(pref.iterations, 1);
-    ENP                     = zeros(pref.iterations, 1);
-    misery                  = zeros(pref.iterations, 1);
-    perimeter               = zeros(pref.iterations, pref.N);
-    perimeter_extrema       = zeros(pref.iterations, pref.N);
-    centroid                = zeros(pref.N, 2, pref.iterations);
-    centroid_distance       = zeros(pref.iterations, pref.N);
+    shares                  = NaN(pref.iterations, pref.N);
+    rank                    = NaN(pref.iterations, pref.N);
+    eccentricity            = NaN(pref.iterations, pref.N);
+    mean_eccentricity       = NaN(pref.iterations, 1);
+    ENP                     = NaN(pref.iterations, 1);
+    misery                  = NaN(pref.iterations, 1);
+    perimeter               = NaN(pref.iterations, pref.N);
+    perimeter_extrema       = NaN(pref.iterations, pref.N);
+    centroid                = NaN(pref.N, 2, pref.iterations);
+    centroid_distance       = NaN(pref.iterations, pref.N);
 
 %% 3. EVOLUTION
 h = waitbar(0,'Calculating evolution...');

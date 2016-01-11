@@ -9,7 +9,7 @@ function O = powerzero(est, std, n)
 
     
     p0 = [est std];
-    power_zero = zeros(length(est), 1);
+    power_zero = NaN(length(est), 1);
     for run=1:length(est)
         power_zero(run) = sampsizepwr('t', p0(run,:), 0, [], n, 'Alpha', 0.05);
     end

@@ -14,7 +14,7 @@ function O = burnin(M, varargin)
             
             
             [repetitions, iterations, runs] = size(M);
-            burnin = zeros(runs,repetitions);
+            burnin = NaN(runs,repetitions);
             for run=1:runs
                 for rep=1:repetitions
                     burnin(run,rep) = find(M(rep,:,run) == M(rep,end,run), 1); % Find 1st occurrence that equals last value
@@ -34,7 +34,7 @@ function O = burnin(M, varargin)
             stddev = varargin{2};
             
             [repetitions, iterations, runs] = size(M);
-            burnin = zeros(runs,repetitions);
+            burnin = NaN(runs,repetitions);
             for run=1:runs
                 for rep=1:repetitions
                     serie = M(rep,:,run);

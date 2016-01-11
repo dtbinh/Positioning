@@ -56,9 +56,9 @@ clearvars;
     pref.repetitions = 1; % Number of repetitions of run
 
     % Creating empty matrixes for summary variable 
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
-    export_temp = zeros(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
+    export_temp = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
 
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
@@ -130,8 +130,8 @@ clearvars;
     pref.repetitions = 5; % Number of repetitions of run
 
     % Creating empty matrixes for summary variable 
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
 
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
@@ -207,16 +207,16 @@ clearvars;
     pref.burnin = 150; % Number of iterations before we have burnin 
     pref.seed = rng(52591025, 'twister'); % Seed such that the randomly generated results are repeatable (from random.org)
     pref.timestamp = datetime('now');  % Create time stamp so exported files don't overwrite exsisting files.
-    pref.runs = 100; % Number of runs of the experiment
+    pref.runs = 1000; % Number of runs of the experiment
     pref.export_data = 0; % Exports the data
     pref.export_fig = 0; % Exports figures
     pref.iterations = pref.burnin + 100; % Number of post-burnin iterations
     pref.repetitions = 1; % Number of repetitions of run
     
     % Creating empty matrixes for summary variable 
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
-    export_temp = zeros(pref.repetitions, 3, pref.runs); % The three extra coloumns are for: N, mu, n_ratio
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
+    export_temp = NaN(pref.repetitions, 3, pref.runs); % The three extra coloumns are for: N, mu, n_ratio
 
     h = waitbar(0, 'Running...');
     for run=1:pref.runs

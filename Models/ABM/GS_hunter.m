@@ -67,9 +67,9 @@ clearvars;
     pref.n_ratio = 1; % Equal subpopulation size
 
     % Creating empty matrixes for summary variable 
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
-    export_temp = zeros(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
+    export_temp = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
     
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
@@ -135,8 +135,8 @@ clearvars;
     pref.n_ratio = 1; % Equal subpopulation size
 
     % Creating empty matrixes for summary variable
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
     
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
@@ -228,8 +228,8 @@ clearvars;
     pref.n_ratio = 1; % Equal subpopulation size
 
     % Creating empty matrixes for summary variable
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
 
     h = waitbar(0, 'Running...');
     for run=1:pref.runs

@@ -51,8 +51,8 @@ clearvars;
     pref.n_ratio = 1; % Equal subpopulation size
 
     % Creating empty matrixes for summary variable
-    data_mean_eccentricity = zeros(pref.repetitions, pref.iterations, pref.runs);
-    data_ENP = zeros(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
 
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
