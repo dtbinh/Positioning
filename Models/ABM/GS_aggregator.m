@@ -37,7 +37,7 @@
 clearvars;
 
 %% 2. Determining Burn-In
-% The process has burnin when there no longer is any change in variables no lo. 
+% The process has burnin when there no longer is any change in variables. 
 % Summary variables: mean eccentricity, effective number of firms (ENP)
 
     % Run through all firm sizes. Run 5 repetitions of each size with 200 iterations.
