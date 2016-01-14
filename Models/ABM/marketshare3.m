@@ -27,17 +27,24 @@ function [M, U] = marketshare3(firms, customers)
     % For each customer calculate the euclidean distance to each of the firms.
     distance = pdist2(firms, customers, 'euclidean');
 
-    % Find for each customer the minimum distiance (minVal) and the firm (minInd)
-    [minVal, minInd] = min(distance);
+    if(size(firms,1)>1)
+    
+        % Find for each customer the minimum distiance (minVal) and the firm (minInd)
+        [minVal, minInd] = min(distance);
 
-    % A customers with equal distiance to two firms will randomly pick one firm.
-    % Loop through all distances and find rows that equal the minimum value.
-    % If there is more than 1 row, then randomly draw.
-    for idx = 1:size(distance,2)
-        rows = find(distance(:,idx)==minVal(idx));
-        if size(rows,1) > 1
-            minInd(idx) = rows(randi(length(rows))); % use rows(randi(length(rows))) rather than randsample(rows,1) since it relies on seed from rnd()
+        % A customers with equal distiance to two firms will randomly pick one firm.
+        % Loop through all distances and find rows that equal the minimum value.
+        % If there is more than 1 row, then randomly draw.
+        for idx = 1:size(distance,2)
+            rows = find(distance(:,idx)==minVal(idx));
+            if size(rows,1) > 1
+                minInd(idx) = rows(randi(length(rows))); % use rows(randi(length(rows))) rather than randsample(rows,1) since it relies on seed from rnd()
+            end
         end
+    
+    else
+        minInd = ones(size(distance));
+        minVal = distance;
     end
     
     % Fills out the customer lattice with the ID of the closest firm.
