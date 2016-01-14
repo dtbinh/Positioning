@@ -84,7 +84,7 @@ b = pref.boundary/2;
     % possible firms. Using the initial number of firms + number of system
     % ticks (there is a max of one new firm per system tick). Ex post the 
     % excess rows and coloumns are removed.
-    N_exante = pref.N + pref.iterations/pref.psi;
+    N_exante = pref.N + pref.iterations;
     
     % Creating a 3D matrix of firms. 
     % 1st dimension is firm, 2nd is (x,y) coordinates, and 3rd is iteration.
