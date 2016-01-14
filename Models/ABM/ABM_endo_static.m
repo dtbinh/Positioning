@@ -1,10 +1,4 @@
-%function [o_mean_eccentricity, o_ENP] = ABM_endo(pref)
-%ABM_ENDO   runs the Agent-Based model with given parameters and saves result in
-% 'data' subfolder.
-%   ABM_ENDO(PREF) 
-%   where PREF is a struc (structure array) with the parameters/preferences
-%   used in the model.
-%   
+%% ABM Endogenous number of firms
 %   Jonas K. Sekamane. 
 %   Version 0.01
 %
@@ -23,7 +17,7 @@ pref.resolution = 70; % Length of the square (even number to include (0,0))
 pref.N = 1; % Number of initial firms
 pref.mu = 0; % Mean of subpopulation
 pref.n_ratio = 1; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-pref.iterations = 200; % Number of iteration
+pref.iterations = 100; % Number of system iterations/ticks
 pref.ruleset = cellstr([{'STICKER'}, {'HUNTER'}, {'AGGREGATOR'}]); % The set of possible decision rules
 pref.beta = 1; % The entry probability sensitivity to dissatisfaction.
 pref.a_b = 0.5; % Customer memory parameter (weight on past dissatisfaction).
@@ -94,30 +88,30 @@ b = pref.boundary/2;
     
     % Creating a 3D matrix of firms. 
     % 1st dimension is firm, 2nd is (x,y) coordinates, and 3rd is iteration.
-    xy                      = NaN(N_exante, 2, pref.iterations); 
+    xy                      = NaN(N_exante, 2, pref.iterations*pref.psi); 
 
     % Creating a 3D matrix of market and utility.
     % 1st dimension is x, 2nd is y, and 3rd is iteration.
-    market                  = NaN(pref.resolution, pref.resolution, pref.iterations); % The cell/value is the closest firm
+    market                  = NaN(pref.resolution, pref.resolution, pref.iterations*pref.psi); % The cell/value is the closest firm
     %utility                 = NaN(pref.resolution, pref.resolution, pref.iterations); % The cell/value is utility
 
-    shares                  = NaN(pref.iterations, N_exante);
-    rank                    = NaN(pref.iterations, N_exante);
-    eccentricity            = NaN(pref.iterations/pref.psi, N_exante);
-    %mean_eccentricity       = NaN(pref.iterations/pref.psi, 1);
-    ENP                     = NaN(pref.iterations/pref.psi, 1);
-    %N                       = NaN(pref.iterations/pref.psi, 1);
-    %mean_share              = NaN(pref.iterations/pref.psi, 1);
-    age_death               = NaN(pref.iterations/pref.psi, N_exante);
+    shares                  = NaN(pref.iterations*pref.psi, N_exante);
+    rank                    = NaN(pref.iterations*pref.psi, N_exante);
+    eccentricity            = NaN(pref.iterations, N_exante);
+    %mean_eccentricity       = NaN(pref.iterations, 1);
+    ENP                     = NaN(pref.iterations, 1);
+    %N                       = NaN(pref.iterations, 1);
+    %mean_share              = NaN(pref.iterations, 1);
+    age_death               = NaN(pref.iterations, N_exante);
     %perimeter               = NaN(pref.iterations, pref.N);
     %perimeter_extrema       = NaN(pref.iterations, pref.N);
-    centroid                = NaN(N_exante, 2, pref.iterations);
-    centroid_distance       = NaN(pref.iterations, N_exante);
+    centroid                = NaN(N_exante, 2, pref.iterations*pref.psi);
+    centroid_distance       = NaN(pref.iterations*pref.psi, N_exante);
     death                   = NaN(N_exante, 1);
     age                     = NaN(N_exante, 1);
-    dissatisfaction         = NaN(pref.resolution, pref.resolution, pref.iterations/pref.psi);
+    dissatisfaction         = NaN(pref.resolution, pref.resolution, pref.iterations);
 
-    fitness                 = NaN(pref.iterations/pref.psi, N_exante);
+    fitness                 = NaN(pref.iterations, N_exante);
     %rules                   = cell(1, N_exante);
     
     
@@ -155,7 +149,7 @@ b = pref.boundary/2;
     
 %% 3. EVOLUTION
 
-for i = 1:pref.iterations
+for i = 1:pref.iterations*pref.psi
     
     %%% 3.1 Decision rules
     
@@ -408,7 +402,7 @@ centroid_distance(:, newestfirm+1:end)  = [];
 [~,ruleidx] = ismember(rules, pref.ruleset);
 
 % Subset with the shares at system ticks only.
-shares_sys = shares(pref.psi:pref.psi:pref.iterations,:);
+shares_sys = shares(pref.psi:pref.psi:pref.iterations*pref.psi,:);
 
 % Colors
 % Unique color for each firm.
@@ -434,10 +428,10 @@ N = sum(~isnan(shares_sys), 2, 'omitnan');
 mean_age_death = mean(age_death, 2, 'omitnan');
 
 % Calculate the summary variables for each rule.
-mean_eccentricity_rule      = NaN(pref.iterations/pref.psi, length(pref.ruleset));
-mean_share_rule             = NaN(pref.iterations/pref.psi, length(pref.ruleset));
-N_rule                      = NaN(pref.iterations/pref.psi, length(pref.ruleset));
-mean_age_death_rule         = NaN(pref.iterations/pref.psi, length(pref.ruleset));
+mean_eccentricity_rule      = NaN(pref.iterations, length(pref.ruleset));
+mean_share_rule             = NaN(pref.iterations, length(pref.ruleset));
+N_rule                      = NaN(pref.iterations, length(pref.ruleset));
+mean_age_death_rule         = NaN(pref.iterations, length(pref.ruleset));
 for r=1:length(pref.ruleset)
     % Select all the firms that use the same rule
     rfirms = find(ruleidx==r);
@@ -453,71 +447,3 @@ for r=1:length(pref.ruleset)
 end
     
 
-
-%% 4. Export
- 
-%     %%% 4.1 Clean up workspace
-%     % Remove redundent variables from workpsace before saving workspace to file
-% 
-%     clear b N_exante... 
-%           deadfirms firms rfirms...
-%           firm i idx j n r si i_mask... 
-%           direction_in dx_in dy_in ...
-%           dissatisfaction_i F_firm_i market_i P_mask utility_i xy_0 x_0 y_0;
-% 
-%     %%% 4.2 Save data
-%     % Save all variables from the current workspace (generated by this .m file)
-%     % in the subfolder 'data'. Each file has unique name (avoids overwriting
-%     % existing files). The unique name is the timestamp of execution and the
-%     % ordinal number of the run.
-%     if(pref.export_data)
-%         save(strcat('data/data_', char(pref.timestamp, 'yyyyMMdd_HHmm'), '_rep', sprintf('%03d', pref.rep), '_run', sprintf('%04d', pref.run)));
-%     end
-%     
-%     %%% 4.3 Save figures
-%     
-%     if(pref.export_fig)
-%         
-%         % Mean eccentricity
-%         fig16 = figure('Name', '16', 'Visible', 'Off');
-%         %figure(16);
-%         %clf reset; % Reset figure.
-%         plot(mean_eccentricity);
-%         title({'Mean eccentricity', ['N: ' num2str(pref.N) ',   \mu: ', num2str(pref.mu) ',   n_l/n_r: ' num2str(pref.n_ratio)]}); % Add title
-%         hold on;
-%         m2nd_mean_eccentricity = mean(mean_eccentricity(length(mean_eccentricity)/2:end));
-%         sd2nd_mean_eccentricity = std(mean_eccentricity(length(mean_eccentricity)/2:end));
-%         plot(repmat( m2nd_mean_eccentricity , 1, pref.iterations), 'k');
-%         plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
-%         plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
-%         hold off;
-%         ylim([0 2.5]);
-%         clear m2nd_mean_eccentricity sd2nd_mean_eccentricity;
-%         
-%         %saveas(fig16, strcat('fig/', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '/fig_', 'run', sprintf('%04d', pref.run), '_16'), 'png');
-%         saveas(fig16, strcat('fig/fig_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_rep', sprintf('%03d', pref.rep), '_run', sprintf('%04d', pref.run), '_16'), 'png');
-% 
-%         % Effective Number of Parties/Players/Firms (ENP)
-%         fig17 = figure('Name', '17', 'Visible', 'off');
-%         %figure(17);
-%         %clf reset; % Reset figure.
-%         plot(ENP);
-%         title({'ENP', ['N: ' num2str(pref.N) ',   \mu: ', num2str(pref.mu) ',   n_l/n_r: ' num2str(pref.n_ratio)]}); % Add title
-%         hold on;
-%         m2nd_ENP = mean(ENP(length(ENP)/2:end));
-%         sd2nd_ENP = std(ENP(length(ENP)/2:end));
-%         plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
-%         plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
-%         plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
-%         hold off;
-%         ylim([1 12]);
-%         clear m2nd_ENP sd2nd_ENP;
-%         
-%         saveas(fig17, strcat('fig/fig_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_rep', sprintf('%03d', pref.rep), '_run', sprintf('%04d', pref.run), '_17'), 'png');
-%     end
-%     
-%     %%% 4.4 Function output
-%     o_mean_eccentricity = mean_eccentricity;
-%     o_ENP = ENP;
-
-%end

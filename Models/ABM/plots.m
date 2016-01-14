@@ -283,7 +283,7 @@ hold off;
 
 
 % Draw evolution
-for i = 1:pref.iterations
+for i = 1:pref.iterations*pref.psi
     figure(2);
     clf reset; % Reset figure.
     image(x, y, market(:,:,i),'AlphaData', 0.2); % Create image of the marketshare with dimmed opacity.
@@ -312,9 +312,9 @@ title('ENP'); % Add title
 hold on;
 m2nd_ENP = mean(ENP(length(mean_eccentricity)/2:end));
 sd2nd_ENP = std(ENP(length(mean_eccentricity)/2:end));
-plot(repmat( m2nd_ENP , 1, pref.iterations/pref.psi), 'k');
-plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations/pref.psi), 'k:');
-plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations/pref.psi), 'k:');
+plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
+plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
 hold off;
 
 
@@ -329,9 +329,9 @@ for r=1:length(pref.ruleset)
 end
 m2nd_mean_eccentricity = mean(mean_eccentricity(length(mean_eccentricity)/2+1:end));
 sd2nd_mean_eccentricity = std(mean_eccentricity(length(mean_eccentricity)/2+1:end));
-plot(repmat( m2nd_mean_eccentricity , 1, pref.iterations/pref.psi), 'k');
-plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iterations/pref.psi), 'k:');
-plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations/pref.psi), 'k:');
+plot(repmat( m2nd_mean_eccentricity , 1, pref.iterations), 'k');
+plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
 hold off;
 
 % Mean share
@@ -345,9 +345,9 @@ for r=1:length(pref.ruleset)
 end
 m2nd_mean_share = mean(mean_share(length(mean_share)/2+1:end));
 sd2nd_mean_share = std(mean_share(length(mean_share)/2+1:end));
-plot(repmat( m2nd_mean_share , 1, pref.iterations/pref.psi), 'k');
-plot(repmat( m2nd_mean_share + sd2nd_mean_share , 1, pref.iterations/pref.psi), 'k:');
-plot(repmat( m2nd_mean_share - sd2nd_mean_share , 1, pref.iterations/pref.psi), 'k:');
+plot(repmat( m2nd_mean_share , 1, pref.iterations), 'k');
+plot(repmat( m2nd_mean_share + sd2nd_mean_share , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_mean_share - sd2nd_mean_share , 1, pref.iterations), 'k:');
 hold off;
 
 
@@ -362,9 +362,9 @@ for r=1:length(pref.ruleset)
 end
 m2nd_N = mean(N(length(N)/2:end));
 sd2nd_N = std(N(length(N)/2:end));
-plot(repmat( m2nd_N , 1, pref.iterations/pref.psi), 'k');
-plot(repmat( m2nd_N + sd2nd_N , 1, pref.iterations/pref.psi), 'k:');
-plot(repmat( m2nd_N - sd2nd_N , 1, pref.iterations/pref.psi), 'k:');
+plot(repmat( m2nd_N , 1, pref.iterations), 'k');
+plot(repmat( m2nd_N + sd2nd_N , 1, pref.iterations), 'k:');
+plot(repmat( m2nd_N - sd2nd_N , 1, pref.iterations), 'k:');
 hold off;
 
 
