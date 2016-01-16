@@ -6,6 +6,7 @@ Articles/**.nlogo
 # Output files
 Models/ABM/data/**
 Models/ABM/fig/**
+Models/ABM/profile/**
 Figures/data/**
 
 # Rstudio system files
