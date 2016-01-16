@@ -6,20 +6,36 @@
 % Extending the the _voronoi_ and _voronoin_ functions with a boundary, 
 % such that any open regions can be patched.
 
+clearvars;
+
 % Points - Random firm locations
-n = 5;
+n = 4;
 x0 = rand(1, n)*10-5; % Initial x-position of firm
 y0 = rand(1, n)*10-5; % Initial y-position of firm
 xy = [x0' y0'];
 
+% Default plot
+figure(1);
+voronoi(xy(:,1)' , xy(:,2)');
+xlim([-6 6]); ylim([-6 6]);
+
 % Default functions
 [vx,vy] = voronoi(xy(:,1)' , xy(:,2)');
-[V,C] = voronoin(xy);
+% Coordinates of the inner Voronoi edges/end points
+[V1,C] = voronoin(xy);
 
 % Boundary box
 bbox = [-5 5 5 -5 -5; 5 5 -5 -5 5]';
 
-% Coordinates of the boundary box
+% Calculate the maximum distance between any two points within the boundary
+bdistance = sqrt((-5-5)^2+(-5-5)^2); % Length of diagonal for a square boundary box.
+% For more general convex boundary use covhull() + algorithm described here: http://stackoverflow.com/a/2736383
+
+% Boundary box line segments
+bvx = [ bbox(1:end-1,1)'; circshift( bbox(1:end-1,1)', [0,-1] ) ];
+bvy = [ bbox(1:end-1,2)'; circshift( bbox(1:end-1,2)', [0,-1] ) ];
+
+% Coordinates of the boundary box cornors
 V2 = [bbox(1:end-1,1) bbox(1:end-1,2)];
 
 % For each point calculate the euclidean distance to boundary points.
@@ -40,13 +56,61 @@ end
 % The minimum length of the extended line should be the diagonal length of the boundary box.
 % If boundary polygon instead of boundary box, then something similar to regionprops's MajorAxisLength property.
 
+% Identify the Voronoi edges/endpoints that are within the boundary.
+%[vxu vxui] = unique(vx(:)); 
+%[vyu vyui] = unique(vy(:)); 
+%[sort(vxui) sort(vyui)]
+%vx(sort(vxui))
+[~, vui] = unique(vx(:)); 
+V0 = [vx(sort(vui)) vy(sort(vui))];
+in = inpolygon(V0(:,1), V0(:,2), bbox(:,1), bbox(:,2));
+
+
+% Identify Voronoi line segments with common endpoints.
+vend = NaN(size(vx));
+% for i=1:2
+%     vend(i,:) = ismember(vx(i,:), V0(:,1));
+% end
+for line=1:length(vx);
+    for i=1:2
+        vend(i,line) = ismember(vx(i,line), vx(:,1:end~=line));
+    end
+end
+% Find the Voronoi lines that have exactly one shared endpoint
+count = sum(vend,1);
+lines = find(count==1);
+% Loop through all lines with one common endpoint (in boundary) and
+% extend its length (to insure that the line intersects with the boundary)
+vx_extent = vx;
+vy_extent = vy;
+for line = lines
+    % The common endpoint
+    i = find(vend(:,line));
+    % The other endpoint (opposite of i)
+    j = 1+abs(2-i); % Takes value 2 if i=1 and takes value 1 if i=2.
+    % Extend the line in the direction away from the common endpoint
+    [direction, ~] = cart2pol( vx(j,line)-vx(i,line), vy(j,line)-vy(i,line) );
+    % Setting the length equal to the maximumum distance between any two
+    % points within boundary.
+    [dx, dy] = pol2cart(direction, bdistance);
+    % New end point
+    vx_extent(j,line) = vx(i,line) + dx;
+    vy_extent(j,line) = vy(i,line) + dy;
+end
+
+
+% Remove lines that are completely outside boundary
+%vx_extent(:,find(~count)) = [];
+%vy_extent(:,find(~count)) = [];
+
+
 % Line intersect with boundary box
-bbx = []; bby = []; %bbii = [];
-for j = 2:length(vx)
-    [xi, yi] = polyxpoly(bbox(:,1), bbox(:,2), vx(:,j), vy(:,j)); % [xi, yi, ii] = 
+bbx = []; bby = []; bbii = [];
+for j = 1:length(vx)
+    [xi, yi ii] = polyxpoly(bbox(:,1), bbox(:,2), vx(:,j), vy(:,j)); % [xi, yi, ii] = 
     bbx = [bbx; xi];
     bby = [bby; yi];
-    %%bbii = [bbii; ii];
+    bbii = [bbii; ii];
 end
 V3 = [bbx bby]; % Coordinates of the voronoi diagram lines intersection with the boundary box.
 
@@ -66,7 +130,7 @@ end
 
 %% Combine the points:
 % TO-DO:
-polygon = [V; V2; V3];
+polygon = [V1; V2; V3];
 
 % First appoach:
 % polygon2 = polygon(3:end,:);
@@ -90,13 +154,13 @@ polygon = [V; V2; V3];
 
 % Second appoach:
 % for i = 1:length(C)
-%     C_final{i} = [C{i} C2{i}+length(V) C3{i}+length(V)+length(V2)];
+%     C_final{i} = [C{i} C2{i}+length(V1) C3{i}+length(V1)+length(V2)];
 %     
 % %     if all(C{i}~=1)   % If at least one of the indices is 1,
 % %                       % then it is an open region and we can't
 % %                       % patch that.
-% %         %polygon = [polygon; V(C{i})];
-% %         %patch(V(C{i},1),V(C{i},2),i); % use color i.
+% %         %polygon = [polygon; V1(C{i})];
+% %         %patch(V1(C{i},1),V1(C{i},2),i); % use color i.
 % %     end
 % %     if ~isempty(C2{i})
 % %         %patch(V2(C2{i},1),V2(C2{i},2),i);
@@ -151,20 +215,20 @@ polygon = [V; V2; V3];
 %     end
 % end
 
-
+figure(2);
 plot(vx,vy);
 xlim([-6 6]); ylim([-6 6]);
 hold on;
 plot(bbox(:,1),bbox(:,2));
 scatter(bbx, bby);
-scatter(V(:,1), V(:,2));
+scatter(V1(:,1), V1(:,2));
 %scatter(bbox(1:end-1,1),bbox(1:end-1,2));
 text(bbox(1:end-1,1)-0.1, bbox(1:end-1,2)-0.1, cellstr(num2str([1:4]')) );
 scatter( xy(:,1)' , xy(:,2)', 'filled');
 text(xy(:,1)'+0.1, xy(:,2)'+0.1, cellstr(num2str([1:n]')) );
 %plot(linex,liney,':');
 %scatter(xi_temp, yi_temp);
-patch(test(:,1),test(:,2),3);
+%patch(test(:,1),test(:,2),3);
 hold off;
 % xlabel('x'); ylabel('y');
 % %voronoi(xy(:,1)' , xy(:,2)');
@@ -175,4 +239,32 @@ hold off;
 %[lat,lon] = polymerge(vx,vy);
 %plot(lat,lon, ':');
 
-%[XY,V,C] = VoronoiLimit(xy(:,1)' , xy(:,2)', bbox); % http://www.mathworks.com/matlabcentral/fileexchange/34428-voronoilimit
+%[XY,V1,C] = VoronoiLimit(xy(:,1)' , xy(:,2)', bbox); % http://www.mathworks.com/matlabcentral/fileexchange/34428-voronoilimit
+
+
+figure(3);
+plot(vx,vy);
+xlim([-30 30]); ylim([-30 30]);
+hold on;
+plot(bbox(:,1),bbox(:,2));
+hold off;
+
+figure(31);
+plot(vx_extent,vy_extent);
+xlim([-30 30]); ylim([-30 30]);
+hold on;
+plot(bbox(:,1),bbox(:,2));
+hold off;
+
+% figure(4);
+% plot(vx(:,bbii(1,2)),vy(:,bbii(1,2)));
+% xlim([-6 6]); ylim([-6 6]);
+% hold on;
+% plot( bbox(bbii(1,1),1) , bbox(bbii(1,1),2) );
+% hold off;
+% bbii(1,1)
+% 
+% figure(5);
+% plot(bvx,bvy);
+% xlim([-6 6]); ylim([-6 6]);
+
