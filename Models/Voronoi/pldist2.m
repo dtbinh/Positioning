@@ -29,9 +29,11 @@ for l=1:size(lines,1)
         d_bx = norm(b-x);
 
         if dot(a-b, x-b) * dot(b-a, x-a) >= 0
+            % Point is perpendicular to line
             A = [a 1; b 1; x 1];
-            dist(p,l) = abs(det(A)) / d_ab;     
+            dist(p,l) = abs(det(A)) / d_ab;
         else
+            % Point is not perpendicular to line
             dist(p,l) = min(d_ax, d_bx);
         end
     end
