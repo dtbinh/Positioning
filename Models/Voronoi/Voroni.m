@@ -9,7 +9,7 @@
 clearvars;
 
 % Points - Random firm locations
-n = 3;
+n = 8;
 %x0 = rand(1, n)*10-5; % Initial x-position of firm
 %y0 = rand(1, n)*10-5; % Initial y-position of firm
 %xy = [x0' y0'];
@@ -36,6 +36,9 @@ bdistance = sqrt((-5-5)^2+(-5-5)^2); % Length of diagonal for a square boundary 
 % Boundary box line segments
 bvx = [ bbox(1:end-1,1)'; circshift( bbox(1:end-1,1)', [0,-1] ) ];
 bvy = [ bbox(1:end-1,2)'; circshift( bbox(1:end-1,2)', [0,-1] ) ];
+
+
+
 
 % Coordinates of the boundary box cornors
 V2 = [bbox(1:end-1,1) bbox(1:end-1,2)];
@@ -186,6 +189,87 @@ VXY = [vx_extent(1,:)' vy_extent(1,:)' vx_extent(2,:)' vy_extent(2,:)'];
 BXY = [bvx(1,:)' bvy(1,:)' bvx(2,:)' bvy(2,:)'];
 
 out = lineSegmentIntersect(VXY, BXY);
+
+%% Split lines at intersection points
+
+% New variables that simply later code
+A = out.intAdjacencyMatrix;
+IX = out.intMatrixX;
+IY = out.intMatrixY;
+s = size(A);
+
+% Create new matrix for the split line segments
+VXY_split = NaN(s(1)+sum(A(:)), 4);
+% Count the number of intersections for each voronoi line.
+vbreaks = sum(A,2);
+% Loop through all voronoi lines that has an intersection.
+v = 1;
+for vline = find(vbreaks)'
+    
+    % Find index for intersection points.
+    bline = find(A(vline,:));
+    % Create matrix with all points. Each row is a point with form [x y].
+    % So need to reshape VXY. Each split gives two points; start and end.
+    points = [ reshape( VXY(vline,:), 2, 2)'; ...
+               repmat( [IX(vline,bline)' IY(vline,bline)'], 2, 1) ];
+    % All points on same line; sort primarily by x and secondarily by y.
+    pointssorted = sortrows(points);
+    % Reformat so row is line with form [x1 y1 x2 y2]. New length is l.
+    l = vbreaks(vline)+1;
+    VXY_split(v:v-1+l,:) = reshape(pointssorted', 4, l)';
+    v = v+l;
+    
+end
+VXY_split(v:end,:) = VXY(vbreaks==0,:); % Lines with no split
+
+% Create new matrix for the split line segments
+BXY_split = NaN(s(2)+sum(A(:)), 4);
+% Count the number of intersections for each boundary line.
+bbreaks = sum(A,1);
+% Loop through all boundary lines that has an intersection.
+b = 1;
+for bline = find(bbreaks)
+    
+    % Find index for intersection points.
+    vline = find(A(:,bline));
+    % Create matrix with all points. Each row is a point with form [x y].
+    % So need to reshape BXY. Each split gives two points; start and end.
+    points = [ reshape( BXY(bline,:), 2, 2)'; ...
+               repmat( [IX(vline,bline) IY(vline,bline)], 2, 1) ];
+    % All points on same line; sort primarily by x and secondarily by y.
+    if mod(bline,2) % even number
+        pointssorted = sortrows(points, [1 2]);
+    else
+        pointssorted = sortrows(points, [2 1]);
+    end
+    % Reformat so row is line with form [x1 y1 x2 y2]. New length is l.
+    l = bbreaks(bline)+1;
+    BXY_split(b:b-1+l,:) = reshape(pointssorted', 4, l)';
+    b = b+l;
+    
+end
+BXY_split(b:end,:) = BXY(bbreaks==0,:); % Lines with no split
+
+% Delete lines outside boundary
+VXY_split(find( sum( (abs(VXY_split)>5) ,2) ),:) = [];
+
+
+% s = size(out.intAdjacencyMatrix);
+% BXY_split = NaN(sum(s), 4);
+% i = 1;
+% for bline=1:s(2)
+%     if any(out.intAdjacencyMatrix(:, bline))
+%         j = 1;
+%         for vline = find(out.intAdjacencyMatrix(:, bline))
+%             BXY_split(i,:) = 
+%             j = j+1;
+%             i = i+1;
+%         end
+%     else 
+%         BXY_split(i,:) = BXY(bline,:);
+%         i = i+1;
+%     end    
+% end
 
 sb = [size(BXY,2)+sum(out.intAdjacencyMatrix(:)), 2];
 BX_split = NaN(sb);
@@ -363,23 +447,25 @@ hold off;
 % bbii(1,1)
 % 
 
-figure(5);
-plot(bvx_split,bvy_split);
-xlim([-6 6]); ylim([-6 6]);
-
 figure(33);
 plot(vx_extent,vy_extent);
 xlim([-8 8]); ylim([-8 8]);
 hold on;
 plot(bbox(:,1),bbox(:,2));
-scatter(out.intMatrixX(out.intAdjacencyMatrix),out.intMatrixY(out.intAdjacencyMatrix),[],'r');
+scatter(IX(A),IY(A),[],'r');
 hold off;
 
-
+m = 1:length(BXY_split);
+figure(5);
+plot( BXY_split(m,[1 3])', BXY_split(m,[2 4])');
+xlim([-6 6]); ylim([-6 6]);
+hold on;
+plot( VXY_split(:,[1 3])', VXY_split(:,[2 4])');
+hold off;
 
 % Calculating distance from line segments to points
 
-bdist = pldist2(xy, BXY)
+bdist = pldist2(xy, BXY_split)
 % Find closest firm for each line segment
 [~, I] = min(bdist)
 
