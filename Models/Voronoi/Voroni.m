@@ -11,7 +11,7 @@ clearvars;
 %% Setup
 
 % Points - Random firm locations
-n = 1;
+n = 3;
 %x0 = rand(1, n)*10-5; % Initial x-position of firm
 %y0 = rand(1, n)*10-5; % Initial y-position of firm
 %xy = [x0' y0'];
@@ -26,18 +26,20 @@ end
 %% Boundary box
 
 % Boundary box
+%bbox = [x([1 end end 1 1]); y([end end 1 1 end])]';
 bbox = [-5 5 5 -5 -5; 5 5 -5 -5 5]';
-
-% Calculate the maximum distance between any two points within the boundary
-bdistance = sqrt((-5-5)^2+(-5-5)^2)*2; % Twice the length of diagonal for a square boundary box.
-% For more general convex boundary use covhull() + algorithm described here: http://stackoverflow.com/a/2736383
 
 % Boundary box line segments
 bvx = [ bbox(1:end-1,1)'; circshift( bbox(1:end-1,1)', [0,-1] ) ];
 bvy = [ bbox(1:end-1,2)'; circshift( bbox(1:end-1,2)', [0,-1] ) ];
 
+% Calculate the maximum distance between any two points within the boundary
+%bdistance = sqrt((pref.boundary)^2+(pref.boundary)^2)*2; % Twice the length of diagonal for a square boundary box.
+bdistance = sqrt((-5-5)^2+(-5-5)^2)*2; % Twice the length of diagonal for a square boundary box.
+% For more general convex boundary use covhull() + algorithm described here: http://stackoverflow.com/a/2736383
 
-%% Special case (n=1) then area is given by boundary
+
+%% Special case (n=1) then market polygon is given by boundary
 if(n==1)
     BXY = [bvx' bvy']; % [x1 x2 y1 y2]
     BXY = BXY(:, [1 3 2 4]); % [x1 y1 x2 y2]
@@ -55,8 +57,8 @@ else
         xynormal = [mean(xy)-xyn; mean(xy)+xyn];
         vx = xynormal(:,1);
         vy = xynormal(:,2);
-        vx_extent = vx;
-        vy_extent = vy;
+        vx_extend = vx;
+        vy_extend = vy;
     else
         % Default functions
         [vx,vy] = voronoi(xy(:,1)' , xy(:,2)');
@@ -83,52 +85,14 @@ else
 
     if(n>2)
 
-        % Identify the Voronoi edges/endpoints that are within the boundary.
-        [~, vui] = unique(vx(:)); 
-        V0 = [vx(sort(vui)) vy(sort(vui))];
-        in = inpolygon(V0(:,1), V0(:,2), bbox(:,1), bbox(:,2));
-
-
-        % Identify Voronoi line segments with common endpoints inside boundary.
-        vend = NaN(size(vx));
-        for line=1:length(vx);
-            % If line is connected to any other line (ie. 1:N~=line).
-            others = find( 1:length(vx) ~= line );
-            for i=1:2
-                 connected = ismember(vx(i,line), vx(:,others));
-                 outside = ismember(vx(i,line), V0(~in,1));
-                 vend(i,line) = connected+outside;
-            end
-        end
-        % Find the Voronoi lines that have exactly one shared endpoint within
-        % boundary.
-        count = sum(logical(vend),1);
-        lines = find(count==1);
-        % Loop through all lines with one common endpoint (in boundary) and
-        % extend its length (to insure that the line intersects with the boundary)
-        vx_extent = vx;
-        vy_extent = vy;
-        for line = lines
-            % The common endpoint
-            i = find(vend(:,line));
-            % The other endpoint (opposite of i)
-            j = 1+abs(2-i); % Takes value 2 if i=1 and takes value 1 if i=2.
-            % Extend the line in the direction away from the common endpoint
-            [direction, ~] = cart2pol( vx(j,line)-vx(i,line), vy(j,line)-vy(i,line) );
-            % Setting the length equal to the maximumum distance between any two
-            % points within boundary.
-            [dx, dy] = pol2cart(direction, bdistance);
-            % New end point
-            vx_extent(j,line) = vx(i,line) + dx;
-            vy_extent(j,line) = vy(i,line) + dy;
-        end
+        [vx_extend vy_extend] = voronoi_extend(vx, vy, bbox, bdistance);
 
     end
 
     %% Line intersection
 
     % Formatting to fit lineSegmentIntersect
-    VXY = [vx_extent' vy_extent']; % [x1 x2 y1 y2]
+    VXY = [vx_extend' vy_extend']; % [x1 x2 y1 y2]
     VXY = VXY(:, [1 3 2 4]); % [x1 y1 x2 y2]
     BXY = [bvx' bvy']; % [x1 x2 y1 y2]
     BXY = BXY(:, [1 3 2 4]); % [x1 y1 x2 y2]
@@ -138,66 +102,10 @@ else
 
     %% Split lines at intersection points
 
-    % New variables that simply later code
-    A = out.intAdjacencyMatrix;
-    IX = out.intMatrixX;
-    IY = out.intMatrixY;
-    s = size(A);
-
-    % Create new matrix for the split line segments
-    VXY_split = NaN(s(1)+sum(A(:)), 4);
-    % Count the number of intersections for each voronoi line.
-    vbreaks = sum(A,2);
-    % Loop through all voronoi lines that has an intersection.
-    v = 1;
-    for vline = find(vbreaks)'
-
-        % Find index for intersection points.
-        bline = find(A(vline,:));
-        % Create matrix with all points. Each row is a point with form [x y].
-        % So need to reshape VXY. Each split gives two points; start and end.
-        points = [ reshape( VXY(vline,:), 2, 2)'; ...
-                   repmat( [IX(vline,bline)' IY(vline,bline)'], 2, 1) ];
-        % All points on same line; sort primarily by x and secondarily by y.
-        pointssorted = sortrows(points);
-        % Reformat so row is line with form [x1 y1 x2 y2]. New length is l.
-        l = vbreaks(vline)+1;
-        VXY_split(v:v-1+l,:) = reshape(pointssorted', 4, l)';
-        v = v+l;
-
-    end
-    VXY_split(v:end,:) = VXY(vbreaks==0,:); % Lines with no split
-
-    % Create new matrix for the split line segments
-    BXY_split = NaN(s(2)+sum(A(:)), 4);
-    % Count the number of intersections for each boundary line.
-    bbreaks = sum(A,1);
-    % Loop through all boundary lines that has an intersection.
-    b = 1;
-    for bline = find(bbreaks)
-
-        % Find index for intersection points.
-        vline = find(A(:,bline));
-        % Create matrix with all points. Each row is a point with form [x y].
-        % So need to reshape BXY. Each split gives two points; start and end.
-        points = [ reshape( BXY(bline,:), 2, 2)'; ...
-                   repmat( [IX(vline,bline) IY(vline,bline)], 2, 1) ];
-        % All points on same line; sort primarily by x and secondarily by y.
-        if mod(bline,2) % even number
-            pointssorted = sortrows(points, [1 2]);
-        else
-            pointssorted = sortrows(points, [2 1]);
-        end
-        % Reformat so row is line with form [x1 y1 x2 y2]. New length is l.
-        l = bbreaks(bline)+1;
-        BXY_split(b:b-1+l,:) = reshape(pointssorted', 4, l)';
-        b = b+l;
-
-    end
-    BXY_split(b:end,:) = BXY(bbreaks==0,:); % Lines with no split
+    [VXY_split, BXY_split] = voronoi_split(VXY, BXY, out.intAdjacencyMatrix, out.intMatrixX, out.intMatrixY);
 
     % Delete lines outside boundary (.0000000000001 fixes rounding error).
-    VXY_split(find( sum( (abs(VXY_split)>5.0000000000001) ,2) ),:) = [];
+    VXY_split(find( sum( (abs(VXY_split) > abs(BXY(1,1))+.0000000000001) ,2) ),:) = [];
 
 
     %% Match lines with respective firm
@@ -205,23 +113,15 @@ else
     % Calculating distance from line segments to points
 
     % Distance to mid-point of line segment
-    BXY_split_mid = [mean(BXY_split(:,[1 3]),2) mean(BXY_split(:,[2 4]),2)] ;
+    BXY_split_mid = [ mean( BXY_split(:,[1 3]), 2) mean( BXY_split(:,[2 4]), 2) ] ;
     bdist_mid = pdist2(xy, BXY_split_mid);
     [~, IB] = min(bdist_mid);
 
-    % bdist = pldist2(xy, BXY_split);
-    % % Find closest firm for each line segment
-    % [~, IB] = min(bdist);
-
-    VXY_split_mid = [mean(VXY_split(:,[1 3]),2) mean(VXY_split(:,[2 4]),2)] ;
+    VXY_split_mid = [ mean( VXY_split(:,[1 3]), 2) mean( VXY_split(:,[2 4]), 2) ] ;
     vdist_mid = pdist2(xy, VXY_split_mid);
+    % Each voronoi line is the border between two firms. Keep the two with min distance.
     [~, IV] = sort(vdist_mid, 1);
     IV(3:end,:) = [];
-
-    % vdist = pldist2(xy, VXY_split);
-    % % Each voronoi line is borders two firms. Keep the two with min distance.
-    % [~, IV] = sort(vdist, 1);
-    % IV(3:end,:) = [];
 
     % Map the line segment to the firms.
     all_split = [BXY_split; VXY_split];
@@ -255,7 +155,7 @@ xlim([-6 6]); ylim([-6 6]);
 hold on;
 plot( BXY_split(:,[1 3])', BXY_split(:,[2 4])');
 text( BXY_split(:,1)'+0.1, BXY_split(:,2)'+0.1, cellstr(num2str([1:length(BXY_split)]')) );
-scatter(IX(A),IY(A),[],'k','filled');
+scatter(out.intMatrixX(out.intAdjacencyMatrix),out.intMatrixY(out.intAdjacencyMatrix),[],'k','filled');
 %scatter(V1(:,1), V1(:,2));
 %scatter(bbox(1:end-1,1),bbox(1:end-1,2));
 %text(bbox(1:end-1,1)-0.1, bbox(1:end-1,2)-0.1, cellstr(num2str([1:4]')) );
@@ -278,7 +178,7 @@ hold off;
 % hold off;
 % 
 % figure(31);
-% plot(vx_extent,vy_extent);
+% plot(vx_extend,vy_extend);
 % xlim([-10 10]); ylim([-10 10]);
 % hold on;
 % plot(bbox(:,1),bbox(:,2));
@@ -294,11 +194,11 @@ hold off;
 % 
 
 % figure(33);
-% plot(vx_extent,vy_extent);
+% plot(vx_extend,vy_extend);
 % xlim([-8 8]); ylim([-8 8]);
 % hold on;
 % plot(bbox(:,1),bbox(:,2));
-% scatter(IX(A),IY(A),[],'r');
+% scatter(out.intMatrixX(out.intAdjacencyMatrix),out.intMatrixY(out.intAdjacencyMatrix),[],'r');
 % hold off;
 
 % figure(5);
