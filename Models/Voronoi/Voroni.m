@@ -18,7 +18,11 @@ n = 1;
 [x0, y0] = pol2cart( rand(n,1)*2*pi , rand(n,1)*3 );
 xy = [x0 y0];
 
-
+if (size(unique(xy,'rows'),1) < n)
+    warning('Less unique xy-firm coordinates than number of firms.');
+    % TO-DO: Test how often likely this situation is, before providing fix.
+end
+    
 %% Boundary box
 
 % Boundary box
