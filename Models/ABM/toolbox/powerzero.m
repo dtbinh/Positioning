@@ -7,11 +7,15 @@ function O = powerzero(est, std, n)
 %   Jonas K. Sekamane. 
 %   Version 0.03
 
-    
+    idx = find(std == 0);
     p0 = [est std];
     power_zero = NaN(length(est), 1);
     for run=1:length(est)
-        power_zero(run) = sampsizepwr('t', p0(run,:), 0, [], n, 'Alpha', 0.05);
+        if any(run==idx)
+            power_zero(run) = NaN;
+        else 
+            power_zero(run) = sampsizepwr('t', p0(run,:), 0, [], n, 'Alpha', 0.05);
+        end
     end
     
     O = power_zero;
