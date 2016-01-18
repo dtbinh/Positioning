@@ -68,8 +68,8 @@ function out = lineSegmentIntersect(XY1,XY2)
 %%% Argument check.
 %-------------------------------------------------------------------------------
 
-validateattributes(XY1,{'numeric'},{'2d','finite'});
-validateattributes(XY2,{'numeric'},{'2d','finite'});
+%validateattributes(XY1,{'numeric'},{'2d','finite'});
+%validateattributes(XY2,{'numeric'},{'2d','finite'});
 
 [n_rows_1,n_cols_1] = size(XY1);
 [n_rows_2,n_cols_2] = size(XY2);
