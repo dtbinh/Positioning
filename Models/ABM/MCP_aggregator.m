@@ -72,7 +72,7 @@ clearvars;
         % Repetitions
         data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
         data_ENP_run                = NaN(pref.repetitions, pref.iterations);
-        export_param_run             = NaN(pref.repetitions, 3);
+        export_param_run            = NaN(pref.repetitions, 3);
         for rep=1:pref.repetitions
             pref3 = pref2;
             pref3.rep = 1;
@@ -81,14 +81,14 @@ clearvars;
             [o_mean_eccentricity, o_ENP] = ABM(pref3);
 
             % Store summary variables from each run
-            data_mean_eccentricity_run = o_mean_eccentricity';
-            data_ENP_run = o_ENP';
+            data_mean_eccentricity_run(rep,:) = o_mean_eccentricity';
+            data_ENP_run(rep,:) = o_ENP';
             
-            export_param_run = [pref3.N pref3.mu pref3.n_ratio];
+            export_param_run(rep,:) = [pref3.N pref3.mu pref3.n_ratio];
         end
         data_mean_eccentricity(:,:,run)     = data_mean_eccentricity_run;
         data_ENP(:,:,run)                   = data_ENP_run;
-        export_param(:,:,run)                = export_param_run;
+        export_param(:,:,run)               = export_param_run;
 
         parfor_progress;
     end
@@ -149,7 +149,7 @@ clearvars;
         % Repetitions
         data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
         data_ENP_run                = NaN(pref.repetitions, pref.iterations);
-        export_param_run             = NaN(pref.repetitions, 4);
+        export_param_run            = NaN(pref.repetitions, 4);
         for rep=1:pref2.repetitions
             pref3 = pref2;
             pref3.rep = rep;
@@ -158,14 +158,14 @@ clearvars;
             [o_mean_eccentricity, o_ENP] = ABM(pref3);
             
             % Store summary variables from each run and each repetition
-            data_mean_eccentricity_run = o_mean_eccentricity';
-            data_ENP_run = o_ENP';
+            data_mean_eccentricity_run(rep,:) = o_mean_eccentricity';
+            data_ENP_run(rep,:) = o_ENP';
             
-            export_param_run = [pref3.N pref3.mu pref3.n_ratio rep ];
+            export_param_run(rep,:) = [pref3.N pref3.mu pref3.n_ratio rep ];
         end
         data_mean_eccentricity(:,:,run) = data_mean_eccentricity_run;
-        data_ENP(:,:,run) = data_ENP_run;
-        export_param(:,:,run) = export_param_run;
+        data_ENP(:,:,run)               = data_ENP_run;
+        export_param(:,:,run)           = export_param_run;
 
         parfor_progress;
     end
