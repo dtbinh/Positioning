@@ -1,0 +1,45 @@
+# Setup
+burnin: 100
+runs: 50
+interations: burnin+1 = 101
+rep: 5
+all-aggregator
+----
+total of 25.250 ticks
+
+## Benchmark (marketshare3)
+
+for-loop: 
+283.420038 seconds
+
+89,09 ticks/sec
+320.725 ticks/h
+
+
+## Marketshare4
+
+for-loop: 
+46.486218 seconds
+
+543,17 ticks/sec
+1.955.418 ticks/h
+
+
+parfor-loop on repetitions (run local with 4 workers)
+26.998224 seconds
+
+935,25 ticks/sec
+3.366.888 ticks/h
+
+
+parfor-loop on repetitions (run local with 4 workers) resolution 50.
+19.694059 seconds
+
+1.282,11 ticks/sec
+4.615.605 ticks/h
+
+parfor-loop on runs (run local with 4 workers) resolution 50
+10.220160 seconds.
+
+2.470,60 ticks/sec
+8.894.185 ticks/h

@@ -18,7 +18,7 @@ function [o_mean_eccentricity, o_ENP] = ABM(pref)
 %% 1. PREFERENCES
 %pref.seed = rng('default');
 pref.boundary = 10; % Number of standard deviations
-pref.resolution = 70; % Length of the square (even number to include (0,0))
+pref.resolution = 50; % Length of the square (even number to include (0,0))
 %pref.N = 5; % Number of firms
 %pref.mu = 1.5; % Mean of subpopulation
 %pref.n_ratio = 2; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
@@ -109,9 +109,9 @@ b = pref.boundary/2;
     eccentricity            = NaN(pref.iterations, pref.N);
     mean_eccentricity       = NaN(pref.iterations, 1);
     ENP                     = NaN(pref.iterations, 1);
-    misery                  = NaN(pref.iterations, 1);
-    perimeter               = NaN(pref.iterations, pref.N);
-    perimeter_extrema       = NaN(pref.iterations, pref.N);
+    %misery                  = NaN(pref.iterations, 1);
+    %perimeter               = NaN(pref.iterations, pref.N);
+    %perimeter_extrema       = NaN(pref.iterations, pref.N);
     centroid                = NaN(pref.N, 2, pref.iterations);
     centroid_distance       = NaN(pref.iterations, pref.N);
 
@@ -199,14 +199,24 @@ for i = 1:pref.iterations
     %%% 3.2 Propeties
     
     % Market and utility.
-    [market_i, utility_i] = marketshare3(xy(:,:,i), [X(:) Y(:)]);
+    [market_i, utility_i] = marketshare4(xy(:,:,i), [X(:) Y(:)]);
     market(:,:,i) = market_i;
     utility(:,:,i) = utility_i;
     
-    % Number of customers for each firm
-    F_firm_i = arrayfun(@(firm) ...
-            sum(F(find(market_i==firm))), ...
-            firms);
+    % Market centroid coordinates
+    F_firm_i  = NaN(pref.N,1);
+    for firm=1:pref.N
+        % Index for each customer of the firm.
+        idx = find(market_i==firm);
+        
+        % Number of customers for each firm
+        F_firm_i(firm) = sum( F(idx) );
+        
+        % Each xy-coordinat within the firm's market weighted with the probability density
+        centroid(firm,:,i) = ([X(idx) Y(idx)]' * F(idx))' ./ F_firm_i(firm);
+    end
+    % Distance from each firm to the respective centroid of its market.
+    centroid_distance(i,:) = sqrt(sum(( xy(:,:,i)-centroid(:,:,i) ).^2,2))';
 
     % Market shares
     shares(i,:) = F_firm_i/sum(F(:)); % Calculate market share for each firm
@@ -214,7 +224,7 @@ for i = 1:pref.iterations
     
     % Eccentricity 
     % Firm euclidean distance from center/mean of voter distribution).
-    eccentricity(i,:) = pdist2(xy(:,:,i), pop_mu, 'euclidean'); % in std. dev.
+    eccentricity(i,:) = sqrt(sum(( xy(:,:,i)-repmat(pop_mu,pref.N,1) ).^2,2)); % in std. dev.
     mean_eccentricity(i,:) = mean(eccentricity(i,:));
     
     % Effective number of firms (ENP) -- Lever and Sergenti (2011), Laakso and Taagepera (1979)
@@ -224,22 +234,13 @@ for i = 1:pref.iterations
     
     % Misery
     % Quadratic loss function / representativeness
-    misery(i,:) = sum(utility_i(:).*F(:))/sum(F(:));
+    %misery(i,:) = sum(utility_i(:).*F(:))/sum(F(:));
   
     % Market perimeter
-    market_props_i = regionpropsext(market(:,:,i), 'Extrema', 'Perimeter');
+    %market_props_i = regionpropsext(market(:,:,i), 'Extrema', 'Perimeter');
 %     perimeter(i,:) = cat(1,market_props_i.Perimeter)';
 %     perimeter_extrema(i,:) = cat(1,market_props_i.ExtremaPerimeter)';
     
-    % Market centroid coordinates
-    for firm=1:pref.N
-        % Index for each customer of the firm.
-        idx = find(market_i==firm);
-        % Each xy-coordinat within the firm's market weighted with the probability density
-        centroid(firm,:,i) = ([X(idx) Y(idx)]' * F(idx))' ./ F_firm_i(firm);
-    end
-    % Distance from each firm to the respective centroid of its market.
-    centroid_distance(i,:) = diag(pdist2(xy(:,:,i), centroid(:,:,i), 'Euclidean'))';
     
 end
 

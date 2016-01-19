@@ -1,0 +1,17 @@
+# Optimise
+
+If marketshareX.m is changed so the respective market areas/regions are calculated geometrically rather then discrete with pdist2, then I lose the information on utility/distance from each customer to each firm. 
+
+*Possible solutions*
+- Only calculate utility on system ticks or at final iteration.
+- Calculate with pdist2, but now you don't have to calculate the distance from each customer to every firm. From the geometric calculation you know closest firm. So only need to calculate distance from each customer to the customer's respective/closest firm. 
+- Only calculate distance/utility inside mask, since this is only area where new firms arise.
+- Find/use a different entry rule; 
+1. Perhaps something related to the minimax. Enter with greatest distance to competitors (not sure it works in 2D).
+2. Enter random location, 3 std. dev. from (0,0). I am not investigating alpha birth (a_b) as it is right now.
+3. ...
+- ...
+
+
+
+Non system tick, next ‘step’ from simply assuming others stay fixed? Conflict with ‘taken as given’ assumption motivating INDUCTOR?

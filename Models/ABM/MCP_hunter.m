@@ -62,38 +62,48 @@ clearvars;
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
     export_temp = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
 
-    h = waitbar(0, 'Running...');
-    for run=1:pref.runs
-        waitbar(run/pref.runs);
-        pref.run = run;
+    poolobj = parpool('local',4)
+    parfor_progress(pref.runs);
+    parfor run=1:pref.runs
+        pref2 = pref;
+        pref2.run = run;
 
         % Randomly sample parameters from uniform distribution of the range of the parameters
         % Number of firms
-        pref.N = randi([2,12]); % N in [2,12]
+        pref2.N = randi([2,12]); % N in [2,12]
         % Mean of subpopulation
-        pref.mu = rand * 1.5; % mu in [0,1.5]
+        pref2.mu = rand * 1.5; % mu in [0,1.5]
         % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-        pref.n_ratio = 1 + rand; % n_ratio in [1,2]
+        pref2.n_ratio = 1 + rand; % n_ratio in [1,2]
         
         % Decision rules: All-hunter
-        pref.rules = repmat( {'HUNTER'}, 1, pref.N);
+        pref2.rules = repmat( {'HUNTER'}, 1, pref2.N);
         
         % Repetitions
+        data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
+        data_ENP_run                = NaN(pref.repetitions, pref.iterations);
+        export_temp_run             = NaN(pref.repetitions, 4);
         for rep=1:pref.repetitions
-            pref.rep = rep;
+            pref3 = pref2;
+            pref3.rep = rep;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref);
+            [o_mean_eccentricity, o_ENP] = ABM(pref3);
 
             % Store summary variables from each run
-            data_mean_eccentricity(rep,:,run) = o_mean_eccentricity';
-            data_ENP(rep,:,run) = o_ENP';
+            data_mean_eccentricity_run = o_mean_eccentricity';
+            data_ENP_run = o_ENP';
             
-            export_temp(rep,:,run) = [pref.N pref.mu pref.n_ratio rep ];
+            export_temp_run = [pref3.N pref3.mu pref3.n_ratio rep ];
         end
+        data_mean_eccentricity(:,:,run) = data_mean_eccentricity_run;
+        data_ENP(:,:,run)               = data_ENP_run;
+        export_temp(:,:,run)            = export_temp_run;
 
+        parfor_progress;
     end
-    close(h);
+    parfor_progress(0);
+    delete(poolobj)
 
     % Save summary variables
     % Reshape the data to required format before exporting
@@ -220,38 +230,48 @@ clearvars;
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
     export_temp = NaN(pref.repetitions, 3, pref.runs); % The three extra coloumns are for: N, mu, n_ratio
 
-    h = waitbar(0, 'Running...');
-    for run=1:pref.runs
-        waitbar(run/pref.runs);
-        pref.run = run;
+    poolobj = parpool('local',4)
+    parfor_progress(pref.runs);
+    parfor run=1:pref.runs
+        pref2 = pref;
+        pref2.run = run;
 
         % Randomly sample parameters from uniform distribution of the range of the parameters
         % Number of firms
-        pref.N = randi([2,12]); % N in [2,12]
+        pref2.N = randi([2,12]); % N in [2,12]
         % Mean of subpopulation
-        pref.mu = rand * 1.5; % mu in [0,1.5]
+        pref2.mu = rand * 1.5; % mu in [0,1.5]
         % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-        pref.n_ratio = 1 + rand; % n_ratio in [1,2]
+        pref2.n_ratio = 1 + rand; % n_ratio in [1,2]
         
         % Decision rules: All-hunter
-        pref.rules = repmat( {'HUNTER'}, 1, pref.N);
+        pref2.rules = repmat( {'HUNTER'}, 1, pref2.N);
         
         % Repetitions
+        data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
+        data_ENP_run                = NaN(pref.repetitions, pref.iterations);
+        export_temp_run             = NaN(pref.repetitions, 3);
         for rep=1:pref.repetitions
-            pref.rep = rep;
+            pref3 = pref2;
+            pref3.rep = rep;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref);
+            [o_mean_eccentricity, o_ENP] = ABM(pref3);
             
             % Store summary variables from each run and each repetition
-            data_mean_eccentricity(rep,:,run) = o_mean_eccentricity';
-            data_ENP(rep,:,run) = o_ENP';
+            data_mean_eccentricity_run = o_mean_eccentricity';
+            data_ENP_run = o_ENP';
             
-            export_temp(rep,:,run) = [pref.N pref.mu pref.n_ratio];
+            export_temp_run = [pref3.N pref3.mu pref3.n_ratio];
         end
+        data_mean_eccentricity(:,:,run) = data_mean_eccentricity_run;
+        data_ENP(:,:,run)               = data_ENP_run;
+        export_temp(:,:,run)            = export_temp_run;
 
+        parfor_progress;
     end
-    close(h);
+    parfor_progress(0);
+    delete(poolobj)
     
     % Post-burnin iterations
     data_burnin_mean_eccentricity = data_mean_eccentricity( :, pref.burnin+1:end, :);

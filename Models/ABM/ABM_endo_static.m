@@ -13,7 +13,7 @@ clearvars;
 %% 1. PREFERENCES
 pref.seed = rng('default');
 pref.boundary = 10; % Number of standard deviations
-pref.resolution = 70; % Length of the square (even number to include (0,0))
+pref.resolution = 50; % Length of the square (even number to include (0,0))
 pref.N = 1; % Number of initial firms
 pref.mu = 0; % Mean of subpopulation
 pref.n_ratio = 1; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
@@ -232,28 +232,28 @@ for i = 1:pref.iterations*pref.psi
     %%% 3.2 Propeties
     
     % Market and utility.
-    [market_i, utility_i] = marketshare3(xy(:,:,i), [X(:) Y(:)]);
+    [market_i, utility_i] = marketshare4(xy(:,:,i), [X(:) Y(:)]);
     market(:,:,i) = market_i;
     
-    % Number of customers for each firm
-    F_firm_i = arrayfun(@(firm) ...
-            sum(F(find(market_i==firm))), ...
-            firms);
-
-    % Market shares
-    shares(i,firms) = F_firm_i/sum(F(:)); % Calculate market share for each firm
-    [~,rank(i,firms)] = sort(shares(i,firms), 'descend'); % Ranking firms according to market share
-    
     % Market centroid coordinates
+    F_firm_i = NaN(length(firms),1);
     for j =1:length(firms)
         firm = firms(j);
         % Index for each customer of the firm.
         idx = find(market_i==firm);
+        
+        % Number of customers for each firm
+        F_firm_i(j) = sum( F(idx) );
+        
         % Each xy-coordinat within the firm's market weighted with the probability density
         centroid(firm,:,i) = ([X(idx) Y(idx)]' * F(idx))' ./ F_firm_i(j);
     end
     % Distance from each firm to the respective centroid of its market.
-    centroid_distance(i,:) = diag(pdist2(xy(:,:,i), centroid(:,:,i), 'Euclidean'))';
+    centroid_distance(i,:) = sqrt(sum(( xy(:,:,i)-centroid(:,:,i) ).^2,2))';
+
+    % Market shares
+    shares(i,firms) = F_firm_i/sum(F(:)); % Calculate market share for each firm
+    [~,rank(i,firms)] = sort(shares(i,firms), 'descend'); % Ranking firms according to market share
     
     
     
@@ -295,7 +295,7 @@ for i = 1:pref.iterations*pref.psi
         
         % Eccentricity 
         % Firm euclidean distance from center/mean of voter distribution).
-         eccentricity(si,:) = pdist2(xy(:,:,i), pop_mu, 'euclidean'); % in std. dev.
+         eccentricity(si,:) = sqrt(sum(( xy(:,:,i)-repmat(pop_mu,N_exante,1) ).^2,2)); % in std. dev.
          %mean_eccentricity(si,:) = mean(eccentricity(si,:), 'omitnan');
         
         % Effective number of firms (ENP) -- Lever and Sergenti (2011), Laakso and Taagepera (1979)
