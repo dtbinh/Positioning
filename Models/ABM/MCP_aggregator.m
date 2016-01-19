@@ -50,7 +50,7 @@ clearvars;
     % Creating empty matrixes for summary variable 
     data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
-    export_temp = NaN(pref.repetitions, 3, pref.runs); % The three extra coloumns are for: N, mu, n_ratio
+    export_param = NaN(pref.repetitions, 3, pref.runs); % The three extra coloumns are for: N, mu, n_ratio
 
     poolobj = parpool('local',4)
     parfor_progress(pref.runs);
@@ -72,7 +72,7 @@ clearvars;
         % Repetitions
         data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
         data_ENP_run                = NaN(pref.repetitions, pref.iterations);
-        export_temp_run             = NaN(pref.repetitions, 3);
+        export_param_run             = NaN(pref.repetitions, 3);
         for rep=1:pref.repetitions
             pref3 = pref2;
             pref3.rep = 1;
@@ -84,11 +84,11 @@ clearvars;
             data_mean_eccentricity_run = o_mean_eccentricity';
             data_ENP_run = o_ENP';
             
-            export_temp_run = [pref3.N pref3.mu pref3.n_ratio];
+            export_param_run = [pref3.N pref3.mu pref3.n_ratio];
         end
         data_mean_eccentricity(:,:,run)     = data_mean_eccentricity_run;
         data_ENP(:,:,run)                   = data_ENP_run;
-        export_temp(:,:,run)                = export_temp_run;
+        export_param(:,:,run)                = export_param_run;
 
         parfor_progress;
     end
@@ -127,7 +127,7 @@ clearvars;
     % Creating empty matrixes for summary variable 
     data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
-    export_temp = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
+    export_param = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
 
     poolobj = parpool('local',4)
     parfor_progress(pref.runs);
@@ -149,7 +149,7 @@ clearvars;
         % Repetitions
         data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
         data_ENP_run                = NaN(pref.repetitions, pref.iterations);
-        export_temp_run             = NaN(pref.repetitions, 4);
+        export_param_run             = NaN(pref.repetitions, 4);
         for rep=1:pref2.repetitions
             pref3 = pref2;
             pref3.rep = rep;
@@ -161,11 +161,11 @@ clearvars;
             data_mean_eccentricity_run = o_mean_eccentricity';
             data_ENP_run = o_ENP';
             
-            export_temp_run = [pref3.N pref3.mu pref3.n_ratio rep ];
+            export_param_run = [pref3.N pref3.mu pref3.n_ratio rep ];
         end
         data_mean_eccentricity(:,:,run) = data_mean_eccentricity_run;
         data_ENP(:,:,run) = data_ENP_run;
-        export_temp(:,:,run) = export_temp_run;
+        export_param(:,:,run) = export_param_run;
 
         parfor_progress;
     end
@@ -220,13 +220,13 @@ clearvars;
     % number of post-burnin iterations. 
 
     % Reshape the data to required format before exporting
-    export_temp_fmt = reshape(permute(export_temp(1,:,:),[1 3 2]), [pref.runs, 4]);
+    export_param_fmt = reshape(permute(export_param(1,:,:),[1 3 2]), [pref.runs, 4]);
     
     %%% 3.6 Export results
     % Format table before saving file
-    export_mean_eccentricity = table(export_temp_fmt(:,1), export_temp_fmt(:,2), export_temp_fmt(:,3), squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), squeeze(est_se_mean_eccentricity), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_mean_eccentricity, ...
+    export_mean_eccentricity = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), squeeze(est_se_mean_eccentricity), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_mean_eccentricity, ...
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
-    export_ENP = table(export_temp_fmt(:,1), export_temp_fmt(:,2), export_temp_fmt(:,3), squeeze(est_ENP), squeeze(est_std_ENP), squeeze(est_se_ENP), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_ENP, ...
+    export_ENP = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_ENP), squeeze(est_std_ENP), squeeze(est_se_ENP), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_ENP, ...
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});    % Save file
     writetable(export_mean_eccentricity, strcat('data/MCP_aggregator_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
     writetable(export_ENP, strcat('data/MCP_aggregator_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');

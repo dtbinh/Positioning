@@ -69,7 +69,7 @@ clearvars;
     % Creating empty matrixes for summary variable 
     data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
-    export_temp = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
+    export_param = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
     
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
@@ -93,7 +93,7 @@ clearvars;
             data_mean_eccentricity(rep,:,run) = o_mean_eccentricity';
             data_ENP(rep,:,run) = o_ENP';
             
-            export_temp(rep,:,run) = [pref.N pref.mu pref.n_ratio rep ];
+            export_param(rep,:,run) = [pref.N pref.mu pref.n_ratio rep ];
         end
 
     end
@@ -101,9 +101,9 @@ clearvars;
 
     % Save summary variables
     % Reshape the data to required format before exporting
-    export_temp_fmt = reshape(permute(export_temp,[1 3 2]), [pref.repetitions*pref.runs, 4]);
-    export_mean_eccentricity    = [export_temp_fmt reshape( permute(data_mean_eccentricity,[1 3 2]), [pref.repetitions*pref.runs, pref.iterations] ) ];
-    export_ENP                  = [export_temp_fmt reshape( permute(data_ENP,[1 3 2]), [pref.repetitions*pref.runs, pref.iterations] ) ];
+    export_param_fmt = reshape(permute(export_param,[1 3 2]), [pref.repetitions*pref.runs, 4]);
+    export_mean_eccentricity    = [export_param_fmt reshape( permute(data_mean_eccentricity,[1 3 2]), [pref.repetitions*pref.runs, pref.iterations] ) ];
+    export_ENP                  = [export_param_fmt reshape( permute(data_ENP,[1 3 2]), [pref.repetitions*pref.runs, pref.iterations] ) ];
     % Export
     csvwrite(strcat('data/data_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'),'.csv'), export_mean_eccentricity);
     csvwrite(strcat('data/data_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'),'.csv'), export_ENP);
