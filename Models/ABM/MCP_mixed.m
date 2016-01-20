@@ -2,7 +2,7 @@
 % version 0.01
 % Jonas K. Sekamane
 %
-% Free paramter: a_f, tau 
+% Free paramter: a_f, tau, psi 
 %
 % Endogenous number of firms.
 % No polarization of subpopulation.
@@ -94,9 +94,9 @@ clearvars;
             data_ENP_run(:,:,rep) = o_ENP';
             data_mean_share_run(:,:,rep) = o_mean_share';
             data_N_run(:,:,rep) = o_N';
-            data_mean_age_death_run(rep,:) = o_mean_age_death';
+            data_mean_age_death_run(:,:,rep) = o_mean_age_death';
             
-            export_param_run = [pref3.N pref3.mu pref3.n_ratio pref3.a_f pref3.tau pref3.psi rep];
+            export_param_run(rep,:) = [pref3.N pref3.mu pref3.n_ratio pref3.a_f pref3.tau pref3.psi rep];
         end
         data_mean_eccentricity(:,:,:,run)   = data_mean_eccentricity_run;
         data_ENP(:,:,:,run)                 = data_ENP_run;
