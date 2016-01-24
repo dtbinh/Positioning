@@ -12,6 +12,7 @@ Figures/data/**
 # Rstudio system files
 **/.RData
 **/.Rhistory
+**/.Rapp.history
 
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
