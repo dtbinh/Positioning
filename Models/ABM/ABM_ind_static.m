@@ -11,7 +11,7 @@ clearvars;
 
 %% 1. PREFERENCES
 %pref.seed = rng('default');
-pref.seed = rng(17796749, 'twister');
+%pref.seed = rng(17796749, 'twister');
 pref.boundary = 10; % Number of standard deviations
 pref.resolution = 50; % Length of the square (even number to include (0,0))
 pref.N = 5; % Number of firms
@@ -154,6 +154,9 @@ b = pref.boundary/2;
     %perimeter_extrema       = NaN(pref.iterations, pref.N);
     centroid                = NaN(pref.N, 2, pref.iterations);
     centroid_distance       = NaN(pref.iterations, pref.N);
+    cf                      = NaN([size(cf_i) pref.iterations]);
+    J_states                = NaN(pref.N, 13, pref.iterations);
+    cf_used                 = NaN(pref.N, size(cf_i, 2), pref.N-1, pref.iterations);
 
 %% 3. EVOLUTION
 h = waitbar(0,'Calculating evolution...');
@@ -240,6 +243,7 @@ for i = 1:pref.iterations
                     [f_n_xy, f_n_rule, f_n_active] = forecast( n, xy(:,:,i-1), J, cf_i(:,:,n) );
                     
                     active_cf_i(:,n) = f_n_active;
+                    cf_used(n, :, :, i) = cf_i(f_n_rule,:,n)';
                     
                     % Calculate market using forecast
 %                    [~, f_n_utility_i] = marketshare4(f_n_xy, [X(:) Y(:)]);
@@ -272,9 +276,15 @@ for i = 1:pref.iterations
         % Update accuracy
         cf_i = accuracy(xy(:,:,i), active_cf_i, cf_0, pref.a_a);
         
+        % Save states
+        J_states(:,:,i) = J;
+        
     end
     
     %%% 3.2 Propeties
+    
+    % Save condition/dorecast rules
+    cf(:,:,:,i) = cf_i;
     
     % Market and utility.
     [market_i, utility_i] = marketshare4(xy(:,:,i), [X(:) Y(:)]);

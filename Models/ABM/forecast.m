@@ -50,6 +50,7 @@ function [F, I, A] = forecast( firm, xy_i, J, cf)
     
     % Do not forecast own position
     f_xy(firm,:) = [];
+    f_rule(firm) = [];
     %f_xy(firm,:) = xy_i(firm,:)
     
     % Output variables
