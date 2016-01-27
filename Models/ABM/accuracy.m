@@ -4,9 +4,6 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
 %   
 %   Jonas K. Sekamane. 
 %   Version 0.01
-   
-    %M = size(cf, 1);
-    %N = size(xy_i, 1);
     
     % Form active_cf find the indecies that match cf.
     idx = [];
@@ -28,8 +25,7 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     % Expand the coordinates set so it fits the index.
     xy_i_target = xy_i( idx_target, : );
     
-    % forecasts
-    %xy_i_forecast = NaN(size(xy_i_target));
+    %% Forecasts
     
     % Total number of active rules
     s = size(idx_firm,1);
@@ -47,16 +43,13 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     % f(x, y) = (a, b) + (x, y)*(e, f; g, h) = (a, b) + (x*e+y*g, x*f+y*h)
     xy_i_forecast = intercepts + [sum(xy_i_target.*coeffecients(:,[1 3]), 2) sum(xy_i_target.*coeffecients(:,[2 4]), 2)];
     
-    %for a=1:length(idx_firm)
-    %    xy_i_forecast(a,:) = cf(idx_cf(a), 14:15, idx_firm(a)) + xy_i_target(a,:) * reshape( cf(idx_cf(a), 16:19, idx_firm(a)), 2, 2)';
-    %end
     
-    % Distance from forecast to actual position.
+    %% Distance from forecast to actual position.
     %distance = sqrt(sum(( xy_i_target-xy_i_forecast ).^2,2)); % distance
     distance = sum(( xy_i_target-xy_i_forecast ).^2,2); % squared distance
     
     
-    % Update accuracy and active count
+    %% Update accuracy and active count
     cf_updated = cf;
     
     % Accuracy in column 24 and active count in column 26.
@@ -74,14 +67,8 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     active_count = accuracy_active(:,2) + 1;
     
     cf_updated(idx_aa) = [updated_accuracy; active_count];
-
-    %for a=1:length(idx_firm)
-    %    cf_updated(idx_cf(a), 24, idx_firm(a)) = a_a * cf(idx_cf(a), 24, idx_firm(a)) + (1-a_a) * distance(a);
-    %    % Count the number of times a rule has been activated.
-    %    cf_updated(idx_cf(a), 26, idx_firm(a)) = cf_updated(idx_cf(a), 26, idx_firm(a))+1;
-    %end
     
     
-    % Output variables
+    %% Output variables
     U = cf_updated;
 end

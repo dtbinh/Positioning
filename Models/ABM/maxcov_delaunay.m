@@ -28,9 +28,6 @@ function xy_new = maxcov_delaunay( firms, customers, F )
     DT2X = reshape(DT.Points(DT.ConnectivityList, 1), size(DT.ConnectivityList));
     DT2Y = reshape(DT.Points(DT.ConnectivityList, 2), size(DT.ConnectivityList));
     
-    %DT2X = NaN(size(DT.ConnectivityList));
-    %DT2Y = NaN(size(DT.ConnectivityList));
-    %DT_market = NaN( length(X(:)), 1);
     F_tri  = NaN(triangles,1);
     centroid_tri  = NaN(triangles,2);
     % Loop through all triangles
