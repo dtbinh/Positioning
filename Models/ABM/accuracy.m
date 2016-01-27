@@ -5,17 +5,8 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
 %   Jonas K. Sekamane. 
 %   Version 0.01
     
-    % Form active_cf find the indecies that match cf.
-    idx = [];
-    for firm=1:size(active_cf,2)
-        for target=1:size(active_cf,1)
-            if(target ~= firm) % Non diagonal elements
-                %[target firm]
-                idx_firm_target = [repmat([firm target], length(active_cf{target, firm}), 1) active_cf{target, firm}];
-                idx = [idx; idx_firm_target];
-            end
-        end
-    end
+    % Form active_cf find the indecies that match cf.    
+    idx = active_cf;
     
     % Split index such that the variables and remaining code is legible.
     idx_firm = idx(:,1);

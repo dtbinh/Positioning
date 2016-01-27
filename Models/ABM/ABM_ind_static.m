@@ -182,7 +182,8 @@ for i = 1:pref.iterations*pref.psi
         % 13 bit descriptor of the current state of each firm.
         J = currentstate(i-1, xy, centroid_distance(i-1,:));
         
-        active_cf_i = cell(pref.N,pref.N);
+        active_cf_i = NaN(pref.M*pref.N*pref.N ,3);
+        active_count = 0;
         
         %%% 3.1 Decision rules
         % Firm position determined by firm behaviour / decsion rule
@@ -254,8 +255,13 @@ for i = 1:pref.iterations*pref.psi
                     
                     [f_n_xy, f_n_rule, f_n_active] = forecast( n, xy(:,:,i-1), J, cf_i(:,:,n) );
                     
-                    % Save active and used rules for later.
-                    active_cf_i(:,n) = f_n_active;
+                    % Save active rules in 2D matrix (first column is firm, 
+                    % the second is the target/other firm, and the last column 
+                    % is the rule used).
+                    f_n_active_length = size(f_n_active,1);
+                    active_cf_i(active_count+1:active_count+f_n_active_length,:) = [repmat(n,f_n_active_length,1) f_n_active];
+                    active_count = active_count + f_n_active_length;
+                    % Save used rules for later.
                     cf_used(n, :, :, i) = cf_i(f_n_rule,:,n)';
                     
                     % Count the number of times a rule has been used to
@@ -289,6 +295,7 @@ for i = 1:pref.iterations*pref.psi
                 
             end
         end
+        active_cf_i(active_count+1:end,:) = []; % Delete excess rows.
         
         % Update accuracy
         cf_i = accuracy(xy(:,:,i), active_cf_i, cf_i, pref.a_a);

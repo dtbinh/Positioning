@@ -12,7 +12,8 @@ function [F, I, A] = forecast( firm, xy_i, J, cf)
     
     f_xy = NaN(size(xy_i));
     f_rule = NaN(1, N);
-    f_active = cell(N,1);
+    f_active = NaN(N*M, 2);
+    c_count = 0;
     
     for n = others
         
@@ -45,8 +46,13 @@ function [F, I, A] = forecast( firm, xy_i, J, cf)
         f_xy(n,:) = cf(idx,14:15) + xy_i(n,:) * reshape(cf(idx,16:19), 2, 2);
         
         f_rule(n) = idx;
-        f_active{n} = c_idx;
+        % Sace active rules in 2D matrix (first column target/other firm, 
+        % last column is the rule used).
+        c_length = size(c_idx, 1);
+        f_active(c_count+1:c_count+c_length, :) = [repmat(n, c_length, 1) c_idx];
+        c_count = c_count + c_length;
     end
+    f_active(c_count+1:end,:) = []; % Delete excess rows;
     
     % Do not forecast own position
     f_xy(firm,:) = [];
