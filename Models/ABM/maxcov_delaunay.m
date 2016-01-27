@@ -18,12 +18,16 @@ function xy_new = maxcov_delaunay( firms, customers, F )
     % Adding the coordinates of the boundary points to the list of firm
     % coordinates. Allowing for the new firm's position to be outside the
     % convex hull created by exsisting firm positions.
-    xy_boundary = [firms; bbox(1:end-1,1) bbox(1:end-1,2)];
+    xy_boundary = [unique(firms, 'rows'); bbox(1:end-1,1) bbox(1:end-1,2)];
     % Create Delaunay Triangulation
     DT = delaunayTriangulation(xy_boundary);
     % Count the number of triangles in the Delaunay Triangulation.
     triangles = size(DT.ConnectivityList, 1);
 
+    % The XY coordinates of the triangle
+    DT2X = reshape(DT.Points(DT.ConnectivityList, 1), size(DT.ConnectivityList));
+    DT2Y = reshape(DT.Points(DT.ConnectivityList, 2), size(DT.ConnectivityList));
+    
     %DT2X = NaN(size(DT.ConnectivityList));
     %DT2Y = NaN(size(DT.ConnectivityList));
     %DT_market = NaN( length(X(:)), 1);
@@ -32,12 +36,8 @@ function xy_new = maxcov_delaunay( firms, customers, F )
     % Loop through all triangles
     for tri = 1:triangles
         
-        % The XY coordinates of the triangle
-        DT2X = DT.Points( DT.ConnectivityList(tri,:), 1);
-        DT2Y = DT.Points( DT.ConnectivityList(tri,:), 2);
-        
         % Index of customers within the triangle
-        idx = inpolygon(customers(:,1), customers(:,2), DT2X, DT2Y);
+        idx = InPolygon(customers(:,1), customers(:,2), DT2X(tri,:), DT2Y(tri,:));
         
         % Number of customers in the triabgle
         F_tri(tri) = sum( F(idx) );
