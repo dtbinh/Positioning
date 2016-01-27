@@ -17,9 +17,12 @@ pref.resolution = 50; % Length of the square (even number to include (0,0))
 pref.N = 5; % Number of firms
 pref.mu = .5; % Mean of subpopulation
 pref.n_ratio = 2; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-pref.iterations = 200;
+pref.iterations = 4; % Number of system ticks / iterations.
+pref.psi = 250; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
 pref.M = 100; % Number of condition/forecast rules that each firm holds.
 pref.a_a = 1-1/75; % Accuracy mememory paramenter.
+pref.C = 0.005; % Cost of specificity.
+pref.crossover = 0.3; % Probability that the offspring condition/forecast rule is created by crossover operations (rather than mutation).
 
 % Decision rules
 %pref.rules = repmat({'STICKER'},1,pref.N);
@@ -112,14 +115,16 @@ b = pref.boundary/2;
     end
     cf_0_condition(cf_0_condition==2) = NaN;
 
+    cf_range = [-1.5 1.5; -1.5 1.5; -1.2 1.2; -0.2 0.2; -0.2 0.2; -1.2 1.2];
+    %cf_range = [-1.5 1.5; -1.2 1.2; -0.2 0.2];
     % Intercept drawn uniformly from [-1.5, 1.5] std. dev. Each row of
     % intercepts have the form [B_x1, B_y1].
-    cf_0_intercept = -1.5 + rand(pref.M, 2, pref.N) * 3;
+    cf_0_intercept = cf_range(1,1) + rand(pref.M, 2, pref.N) * cf_range(1,2)*2;
     % Coeffecients along same dimension drawn uniformly from [-1.2, 1.2],
     % while coeffecients along opposing dimension drawn uniformly from 
     % [-0.2, 0.2]. Each row of betas have the form [B_xx B_xy B_yx B_yy].
-    cf_0_coefficients(:,[1 4 3 2],:) = [-1.2 + rand(pref.M, 2, pref.N) * 2.4 ...
-                                           -0.2 + rand(pref.M, 2, pref.N) * 0.4 ];
+    cf_0_coefficients(:,[1 4 3 2],:) = [cf_range(3,1) + rand(pref.M, 2, pref.N) * cf_range(3,2)*2 ...
+                                        cf_range(4,1) + rand(pref.M, 2, pref.N) * cf_range(4,2)*2 ];
 
     % Covariance matrix is initially set such that the variance along same the 
     % dimension is 0.005 and the variance along the opposing dimension is 0. 
@@ -129,39 +134,46 @@ b = pref.boundary/2;
     % The initial accuracy of all condition/forecast is set at zero. 
     cf_0_acc = zeros(pref.M, 1, pref.N);
 
-    cf_0 = [cf_0_condition cf_0_intercept cf_0_coefficients cf_0_var cf_0_acc];
+    cf_0 = [cf_0_condition cf_0_intercept cf_0_coefficients cf_0_var cf_0_acc zeros(pref.M,2,pref.N)];
+    
+    % Special case: Default rule that matches any state
+    % The values of the default rule is set to average values of all others.
+    other_values_0 = cf_0(2:end, 14:19, :);
+    cf_0(1, 14:19, :) = mean( other_values_0 );
+    
     cf_i = cf_0;
+    
     
     %%% 2.4 Prelocating / Preparing matrices for iteration
     
     % Creating a 3D matrix of firms. 
     % 1st dimension is firm, 2nd is (x,y) coordinates, and 3rd is iteration.
-    xy                      = NaN(pref.N, 2, pref.iterations); 
-    heading                 = NaN(pref.iterations, pref.N);  
+    xy                      = NaN(pref.N, 2, pref.iterations*pref.psi); 
+    heading                 = NaN(pref.iterations*pref.psi, pref.N);  
     
     % Creating a 3D matrix of market and utility.
     % 1st dimension is x, 2nd is y, and 3rd is iteration.
-    market = NaN(pref.resolution, pref.resolution, pref.iterations); % The cell/value is the closest firm
-    utility = NaN(pref.resolution, pref.resolution, pref.iterations); % The cell/value is utility
+    market = NaN(pref.resolution, pref.resolution, pref.iterations*pref.psi); % The cell/value is the closest firm
+    utility = NaN(pref.resolution, pref.resolution, pref.iterations*pref.psi); % The cell/value is utility
 
-    shares                  = NaN(pref.iterations, pref.N);
-    rank                    = NaN(pref.iterations, pref.N);
-    eccentricity            = NaN(pref.iterations, pref.N);
-    mean_eccentricity       = NaN(pref.iterations, 1);
-    ENP                     = NaN(pref.iterations, 1);
-    %misery                  = NaN(pref.iterations, 1);
-    %perimeter               = NaN(pref.iterations, pref.N);
-    %perimeter_extrema       = NaN(pref.iterations, pref.N);
-    centroid                = NaN(pref.N, 2, pref.iterations);
-    centroid_distance       = NaN(pref.iterations, pref.N);
-    cf                      = NaN([size(cf_i) pref.iterations]);
-    J_states                = NaN(pref.N, 13, pref.iterations);
-    cf_used                 = NaN(pref.N, size(cf_i, 2), pref.N-1, pref.iterations);
+    shares                  = NaN(pref.iterations*pref.psi, pref.N);
+    rank                    = NaN(pref.iterations*pref.psi, pref.N);
+    eccentricity            = NaN(pref.iterations*pref.psi, pref.N);
+    mean_eccentricity       = NaN(pref.iterations*pref.psi, 1);
+    ENP                     = NaN(pref.iterations*pref.psi, 1);
+    %misery                  = NaN(pref.iterations*pref.psi, 1);
+    %perimeter               = NaN(pref.iterations*pref.psi, pref.N);
+    %perimeter_extrema       = NaN(pref.iterations*pref.psi, pref.N);
+    centroid                = NaN(pref.N, 2, pref.iterations*pref.psi);
+    centroid_distance       = NaN(pref.iterations*pref.psi, pref.N);
+    cf                      = NaN([size(cf_i) pref.iterations*pref.psi]);
+    J_states                = NaN(pref.N, 13, pref.iterations*pref.psi);
+    cf_used                 = NaN(pref.N, size(cf_i, 2), pref.N-1, pref.iterations*pref.psi);
 
 %% 3. EVOLUTION
 h = waitbar(0,'Calculating evolution...');
-for i = 1:pref.iterations
-    waitbar(i/pref.iterations);
+for i = 1:pref.iterations*pref.psi
+    waitbar(i/(pref.iterations*pref.psi));
     if(i==1) 
         % For first iteration set initial firm position
         xy(:,:,i) = xy_0;
@@ -242,8 +254,13 @@ for i = 1:pref.iterations
                     
                     [f_n_xy, f_n_rule, f_n_active] = forecast( n, xy(:,:,i-1), J, cf_i(:,:,n) );
                     
+                    % Save active and used rules for later.
                     active_cf_i(:,n) = f_n_active;
                     cf_used(n, :, :, i) = cf_i(f_n_rule,:,n)';
+                    
+                    % Count the number of times a rule has been used to
+                    % forecast.
+                    cf_i(f_n_rule,25,n) = cf_i(f_n_rule,25,n) + 1;
                     
                     % Calculate market using forecast
 %                    [~, f_n_utility_i] = marketshare4(f_n_xy, [X(:) Y(:)]);
@@ -274,7 +291,7 @@ for i = 1:pref.iterations
         end
         
         % Update accuracy
-        cf_i = accuracy(xy(:,:,i), active_cf_i, cf_0, pref.a_a);
+        cf_i = accuracy(xy(:,:,i), active_cf_i, cf_i, pref.a_a);
         
         % Save states
         J_states(:,:,i) = J;
@@ -329,6 +346,16 @@ for i = 1:pref.iterations
 %     perimeter(i,:) = cat(1,market_props_i.Perimeter)';
 %     perimeter_extrema(i,:) = cat(1,market_props_i.ExtremaPerimeter)';
     
+
+    %%% 3.3 System tick
+    % On system ticks discarg poorly performing condition rules, and
+    % created new rules by mutating or crossing retained rules.
     
+    si = i/pref.psi; % System tick
+    if ~mod(si,1) % if si integer
+        
+        cf_i = geneticalgorithm(cf_i, pref.C, pref.crossover, cf_range);
+        
+    end
 end
 close(h);

@@ -42,6 +42,8 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     cf_updated = cf;
     for a=1:length(idx_firm)
         cf_updated(idx_cf(a), 24, idx_firm(a)) = a_a * cf(idx_cf(a), 24, idx_firm(a)) + (1-a_a) * distance(a);
+        % Count the number of times a rule has been activated.
+        cf_updated(idx_cf(a), 26, idx_firm(a)) = cf_updated(idx_cf(a), 26, idx_firm(a))+1;
     end
         
     % Output variables
