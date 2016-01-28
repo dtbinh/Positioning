@@ -43,7 +43,7 @@ function [F, I, A] = forecast( firm, xy_i, J, cf)
         % Use condition/forecast rule idx.
         idx = c_idx(c_idx_accuracy);
         % 2D linear forecast model
-        f_xy(n,:) = cf(idx,14:15) + xy_i(n,:) * reshape(cf(idx,16:19), 2, 2);
+        f_xy(n,:) = cf(idx,14:15) + xy_i(n,:) * reshape(cf(idx,16:19), 2, 2)';
         
         f_rule(n) = idx;
         % Sace active rules in 2D matrix (first column target/other firm, 

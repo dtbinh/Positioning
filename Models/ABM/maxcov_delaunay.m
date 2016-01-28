@@ -15,10 +15,15 @@ function xy_new = maxcov_delaunay( firms, customers, F )
     % Boundary box
     bbox = [-5 5 5 -5 -5; 5 5 -5 -5 5]';
 
+
+    % Check for potential duplicate coordinates. Only use unique firms.
+    if any( diff( sort( sum(firms,2) ) ) == 0 )
+        firms = unique(firms, 'rows');
+    end
     % Adding the coordinates of the boundary points to the list of firm
     % coordinates. Allowing for the new firm's position to be outside the
     % convex hull created by exsisting firm positions.
-    xy_boundary = [unique(firms, 'rows'); bbox(1:end-1,1) bbox(1:end-1,2)];
+    xy_boundary = [firms; bbox(1:end-1,1) bbox(1:end-1,2)];
     % Create Delaunay Triangulation
     DT = delaunayTriangulation(xy_boundary);
     % Count the number of triangles in the Delaunay Triangulation.
@@ -29,7 +34,8 @@ function xy_new = maxcov_delaunay( firms, customers, F )
     DT2Y = reshape(DT.Points(DT.ConnectivityList, 2), size(DT.ConnectivityList));
     
     F_tri  = NaN(triangles,1);
-    centroid_tri  = NaN(triangles,2);
+    idx_max = [];
+    F_tri_max = 0;
     % Loop through all triangles
     for tri = 1:triangles
         
@@ -39,21 +45,19 @@ function xy_new = maxcov_delaunay( firms, customers, F )
         % Number of customers in the triabgle
         F_tri(tri) = sum( F(idx) );
         
-        % The xy-coordinate of the centroid within the triangle weighted with the probability density
-        centroid_tri(tri,:) = ([customers(idx,1) customers(idx,2)]' * F(idx))' ./ F_tri(tri);
+        if(F_tri(tri) > F_tri_max)
+            F_tri_max = F_tri(tri);
+            idx_max = idx;
+        end
         
     end
+    
+    % The xy-coordinate of the centroid within the triangle weighted with the probability density
+    centroid_tri = ([customers(idx_max,1) customers(idx_max,2)]' * F(idx_max))' ./ F_tri_max;
     
     % Market share of each triangle.
     %F_tri/sum(F(:))
     
-    % Find the index of the triangle with the largest market share.
-    [~, max_tri] = max(F_tri/sum(F(:)));
-
-    % Centroid oordinates of the triangle with largest market share.
-    %centroid_tri(max_tri,:)
-    
-    
     % Output variables
-    xy_new = centroid_tri(max_tri,:);
+    xy_new = centroid_tri;
 end
