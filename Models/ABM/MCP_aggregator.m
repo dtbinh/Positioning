@@ -78,7 +78,7 @@ clearvars;
             pref3.rep = 1;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref3);
+            [o_mean_eccentricity, o_ENP, ~] = ABM(pref3);
 
             % Store summary variables from each run
             data_mean_eccentricity_run(rep,:) = o_mean_eccentricity';
@@ -127,6 +127,7 @@ clearvars;
     % Creating empty matrixes for summary variable 
     data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_representation = NaN(pref.repetitions, pref.iterations, pref.runs);
     export_param = NaN(pref.repetitions, 4, pref.runs); % The four extra coloumns are for: repetition number, N, mu, n_ratio
 
     poolobj = parpool('local',4)
@@ -147,25 +148,28 @@ clearvars;
         pref2.rules = repmat( {'AGGREGATOR'}, 1, pref2.N);
         
         % Repetitions
-        data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
-        data_ENP_run                = NaN(pref.repetitions, pref.iterations);
-        export_param_run            = NaN(pref.repetitions, 4);
+        data_mean_eccentricity_run   = NaN(pref.repetitions, pref.iterations);
+        data_ENP_run                 = NaN(pref.repetitions, pref.iterations);
+        data_mean_representation_run = NaN(pref.repetitions, pref.iterations);
+        export_param_run             = NaN(pref.repetitions, 4);
         for rep=1:pref2.repetitions
             pref3 = pref2;
             pref3.rep = rep;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref3);
+            [o_mean_eccentricity, o_ENP, o_mean_representation] = ABM(pref3);
             
             % Store summary variables from each run and each repetition
             data_mean_eccentricity_run(rep,:) = o_mean_eccentricity';
             data_ENP_run(rep,:) = o_ENP';
+            data_mean_representation_run(rep,:) = o_mean_representation';
             
             export_param_run(rep,:) = [pref3.N pref3.mu pref3.n_ratio rep ];
         end
-        data_mean_eccentricity(:,:,run) = data_mean_eccentricity_run;
-        data_ENP(:,:,run)               = data_ENP_run;
-        export_param(:,:,run)           = export_param_run;
+        data_mean_eccentricity(:,:,run)   = data_mean_eccentricity_run;
+        data_ENP(:,:,run)                 = data_ENP_run;
+        data_mean_representation(:,:,run) = data_mean_representation_run;
+        export_param(:,:,run)             = export_param_run;
 
         parfor_progress;
     end
@@ -175,18 +179,22 @@ clearvars;
     % Post-burnin iterations
     data_burnin_mean_eccentricity = data_mean_eccentricity( :, pref.burnin+1:end, :);
     data_burnin_ENP = data_ENP( :, pref.burnin+1:end, :);
+    data_burnin_mean_representation = data_mean_representation( :, pref.burnin+1:end, :);
     
     % Ensemble average estimate
     est_mean_eccentricity = mean(data_burnin_mean_eccentricity, 1);
     est_ENP = mean(data_burnin_ENP, 1);
+    est_mean_representation = mean(data_burnin_mean_representation, 1);
     
     % Ensemble average estimate standard deviation
     est_std_mean_eccentricity = std(data_burnin_mean_eccentricity, 0, 1);
     est_std_ENP = std(data_burnin_ENP, 0, 1);
+    est_std_mean_representation = std(data_burnin_mean_representation, 0, 1);
     
     % Ensemble average estimate standard error
     est_se_mean_eccentricity = est_std_mean_eccentricity ./ sqrt(pref.repetitions);
     est_se_ENP = est_std_ENP ./ sqrt(pref.repetitions);
+    est_se_mean_representation = est_std_mean_representation ./ sqrt(pref.repetitions);
 
     
     
@@ -213,6 +221,7 @@ clearvars;
     % 
     SESD_ratio_mean_eccentricity = squeeze(est_se_mean_eccentricity) ./ squeeze(est_std_mean_eccentricity);
     SESD_ratio_ENP = squeeze(est_se_ENP) ./ squeeze(est_std_ENP);
+    SESD_ratio_mean_representation = squeeze(est_se_mean_representation) ./ squeeze(est_std_mean_representation);
     % Have all summary variables been estimated with the same level of
     % precisions? This is (trivially) satisfied when the summary variables
     % have been estimated using the same number of post-burnin iterations,
@@ -228,7 +237,10 @@ clearvars;
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
     export_ENP = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_ENP), squeeze(est_std_ENP), squeeze(est_se_ENP), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_ENP, ...
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});    % Save file
+    export_mean_representation = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_mean_representation), squeeze(est_std_mean_representation), squeeze(est_se_mean_representation), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_mean_representation, ...
+                      'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});    % Save file
     writetable(export_mean_eccentricity, strcat('data/MCP_aggregator_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
     writetable(export_ENP, strcat('data/MCP_aggregator_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
+    writetable(export_mean_representation, strcat('data/MCP_aggregator_mean_representation_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
 
 

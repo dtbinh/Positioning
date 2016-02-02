@@ -88,7 +88,7 @@ clearvars;
             pref3.rep = rep;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref3);
+            [o_mean_eccentricity, o_ENP, ~] = ABM(pref3);
 
             % Store summary variables from each run
             data_mean_eccentricity_run(rep,:) = o_mean_eccentricity';
@@ -165,7 +165,7 @@ clearvars;
             pref.rep = rep;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref);
+            [o_mean_eccentricity, o_ENP, ~] = ABM(pref);
             
             % Store summary variables from each run and each repetition
             data_mean_eccentricity(rep,:,run) = o_mean_eccentricity';
@@ -228,6 +228,7 @@ clearvars;
     % Creating empty matrixes for summary variable 
     data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_representation = NaN(pref.repetitions, pref.iterations, pref.runs);
     export_param = NaN(pref.repetitions, 3, pref.runs); % The three extra coloumns are for: N, mu, n_ratio
 
     poolobj = parpool('local',4)
@@ -248,25 +249,28 @@ clearvars;
         pref2.rules = repmat( {'HUNTER'}, 1, pref2.N);
         
         % Repetitions
-        data_mean_eccentricity_run  = NaN(pref.repetitions, pref.iterations);
-        data_ENP_run                = NaN(pref.repetitions, pref.iterations);
-        export_param_run            = NaN(pref.repetitions, 3);
+        data_mean_eccentricity_run   = NaN(pref.repetitions, pref.iterations);
+        data_ENP_run                 = NaN(pref.repetitions, pref.iterations);
+        data_mean_representation_run = NaN(pref.repetitions, pref.iterations);
+        export_param_run             = NaN(pref.repetitions, 3);
         for rep=1:pref.repetitions
             pref3 = pref2;
             pref3.rep = rep;
             
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref3);
+            [o_mean_eccentricity, o_ENP, o_mean_representation] = ABM(pref3);
             
             % Store summary variables from each run and each repetition
             data_mean_eccentricity_run(rep,:) = o_mean_eccentricity';
             data_ENP_run(rep,:) = o_ENP';
+            data_mean_representation_run(rep,:) = o_mean_representation';
             
             export_param_run(rep,:) = [pref3.N pref3.mu pref3.n_ratio];
         end
-        data_mean_eccentricity(:,:,run) = data_mean_eccentricity_run;
-        data_ENP(:,:,run)               = data_ENP_run;
-        export_param(:,:,run)           = export_param_run;
+        data_mean_eccentricity(:,:,run)   = data_mean_eccentricity_run;
+        data_ENP(:,:,run)                 = data_ENP_run;
+        data_mean_representation(:,:,run) = data_mean_representation_run;
+        export_param(:,:,run)             = export_param_run;
 
         parfor_progress;
     end
@@ -276,18 +280,22 @@ clearvars;
     % Post-burnin iterations
     data_burnin_mean_eccentricity = data_mean_eccentricity( :, pref.burnin+1:end, :);
     data_burnin_ENP = data_ENP( :, pref.burnin+1:end, :);
+    data_burnin_mean_representation = data_mean_representation( :, pref.burnin+1:end, :);
     
     % Time average estimate (of post-burnin iterations)
     est_mean_eccentricity = mean(data_burnin_mean_eccentricity, 2);
     est_ENP = mean(data_burnin_ENP, 2);
+    est_mean_representation = mean(data_burnin_mean_representation, 2);
     
     % Time average estimate standard deviation (of post-burnin iterations)
     est_std_mean_eccentricity = std(data_burnin_mean_eccentricity, 0, 2);
     est_std_ENP = std(data_burnin_ENP, 0, 2);
+    est_std_mean_representation = std(data_burnin_mean_representation, 0, 2);
     
     % Time average estimate standard error (of post-burnin iterations)
     est_se_mean_eccentricity = est_std_mean_eccentricity ./ sqrt(pref.iterations - pref.burnin);
     est_se_ENP = est_std_ENP ./ sqrt(pref.iterations - pref.burnin);
+    est_se_mean_representation = est_std_mean_representation ./ sqrt(pref.iterations - pref.burnin);
 
     
     
@@ -303,6 +311,7 @@ clearvars;
     % Calculating the power of the t-test where H_0: estimate is equal zero, H_A: different from zero
     power_zero_mean_eccentricity = powerzero(squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), pref.iterations-pref.burnin);
     power_zero_ENP = powerzero(squeeze(est_ENP), squeeze(est_std_ENP), pref.iterations-pref.burnin);
+    power_zero_mean_representation = powerzero(squeeze(est_mean_representation), squeeze(est_std_mean_representation), pref.iterations-pref.burnin);
     % The power of the t-test should be at least 0.8
     
     
@@ -314,6 +323,7 @@ clearvars;
     % 
     SESD_ratio_mean_eccentricity = squeeze(est_se_mean_eccentricity) ./ squeeze(est_std_mean_eccentricity);
     SESD_ratio_ENP = squeeze(est_se_ENP) ./ squeeze(est_std_ENP);
+    SESD_ratio_mean_representation = squeeze(est_se_mean_representation) ./ squeeze(est_std_mean_representation);
     % Have all summary variables been estimated with the same level of
     % precisions? This is (trivially) satisfied when the summary variables
     % have been estimated using the same number of post-burnin iterations,
@@ -329,9 +339,12 @@ clearvars;
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
     export_ENP = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_ENP), squeeze(est_std_ENP), squeeze(est_se_ENP), NaN(pref.runs,1), NaN(pref.runs,1), power_zero_ENP, NaN(pref.runs,1), SESD_ratio_ENP, ...
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
+    export_mean_representation = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_mean_representation), squeeze(est_std_mean_representation), squeeze(est_se_mean_representation), NaN(pref.runs,1), NaN(pref.runs,1), power_zero_mean_representation, NaN(pref.runs,1), SESD_ratio_mean_representation, ...
+                      'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
     %export_ENP.Properties.Description = ['burnin ' num2str(pref.burnin) ' iterations ' num2str(pref.iterations)];
     % Save file
     writetable(export_mean_eccentricity, strcat('data/MCP_hunter_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '.csv'),'Delimiter',',');
     writetable(export_ENP, strcat('data/MCP_hunter_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '.csv'),'Delimiter',',');
+    writetable(export_mean_representation, strcat('data/MCP_hunter_mean_representation_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '.csv'),'Delimiter',',');
 
 

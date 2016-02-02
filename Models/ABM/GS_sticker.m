@@ -53,6 +53,7 @@ clearvars;
     % Creating empty matrixes for summary variable
     data_mean_eccentricity = NaN(pref.repetitions, pref.iterations, pref.runs);
     data_ENP = NaN(pref.repetitions, pref.iterations, pref.runs);
+    data_mean_representation = NaN(pref.repetitions, pref.iterations, pref.runs);
 
     h = waitbar(0, 'Running...');
     for run=1:pref.runs
@@ -70,11 +71,12 @@ clearvars;
             pref.rep = rep;
 
             % Run ABM with parmeters
-            [o_mean_eccentricity, o_ENP] = ABM(pref);
+            [o_mean_eccentricity, o_ENP, o_data_mean_representation] = ABM(pref);
 
             % Store summary variables from each run
             data_mean_eccentricity(rep,:,run) = o_mean_eccentricity';
             data_ENP(rep,:,run) = o_ENP';
+            data_mean_representation(rep,:,run) = o_data_mean_representation'; 
         end
 
     end
@@ -84,14 +86,17 @@ clearvars;
     % Ensemble average estimate
     est_mean_eccentricity = mean(data_mean_eccentricity, 1);
     est_ENP = mean(data_ENP, 1);
+    est_mean_representation = mean(data_mean_representation, 1);
     
     % Ensemble average estimate standard deviation
     est_std_mean_eccentricity = std(data_mean_eccentricity, 0, 1);
     est_std_ENP = std(data_ENP, 0, 1);
+    est_std_mean_representation = std(data_mean_representation, 0, 1);
     
     % Ensemble average estimate standard error
     est_se_mean_eccentricity = est_std_mean_eccentricity ./ sqrt(pref.repetitions);
     est_se_ENP = est_std_ENP ./ sqrt(pref.repetitions);
+    est_se_mean_representation = est_std_mean_representation ./ sqrt(pref.repetitions);
     
     
     
@@ -115,11 +120,13 @@ clearvars;
     % No expecations for ENP
     pvalue_ENP = NaN(pref.runs, 1);
     % The p-value should be greater than 0.1.
+    pvalue_mean_representation = NaN(pref.runs, 1);
     
     %%% 3.3 Check 3 -- Power zero
     % Calculating the power of the t-test where H_0: estimate is equal zero, H_A: different from zero
     power_zero_mean_eccentricity = powerzero(squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), pref.repetitions);
     power_zero_ENP = powerzero(squeeze(est_ENP), squeeze(est_std_ENP), pref.repetitions);
+    power_zero_mean_representation = powerzero(squeeze(est_mean_representation), squeeze(est_std_mean_representation), pref.repetitions);
     % The power of the t-test should be at least 0.8
     
     
@@ -127,6 +134,7 @@ clearvars;
     % Calculating the power of the two-sample t-test where H_0: estimate is equal estimate from adjacent grid, H_A: different
     power_diff_mean_eccentricity = powerdiff(squeeze(est_mean_eccentricity), squeeze(est_std_mean_eccentricity), pref.repetitions);
     power_diff_ENP = powerdiff(squeeze(est_ENP), squeeze(est_std_ENP), pref.repetitions);
+    power_diff_mean_representation = powerdiff(squeeze(est_mean_representation), squeeze(est_std_mean_representation), pref.repetitions);
     % The power of the t-test should be at least 0.8 for ENP.
     % For mean eccentricity the power should be as low as possible, since
     % we expect that the estimates are 1.5. 
@@ -136,6 +144,7 @@ clearvars;
     % 
     SESD_ratio_mean_eccentricity = squeeze(est_se_mean_eccentricity) ./ squeeze(est_std_mean_eccentricity);
     SESD_ratio_ENP = squeeze(est_se_ENP) ./ squeeze(est_std_ENP);
+    SESD_ratio_mean_representation = squeeze(est_se_mean_representation) ./ squeeze(est_std_mean_representation);
     % Have all summary variables been estimated with the same level of
     % precisions? This is (trivially) satisfied when the summary variables
     % have been estimated using the same number of repetitions,
@@ -150,10 +159,13 @@ clearvars;
                       'VariableNames', {'N' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
     export_ENP = table(test.N', squeeze(est_ENP), squeeze(est_std_ENP), squeeze(est_se_ENP), NaN(pref.runs,1), pvalue_ENP, power_zero_ENP, power_diff_ENP, SESD_ratio_ENP, ...
                       'VariableNames', {'N' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
+    export_mean_representation = table(test.N', squeeze(est_mean_representation), squeeze(est_std_mean_representation), squeeze(est_se_mean_representation), NaN(pref.runs,1), pvalue_mean_representation, power_zero_mean_representation, power_diff_mean_representation, SESD_ratio_mean_representation, ...
+                      'VariableNames', {'N' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
     %export_ENP.Properties.Description = ['burnin ' num2str(pref.burnin) ' iterations ' num2str(pref.iterations)];
     % Save file
     writetable(export_mean_eccentricity, strcat('data/GS_sticker_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
     writetable(export_ENP, strcat('data/GS_sticker_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
+    writetable(export_mean_representation, strcat('data/GS_sticker_mean_representation_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
 
     % Preliminary conclusion
     %

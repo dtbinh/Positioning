@@ -163,7 +163,7 @@ b = pref.boundary/2;
     eccentricity            = NaN(pref.iterations*pref.psi, pref.N);
     mean_eccentricity       = NaN(pref.iterations*pref.psi, 1);
     ENP                     = NaN(pref.iterations*pref.psi, 1);
-    %misery                  = NaN(pref.iterations*pref.psi, 1);
+    mean_representation     = NaN(pref.iterations*pref.psi, 1);
     %perimeter               = NaN(pref.iterations*pref.psi, pref.N);
     %perimeter_extrema       = NaN(pref.iterations*pref.psi, pref.N);
     centroid                = NaN(pref.N, 2, pref.iterations*pref.psi);
@@ -396,9 +396,9 @@ for i = 1:pref.iterations*pref.psi
     % Herfindahl-Hirschman Index (HHI) -- Eiselt and Marianov (2011)
     % HHI(i,:) = sum( ( F_firm/sum(F(:)) ).^2 ); % HHI = 1/ENP
     
-    % Misery
-    % Quadratic loss function / representativeness
-    %misery(i,:) = sum(utility_i(:).*F(:))/sum(F(:));
+    % Representativeness
+    % Utility/distance from entire market weighted with the market share.
+    mean_representation(i,:) = - sum( utility_i(:).^2.*F(:) )/sum(F(:));
   
     % Market perimeter
     %market_props_i = regionpropsext(market(:,:,i), 'Extrema', 'Perimeter');
