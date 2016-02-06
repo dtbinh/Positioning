@@ -4,7 +4,7 @@ clearvars;
 %% Setup
 
 % Points - Random firm locations
-n = 12;
+n = 5;
 %x0 = rand(1, n)*10-5; % Initial x-position of firm
 %y0 = rand(1, n)*10-5; % Initial y-position of firm
 %xy = [x0' y0'];
@@ -60,42 +60,18 @@ weight = pref.n_ratio/(1+pref.n_ratio);
 F = (F_l + F_r*1/pref.n_ratio)/4;
 
 
-%% Plots
+%% Calculations
 
-% Default plot
-figure(1);
-voronoi(xy(:,1)' , xy(:,2)', 'r');
-%plot(vx,vy, 'b');
-xlim([-6 6]); ylim([-6 6]);
-%hold on;
-%s = scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
-%hold off;
-
-
+% Delaunay Triangulation without boundaries.
 DT = delaunayTriangulation(xy);
-%tri = delaunay(xy(:,1)' , xy(:,2)');
-figure(2);
-triplot(DT, 'k')
-xlim([-6 6]); ylim([-6 6]);
-
-% figure(21);
-% triplot(DT)
-% xlim([-6 6]); ylim([-6 6]);
-% hold on;
-% [centers, radii] = DT.circumcenter();
-% theta = -pi:pi/20:pi;
-% for iCircle=1:size(centers,1)
-%   xCircle = centers(iCircle,1) + radii(iCircle)*cos(theta);
-%   yCircle = centers(iCircle,2) + radii(iCircle)*sin(theta);
-%   plot(xCircle, yCircle, 'k');
-% end
-% hold off;
-
+% Delaunay Triangulation with boundaries.
 xy_boundary = [xy; bbox(1:end-1,1) bbox(1:end-1,2)];
 DT2 = delaunayTriangulation(xy_boundary);
 
+% Number of triangles
 triangles = size(DT2.ConnectivityList,1);
 
+% Get coordinates for each triangle
 DT2X = NaN(size(DT2.ConnectivityList));
 DT2Y = NaN(size(DT2.ConnectivityList));
 for tri = 1:triangles
@@ -103,20 +79,7 @@ for tri = 1:triangles
     DT2Y(tri,:) = DT2.Points( DT2.ConnectivityList(tri,:), 2);
 end
 
-
-
-
-%tri = delaunay(xy(:,1)' , xy(:,2)');
-figure(3);
-triplot(DT2, 'k')
-xlim([-6 6]); ylim([-6 6]);
-hold on;
-for tri = 1:triangles
-    patch(DT2X(tri,:), DT2Y(tri,:), tri, 'FaceAlpha', 0.2, 'EdgeColor', 'none');
-end
-hold off;
-
-
+% Calculate the market share of each triangle and the centroid
 DT_market = NaN( length(X(:)), 1);
 F_tri_i  = NaN(triangles,1);
 centroid_tri_i  = NaN(triangles,2);
@@ -132,55 +95,51 @@ end
 %F_tri_i/sum(F(:))
 [~, max_tri] = max(F_tri_i/sum(F(:)));
 
-centroid_tri_i(max_tri,:)
+% The optimal location
+centroid_tri_i(max_tri,:);
 
+% Color triangle based on customer share.
+alpha_tri = F_tri_i./sum(F_tri_i);
 
-% l = sqrt(length(X(:)));
-% DT_market_square = reshape(DT_market,[l l]);
-% figure(5);
-% imagesc(x,y,DT_market_square);
-% set(gca,'ydir', 'normal');
-% hold on;
-% scatter( centroid_tri_i(:,1) , centroid_tri_i(:,2), 'r', 'filled');
-% hold off;
-
-% % Market centroid coordinates
-% F_tri_i  = NaN(triangles,1);
-% for tri= 1:triangles
-%     % Index for each customer of the firm.
-%     idx = find(market_i==firm);
-% 
-%     % Number of customers for each firm
-%     F_tri_i(firm) = sum( F(idx) );
-% 
-%     % Each xy-coordinat within the firm's market weighted with the probability density
-%     centroid(firm,:,i) = ([X(idx) Y(idx)]' * F(idx))' ./ F_tri_i(firm);
-% end
-
-
-%tri = delaunay(xy(:,1)' , xy(:,2)');
-
-% figure(4);
-% triplot(DT2)
-% xlim([-6 6]); ylim([-6 6]);
-% hold on;
-% [centers, radii] = DT2.circumcenter();
-% theta = -pi:pi/20:pi;
-% for iCircle=1:size(centers,1)
-%   xCircle = centers(iCircle,1) + radii(iCircle)*cos(theta);
-%   yCircle = centers(iCircle,2) + radii(iCircle)*sin(theta);
-%   plot(xCircle, yCircle, 'k');
-% end
-% hold off;
-
-
+% firm coordinates including new firm
 xy_new = [xy; centroid_tri_i(max_tri,:)];
 
-% Default plot
+
+%% Plots
+
+% Voronoi plot
+figure(1);
+voronoi(xy(:,1)' , xy(:,2)', 'k');
+xlim([-5 5]); ylim([-5 5]);
+set(gca,'YTick',(-5:5:5));
+set(gca,'XTick',(-5:5:5));
+hold on;
+s = scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
+hold off;
+
+% Delaunay Triangulation with boundaries
+figure(3);
+triplot(DT2, ':k')
+xlim([-5 5]); ylim([-5 5]);
+set(gca,'YTick',(-5:5:5));
+set(gca,'XTick',(-5:5:5));
+hold on;
+triplot(DT, '--k'); % 'color', [0.5 0.5 0.5]
+scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
+scatter( centroid_tri_i(max_tri,1)' , centroid_tri_i(max_tri,2)', 'xr');
+%for tri = 1:triangles
+%    patch(DT2X(tri,:), DT2Y(tri,:), tri, 'FaceColor', [0.5 0.5 0.5], 'FaceAlpha', alpha_tri(tri), 'EdgeColor', 'none');
+%end
+hold off;
+
+
+% Voronoi plot Wtih new firm
 figure(7);
-voronoi(xy_new(:,1)' , xy_new(:,2)', 'r');
-%plot(vx,vy, 'b');
-xlim([-6 6]); ylim([-6 6]);
-%hold on;
-%s = scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
-%hold off;
+voronoi(xy_new(:,1)' , xy_new(:,2)', 'k');
+xlim([-5 5]); ylim([-5 5]);
+set(gca,'YTick',(-5:5:5));
+set(gca,'XTick',(-5:5:5));
+hold on;
+scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
+scatter( centroid_tri_i(max_tri,1)' , centroid_tri_i(max_tri,2)', 'filled', 'r');
+hold off;
