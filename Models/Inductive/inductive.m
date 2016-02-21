@@ -45,11 +45,11 @@ J(1:5) = (distance>fundamental_bins);
 % POSITION 6-11: Greater than 5-period, 10-period or 15-period moving 
 % average.
 ma = [5 10 15]; % Number of periods in moving average.
-ma_l = max( [ti+1-ma; ones(1, length(ma))] ); % No lower index below 1.
+ma_l = max( [ti-ma; ones(1, length(ma))] ); % No lower index below 1.
 ma_xy = NaN(length(ma), 2);
 for m = 1:length(ma)
     % Calculate simple moving average for each period
-    ma_xy(m,:) = mean( xy1( ma_l(m):ti, : ) );
+    ma_xy(m,:) = mean( diff( xy1( ma_l(m):ti, : ), 1 ), 1 );
 end;
 % Reshape to form [x5 y5 x10 y10 x15 y15].
 J(6:11) = reshape( (repmat(xyti,length(ma),1) > ma_xy), 1, length(ma)*2);
