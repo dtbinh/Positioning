@@ -21,7 +21,7 @@ for i = 1:pref.iterations
     end
     scatter( xy(:,1,i,:)' , xy(:,2,i,:)' , [], color, 'filled'); % Plot the firms with respective colors.
     hold off; % Don't place anymore plots on top of figure.
-    pause(.03);
+    pause(.02);
 end
 
 
@@ -29,10 +29,10 @@ end
 figure(10);
 surf(x,y,F);%,'EdgeColor','none');
 caxis([min(F(:))-.5*range(F(:)),max(F(:))]);
-axis([-5 5 -5 5 0 .2])
+axis([-3 3 -3 3 0 .2])
 %title('Population density');
 title({'Population density', ['\mu_r = -\mu_l = ', num2str(pref.mu) ';   n_l/n_r: ' num2str(pref.n_ratio)]}); % Add title
-xlabel('x1'); ylabel('x2'); zlabel('Probability Density');
+xlabel('x'); ylabel('y'); zlabel('Probability density');
 set(gca,'ZTick',[0:0.05:0.2]);
 
 
@@ -44,6 +44,16 @@ scatter( xy_0(:,1)' , xy_0(:,2)', [], color, 'filled'); % Plot the firms with re
 xlim([-5 5]); ylim([-5 5]);
 title('Population contours and initial firm position');
 xlabel('x1'); ylabel('x2');
+hold off;
+
+% 2D plot of contours of population and firm initial position
+figure(11);
+contour(x,y,F,[.0001 .001 .01 .05:.1:.95 .99 .999 .9999]);
+hold on;
+scatter( xy(:,1,pref.iterations,:)' , xy(:,2,pref.iterations,:)', [], color, 'filled'); % Plot the firms with respective colors.
+xlim([-5 5]); ylim([-5 5]);
+title('Population contours and firm position');
+xlabel('x'); ylabel('y');
 hold off;
 
 
@@ -84,7 +94,8 @@ hold on;
 scatter( centroid(:,1,pref.iterations)' , centroid(:,2,pref.iterations)', [], color, 'x');
 scatter( xy(:,1,pref.iterations,:)' , xy(:,2,pref.iterations,:)' , [], color, 'filled');
 hold off;
-title('Final market');
+title('Market areas, market centroids and firm position');
+xlabel('x'); ylabel('y');
 
 
 % Compass of the direction of the firm's movement
@@ -334,6 +345,7 @@ plot(repmat( m2nd_mean_eccentricity + sd2nd_mean_eccentricity , 1, pref.iteratio
 plot(repmat( m2nd_mean_eccentricity - sd2nd_mean_eccentricity , 1, pref.iterations), 'k:');
 hold off;
 
+
 % Mean share
 figure(161);
 clf reset; % Reset figure.
@@ -383,4 +395,262 @@ end
 %plot(repmat( m2nd_mean_share + sd2nd_mean_share , 1, pref.iterations/pref.psi), 'k:');
 %plot(repmat( m2nd_mean_share - sd2nd_mean_share , 1, pref.iterations/pref.psi), 'k:');
 hold off;
+
+
+
+%% Plot Inductor
+
+% Draw evolution
+for i = 1:pref.iterations*pref.psi
+    figure(2);
+    clf reset; % Reset figure.
+    image(x, y, market(:,:,i),'AlphaData', 0.2); % Create image of the marketshare with dimmed opacity.
+    title(sprintf('Market (iteration %d)',i)); % Add title
+    colormap(color); % Set the respective firm colors on each market share.
+    axis image; % Scale to fit the dimensions of customers/lattice.
+    set(gca,'ydir', 'normal'); % By default image() reverese the y-axis. This reinstates the normal ordering.
+    hold on; % Place following scatter/plots on top of image.
+%    scatter(centroid(:,1,i)',centroid(:,2,i)', [], color, 'x'); % Plot current market centroid point
+%     for n = 1:pref.N % Trace the firm movement over time
+%        n_xy = xy(n,:,1:i,:);
+%        n_xy = reshape(n_xy, [size(n_xy,2) size(n_xy,3) 1]);
+%        line(n_xy(1,:)', n_xy(2,:)', 'Color', color(n,:), 'LineStyle', ':');
+%     end
+    scatter( xy(:,1,i,:)' , xy(:,2,i,:)' , [], color, 'filled'); % Plot the firms with respective colors.
+    hold off; % Don't place anymore plots on top of figure.
+    pause(.01);
+end
+
+% Draw market share
+figure(3);
+clf reset; % Reset figure.
+hold on;
+title('Share of market'); % Add title
+for n = 1:pref.N
+    plot(shares(:,n,:), 'Color', color(n,:));
+end
+plot(repmat(1/pref.N, 1, pref.iterations*pref.psi), 'Color', 'k', 'LineStyle', ':'); % Equal shares
+hold off;
+
+figure(4);
+clf reset; % Reset figure.
+hold on;
+title('Share of market moving average (lagged approx. 10% of number of iterations)'); % Add title
+for n = 1:pref.N
+    simple = tsmovavg(shares(:,n,:), 's', round(pref.iterations*pref.psi*0.1), 1);
+    plot(simple, 'Color', color(n,:));
+end
+plot(repmat(1/pref.N, 1, pref.iterations*pref.psi), 'Color', 'k', 'LineStyle', ':');
+hold off;
+
+% Check accuracy
+accuracy_final = squeeze(cf_i(:, 24, :));
+accuracy_final(accuracy_final==0) = NaN; % Non-zero accuracy.
+
+figure(901);
+histogram(accuracy_final);
+title('Accuracy at final iteration');
+
+accuracy = squeeze(cf(:, 24, :, :));
+accuracy_positive = accuracy;
+accuracy_positive(accuracy_positive==0) = NaN; % Non-zero accuracy.
+
+accuracy_positive_mean_iter = mean(accuracy_positive, 3, 'omitnan');  % Mean over all iterations.
+accuracy_positive_mean_firm = squeeze(mean(accuracy_positive, 1, 'omitnan'));  % Mean over all firm's condition/forcast rules.
+
+figure(902);
+histogram(accuracy_positive_mean_iter);
+title('Mean accuracy over all iteration');
+
+figure(903);
+clf reset; % Reset figure.
+plot(accuracy_positive_mean_firm');
+title('Mean accuracy of all the firm´s condition/forecast rules'); % Add title
+%hold on;
+%plot(mean(accuracy_positive_mean_firm,1), 'k');
+%hold off;
+
+figure(904);
+clf reset; % Reset figure.
+plot(mean(accuracy_positive_mean_firm,1), 'k');
+title('Mean accuracy of all condition/forecast rules'); % Add title
+
+% Which conditions are being used?
+
+
+
+% % Total number of times that a state is active.
+sum(~isnan(accuracy_final)) % Percentage of conditions that have been used.
+figure(9001);
+n=1;
+stem(~isnan(accuracy_final(:,n)));
+title('Total number of states occurrences'); % Add title
+
+% % Total number of times that a state is active.
+state_occurrences = squeeze(sum(J_states,1,'omitnan'));
+state_occurrences_total = sum(state_occurrences,2,'omitnan');
+figure(905);
+stem(state_occurrences_total);
+title('Total number of states occurrences'); % Add title
+
+state_occurrences_type = [mean(state_occurrences(1:5,:)); mean(state_occurrences(6:11,:)); state_occurrences(12,:); state_occurrences(13,:)];
+figure(906);
+plot(state_occurrences_type');
+title('State occurrences over time'); % Add title
+
+% figure(9060);
+% plot(state_occurrences(6:8,1:50)');
+% title('MA-state occurrences over time'); % Add title
+% figure(9061);
+% plot(state_occurrences(9:11,1:50)');
+% title('MA-state occurrences over time'); % Add title
+
+
+% Total number of times that a state is active. second half
+state2nd_occurrences = squeeze(sum(J_states(:,:,101:200),1,'omitnan'));
+state2nd_occurrences_total = sum(state2nd_occurrences,2,'omitnan');
+figure(907);
+stem(state2nd_occurrences_total);
+title('Total number of states occurrences'); % Add title
+
+state2nd_occurrences_type = [mean(state2nd_occurrences(1:5,:)); mean(state2nd_occurrences(6:11,:)); state2nd_occurrences(12,:); state2nd_occurrences(13,:)];
+figure(908);
+plot(state2nd_occurrences_type');
+title('State occurrences over time'); % Add title
+
+
+% diff_xy = diff(xy(:,:,:), 1, 3);
+% %size(xy)
+% %size(diff_xy)
+% 
+% figure(909);
+% plot( squeeze(diff_xy(1,:,:))' );
+% 
+% 
+% figure(910);
+% clf reset; % Reset figure.
+% hold on;
+% title('5-period moving average of difference in x-coordinate'); % Add title
+% %for n = 1:pref.N
+% n=1
+% scatter(1:pref.iterations-1, squeeze(diff_xy(n,1,:)), 'Filled', 'k');
+% simple = tsmovavg(squeeze(diff_xy(n,1,:)), 's', 5, 1);
+% plot(simple, 'Color', color(n,:));
+% simple = tsmovavg(squeeze(diff_xy(n,1,:)), 's', 10, 1);
+% plot(simple, 'Color', color(n+1,:));
+% simple = tsmovavg(squeeze(diff_xy(n,1,:)), 's', 100, 1);
+% plot(simple, 'Color', color(n+2,:));
+% %end
+% plot(repmat(mean(squeeze(diff_xy(n,1,:))), 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+% hold off;
+% 
+% figure(911);
+% clf reset; % Reset figure.
+% hold on;
+% title('5-period moving average of difference in y-coordinate'); % Add title
+% %for n = 1:pref.N
+% n=1
+% scatter(1:pref.iterations-1, squeeze(diff_xy(n,2,:)), 'Filled', 'k');
+% simple = tsmovavg(squeeze(diff_xy(n,2,:)), 's', 5, 1);
+% plot(simple, 'Color', color(n,:));
+% simple = tsmovavg(squeeze(diff_xy(n,2,:)), 's', 10, 1);
+% plot(simple, 'Color', color(n+1,:));
+% simple = tsmovavg(squeeze(diff_xy(n,2,:)), 's', 100, 1);
+% plot(simple, 'Color', color(n+2,:));
+% %end
+% plot(repmat(mean(squeeze(diff_xy(n,2,:))), 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+% hold off;
+% 
+% figure(911);
+% autocorr( squeeze(diff_xy(4,1,101:end)) )
+% 
+% [theta, rho] = cart2pol( diff_xy(:,1,:), diff_xy(:,2,:) );
+% 
+% figure(912);
+% clf reset; % Reset figure.
+% hold on;
+% title('5-period moving average of direction'); % Add title
+% %for n = 1:pref.N
+% n=1
+% scatter(1:pref.iterations-1, squeeze(theta(n,1,:)), 'Filled', 'k');
+% simple = tsmovavg(squeeze(theta(n,1,:)), 's', 5, 1);
+% plot(simple, 'Color', color(n,:));
+% simple = tsmovavg(squeeze(theta(n,1,:)), 's', 10, 1);
+% plot(simple, 'Color', color(n+1,:));
+% simple = tsmovavg(squeeze(theta(n,1,:)), 's', 100, 1);
+% plot(simple, 'Color', color(n+2,:));
+% %end
+% plot(repmat(mean(squeeze(theta(n,1,:))), 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+% hold off;
+% 
+% 
+% figure(913);
+% clf reset; % Reset figure.
+% hold on;
+% title('5-period moving average of distance'); % Add title
+% %for n = 1:pref.N
+% n=1
+% scatter(1:pref.iterations-1, squeeze(rho(n,1,:)), 'Filled', 'k');
+% simple = tsmovavg(squeeze(rho(n,1,:)), 's', 5, 1);
+% plot(simple, 'Color', color(n,:));
+% simple = tsmovavg(squeeze(rho(n,1,:)), 's', 10, 1);
+% plot(simple, 'Color', color(n+1,:));
+% simple = tsmovavg(squeeze(rho(n,1,:)), 's', 100, 1);
+% plot(simple, 'Color', color(n+2,:));
+% %end
+% plot(repmat(mean(squeeze(rho(n,1,:))), 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+% hold off;
+% %ylim([0 0.12]);
+% 
+% 
+% 
+
+figure(912);
+clf reset; % Reset figure.
+hold on;
+title('5-period moving average of x-coordinate'); % Add title
+%for n = 1:pref.N
+n=2
+scatter(1:pref.iterations, squeeze(xy(n,1,:)), 'Filled', 'k');
+simple = tsmovavg(squeeze(xy(n,1,:)), 's', 4, 1);
+plot(simple, 'Color', color(n,:));
+simple = tsmovavg(squeeze(xy(n,1,:)), 's', 16, 1);
+plot(simple, 'Color', color(n+1,:));
+simple = tsmovavg(squeeze(xy(n,1,:)), 's', 64, 1);
+plot(simple, 'Color', color(n+2,:));
+%end
+plot(repmat(mean(squeeze(xy(n,1,:))), 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+hold off;
+
+
+figure(913);
+clf reset; % Reset figure.
+hold on;
+title('5-period moving average of y-coordinate'); % Add title
+%for n = 1:pref.N
+n=2
+scatter(1:pref.iterations, squeeze(xy(n,2,:)), 'Filled', 'k');
+simple = tsmovavg(squeeze(xy(n,2,:)), 's', 4, 1);
+plot(simple, 'Color', color(n,:));
+simple = tsmovavg(squeeze(xy(n,2,:)), 's', 16, 1);
+plot(simple, 'Color', color(n+1,:));
+simple = tsmovavg(squeeze(xy(n,2,:)), 's', 64, 1);
+plot(simple, 'Color', color(n+2,:));
+%end
+plot(repmat(mean(squeeze(xy(n,2,:))), 1, pref.iterations), 'Color', 'k', 'LineStyle', ':');
+hold off;
+
+
+state_used = squeeze(sum(cf_used(:,1:13,:,:),3,'omitnan'));
+state_used_total = sum(sum(state_used,1,'omitnan'),3);
+figure(914);
+stem(state_used_total);
+title('Total number of states occurrences'); % Add title
+
+
+state_used = squeeze(sum(cf_used(:,1:13,:,:),3,'omitnan'));
+state_used_total = sum(sum(state_used,1,'omitnan'),3);
+figure(914);
+stem(state_used_total);
+title('Total number of states occurrences'); % Add title
 
