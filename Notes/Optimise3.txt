@@ -1,0 +1,7 @@
+# 2 firms
+
+inpolygon (matlab)
+Elapsed time is 9.034413 seconds.
+
+InPolygon (mex)
+Elapsed time is 6.598226 seconds.
