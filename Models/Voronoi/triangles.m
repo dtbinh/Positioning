@@ -1,6 +1,6 @@
-function [convexTriangleSets,DT] = triangles()
+function [convexTriangleSets,DT] = triangles(xy)
     % inputs
-    xy = [3.3735 0.7889; -0.1072 -3.4814; -3.9732 4.1955; -5 5; 5 5; 5 -5; -5 -5];
+    %xy = [3.3735 0.7889; -0.1072 -3.4814; -3.9732 4.1955; -5 5; 5 5; 5 -5; -5 -5];
     DT = delaunayTriangulation(xy);
 
     function convexTriangleSets = testAddTriangle(iTriangle,attachedTriangleIndices,includedTriangleIndices)
@@ -65,7 +65,7 @@ function [convexTriangleSets,DT] = triangles()
         end
     end
     % Remove duplicates
-    [~,c] = unique(cellfun(@(x) sprintf('%d,',x),combi,'UniformOutput',false))
+    [~,c] = unique(cellfun(@(x) sprintf('%d,',x),combi,'UniformOutput',false));
     combi = combi(c);
 
     % Remove the convex sets that are not the largest.
