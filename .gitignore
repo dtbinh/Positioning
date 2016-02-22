@@ -9,6 +9,9 @@ Models/ABM/fig/**
 Models/ABM/profile/**
 Figures/data/**
 
+# No need for duplicates. Just keep the PDF-files.
+Figures/**.png
+
 # Rstudio system files
 **/.RData
 **/.Rhistory
