@@ -230,20 +230,58 @@ The *aggregator* model also results in the CVT when the distribution of consumer
 
 In the *hunter* model we once again see that the asymmetric distribution of consumers give rise to significant changes when going from 2-3 firms and to 4 or more firms. This is particularly pronounced in the models with a high degree of polarisation. With two or three *hunter* firms the mean representation is around -2, while with four or more firms the mean representation is between -0.5 and -0.2. As earlier noted this is the result of *hunter* firms locating in between the centers of the subpopulations when there are 2-3 firms in the market. Although the firms locate close the average ideal point of all customers they also locate in an area with a low density of consumers. Because firms locate far from the densely populated areas it significantly reduecs the average utility of customers. On the other hand firms seperating into crowds that locate around the centers of the subpopulation when there are four or more firms in the market. Laver and Sergenti (2011, chapter 5, p. 102) refer to this as the *“sea change”* in mean representation when reaching four or more firms.
 
+## 4.2 Decision rules with predictions / learning -- hetrogenous
 
-## 4.2 Decision rules with learning
+_[...]_
 
-... 
+A firm with the _[maxcov-inductor]_ decision rule maintains several hypotheses on how competing firms locate. The firm uses the hypothesis that fits the current state and that previously proved most accurate to forcast the future location of a competing firm. When the firm chooses its own location it relys on the predicted location of all competing firms.
 
-_[Maxcov-inductor]_
+The firm is endowed with $M$ number of hypotheses. While each hypothesis might only be relevant to a narrow set of situations, together the array of hypotheses cover a wide range of different situations. At every iteration the firm only considers the hypotheses specific to the current state and ignores the remaining hypotheses. This makes the firm capable of ‘recognising’ different situations and applying the appropriate forecast.
+
+Each hypothesis consists of two parts jointly forming a *condition/forcast* rule. The condition part specifies which situations trigger the forecast. And the forecast part contains the spefic estimates used to make a prediction about the future location.
+
+To describe the current state we use a 13-bit descriptor. The descriptor $J_j$ summarises the location behaviour of firm $j$. Eg. the fourth bit in $J_j$ relays wether or not *firm $j$ is more than 0.6 standard deviations away from the population center*. The tenth bit in $J_j$ relays whether or not *firm $j$ position along the y-axis is above the average of the last 16 periods*. Etc. These bits take the value 1 if the state occured, and takes the value 0 if the state is absent. The current state of firm $j$ can fore instance be summerised by the following descriptor: `1110010011010`.
+
+Each *condition/forcast* rule attempts to ‘recognise’ the current state. Therefore the condition consists of 13 corresponding positions each taking the value 1, 0, or #. The condition is met if the ones and zeros match the current state descriptor. The # is a wildcard character that matches either case. Eg. The condition `###1#####0###` is satisfied if the state described by the fourth bit occured and the state described by the tenth bit did not occure. In other words the condition will match any state where *the firm $j$ is more than 0.6 standard deviations away from the population center while its position along the y-axis is NOT above the average of the last 16 periods*. While the condition `###1#####0###` would not satisfied by the current state descriptor `1110010011010` the condition `#1########0##` would be.
+
+All the *condition/forcast* rules that match the current state are said to be active. Among the active *condition/forcast* rules the firm chooses the rule with the best accuracy. 
+The accuracy of the active *condition/forcast* rules is updated once all the firms relocate and the actual location of each competing firm is revealed. ...
+
+_[The 13-bit descripter is able to describe $2^13 = 8.192$ distinct states.]_
+
+The first 5 bits relates 
+
+-----
+
+* Inductive reasoning
+* Predict the location of competing firms / hypotheis
+* Two types of learning: Learning through experience (Use the the most reliable hypothesis in any given situation). Learning through evolution (Updating hypothesise: discard poorly performing hypothesis, and form new hypothesis).
+(which hypothesis / condition/forecast rules worked well in the past).
+* Hetrogenous agents.
+* Reinforcement learning?
+
+
+-----
+
+We are now at the point where we have an understanding of the baseline decision rules; *sticker*, *aggregator*, *hunter* and *maxcov*. The first three rules rely on heuristics, while the last rule deliberately and directly maximises the market share of the firm. We know how firms that use these rules choose to locate when the distribution of consumers is symmetric and when it is asymmetric. We know which type of competitive enviroment arises from the location behaviour of the firms. And we know how this behaviour affects the overall welfare of consumers. _[The following section will investigate the competitive location behaviour of hetrogenous firms. These firms will attempt to predict the future location of competing firms. In addition learning will be part of the behaviour of firms.]_
+
+When a firm chooses its own location, the location of the other competing firms is unknown. The firm may try to predict the location of the other firms. However if multiple firms use this approach then the location outcome that each firm is trying to predict will depend on predictions that the firm and the other firms form. Thus as Arthur (2014, p.175) write *”predictions are forming a world those predictions are trying to forecast”*. This self-referential loop leads to logical indeterminacy. _[...]_ Because of this the maximisation problem of the firm is ill defined and cannot be solved deductively. 
+_[... hetrogenous agents ... in a infinite regress ... unrestricted computational capacity ... ]_
+
+I will concentrate on a decision rule with foresight -- firms with inductive rationality. A firm with this decision rule forms hypotheses on how other firms choose their location. The firm holds several hypotheses at once, and acts on the hypothesis that worked best in the past. Each hypothesis attempts to predict the movement of the other agents based on their movement history. The firm still chooses its own location such that it maximises market share, but subject to the predicted movements of other firms generated by its most reliable hypothesis. In addition the firm gradually discards poorly performing hypotheses and forms new hypotheses.
+
+-----
+
+
+_[Maxcov-inductor:]_
+Not locked into position. The average distance to the population center is about the same. Locates closer the the average ideal point along the dimension with no disagreement (that is closer to y=0).
 Mean eccentricity: no change compared to *maxcov* model.
 ENP: falls since some firms are endowed with more accurace condition/forecast rules.
 
 
-
-_[Maxcov-inductor-GA]_
-Mean eccentricity: When there are few firms in the market then the firms locate further from the population center.
-ENP: low.
+_[Maxcov-inductor-GA:]_
+Mean eccentricity: When there are few firms in the market then the firms locate further from the population center. [Closer to y=0. The location perimeter / boundary of where firms locate has along the x-axis has not changed. The firms will only locate out to a certain point/distance, that is not too far away from the centers of the subpopulations. Thus the mean eccentricity tells us that firms to a greater extend locate in between the subpopulations, and that this behaviour increases as the number of firms increase. This is why we see a decline in the mean eccentricity as the number of firms increase. This is not a stable location pattern, but instead it reflects that firms in transition --- relocating from one subpopulation to the other.]
+ENP: low. The firms end up locating at the subpopulation center.  The firms seperate into two crowds: the crowds are uneven in size. => low ENP. When firms locate on top of each other ==> the firms very likely to lock into positon.
 
 
 ## 4.3 Entry/Exit
@@ -520,3 +558,84 @@ Looking at the ENP in the *maxcov* model the
 _All-Maxcov ENP:_ The more polarised the subpopulation is the more inequality among the market share of firms. What happens when $\mu$ is large, is that the subpopulations is split, and a minority of the firms often manage to capture one-half of the market. This pulls down the ENP. 
 
 _All-Maxcov:_ What happens around N=6 and N=7 ??
+
+We know which competitive enviroment results 
+We know how the location behaviour translates into 
+We know which type of competitive enviorment and   the location behaviour of the firms translate into 
+ 
+ how firms locate using these decision rules. 
+ The three heuristic decision rule; *sticker*, *aggregator* and *hunter* -- and the the *maxcov* decision rule, which deliberately and directly aims at maximising the market share. 
+ 
+ The hypotheses come in the two-part form of *condition/forcast* rules. The condition part is
+
+The condition part specifies what states the hypothesis covers.
+
+The descriptor $J_j$ consists of 13 bits and each bit can take the value 1 or 0. 
+
+, eg. `1110010011010`.
+
+relates to a particular state and
+
+The firm holds several hypothesis that fit a wide range of different situations. And at each iteration the firm will select the hypothesis that fit the current situation.
+
+And when predicting the future locate of competing firms the firm acts on the hypothesis that previously proved most accurate. 
+ 
+A 13-bit descriptor of the state of each firm's location.
+
+The location behaviour of each firm is summerised by the state variable $J_i$. The state variable $J_i$ is a 13-bit discriptor.
+
+Out of these hypothesis often only a handfull will fit the current situation.
+
+These hypothesis need not fit any situation, some hypothesis might be specific and the firm will only use the hypothesis if
+
+The firms uses the predicted location of all competing firms to decide where it itself should locate.
+
+to make predictions on the future location of all competing firms. The firm these predictions when deciding where to locate.
+
+Eg. which states 
+part specify h
+
+A firm with the _[maxcov-inductor]_ decision rule make predictions on the future location of all competing firms and uses these predictions when deciding where to locate. The firm maintains several hypothesise at any point in time. When predicting the future location of a competing firm the firms uses the hypothesis that fits the current state and that previously proved most accurate.
+
+Such that at each iteration only
+
+* current state
+* hypothesis that fit many different situations
+
+Eg. the hypotheses are specific to the current state, and forecast  hypothesis
+
+The firm retains an array of hypotheses covering a wide range of different situations, but at every iteration the firm only considers the hypotheses that the fit the current state.
+
+and at every iteration only considers the hypotheses that fit the current state. 
+and at every iteration only  
+The firm has 
+
+The firm holds many hypotheses that together fit a wide range of different situations, but at every iteration it only considers the hypotheses that fit the current state. 
+
+the hypothesis and thus which.
+
+The firm is endowed with $M$ number of hypotheses _[that together cover a wide range of different situations]_. Each hypothesis consists of two parts that jointly form a *condition/forcast* rule. The condition part specifies which situations trigger the forecast. _[Thus at every iteration the firm considers the hypotheses specific to the current state and ignores the remaining hypotheses.]_ To describe the current state of each firm we use a 13-bit descriptor. The descriptor $J_j$ summarises the location behaviour of firm $j$.
+
+Each bit takes the value 1 or 0 -- the value 1 if the state occured and takes the value 0 if the state is absent. _[Eg. the 13-bit descriptor may look like `1110010011010`.]_
+
+The descriptor is used in conjunction 
+A condition then specifics which bits most be satisfied and which  
+The condition `###1#####0###` will match any state where the firm is more than 0.6 standard deviations away from the population center and it position along the y-axis is not above the average of the last 16 periods. 
+The value 1 require that the state described by the corresponding bit is true. The value 0 require that the state is false. And the value # matches either case.
+The # is a wildcard that matches either case. 
+Three selectors are used in the conditions; 1, 0 or #. A 1 will match 
+A condition consists of 13 position where each position can take the value 1, 0 or #. The value 1 in
+Th fourth position in the condition is 1, then it 
+There are 13 corresponding positions in a condition, each taking the value 1, 0, or #. A 1 in the condition says that
+A condition has 13 positions corresponding to the bits in descriptor, 
+There is 13 corresponding positions in a condition that take the values 1, 0, or #. The condition matches the current state
+A condition has 13 positions corresponding to the bits in descriptor. 
+Each position can take the value 1, 0, or #. 
+Correspondingly the condition has 13 positions and each position can take the value 1, 0, or #. 
+A 1 corresponds to the condition being fulfilled, a 0 is not fulfilled, and # match either case. 
+A value of 1 matches
+The condition have 13 corresponding positions where each position take the value 1, 0 or #
+
+Correspondently the condition that match the current state consists of 13 positions and each position take the value 1, 0 or #. 
+The *condition/forcast* rule can recognise states
+Each of the 13 positions in the descriptor $J_j$ take the value 1 or 0 depending on the current location of the firm. E.g. the fourth position in $J_j$ takes the value 1 when firm $j$ is more than 0.6 standard deviations away from the population center. The tenth position in $J_j$ takes the value 1 when firm $j$ position along the y-axis is above the average of the last 16 periods. _[(along the dimension where the consumer subpopulations are in agreement).]_ Etc. Our 13-bit descripter is able to describe $2^13 = 8.192$ distinct states.
