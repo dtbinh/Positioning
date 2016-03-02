@@ -340,3 +340,93 @@ The condition have 13 corresponding positions where each position take the value
 Correspondently the condition that match the current state consists of 13 positions and each position take the value 1, 0 or #. 
 The *condition/forcast* rule can recognise states
 Each of the 13 positions in the descriptor $J_j$ take the value 1 or 0 depending on the current location of the firm. E.g. the fourth position in $J_j$ takes the value 1 when firm $j$ is more than 0.6 standard deviations away from the population center. The tenth position in $J_j$ takes the value 1 when firm $j$ position along the y-axis is above the average of the last 16 periods. _[(along the dimension where the consumer subpopulations are in agreement).]_ Etc. Our 13-bit descripter is able to describe $2^13 = 8.192$ distinct states.
+
+this paper will use standard deviations when reporting on the distance between two firms.
+
+, or when reporting on the average distance of all firms to the mean ideal point of all consumers, etc. 
+
+The standard deviation measurement used in the bivariate normal distributions will be the default unit of measure throughout this paper. 
+
+A *bivariate normal distribution* with mean (0,0) and with standard deviation (1, 1).
+the *bivariate normal distribution* with mean (0,0) and 
+Throughout this paper many of the measure
+
+$\left( \begin{array}{c} C_1 & C_2 & A_1 & B_1 & A_2 & B_2 \end{array} \right)$
+
+_[This implies that a *condition/forcast* rule might be updated multiple times in one iteration, if the firm uses that same rule to forecast the location of multiple competing firms. The probability of this happing increases with the number of firms in the market. The updating frequency of the *condition/forcast* rules is disproportionate to the number of iterations. And the updating frequency may get skewed as the number of firms in the market increase.]_
+
+_[The 13-bit descriptor can describe 8.192 distinct states.]_ _[??? However the bits are not undefended so less that 8.192 states ???.]_ 
+
+The following section looks at how firms choose to locate when they also consider the predicted future location of competing firms.
+
+The following section looks at how firms choose to locate taking into consideration the predicted future location of competing firms.
+
+will investigate the competitive location behaviour of firms that make predictions 
+
+_[The following section will investigate the competitive location behaviour of heterogeneous firms. These firms will attempt to predict the future location of competing firms. In addition learning will be part of the behaviour of firms.]_
+
+Learning takes place through the continuous updating of the accuracy of the *condition/forcast* rules. 
+
+The _[maxcov-inductor]_ firm learns  
+
+therefore reasonable to use 
+
+are reliable and can be work well
+
+And so the firms tests the prediction of the hypotheses against the observed location of the other firms.
+
+By testing the prediction of the hypotheses against the observed location of
+
+This process channels the accumulated knowledge from testing predictions into the new hypotheses. New hypotheses
+
+Something that 
+We would like new hypotheses to perform better or at pair with existing 
+This process channels the knowledge accumulated by testing predictions into the new hypotheses.
+
+These new hypotheses are adaptions and revisions of the currently best preforming hypotheses, thus implicitly passing on the knowledge accumulated by testing of predictions.
+
+Because the hypotheses are adaptions and revisions of the currently best preforming hypotheses they implicitly passing on the knowledge accumulated by testing of predictions.
+
+New hypotheses are adaptions and revisions of the currently best preforming hypotheses, rather than independently created hypotheses
+
+Besides being endogenous, 
+The hypotheses are adaptions and revisions of pre 
+The hypotheses are not only endogenous, but they are 
+This means that the endogenously created hypotheses are adaptions and revisions of pre 
+
+the hypotheses are exogenously given to the firm.
+
+In the first decision rule considered 
+The first decision rule in this
+
+There are two decision rules in this sec
+
+_[Exogenous hypotheses vs. endogenous hypotheses]_
+
+Similar to The firm still chooses its own location such that it maximises market share, but subject to the predicted movements
+
+The firm makes predictions using the hypothesis that worked best in the past, and continuously updates
+
+be correct, so contrary evidence will weak the hypothesis.  
+
+Here the firm holds several hypotheses on how the other firms choose to locate. The firm acts on the hypothesis that worked best in the past.
+
+attempts to predict the movement  ... based upon their movement history. 
+
+inference / infer
+
+I will concentrate on a  -- firms with inductive rationality. A firm with this decision rule forms hypotheses on how other firms choose their location. The firm holds several hypotheses at once, and acts on the hypothesis that worked best in the past. Each hypothesis attempts to predict the movement of the other agents based on their movement history. The firm still chooses its own location such that it maximises market share, but subject to the predicted movements of other firms generated by its most reliable hypothesis. In addition the firm gradually discards poorly performing hypotheses and forms new hypotheses.
+
+ as opposed to the many-to-one prediction.
+
+_[Although both are multiple agent problems ... This paper differ in that it considers ... ]_
+However this paper deviates ... 
+
+_[... Using the procedure first developed for the *Santa Fe Artificial Stock Market* and described by Arthur (2014, chapter 3) and Arthur, Holland, LeBaron, Palmer and Tayler (1996). ... They look at a many-to-one prediction where each agent try to predict the stock price. The agent acts based on this one prediction. The actual stock price is the product of the aggregated behaviour of all agents. This paper looks at many-to-many prediction, where each agents attempts to predict the behaviour of all other agents. Each agents acts based on all of these predictions. And that gives us the aggregated behaviour of all agents ... ]_
+
+* Inductive reasoning: Predict the location of competing firms / hypothesis.
+* Two types of learning: Learning through experience (Use the the most reliable hypothesis in any given situation). Learning through evolution (Updating hypothesise: discard poorly performing hypothesis, and form new hypothesis).
+(which hypothesis / condition/forecast rules worked well in the past).
+* Hetrogenous agents.
+
+-----

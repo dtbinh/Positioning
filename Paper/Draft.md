@@ -43,9 +43,11 @@ $$ U_i(j) = -d(i,j)^2 $$
 **Distribution of customers**
 The above described simplification of consumer behaviour allows focused attention on firm behaviour. As previously discussed in the literature review section the distribution of consumers in the market fundamentally changes the behaviour of firms. We would like to capture and analyse these effects -- in particular the effects from asymmetric and multimodal distributions. We follow the method used by Laver and Sergenti (2011) and assume two consumer subpopulations in our market. When the two subpopulations have the same mean ideal point then the aggregated distribution of consumers will be symmetric and unimodal. While subpopulations with vastly different mean ideal points and different sizes will lead to an aggregated distribution of consumers that is asymmetric and bimodal. Thus this method of using two subpopulations is able to capture several different types of aggregate distributions using only two parameters; the polarisation of subpopulation ideal points, and the relative size of the two subpopulations. 
 
-The market is two-dimensional, so we use the two-dimensional equivalent of the *normal distribution* -- the *bivariate normal distribution*. Both subpopulations follow a bivariate normal distribution. Using different mean values in the distribution imply that the subpopulations disagree over the ideal point. Without further restrictions it also implies that the subpopulations disagree on both dimensions. [saltyness-sweetness and thickness]. To simplify the analysis, and without lose of generality, we assume that the subpopulations have a common ideal point along one dimension and only disagree over the ideal point along the other dimension. This is equivalent to rotating the market space or coordinate system until disagreement only appear along one of the dimensions. Ie. rotating the market space such that the line going through the mean ideal points of subpopulations is parallel to an axis. One can always rotate the coordinate system without loss of information, and similarly this simplifies our analysis without any loss of generality. This is similar to the orthogonal transformation underlying a *principal component analysis*. We start out with two dimensions or components, and end up with two new dimensions; the disagreement dimension (x-axis) and the agreement dimension (y-axis). The two subpopulations -- from now on referred to as 'left' and 'right' -- follow a *bivariate normal distribution* with mean $(-\mu,0)$ and mean $(\mu,0)$ respectively, and both with standard deviation (0.5, 0.5).[^covarmatrix]. Where parameter $\mu$ measures the ideal point polarisation. The parameter measuring the relative size of the left subpopulation is $n_l/n_r$. The aggregated consumer distribution is a *mixed bivariate normal distribution* with weights based on the relative size of the subpopulations.
+The market is two-dimensional, so we use the two-dimensional equivalent of the *normal distribution* -- the *bivariate normal distribution*. Both subpopulations follow a bivariate normal distribution. Using different mean values in the distribution imply that the subpopulations disagree over the ideal point. Without further restrictions it also implies that the subpopulations disagree on both dimensions. _[saltyness-sweetness and thickness]_. To simplify the analysis, and without lose of generality, we assume that the subpopulations have a common ideal point along one dimension and only disagree over the ideal point along the other dimension. This is equivalent to rotating the market space or coordinate system until disagreement only appear along one of the dimensions. Ie. rotating the market space such that the line going through the mean ideal points of subpopulations is parallel to an axis. One can always rotate the coordinate system without loss of information, and similarly this simplifies our analysis without any loss of generality. This is similar to the orthogonal transformation underlying a *principal component analysis*. We start out with two dimensions or components, and end up with two new dimensions; the disagreement dimension (x-axis) and the agreement dimension (y-axis). The two subpopulations -- from now on referred to as 'left' and 'right' -- follow a *bivariate normal distribution* with mean $(-\mu,0)$ and mean $(\mu,0)$ respectively, and both with standard deviation (0.5, 0.5).[^covarmatrix]. Where parameter $\mu$ measures the ideal point polarisation. The parameter measuring the relative size of the left subpopulation is $n_l/n_r$. The aggregated consumer distribution is a *mixed bivariate normal distribution* with weights based on the relative size of the subpopulations.
 
 The mean ideal point on the y-axis is 0 for both subpopulations hence no disagreement along this dimension. The mean ideal point on the x-asis is $-\mu$ for the left subpopulation and $\mu$ for the right subpopulation. For $\mu > 0$ there is a disagreement along the x-asis. I will analysis the polarisation parameter in the range $\mu \in [0, 1.5]$ --  a that range spans both unified and split market. At the lower bound of the range there is no disagreement and the market consists of one unified customer base. At the upper bound there is essentially no overlap between the subpopulations and the customer base is split. With no overlap we are at the edge of what constitutes a single market[^singlemarket], and it might be more appropriate to describe this setting as two separate markets, at least in terms of the customers. The range of the relative subpopulation size is $n_l/n_r \in [1, 2]$. The subpopulations are equally large when the $n_l/n_r = 1$, while $n_l/n_r = 2$ indicates that the left subpopulation is twice the size of the right subpopulation. 
+
+The default unit of measure troughout this paper will be standard deviations. This unit of measure will refer to the standard deviation measurement used in the bivariate normal distributions. E.g. if this paper reports that the distance betweeen two points is 1 standard deviation then this is equivilant to twice the standard deviation in the subpopulation distribution.
 
 [^covarmatrix]: We further assume no correlation among the two dimensions. The correlation coefficient $\rho$ is zero and the covariance matrix is $\left[ \begin{array} 0.5^2 & 0\\ 0 & 0.5^2 \end{array} \right]$.
 
@@ -128,15 +130,15 @@ In determining its location the *maxcov* firm uses information on the location o
 
 ## 3.3 Markov Chain Monte Carlo
 
-convergence / burn in
-Initial position of firms
-(Visually show the movement / iterations over time to the reader)
-runs, repetitions, iterations.
+_[convergence / burn in]_
+_[Initial position of firms]_
+_[(Visually show the movement / iterations over time to the reader)]_
+_[runs, repetitions, iterations.]_
 
 
 ### Monte Carlo parameterisation
 
-Grid sweep.
+_[Grid sweep.]_
 
 
 
@@ -156,7 +158,7 @@ $$ENP = \frac{{\left( \sum\limits_j^N s_j \right)^2}}{{\sum\limits_j^N s_j^2 }}$
 The ENP is the inverse of the Herfindahl-Hirschman Index (Laakso and Taagepera 1979, p.4). Thus ENP and the index measures the same thing, but ENP is easier to interpret than the index across our parameter settings where we change the number of firms.
 
 **Mean Representation:**
-It is straight forward to create a measure that summarises the consumer welfare given our utility function (see equation [...]). By taking the average over all customers we get the mean representation in every stage.
+It is straight forward to create a measure that summarises the consumer welfare given our utility function (see equation _[...]_). By taking the average over all customers we get the mean representation in every stage.
 
 
 # 4. ANALYSIS
@@ -230,47 +232,52 @@ The *aggregator* model also results in the CVT when the distribution of consumer
 
 In the *hunter* model we once again see that the asymmetric distribution of consumers give rise to significant changes when going from 2-3 firms and to 4 or more firms. This is particularly pronounced in the models with a high degree of polarisation. With two or three *hunter* firms the mean representation is around -2, while with four or more firms the mean representation is between -0.5 and -0.2. As earlier noted this is the result of *hunter* firms locating in between the centers of the subpopulations when there are 2-3 firms in the market. Although the firms locate close the average ideal point of all customers they also locate in an area with a low density of consumers. Because firms locate far from the densely populated areas it significantly reduecs the average utility of customers. On the other hand firms seperating into crowds that locate around the centers of the subpopulation when there are four or more firms in the market. Laver and Sergenti (2011, chapter 5, p. 102) refer to this as the *“sea change”* in mean representation when reaching four or more firms.
 
-## 4.2 Decision rules with predictions / learning -- hetrogenous
+We are now at the point where we have an understanding of the baseline decision rules; *sticker*, *aggregator*, *hunter* and *maxcov*. The first three rules rely on heuristics, while the last rule deliberately and directly maximises the market share of the firm. We know how firms that use these rules choose to locate -- both when the distribution of consumers is symmetric and when it is asymmetric. We know which type of competitive enviroment arises from the location behaviour of the firms. And we know how this behaviour affects the overall welfare of consumers. The following section looks at how firms locate when they take the predicted location of competing firms into considerations.
 
-_[...]_
+## 4.2 Decision rules with foresight
 
-A firm with the _[maxcov-inductor]_ decision rule maintains several hypotheses on how competing firms locate. The firm uses the hypothesis that fits the current state and that previously proved most accurate to forcast the future location of a competing firm. When the firm chooses its own location it relys on the predicted location of all competing firms.
+When a firm chooses its own location, the location of the other competing firms is unknown. The firm may try to predict the location of the other firms. However if multiple firms use this approach then the location outcome that each firm is trying to predict will depend on predictions that the firm and the other firms form. As Arthur (2014, p.175) writes *”predictions are forming a world those predictions are trying to forecast”*. This self-referential loop leads to logical indeterminacy. _[...]_ Because of this logical indeterminacy the maximisation problem of the firm is ill defined and cannot be solved by means of deductive reasoning. 
+
+_[ ... simultaneous ... hetrogenous agents ... infinite regress ... Note that the lack of a solution to the maximisation problem is not the result of bounded rationality, ie. that agents do not have the mental capacity to calculate the correct solution. We have make no such restriction. Agents have unbounded rationality. ... ]_
+
+The two decision rules discussed in this section use inductive reasoning or inductive rationality. The firm holds several hypotheses and uses these to make predictions on how the other firms will locate. A hypothesis consists of a proposition that might not hold true and contrary evidence weakens the hypothesis. The firm tests its hypotheses by comparing the predicted location of the other firms against the observed locations. Thereby the firms learns which hypotheses 
+are plausible and thus applicable moving forward. Predictions are made using the hypothesis that worked best in the past. The firm locates -- like the *maxcov* firm -- such that it maximises its market share, but uses the predicted location of all competing firms rather than their current location. In the first decision rule we will consider the firm is endowed with a set of hypotheses. These hypotheses are exogenously given and do not change over time. Only the accuracy of each hypothesis changes in pace with its predictions being tested. I will refer to this decision rule as *maxcov-inductor* or simply *inductor*, since the firm uses inductive reasoning. The second decision rule is an expansion of the *inductor* rule, but where the firm gradually discards poorly performing hypotheses and forms new hypotheses. If possible new hypotheses should perform at par or better than the exsisting hypotheses. Therefore new hypotheses are formed though a evolutionary process that mutates and fuses the best exsisting hypotheses. Hypotheses are endogenous in this decision rule. I will refer to this rule as the *maxcov-inductor-GA* or *inductor-GA*, since a genetic algorithm is used to create the new hypotheses.
+
+_[... This process channels the knowledge accumulated by testing predictions into the new hypotheses. ... rather than independently created hypotheses ... ]_
+
+The following procedure is a modified version of the procedure first developed for *The Santa Fe Institute Artificial Stock Market Model* and described by Arthur (2014, chapter 3) and Arthur, Holland, LeBaron, Palmer and Tayler (1996). In the stock market model multiple agents try to predict the stock price. Each agent faces one unknown factor. The agent’s demand for shares depends on the agent’s predicted stock price, ie. the agent’s action depends on a single prediction. And the actual stock price rely upon the aggregated demand of all agents. In this paper an agent or a firm attempts to predict the behaviour of all other firms. Each agent faces $N-1$ unknown factors. The firm locates based on its predicted location of competing firms, ie. the action of the firm depends on multiple predictions. Thus the most significant modification is going from a many-to-one prediction to a many-to-many prediction. Additionlly the stock price is one-dimensional -- it can go up or down. Whereas the position of a firm is two-dimensional. The firm can relocate in any 360 degree direction. The latter only requires a slight modification to the forecasting model used in the procedure.
+
+A firm with the *maxcov-inductor* decision rule maintains several hypotheses on how competing firms locate. The firm uses the hypothesis that fits the current state and that previously proved most accurate to forcast the future location of a competing firm. When the firm chooses its own location it relys on the predicted location of all competing firms.
 
 The firm is endowed with $M$ number of hypotheses. While each hypothesis might only be relevant to a narrow set of situations, together the array of hypotheses cover a wide range of different situations. At every iteration the firm only considers the hypotheses specific to the current state and ignores the remaining hypotheses. This makes the firm capable of ‘recognising’ different situations and applying the appropriate forecast.
 
 Each hypothesis consists of two parts jointly forming a *condition/forcast* rule. The condition part specifies which situations trigger the forecast. And the forecast part contains the spefic estimates used to make a prediction about the future location.
 
-To describe the current state we use a 13-bit descriptor. The descriptor $J_j$ summarises the location behaviour of firm $j$. Eg. the fourth bit in $J_j$ relays wether or not *firm $j$ is more than 0.6 standard deviations away from the population center*. The tenth bit in $J_j$ relays whether or not *firm $j$ position along the y-axis is above the average of the last 16 periods*. Etc. These bits take the value 1 if the state occured, and takes the value 0 if the state is absent. The current state of firm $j$ can fore instance be summerised by the following descriptor: `1110010011010`.
+To describe the current state we use a 13-bit descriptor. The descriptor $J_j$ summarises the location behaviour of firm $j$. Eg. the fourth bit in $J_j$ relays wether or not *firm $j$ is more than 0.6 standard deviations away from the population center*. The tenth bit in $J_j$ relays whether or not *firm $j$ position along the agreement dimension (y-axis) is above the average of the last 16 periods*. Etc. These bits take the value 1 if the state occured, and takes the value 0 if the state is absent. The current state of firm $j$ could fore instance be summerised by the following descriptor: `1110010011010`. 
 
-Each *condition/forcast* rule attempts to ‘recognise’ the current state. Therefore the condition consists of 13 corresponding positions each taking the value 1, 0, or #. The condition is met if the ones and zeros match the current state descriptor. The # is a wildcard character that matches either case. Eg. The condition `###1#####0###` is satisfied if the state described by the fourth bit occured and the state described by the tenth bit did not occure. In other words the condition will match any state where *the firm $j$ is more than 0.6 standard deviations away from the population center while its position along the y-axis is NOT above the average of the last 16 periods*. While the condition `###1#####0###` would not satisfied by the current state descriptor `1110010011010` the condition `#1########0##` would be.
+We will refer to the first 5 bits as the *fundamental bits*. They relay whether or not the distance from the firm to population center is greater than respectively 0.1, 0.25, 0.4, 0.6, or 1.2 standard deviations. These bits measure the degree to which the location of the firm is fundamentally different from the ideal point of all consumers. Bits 6-11 are the *tendency bits*. The bits 6-8 relay whether or not the position of the firm along the disagreement dimension (x-axis) is above the average of the last respectively 4, 16 and 64 periods. And the bits 9-11 relay whether or not the position of the firm along the agreement dimension (y-axis) is above the average of the last respectively 4, 16 and 64 periods. Thus these bits measure trends in the relocation pattern of the firm. The last two bits are respectively always on and always off. These are experimental controls. By construction they contain no infomation about the current state, and thus they tell to what degree firms act on useless information. 
 
-All the *condition/forcast* rules that match the current state are said to be active. Among the active *condition/forcast* rules the firm chooses the rule with the best accuracy. 
-The accuracy of the active *condition/forcast* rules is updated once all the firms relocate and the actual location of each competing firm is revealed. ...
+Each *condition/forcast* rule attempts to ‘recognise’ the current state. Therefore the condition consists of 13 corresponding positions each taking the value 1, 0, or #. The condition is met if the ones and zeros match the current state descriptor. The # is a wildcard character that matches either case. Eg. The condition `###1#####0###` is satisfied if the state described by the fourth bit occured and the state described by the tenth bit did not occure. In other words the condition will match any state where *the firm $j$ is more than 0.6 standard deviations away from the population center while its position along the agreement dimension (y-axis) is not above the average of the last 16 periods*. The condition `###1#####0###` is not satisfied if the current state descriptor is `1110010011010`, but the condition is satisfied if the current state is `1111000010010`.
 
-_[The 13-bit descripter is able to describe $2^13 = 8.192$ distinct states.]_
+All the *condition/forcast* rules that matches the current state of firm $j$ are said to be active. Among these active *condition/forcast* rules the rule with the best accuracy is used to forecast the future location of firm $j$. In the case where several rules tie for the best accuracy one of the rules is selected randomly and used to forecast. The accuracy of the active *condition/forcast* rules is updated once all the firms relocate and the actual location of each competing firm is revealed. The accuracy measurement is based on the forecast error variance -- a lower forecast error variance imply better accuracy. The accuracy is updated using the inverse of the moving average of squared forecast errors (see details in appendix). Over time the firm learns which hypothesis work well in a given situation. Thus the continuous updating of the accuracy of the *condition/forcast* rules facilitates learning. We will refer to this as *learning through experience / learning by using (Rosenberg 1982)*.
 
-The first 5 bits relates 
+_[... vs. using the market share/profit forecast error as accuracy measure of the c/f rule ... ]_
 
------
+The firm forecasts the future location of the competing firm $j$ using a linear forcasting model. 
 
-* Inductive reasoning
-* Predict the location of competing firms / hypotheis
-* Two types of learning: Learning through experience (Use the the most reliable hypothesis in any given situation). Learning through evolution (Updating hypothesise: discard poorly performing hypothesis, and form new hypothesis).
-(which hypothesis / condition/forecast rules worked well in the past).
-* Hetrogenous agents.
-* Reinforcement learning?
+$$\left( \begin{array}{*{20}{c}} {{x_{t + 1,j}}}\\ {{y_{t + 1,j}}} \end{array} \right) = \left( {\begin{array}{*{20}{c}} {{C_1}}\\ {{C_2}} \end{array}} \right) + \left( {\begin{array}{*{20}{c}} {{A_1}}&{{B_1}}\\ {{A_2}}&{{B_2}} \end{array}} \right)\left( {\begin{array}{*{20}{c}} {{x_{t,j}}}\\ {{y_{t,j}}} \end{array}} \right)$$
+
+The six parameters of this model come from the most accurate active *condition/forcast* rule and take the form ($C_1$ $C_2$ $A_1$ $B_1$ $A_2$ $B_2$) Eg. the full *condition/forcast* rule might look like `###1#########` / (0.1 0 1.2 0 0 0.5). The rule  in this example states that if *firm $j$ is more than 0.6 standard deviations away from the population center, then the predicted location along the x-axis is 20% further right and along the y-axis 50% less north relative to the current position shifted 0.1 standard deviation right along the x-axis.*
+
+The *maxcov-inductor* firm makes predictions on the future location of all competing firms. Each competing firm $j$ has a unique current state descriptor $J_j$. But the *maxcov-inductor* firm uses the same set of $M$ *condition/forcast* rules on all its competing firms. Thus in the model we make the assumption that the *condition/forcast* rules are not tied to any competing firm. The hypotheses of the firm are not specific to the location behaviour of a particular competing firm, but generally applicable to any competing firms that exhibit a perticular location behaviour. 
+
+The *maxcov-inductor* firm is endowed with $M$ hypotheses. All but one hypothesis is randomly generated by the following procedure. Each position in the condition is randomly set to 1 or 0 both with probability 0.1, or set to # with probability 0.8. The forcasting parameters are drawn uniformly random from distributions with mean value 0. The parameters $C_1$ and $C_2$ are drawn from a uniform distribution with range [-1.5 1.5]. The parameters $A_1$ and $B_2$ are drawn from the range [-1.2 1.2]. And $A_2$ and $B_1$ are drawn from [-0.2 0.2]. The initial accuracy or forecast error variance of each *condition/forcast* rules is set to zero. The last hypothesis is the default. This *condition/forcast* rule consists of only #’s so it matches any state and insures that the firm always make a prediction. Each of the forecast parameters for this special rule is set to the average parameter values of the other $M-1$ *condition/forcast* rules.
+
+**The *maxcov-inductor-GA* firm ...**
+_[Learning through adaption]_
 
 
------
-
-We are now at the point where we have an understanding of the baseline decision rules; *sticker*, *aggregator*, *hunter* and *maxcov*. The first three rules rely on heuristics, while the last rule deliberately and directly maximises the market share of the firm. We know how firms that use these rules choose to locate when the distribution of consumers is symmetric and when it is asymmetric. We know which type of competitive enviroment arises from the location behaviour of the firms. And we know how this behaviour affects the overall welfare of consumers. _[The following section will investigate the competitive location behaviour of hetrogenous firms. These firms will attempt to predict the future location of competing firms. In addition learning will be part of the behaviour of firms.]_
-
-When a firm chooses its own location, the location of the other competing firms is unknown. The firm may try to predict the location of the other firms. However if multiple firms use this approach then the location outcome that each firm is trying to predict will depend on predictions that the firm and the other firms form. Thus as Arthur (2014, p.175) write *”predictions are forming a world those predictions are trying to forecast”*. This self-referential loop leads to logical indeterminacy. _[...]_ Because of this the maximisation problem of the firm is ill defined and cannot be solved deductively. 
-_[... hetrogenous agents ... in a infinite regress ... unrestricted computational capacity ... ]_
-
-I will concentrate on a decision rule with foresight -- firms with inductive rationality. A firm with this decision rule forms hypotheses on how other firms choose their location. The firm holds several hypotheses at once, and acts on the hypothesis that worked best in the past. Each hypothesis attempts to predict the movement of the other agents based on their movement history. The firm still chooses its own location such that it maximises market share, but subject to the predicted movements of other firms generated by its most reliable hypothesis. In addition the firm gradually discards poorly performing hypotheses and forms new hypotheses.
-
------
+### 4.2.1 Results
 
 
 _[Maxcov-inductor:]_
@@ -287,16 +294,26 @@ ENP: low. The firms end up locating at the subpopulation center.  The firms sepe
 ## 4.3 Entry/Exit
 
 
-market share
+_[market share]_
 
-number of surviving parties
+_[number of surviving parties]_
 
-mean age at death
+_[mean age at death]_
 
 
 # 5. CONCLUSION
 
+_[decision rule with foresight]_
+
 # A. APPENDIX 
+
+-----
+
+To update the accuracy of a *condition/forecast* rule we use the inverse of the moving average of squared forecast errors. The accuracy of firm $i$ using hypothesis $m$ at iteration $t$ is:
+
+$$e^2_{t,i,m} = \alpha_a e^2_{t-1,i,m} + (1-\alpha_a) \left( X_{t+1,j} - E_{t,i,m} [X_{t+1,j}] \right)^2, \quad \forall j \ne i$$
+
+where $\alpha_a$ is the mememory paramenter and $X_{t+1,j}$ is the future location of competing firm $j$. The mememory paramenter is set to $\alpha_a = 1-1/75 = 74/75$.
 
 
 
