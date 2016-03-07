@@ -430,3 +430,51 @@ _[... Using the procedure first developed for the *Santa Fe Artificial Stock Mar
 * Hetrogenous agents.
 
 -----
+
+By replacing old hypothesis the firm learns 
+The replacement of old hypothesis leads the firm to learn 
+
+This adaption price
+
+By discarding and taking in new hypothesis the firm leans
+
+By continuously discarding and  
+
+By using these two decision rules and comparing the results we can separate the effects from 
+
+and in turn analyses the 
+
+By using these two decision rules and comparing the results we can separate the effects from 
+We use two decision rules such that we can separate the effect from endogenousisng  hy Since the *maxcov-inductor-GA* decision rule is an extension of the *maxcov-inductor* rule we can analyse the effect of 
+
+In the condition part each of the 13 bits are inherited from one randomly selected parent.
+
+in the condition is passed on by one of the two parents 
+
+The new hypothesis inherits individual bits fro  in the condition is 
+
+of the parent through random replacements and changes.
+
+
+in the condition part of the most fit parent rule.
+
+The specificity is the number of ones and zeros in the condition part of the rule. The cost $C$ is 
+The cost $Cs$ 
+that is a cost is placed on rules with many ones and zeros. 
+
+In the mutation method the new hypothesis inherits 
+The mutation method selects the most fit parent the 
+
+ and randomly alters the 1, 0, and # in its *condition/forecast* rule, a
+
+For each new hypothesis two parent hypotheses are randomly selected from the  
+
+   The hypotheses with the worst accuracy are discarded.
+
+We use a fitness measure to evaluate the performance of the hypotheses. The fitness
+
+The evolutionary process creates a link between new hypotheses and past hypotheses. Thus the knowledge that past hypotheses have accumulated -- i.e. which hypothesis is accurate and which is not -- is channeled into the new hypotheses. The accumulated knowledge would be lost if new hypothesis were independently creates, say by randomly d
+
+This process channels the knowledge accumulated obtained by ‘learning by using’ into the new hypotheses
+
+_[... evolutionary process ... This process channels the knowledge accumulated by testing predictions into the new hypotheses. ... rather than independently created hypotheses ... ]_
