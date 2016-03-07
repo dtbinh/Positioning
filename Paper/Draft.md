@@ -1,23 +1,19 @@
 # Draft
 
-## Purpose:
-Reintroducing strategic considerations into the competitive location behaviour of firms. 
+_[Abstract: ... ]_
 
-Monopoly, duopoly and *perfect competition* are undoubtedly the most studied market settings in the literature. Nonetheless most markets lay somewhere in-between the extreme case of 1-2 firms and the other extreme case of infinitely many firms. In addition the markets between the two extremes give rise to new and interesting phenomenas _that cannot be analysed under assumptions such as *monopolistic competition*_. Phenomenas such as niche markets, clustering of firms and [...].
+<!--TOC-->
 
-Does a firm set out to occupy a niche market, or is it the output of a competitive process among several firms that drive the firm into a niche market? When is it a competitive advantage to occupy a niche market, rather than engage in direct and fierce competition with other firms? Why do firms tend to cluster or agglomerate in some markets, while they are dispersed in other?
-
-Competitive location models investigates how firms choose to locate in a market with competing firms. The strategic aspects were the bedrock of the first competitive location models. Expanding the competitive location model to include more firms or multiple dimensions has proven difficult. Previous attempts to solve these models have used decision rules that rely on heuristics or rules of thumb. This simplifies the problem. And the rules provide a good first approximation. But these rules disregard any strategic considerations in the decision process of firms. The implicit assumption when a firm has to choose its position is that all competing firms will maintain their current position. In addition to being unrealistic this assumption heavily influences the results and conclusions of the location model. This paper is a first attempt at reintroducing strategic considerations back into the competitive location model with two dimensions and multiple firms.
-
------
 
 # 1. INTRODUCTION
 
+...
+
+
 # 2. LITERATURE REVIEW
 
-aka. MAXCOV.
-Voronoi diagrams and Delaunay Triangulation.
-Different distance metrics. Manhattan, Euclidian, etc.
+{{Literature review.md}}
+
 
 # 3. METHODOLOGY
 
@@ -70,7 +66,7 @@ _[table: population statistics]_
 Given the aggregated consumer distribution one approach would be to randomly draw a finite number of consumers from the distribution. Market shares can then be calculated by counting the number of consumers. Like Laver and Sergenti (2011) this paper will not employ this approach. Instead the consumer distribution are carried though and market shares are calculated by aggregating probability mass. Similarly the centroid of the market is weighted by probability mass rather than the number of consumers. Although the approaches will yield the same results on average, the latter is independent of particular draws, thus we save computational power not having to run repetitions to obtain the average values.
 
 
-## 3.1 Agent-based modelling
+## 3.2 Agent-based modelling
 
 ### Firm behaviour
 
@@ -234,7 +230,7 @@ In the *hunter* model we once again see that the asymmetric distribution of cons
 
 We are now at the point where we have an understanding of the baseline decision rules; *sticker*, *aggregator*, *hunter* and *maxcov*. The first three rules rely on heuristics, while the last rule deliberately and directly maximises the market share of the firm. We know how firms that use these rules choose to locate -- both when the distribution of consumers is symmetric and when it is asymmetric. We know which type of competitive enviroment arises from the location behaviour of the firms. And we know how this behaviour affects the overall welfare of consumers. The following section looks at how firms locate when they take the predicted location of competing firms into considerations.
 
-## 4.2 Decision rules with foresight
+## 4.3 Decision rules with foresight
 
 When a firm chooses its own location, the location of the other competing firms is unknown. The firm may try to predict the location of the other firms. However if multiple firms use this approach then the location outcome that each firm is trying to predict will depend on predictions that the firm and the other firms form. As Arthur (2014, p.175) writes *”predictions are forming a world those predictions are trying to forecast”*. This self-referential loop leads to logical indeterminacy. _[...]_ Because of this logical indeterminacy the maximisation problem of the firm is ill defined and cannot be solved by means of deductive reasoning. 
 
@@ -284,7 +280,7 @@ To insure that the new hypotheses have a reasonable chance of being used, each n
 
 The process of discarding the poorly performing hypotheses and formning new hypotheses based on the most accurate is another way in which the firm learns. The firm learns to make better predictions by gradually refining its hypotheses. I will refer to this as *learning through adaptation*. 
 
-### 4.2.1 Results
+### Results
 
 
 _[Maxcov-inductor:]_
@@ -296,16 +292,6 @@ ENP: falls since some firms are endowed with more accurace condition/forecast ru
 _[Maxcov-inductor-GA:]_
 Mean eccentricity: When there are few firms in the market then the firms locate further from the population center. [Closer to y=0. The location perimeter / boundary of where firms locate has along the x-axis has not changed. The firms will only locate out to a certain point/distance, that is not too far away from the centers of the subpopulations. Thus the mean eccentricity tells us that firms to a greater extend locate in between the subpopulations, and that this behaviour increases as the number of firms increase. This is why we see a decline in the mean eccentricity as the number of firms increase. This is not a stable location pattern, but instead it reflects that firms in transition --- relocating from one subpopulation to the other.]
 ENP: low. The firms end up locating at the subpopulation center.  The firms seperate into two crowds: the crowds are uneven in size. => low ENP. When firms locate on top of each other ==> the firms very likely to lock into positon.
-
-
-## 4.3 Entry/Exit
-
-
-_[market share]_
-
-_[number of surviving parties]_
-
-_[mean age at death]_
 
 
 # 5. CONCLUSION

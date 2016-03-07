@@ -1,5 +1,3 @@
-# Literature review
-
 The literature on spatial competition began with Hotelling's (1929) paper. Hotelling proposes a line market where consumers are uniformly distributed along the line and firms produce homogenous goods. Consumers inelastically demand one unit from the firm with the lowest price. The price is composed of the *mill price* and *transportation cost*. Each firm charges a *mill price* and customers bear a cost by going to the firm to shop. This *transport costs* is linear in the distance between the customer and the firm. Two firms decide where to locate and which *mill price* to charge. Firms first simultaneously choose their location, and thereafter simultaneously decide on their prices. There are two opposing forces that come into play; If the firm locates close to its competitor, it will attract more consumers. Meanwhile locating closer also lead to more fierce price competition from its competitor.
 
 If *mill prices* are fixed and equal then there is no price competition and both firms locate at the center of the market and split the market equally. The agglomeration of firms has been coined *the principle of minimal differentiation*[^1]. The average distance travelled by consumers is one-fourth the length of the line. This is socially suboptimal. The social optimal location is where the market is split in two halves, with one firm located at the center in each of these halves. This reduces the average distance to one-eighth. 
@@ -53,7 +51,7 @@ In a bounded two-dimensioanl space, each Voronoi set is a polygon[^poly-distance
 
 Another thing that has arisen from Voronoi diagrams is the Voronoi game. This competitive location model shares features with the Hotelling model. In the Voronoi game two firms place _n_ facilities each and consumers shop at the nearest facility. The game is sequential so firms take turns and place one facility at a time. The game ends after _2n_ turns when both firms have placed all their facilities, and the winner is the firm with the largest market area. In the continuous line market the follower has winning strategy that captures _1/2+ɛ_ of the market area, however the leader has a strategy that can make _ɛ_ arbitrarily small (Ahm, Cheng and Cheong 2001). The two-dimensional Voronoi game is significantly more differcult to solve. In a one-round version of the Voronoi game where each firm place all its _n_ facilities in turns on a continuous square area, the follower still has a winning strategy, but the leader cannot make _ɛ_ arbitrarily small (Eiselt and Marianov 2011, chapter 9). And if consumers are distributed over a rectangular area that is suffeciently oblong, then it is the leader who has a winning strategy (Fekete and Meijer 2005). Fekete and Meijer (2005) furthermore show that the followers problem is NP-hard in the two-dimentional one-round game. 
 
-### Space – Hinterlands, vertical differentiation and networks
+## Space – Hinterlands, vertical differentiation and networks
 
 The space on which customers are distributed influences results. As seen above moving from one-dimentional space to multi-dimensional space changes the equilibrium. Similarly the shape of the space (square, disc, rectangular) and whether the space is bounded or unbounded affects results. Depending on the shape and boundaries of the space there may exist *hinterlands*, that is remote areas or sparesly populated areas. Competing firms will find it less attractive to locate in these regions. Thus articles that consider spaces without natural hinterlands, such as the one-dimensional circular market, find that firms are more evenly spread (Eaton and Lipsey 1975, Salop 1979).
 
@@ -79,19 +77,19 @@ _[Competitive location on networks:]_
 - Drezner_2011 (16 Competitive Location in Discrete Space)
 
 
-### [A note on price competition]
+## A note on price competition
 
 Although this paper does not consider price competion I would no the less like to highlight a couple of papers that may indicate how the results in this paper might change if price competition was included ...
 Irmen and Thisse (1998) : multiple dimensions. Equilibrium with maximimum differentiation along one dimension (the dominant), and minimum differentiation along all others.
 Liu and Shuai (2012) : Find results that constrasts with Irmen and Thisse (1998).
 
 
-### Political Economics 
+## Political Economics 
 …
 Denzau, Kats and Slutsky (1985) : Firms that also have a rank objective.
 
 
-### Foresight
+## Foresight
 
 Prescott and Visscher (1977) critise the Hotelling model for its assumption of costless relocation. The hotelling model implicity assume that firms can always relocated at a future point of time at very low cost, and therefore firms, when they choose thier location, do not need to take account of future entry into the market. Instead they propose a sequential location model, where it is prohibitively expensive to relocate, and where firms therefore use foresight when choosing thier location *once-and-for-all*. Firm chose the profit maxisiming position subject to the position of firms already in the market, and the subject to the location rules that future rational entrants will use. Firms use backwards inductive reasoning, ie. the last firm firm will maximise its position given the position of all other firms already located in the market. The second last firm _n-1_ can use the position of all _n-2_ firms already located and the last firms best response to choose its location. And so on, firm _n-2_ use the position of the first _n-3_ firms and the best repsonse of firms _n-1_ and _n_. This continues all the way to the first firm.
 
@@ -103,7 +101,7 @@ In the *Santa Fe Artificial Stock Market* discussed by Arthur (2014, chapter 11,
 
 [^GA]: …
 
-### Agent-based modeling
+## Agent-based modeling
 
 Laver and Sergenti (2011) also construct an agent-based model. I will review thier methodology in this subsection. They use this model to investigate the competitive location behaviour of political parties on a two dimensional policy space. They argue that the policy preferences of voters in many countries can be reduced to 2-3 fundemental dimensions. 
 
@@ -125,179 +123,15 @@ In addition their model includes entry and exit of political parties.
 
 Further note that none of these decision rules considers the simultaneous move of competing parties. They implicitly assume that other parties remain at their current location. And thus the decision rules are stripped of any and all strategic considerations and foresight.
 
-### Predictive analysis
+## Predictive analysis
 GACH, Multinominal distribution with Dirichlet prior distribution.
 
-### Recap
+## Recap
 
 _Firm behaviour:_
 This litterature reviews has look at different firm location behaviors. The simplest being firms with zero conjectural variation, ie. no foresight. With the minimax strategy firms forsee new entry or the relocation of exsisting firms in a manner that will cause a maximum damange to the firms market share, and the firm therefore locate to minimise this damange. However the minimax strategy does not consider whether the entry or relocation is a rational strategy or not for other firms, and  thus it leads to an inadequte concept of equilibrium. The ratational expectations appoach does consider this, but requires a sequential setup and very restrictive assumptions. In the field of asset pricing agents with *inductive rationality* is an alternative with more realistic assumptions. This paper will use *inductive rationality* to analyse firm location behaviour.
 
 
------
-
-# RANDOM SCRIBBLES WHEN WRITING
-
-in the Hotelling model
-
-Similarly the research in the last 85 years, since Hotelling published his paper, show that
-
- such a linear quadratic transport functions or three firms (Eiselt 2011, Eaton and Lipsey 1975).
-
-that the model is not robust when the various 
-
-In the 85 years of research since Hotelling published his paper has shown that
-
- The generel result from the literature on spacial competition in the 85 years of research has shown that that the Hote
-
-This is just one example of how the results in the Hotelling location model fundamentally change when assumptions are modified. not robust to
-Although the H
-
-An error lead Hotelling to the wrong conclusion in the model with price competition.
-
-the closer the firm locates, the more price competition intensifies. 
-
-and the the more 
-
-For each firm there is a trade off between two opposing forces; 
-by locating closer to the competing firm
-by differentiating location 
-For each firm there is a trade-off between; differentiating to relax price competition and closer to rival attracts more consumers
-
-there is a unique pure strategy equilibrium where
-
- This equilibrium is not
-ex  firms charge the same price 
-
-* is typically measured. is the cost endured by customers 
-
-It is socially suboptimal. If the market was split in two halves and  , whereas in the social optimum firms locate at the center of each half of the market, the average distance is one-eighth. 
-
- firms spilt the market in half, but locate at the center of their respective market area. Here
-
-
-The closer the firm locates to its competitor, the more consumers it attracts. But the closer the firm locates, the more 
-
-Researchers find that conclusions are non-robust across alternative model specifications
-
-In the last 85 years since Hotelling published his paper, researchers have generalise the model, but found that conclusions are non-robust across alternative model specifications. Most results are falsified when assumptions are modified. And even minor modification may remove any equilibrium constellations.
-
- The reader will see how results change when assumptions are relaxed, 
-Below I will go through some of the 
-
-For exhastive review Several papers pr reader to some of the previously published reviews on the topic. 
-
-change assumptions regarding firm behavior from what they call *zero conjectural variance*, ie. firms with no foresigt.
-
-,  each measure results in a different Voronoi diagram]_  can be constructed with different measures of proximity.
-
-  Each firms market area therefore consists of all the consumers that are located closer to the firm,  the  the objective of firms corresponds to maximising its market share.
-
-the objective of firms is to minimise the su
-A Voronoi diagram is a geometrical construction related to the allocation problem. The Voronoi diagram consists of several Voronoi set. Each Voronoi set contains all the points that are closer to each firm or *seed*.
-Allocation problem
-
-A Voronoi diagram is not unique in the sense that several different locations of firms or *seeds* may lead to the same Voronoi sets and tessellation. The unique Voronoi diagram where firms or *seeds* are located at the centroid of the Voronoi set is a special case called the *centroidal Voronoi tessellation* (Laver and Sergenti, 2011). Here each firm is located at the mean or center of mass of its Voronoi set. Thus the
-—> Representativeness 
-
-![Voronoi diagrams are not unquie. Several firm or seed locations can lead to the same tessellation. In the centroidal Voronoi tessellation firms or seeds are located at the sets center of mass.](Graphics/Nonunique_CVT.png)
-
-The Minkowsky distance measuse statisfic
-If the Minkowsky distance meassue is used with the usual parameters  Polygon
-
-
-That is Minkowsky distances with the usual parameters p = 1, 2, ∞ 
-
-Perimeter
-
-Teramoto, Demaine and Uehara (2006) consider the discrete Voronoi game where firms locate facilities on a network. 
-
-take turns and
-
- place or relocate
-
-In the Voronoi game is squentially two firms in turns choose the location of _p_ facilities.
-
-consumers are distributed on a continuous two-dimensional area
-
- The two firms take turns and place or relocate
-
-(Eiselt and Marianov, 2011, chapter 9)
-
-_Spatial-temporal process_
-What happens to shape when change? vs. shape stable
-
-In the model products  however are where each product
-
-An other appoach alltogether 
-Besides competitive location models where firms locate in real space, the 
-The literature on competitive location parts with 
-
-also makes an abstraction away from contenous real space and the linear ordering.
-
-also left the real space
-Competive location models have also been studied
-Non-euclidean space-.
-
-, that is if the current market state corresponds the the investors predictions, then these predictors are *active* and the most reliable of these is then
-
- descriptors  
-
- using a gerneric algorithm
-
- behave like staticians, and that the try to predict the stock price in the next periode using a
-
-Their baseline model has an exogeounsly given number of political parties and all parties are of the same type. They find that more parties will result in 
-
-o analyse the model across the entire parameter space they use 
-
-contains many free 
-
------
-
-# Assumptions / Generalized
-
-* __The space__
-    * 1D line market (2D, n-dimensional, vertical and horizontal differentiation)
-    * Bounded market / Hinterlands (Circle, distribution with non-closed support)
-    * Uniform distribution of customers (Non-uniform, non-symmetric, distribution with non-closed support)
-    * Euclidean space (Networks, ranking objective)
-* __Number of firms__ 
-    * Exogenous number of firms (Endogenous, simultanoues market entry/exit, sequential market entry/exit)
-    * 1 facility per firm (Voronoi Game)
-* __Transport cost function & distance function__
-    * Linear transport cost (Concave)
-    * 2D: Pythagorean distance formula (City-block, Infinity measure)
-* __Firm behaviour__
-    * Zero conjectural variation / no foresigt (Minimax strategies)
-    * Constant marginal production costs
-    * No cost of relocating
-    * Occupy same location
-    * Profit maximising (Firm preferred location)
-* __Consumer behaviour__
-    * Fixed demand (demand price/upper bound on price)
-    * Inelastic demand (Elastic)
-    * Homogeneous consumers (Heterogeneity) 
-* __Pure strategies__ (mixed strategies)
-* __Static game__
-
------
-
-## Reviews
-
-- [x] Eiselt_Laporte_Thisse_1993 : 
-- [x] Biscaia_Mota_2013 :
-- [x] Brenner_2001 : (non-peer review)
-- [x] Daskin_2008 : (discrete)
-- [x] Eiselt_Marianov_2011 (chapter 1): Early developments
-- [x] Smith_Laporte_Harper_2009: Historical development
-- [x] Eiselt_2011 : 
-- [x] Graitson_1982 :
-- [x] Kilkenny_Thisse_1999 : 
-- [x] Plastria_2001: Optimisation approaches
-- [x] ReVelle_Eiselt_2005: 
-
-- [x] Eiselt_Laporte_1996 : Sequential location
-- [x] Kress_Pesch_2012 : Sequential location on networks
-
-- [ ] Chen_2012 : ABM
+_[aka. MAXCOV.]_
+_[Voronoi diagrams and Delaunay Triangulation.]_
+_[Different distance metrics. Manhattan, Euclidian, etc.]_

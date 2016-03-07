@@ -4,6 +4,127 @@ _[While writing I will consider multiple versions of the same line/paragraph/wor
 
 -----
 
+## From Literature review.md
+
+in the Hotelling model
+
+Similarly the research in the last 85 years, since Hotelling published his paper, show that
+
+ such a linear quadratic transport functions or three firms (Eiselt 2011, Eaton and Lipsey 1975).
+
+that the model is not robust when the various 
+
+In the 85 years of research since Hotelling published his paper has shown that
+
+ The general result from the literature on spacial competition in the 85 years of research has shown that that the Hote
+
+This is just one example of how the results in the Hotelling location model fundamentally change when assumptions are modified. not robust to
+Although the H
+
+An error lead Hotelling to the wrong conclusion in the model with price competition.
+
+the closer the firm locates, the more price competition intensifies. 
+
+and the the more 
+
+For each firm there is a trade off between two opposing forces; 
+by locating closer to the competing firm
+by differentiating location 
+For each firm there is a trade-off between; differentiating to relax price competition and closer to rival attracts more consumers
+
+there is a unique pure strategy equilibrium where
+
+ This equilibrium is not
+ex  firms charge the same price 
+
+* is typically measured. is the cost endured by customers 
+
+It is socially suboptimal. If the market was split in two halves and  , whereas in the social optimum firms locate at the centre of each half of the market, the average distance is one-eighth. 
+
+ firms spilt the market in half, but locate at the centre of their respective market area. Here
+
+
+The closer the firm locates to its competitor, the more consumers it attracts. But the closer the firm locates, the more 
+
+Researchers find that conclusions are non-robust across alternative model specifications
+
+In the last 85 years since Hotelling published his paper, researchers have generalise the model, but found that conclusions are non-robust across alternative model specifications. Most results are falsified when assumptions are modified. And even minor modification may remove any equilibrium constellations.
+
+ The reader will see how results change when assumptions are relaxed, 
+Below I will go through some of the 
+
+For exhaustive review Several papers pr reader to some of the previously published reviews on the topic. 
+
+change assumptions regarding firm behaviour from what they call *zero conjectural variance*, ie. firms with no foresight.
+
+,  each measure results in a different Voronoi diagram]_  can be constructed with different measures of proximity.
+
+  Each firms market area therefore consists of all the consumers that are located closer to the firm,  the  the objective of firms corresponds to maximising its market share.
+
+the objective of firms is to minimise the su
+A Voronoi diagram is a geometrical construction related to the allocation problem. The Voronoi diagram consists of several Voronoi set. Each Voronoi set contains all the points that are closer to each firm or *seed*.
+Allocation problem
+
+A Voronoi diagram is not unique in the sense that several different locations of firms or *seeds* may lead to the same Voronoi sets and tessellation. The unique Voronoi diagram where firms or *seeds* are located at the centroid of the Voronoi set is a special case called the *centroidal Voronoi tessellation* (Laver and Sergeant, 2011). Here each firm is located at the mean or centre of mass of its Voronoi set. Thus the
+—> Representativeness 
+
+![Voronoi diagrams are not unique. Several firm or seed locations can lead to the same tessellation. In the centrical Voronoi tessellation firms or seeds are located at the sets centre of mass.](Graphics/Nonunique_CVT.png)
+
+The Minkowski distance measure statistic
+If the Minkowski distance meassue is used with the usual parameters  Polygon
+
+
+That is Minkowski distances with the usual parameters p = 1, 2, ∞ 
+
+Perimeter
+
+Teramoto, Domaine and Uehara (2006) consider the discrete Voronoi game where firms locate facilities on a network. 
+
+take turns and
+
+ place or relocate
+
+In the Voronoi game is sequentially two firms in turns choose the location of _p_ facilities.
+
+consumers are distributed on a continuous two-dimensional area
+
+ The two firms take turns and place or relocate
+
+(Easel and Marianov, 2011, chapter 9)
+
+_Spatial-temporal process_
+What happens to shape when change? vs. shape stable
+
+In the model products  however are where each product
+
+An other approach altogether 
+Besides competitive location models where firms locate in real space, the 
+The literature on competitive location parts with 
+
+also makes an abstraction away from continuos real space and the linear ordering.
+
+also left the real space
+Competitive location models have also been studied
+Non-euclidean space-.
+
+, that is if the current market state corresponds the the investors predictions, then these predictors are *active* and the most reliable of these is then
+
+ descriptors  
+
+ using a generic algorithm
+
+ behave like staticians, and that the try to predict the stock price in the next period using a
+
+Their baseline model has an exogeounsly given number of political parties and all parties are of the same type. They find that more parties will result in 
+
+o analyse the model across the entire parameter space they use 
+
+contains many free 
+
+-----
+
+## From Draft.md
+
 Therefore the other side of the market -- consumers and their purchasing behaviour -- has been greatly simplified.
 It therefore uses simplifying assumptions for consumers and their purchasing behaviour.
 
@@ -477,4 +598,12 @@ The evolutionary process creates a link between new hypotheses and past hypothes
 
 This process channels the knowledge accumulated obtained by ‘learning by using’ into the new hypotheses
 
-_[... evolutionary process ... This process channels the knowledge accumulated by testing predictions into the new hypotheses. ... rather than independently created hypotheses ... ]_
+_[... evolutionary process ... This process channels the knowledge accumulated by testing predictions into the new hypotheses. ... rather than independently created hypotheses ... ]_	
+
+ **Entry/Exit**
+
+_[market share]_
+
+_[number of surviving parties]_
+
+_[mean age at death]_
