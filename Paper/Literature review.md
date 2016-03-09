@@ -135,3 +135,4 @@ This litterature reviews has look at different firm location behaviors. The simp
 _[aka. MAXCOV.]_
 _[Voronoi diagrams and Delaunay Triangulation.]_
 _[Different distance metrics. Manhattan, Euclidian, etc.]_
+_[... Equilibrium exsists if number of firms is large enough, and the location of firms converges to the distribution of consumers’ preferences (Núñez and Scarsini 2014) ... ]_

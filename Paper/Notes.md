@@ -607,3 +607,96 @@ _[market share]_
 _[number of surviving parties]_
 
 _[mean age at death]_
+
+_[ ... in high polarisation/two markets ... if there is two firms in the market, then hunting for greater market shares will lead the two firms towards the mean ideal point of all customers ... ]_
+
+Essentially the firms locate in a market where they face competing firms.
+
+Competitive location models are not limited to geographical locations. Location can be the characteristics of a product, a set of political policies, etc.
+
+As hinted above the 
+
+To study such type of competition a growing set of competitive location models have been developed.
+
+Competitive location models are used to study such types of competition. 
+
+In these models firms choose their location in a market where they face competing firms. These model are not limited to geographical locations. Location can be the characteristics of a product, a set of political policies, etc.
+
+In the field of economics competition is often synonymous with price competition. However businesses compete with one-another on a multitude of other factors. Shops compete for customers when they choose their location. Manufactures compete when they choose product characteristic such as size, colour, and shape. Political parties compete for voters when they choose policies. Competitive location models are used to study such types of competition. In these models firms choose their location in a market where they face competing firms. 
+
+, by position themselves somewhere along the line. 
+
+Hoteling’s line market was the first competitive location model. In this model 
+
+As the subsequent literature review shows this model has been extended in terms of the number of firms, the distribution of consumers, and the number of dimensions. 
+
+The literature review section will go into details with this model and t
+
+_[ ... price competition, but how about the many other dimensions on which firms compete ... location models is a good point of departure for this line of inquiry ... since not only geographic location but firm location in product characteristics space ... geographic location is just one characteristic that firms can compete on. But they might also compete on other product characteristics ... ]_
+
+Political parties compete for voters when they choose policies. 
+
+but formulated in terms of the competitive location behaviour of firms.
+
+therefore the agent does not take this into account when deciding where to locate.
+
+since any action on my part 
+Since my actions affects other agents, and I take this effect into consideration when choosing my location. 
+
+The lack of foresight in the decision process of agents unfortunately implies the loss of strategic considerations. Strategic considerations that were fundamental to earlier competitive location models.
+
+This unfortunately implies that the strategic considerations -- fundamental to earlier competitive location models -- is absent.
+
+None of the rules employ fore
+
+and discover new insights concerning the competitive location behaviour. 
+
+The approach sets up and runs a computer model in which the agents act using a given set of decision rules. 
+
+The recent political science literature has advanced an alternative approach that relies on agent-based modelling. 
+
+An alternative approach advanced in the recent political science literature uses agent-based modelling.  
+
+Recent advances in political science provide an alternative approach using agents-based modelling. 
+
+ to the competitive location models based.
+
+
+An alternative approach has been brought forward by recent advances in political science.
+
+Recent advances in the political science literature show an alternative
+
+Inanition solving some location models has been proven to be computationally impossible. 
+
+loving some models has been proven to be computationally impossible.
+
+Research has proven the non-existence of equilibrium in some models, such as models with three firms in the market. This leaves
+
+Research has shown that no equilibrium exist in models, such as the line market with three firms in the market
+
+Inanition research has shown that no equilibrium exist in some models, such as
+Research has shown the non-existence of equilibrium in models, such as the line market with three firms in the market, contrary to 
+
+Research has shown that no equilibrium exists in some models. Such as the model with 3 firms in the market.
+
+It has been shown that no equilibrium exist in some models. While other models For some of the models it has been shown that no equilibrium exists. While in other models simply solving the model has been shown to possibly be computationally impossible. 
+
+it has been shown that simply solving the model might be impossible.
+
+Few papers have been published the last 20 years that 
+
+The limited number of papers pr
+Traditionally these models have been solved
+
+The extensions have shown that the conclusions drawn from the model are highly sensitive to the particular assumptions used.
+
+However the purely analytical approach of solving for equilibria in the model seems to have reached its limit. This approach 
+
+Analytically solving for equilibrium in the *competitive location models* using a
+
+...
+_[ ... advances in the political science literature ... ]_
+
+The sections also discusses how to solve and obtain results from the process that is independent of fore instance the initial position of the firms. 
+
+The results from competitive location models such as Hotelling’s line market and its extensions are covered in the literature review. As is the agent-based model
