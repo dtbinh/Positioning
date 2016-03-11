@@ -121,7 +121,53 @@ o analyse the model across the entire parameter space they use
 
 contains many free 
 
------
+However no firm will have a total market area that is less than one of the market areas on either sides of any firm (also referred to as the two *half-markets*).
+
+There are also problems where firms have multiAnd the problems that look for the locations of multiple firms or facilities that minimise the sum of each firm distance to its consumers in a plane is known as .
+
+   The market area of each firm contains all consumers that are located closer to the firm than any of the other firms. Combining the market area of all firms result in a *Voronoi tessellation* or *Voronoi diagram*. 
+ The market areas of firms can
+
+The algorithm prescribes that at every iteration the firms or *seeds* should move to the current centroid of its Voronoi set. By iterating this process a Voronoi diagram will converge to the *centroidal Voronoi tessellation*.
+
+_[In the one-dimensional line market the market areas created by two firms locating at respectively one-fourth and three-fourth the length of the line constitutes a *centroidal Voronoi tessellation*.]_
+
+or firms are 
+ is where firms are located such that all the market areas create a *centroidal Voronoi tessellation*
+
+ Depending on the shape and boundaries of the space there may exist 
+
+The models discussed so fare can be formulated in terms of product differentiation rather than of geographical location. 
+
+ The ideal point of the consumer is his or her location. , and the ideal point of all consumers are distributed over the entire space.
+
+The models discussed so fare strictly consider *horizontal product differentiation*. Consumers have heterogeneous preferences regarding products or firms. The ideal point of the consumer is his or her location, and the ideal point of all consumers are distributed over the entire space. 
+
+Runic (2012) considers vertical product differentiation. Runic (2012) does not model products on a scale, but instead defines products as a bundle of characteristics. The two firms choose which of the _Q_ characteristics to include in their product. The preferences of consumers is given by a joint density function. They find that in equilibrium the product of one firm includes all _Q_ characteristics, and that the degree of product differentiation between the firms depend on the correlation between the characteristics. Núñez and Scarsini (2014) considers competition over a finite number of discrete locations. They find that an equilibrium exists when there is sufficiently many firms in the market. Additionally they find that as the number of firms increase, the distribution of their locations converges towards the distribution of consumers.
+
+_[Competitive location on networks:]_
+
+- Transportation_Science_Volume27_Issue1_1993 (25768565, 25768566)
+- Fournier_Scarsini_2015
+- Heijnen_Soetevent_2014
+- Bauer_Domschke_1993
+- Hansen_Labbé_1988
+- Hansen_Thisse_Wendell_1986
+- Serra_ReVelle_1998
+- ReVelle_1986
+- Bodson_Karmarkar_1987
+- Drezner_2011 (16 Competitive Location in Discrete Space)
+
+##Political Science and Political Economics 
+
+_[Denzau, Kats and Slutsky (1985) : Firms that also have a rank objective.]_
+
+s difference between the two subpopulations take place along one of their dimensions.
+
+##Predictive analysis
+GACH, Multinomial distribution with Dirichlet prior distribution.
+
+_[Voronoi diagrams and Delaunay Triangulation.]_
 
 ## From Draft.md
 
@@ -700,3 +746,19 @@ _[ ... advances in the political science literature ... ]_
 The sections also discusses how to solve and obtain results from the process that is independent of fore instance the initial position of the firms. 
 
 The results from competitive location models such as Hotelling’s line market and its extensions are covered in the literature review. As is the agent-based model
+
+In addition the paper reintroduces strategic considerations into the competitive location model.
+
+[Fore instance salty-sweetness of chips and the thickness of chips. / mobile screen size]
+
+
+- [Characteristics are non-ordinal, such consumers do agree that more of a characteristic is better to less, ie. quality would be a ordinal characteristic, on which all consumer agree that better quality is preferable to lower quality.]
+- [Characteristics are continuous and infinitely divisible.]
+
+_[saltyness-sweetness and thickness]_. 
+
+The underlying basis is 
+
+in the following models 
+
+. Equilibrium exists if number of firms is large enough, and the location of firms converges to the distribution of consumers’ preferences (Núñez and Scarsini 2014) ... 
