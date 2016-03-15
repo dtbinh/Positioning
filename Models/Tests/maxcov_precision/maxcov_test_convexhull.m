@@ -1,7 +1,6 @@
 % Population
 pref.boundary = 10; % Number of standard deviations
 pref.resolution = 50; % Length of the square (even number to include (0,0))
-pref.N = 12; % Number of firms
 pref.mu = 1.5; % Mean of subpopulation
 pref.n_ratio = 2; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
 
@@ -37,11 +36,11 @@ F = (F_l + F_r*1/pref.n_ratio)/4;
 pref.repetitions = 200;
 for rep=1:pref.repetitions
     
-    pref.N = 1;
+    pref.N = 6;
     [x0, y0] = pol2cart( rand(pref.N,1)*2*pi , rand(pref.N,1)*3 );
-    xy = [x0 y0];
+    xy_test(1:pref.N,:,rep) = [x0 y0];
     %xy = [3.3735 0.7889; -0.1072 -3.4814; -3.9732 4.1955];
-    xy_boundary = [xy; -5 5; 5 5; 5 -5; -5 -5];
+    xy_boundary = [xy_test(1:pref.N,:,rep); -5 5; 5 5; 5 -5; -5 -5];
 
     figure(20);
     clf reset; % Reset figure.
@@ -65,7 +64,7 @@ for rep=1:pref.repetitions
         centroid_tri(i,:) = ([X(idx) Y(idx)]' * F(idx))' ./ F_tri(i);
 
 
-        [market_i, ~] = marketshare4([centroid_tri(i,:); xy], [X(:) Y(:)]);
+        [market_i, ~] = marketshare4([centroid_tri(i,:); xy_test(1:pref.N,:,rep)], [X(:) Y(:)]);
         idx2 = find(market_i==1);
         share_tri(i) = sum( F(idx2) ) / sum(F(:));
 
@@ -93,4 +92,12 @@ mean_error_share = mean(error_share(~correct));
 mean_error_distance = mean(error_distance(~correct));
 
 summary = table(corrent_pct, max_error_share, mean_error_share, max_error_distance, mean_error_distance)
+
+
+
+xy = xy_test(1:pref.N,:,max_error_share_rep);
+figure(21);
+DT = delaunayTriangulation([xy; -5 5; 5 5; 5 -5; -5 -5]);
+figure(21);
+triplot(DT, 'k');
 
