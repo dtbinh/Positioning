@@ -16,7 +16,7 @@ bvx = [ bbox(1:end-1,1)'; circshift( bbox(1:end-1,1)', [0,-1] ) ];
 bvy = [ bbox(1:end-1,2)'; circshift( bbox(1:end-1,2)', [0,-1] ) ];
 
 %% Population
-pref.boundary = 10; % Number of standard deviations
+pref.boundary = 12; % Number of standard deviations
 pref.resolution = 50; % Length of the square (even number to include (0,0))
 
 sd = 0.5; % Standard deviation of each subpopulation
@@ -34,7 +34,7 @@ error_share = NaN(pref.repetitions,1);
 
 for rep=1:pref.repetitions
     
-    pref.N = 12;
+    pref.N = 10;
     pref.mu = 0; % Mean of subpopulation
     pref.n_ratio = 1; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
     
@@ -105,6 +105,10 @@ mean_error_share = mean(error_share(~correct));
 mean_error_distance = mean(error_distance(~correct));
 
 summary = table(random_corrent_pct, corrent_pct, max_error_share, mean_error_share, max_error_distance, mean_error_distance)
+
+
+
+
 
 xy = xy_test(1:pref.N,:,max_error_share_rep);
 
