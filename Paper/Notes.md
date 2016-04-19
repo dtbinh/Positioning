@@ -762,3 +762,172 @@ The underlying basis is
 in the following models 
 
 . Equilibrium exists if number of firms is large enough, and the location of firms converges to the distribution of consumers’ preferences (Núñez and Scarsini 2014) ... 
+
+ such that we can determine how the location of firms converge over time.
+
+We want to investigate how the parameters of the model affect the results. 
+
+and the full parameter space is huge.
+
+to insure that the results of the models are independent of any particular position.
+
+that only have two parameters — the decision rule and the number of firms — so we use the *grid sweep* method. The two parameter values are discrete and the full parameter space spans of 44 cells or combinations. Four decision rules and number of firms between 2 and 12.
+*Grid sweep:*
+
+it should therefore be no surprise that the following outline of the procedure is known as the *experimental design*
+
+*Monte Carlo parameterisation:*
+To investigate how the parameters of the model affect the results we employ two different methods. 
+_[Grid sweep vs Monte Carlo parameterisation]_
+
+This section reviews the setup and details the execution of the agent-based model. Unlike an analytical model that can be solved mathematically, and where the results and conclusions follow from the derivation of equations, an agent-based model need a more meticulous planning to in order to be able to analyse the results of the model and to insure results that are trustworthy. The type of pre-planning resembles the *experimental design* known from experimental economics.
+
+The model is a M
+
+From this knowledge of the dynamics follow the methods used to estimate the output variables.
+
+guides our choice of method for estimating the output variables.
+
+We can use this knowledge to determine the appropriate method to estimate the output variables.
+
+Satisfying the conditions gives us prior knowledge of the dynamics of the *run*. And we can use this to determine the appropriate method to estimate the output variables.
+
+We first start by showing how a model with a random component can
+First we show how models with a random component constitute a *stochastic process*.
+
+We want to estimate the mean value of each of the output variables. 
+We will calculate the mean using either the *time average* or the *ensemble average*. 
+When selecting between the two it is important to distinguish between the underlying process of a *run* of the model. A run of the model may constitute a deterministic process or stochastic process. In this paper all deterministic process converge to a single state,  but since it is not a unique state, we calculate the mean value of the out
+In this paper A deterministic processes in this paper will converge to a single state, however the state
+The appropriate method will depend on the
+
+When choosing the method it
+The choice of method depends on whether the model represents a  
+
+First we show how models with a random component constitute a *stochastic process*. Laver and Sergeant (2011) note that most computational models can be represented by a time-homogenous Markov chain. So we put forth the conditions that a *stochastic process* needs to satisfy for it to represent a time-homogenous Markov chain. Satisfying the conditions gives us prior knowledge of the dynamics of the *run*. And we can use this to determine the appropriate method to estimate the output variables.
+
+Markov chain … different processes and what is known about convergence of these process … burn in … and finally arrive a the appropriate method used to estimate the output variables. We will use mean estimates across iterations for a single repetition, or across repetitions at a single iteration.
+We use this and previous 
+We briefly discuss  different process and their 
+of the time-homogenous Markov chain
+
+ This in turn implies that a *run* which consists of multiple *repetitions* constitutes a *stochastic process*. with a random component
+
+that contain a random component and a finite state space
+All time-homogenous Markov chains converge to at least one steady state. 
+While process that are *ergodic* converge to a unique distribution vector $\pi_\infty$.
+Not all time-homogenous Markov chains are *ergodic*, but as 
+
+We let $s$ denote the dimension of the state space, that is the number of possible states. The transition probability matrix $\rm P$ is a $s \times s$ matrix with all the one-step transition probabilities. The *state space distribution vector* $\pi_t$ represents the unconditional probability distribution of the state space at time $t$. Each element $i$ in the vector describe the probability that the process will be in state $i$ at iteration $t$. The size of the *state space distribution vector* is $s \times 1$. The *state space distribution* then evolves as given by $\pi'_{t+1} = \pi'_t \rm P$. Knowing the initial state space distribution, $\pi_0$, we can derive the vector $\pi_t$ using $\pi'_t = \pi'_0 {\rm P}^t$.
+
+We have laid out the specifications of our model and now turn to the methods used to estimate the output variables of the model. In choosing the appropriate method it is important to distinguish between the underlying process of a *run* of the model. We use different methods depending on whether the *run* constitutes a *deterministic process* or a *stochastic process*. We first show that a stochastic component in our model allows us to view a *run* of the model as a *stochastic process*. Laver and Sergeant (2011) note that most computational models can be represented by a particular *stochastic process* known as the *time-homogenous Markov chain*. We present the necessary conditions for a *time-homogenous Markov chain*. We have prior knowledge of the dynamics of the process — in particular convergence and steady state — when the model satisfy these conditions. And knowing the dynamics of the process lets us construct methods that give accurate estimates of the output variables.
+
+In choosing the appropriate method it is important to distinguish between the underlying process of a *run* of the model. 
+
+We use different methods depending on whether the *run* constitutes a *deterministic process* or a *stochastic process*. 
+
+We make a distinction between the time-homogenous Markov chains that contain a random component (besides the randomly drawn initial positions), and those that do not. A *stochastic time-homogenous Markov chain* contains a random component. 
+
+If the time-homogenous Markov chain contains a random combo
+
+are non-ergodic and
+
+A *deterministic time-homogenous Markov chain* converges to a single state
+
+**Deterministic process**
+To evaluate whether a process has “burnt in” or not we need to distinguish between deterministic processes that converge to a single state, and stochastic processes that converge to a distribution of states. Deterministic processes are a subset of stochastic processes where the probability that the random vector $Y_t$ takes on particular values is 1. In general there is no guarantee that a deterministic process will converge to a single state, it could oscillate between several states. However all deterministic process in this paper are non-ergodic and converge to a single state. 
+
+determining whether 
+
+We cannot use the output variables in
+
+This prohibits us from using any of the output variables in transient states. We discard the
+
+The Markov property requires that the probability of a future state of the process depend on the current state and not on any of the previous state of the process.
+
+… random component such as when the a hunter-firm turns around and heads in a random direction (not the random initial position) …
+
+So the iteration parameter does not affect the probability: 
+
+The *deterministic process* is a subset of the stochastic process, where the random vector takes particular values with probability equal 1. 
+
+For each iteration $t$, t
+In the experimental design we use
+The random seed is the number used to initialise the pseudorandom number generator, that in turn is used to randomly draw initial positions of firms.
+relation 
+that is the range of possible values of the random vector. 
+
+When the condition of the time-homogenous Markov chain are satisfied, we have prior knowledge of the dynamics of the *run*. 
+
+Thus a *ergodic* process converges to the unique state space distribution
+For a *ergodic* process the unique state space distribution is independent of the particular repetition. affect So if the process is *ergodic* the state space distribution is independent of the particular repetition, 
+
+In the limit as the total number of iterations go to infinity the 
+
+We model the realised value of $\mu^{(n)}$ for a given repetition as a random variable drawn from distribution with mean $\mu$ and standard deviations $\sigma_\mu$.
+
+There are several repetitions and not j
+Looking across the
+
+In steady state, by definition the state space distribution vector is *stationary*, so we have that $\mu_t^{(n)} = \mu_{t+1}^{(n)} = \mu_{t+2}^{(n)}$ and so on, for all repetitions $n$. 
+
+And so we remove the time subscript and define $\mu^{(n)}$ as the expected value of $Y_t$ for repetition $n$ over all iterations $t$. 
+
+We define the expected value of $Y_t$ for repetition $n$ as $\mu_t^{(n)}$. 
+
+We only consider output variables in steady state.
+We want an estimate of the output variables in steady state.
+Our goal is to calculate the mean value for each of the output variables in steady state. 
+
+trace plots. The trace plots display the iterative history of a repetition. No trends, just consistent noise around a stable mean.
+
+, such that the *time average* gives a representative estimate of $\mu$.
+
+Whenever the underlying *stochastic time-homogenous Markov chain* is *ergodic* we estimate using the *time average*.
+
+and we use the 
+
+There is less potential to trim with a low R-hat statistics, and in the limit the measure tends to one – indicating that process has map out the entire steady state distribution.
+
+Only when the process has mapped out the entire distribution can we be assured that the *time average* gives a representative estimate of $\mu$. 
+
+This may not be the case when using the *time average*
+
+If we feel confident that the process has mapped out the entire distribution then we will use the *time average* give a representative estimate of $\mu$. If this is not the case we will resort to using the *ensemble average*.
+
+To check whether enough observations have been collected to map out the steady state distribution vector we run several test repetitions. 
+
+[We use the *R-hat statistic*[^rhat] to check whether enough observations have been collected to map out the steady state distribution vector (Laver and Sergeant 2011, Brooks and Gelman 1998). The R-hat statistic compares between-repetition variance to the total within-repetition variance. A low R-hat statistic implies less potential to reduce the state space distribution vector from increasing the number of iterations. We run several test repetition and calculate the R-hat statistic. The R-hat statistic tends to 1 in the limit. We use the common cutoff threshold level for the R-hat statistic of 1.05. If the R-hat statistic is below this threshold level, then we feel confident that the process has mapped out the entire distribution such that the *time average* gives a representative estimate of $\mu$, otherwise we use the *ensemble average*.]
+
+[We check whether enough observations have been collected to map out the steady state distribution vector by visually inspecting the density plots.]
+
+We use the maximum of all test repetition as the *burnin* iterations is set
+Each test repetition returns
+From each test repetition we get a specific 
+From all test repetitions we select the maximum number iterations need to fulfil this 
+
+Deterministic process: burnt in once values don’t change, ie. the process is stationary. Empirically we set the burn in period to the maximum number of iterations it takes before the output variables flatline[^deterburn].  
+
+For the stochastic process we can in theory do the same, however since the process converges to
+
+Each test repetition returns a burnin iteration, and the largest of these is set as the number of *burnin* iterations in the final execution of the model.
+
+We execute a test run, where each repetition has say 100 iterations. For each run we find the first iteration where the value of the output variable is equal to the value at the 100th iteration. From all repetitions we select the largest of these iteration numbers, say the 69th iterations. This is then number of iterations needed for the process to burn in. In the final execution of the model we err on the side of caution and set the number burn in iterations slightly higher, say 100 iterations.
+
+This is done by visually inspecting the trace plots of a few repetitions from different runs of the model. 
+
+Stochastic process: In theory the same, however since the process converges to a distribution of states rather than a single state, it is in practice more difficult to determine when the process has burnt in.
+Empirically: 
+
+**convergence / burn in**
+_[runs, repetitions, iterations.]_
+
+### Deliberate (re)action to location of competitors
+### Competitors – a deliberate consideration
+### Deliberately 
+### Competitor awareness
+### Receptive to the location of competitors 
+
+_[Similarly to experimental studies we rely on randomisation to validate estimated effects.]_
+
+_[The end of this section discuss *burn in*, that is how long the model needs to run in order to converge.]_

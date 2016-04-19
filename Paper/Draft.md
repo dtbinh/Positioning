@@ -17,13 +17,13 @@ _[Abstract: ... ]_
 {{Literature review.md}}
 
 
-# 3. METHODOLOGY
+# 3. MODEL & METHODOLOGY
 
 …[^computation]
 
 [^computation]: All the models in this paper are build in MATLAB (R2015a) and run on a MacBook Pro with a 2.6 GHz quad-core Intel Core i7 processor. In addition several models use MATLAB’s Parallel Computing Toolbox with 4 local workers taking advantage of the quad-core processor structure to process several runs in parallel.
 
-### Consumers
+## 3.1 Consumers
 
 The scope of this paper is limited to one side of the market -- the firms and their decision-making behaviour. For this reason simplifying assumptions are used with regard to the other side of the market -- the consumers and the purchasing behaviour of consumers. For one thing consumers are static. They do not shift position, they maintain preferences, they are obliques to trends, and are in no way influenced by changes in the market. Secondly consumers behave non-strategically and demand inelastically. They always purchase a single unit from the closest firm, regardless of the distance to the firm. And finally all firms are identical in the eyes of the consumer. There is no brand recognition and no loyalty -- the customer purchase from the closest firm regardless of previous purchasing history.
 
@@ -35,7 +35,7 @@ The utility function for each consumer is a function of the distance from the co
 
 $$ U_i(j) = -d(i,j)^2 $$
 
-#### Distribution of customers
+### Consumer distribution
 
 The above described simplification of consumer behaviour allows focused attention on the behaviour of firms. As discussed in the literature review the distribution of consumers can fundamentally change the behaviour of firms. We would like to capture and analyse these changes -- in particular the effects from asymmetric and multimodal distributions. We follow the method used by Laver and Sergenti (2011) and assume two consumer subpopulations in our market. When the two subpopulations have the same mean ideal point then the aggregated distribution of consumers will be symmetric and unimodal. While subpopulations with vastly different mean ideal points and different sizes will lead to an aggregated distribution of consumers that is asymmetric and bimodal. Thus this method of using two subpopulations is able to capture several different types of aggregate distributions using only two parameters; the polarisation of subpopulation ideal points, and the relative size of the two subpopulations. 
 
@@ -65,18 +65,19 @@ _[table: population statistics]_
 
 Given the aggregated consumer distribution one approach would be to randomly draw a finite number of consumers from the distribution. Market shares can then be calculated by counting the number of consumers. Like Laver and Sergenti (2011) this paper will not employ this approach. Instead the consumer distribution is carried through and market shares are calculated by aggregating probability mass. Similarly the centroid of the market is weighted by the probability mass rather than the number of consumers. Although the approaches will yield the same results on average, the latter is independent of particular draws, thus we save computational power not having to run repetitions to obtain the average values.
 
+## 3.2 Firm behaviour
 
-## 3.2 Agent-based modelling
-
-### Firm behaviour
+_[Short recap of the definition of a agent-based model]_
 
 Our point of departure is that each firm chooses the location that maximises its market share, given the location of the other firms. However all firms choose their location simultaneously, and thus when a firm has to choose its own location, the location of other firms is unknown. Instead of solving for the optimal location that maximise market share, firms may use heuristics or rules of thumb when they choose location. The literature review provided an overview of the many different decision rules previously considered. This paper will use three of the heuristic decision rules laid out by Laver and Sergenti (2011) as the base to which other decision rules are compared. These rule are described in detail below. _[rational vs. rule of thumb]_
 _[Why these three rules? No exploration, social optimum, and high on exploration.]_
 
-**Sticker:**
+### Sticker-rule
+
 The simplest decision rule a firm can use is the *sticker*-rule. With this decision rule the firm sticks to its initial position regardless of what happens. This could be a firm that is either unwilling to change or incapable of change. The management of the firm may have an unyielding belief in the long-run superiority of the position of the firm, discouraging it from any change, even in times of despair. Ie. a belief that the market share of the firm will always recover and excel in and of itself. The firm might also be unable to change, due to financially constraint such as the fixed cost of relocating or investments that cannot be recuperated. And finally, given the  task of predicting the future location of all other firms, the firm might see its current position as less risky than a new location based on uncertain predictions.
 
-**Aggregator:**
+### Aggregator-rule
+
 Firms using the *aggregator*-rule constantly seeks to please its own customer base. The firm does not try and predict the future. Instead it takes its current market area and locates at the centre of it. More specifically the centre or *centroid* is the mean ideal point of all customers of the firm. Thus the centroid position takes into account the population density within the market area, drawing the firm towards the centre of mass.
 
 The future landscape of competing firms may change and with it the market areas. So there is no guarantee that the current centroid is also the centroid of the future. Nonetheless firms using the *aggregator*-rule continually pursue the mean ideal point of their customer base. Likewise there is no guarantee that the relocation of the firm will increase market shares, or even maintain current shares. Market shares are in a sense a secondary priority for the firm using the *aggregator*-rule. The management of the firm may reason that they can retain and recruit new customers by pleasing their current customers[^loyalty]. 
@@ -89,7 +90,8 @@ The underlying requirement for a *aggregator* firm is that it has perfect knowle
 
 The *aggregator* firm never relocates outside its current market area. But otherwise there is no limit as to how far an *aggregator* firm can move at each iteration. The firm nonetheless tends to move in relatively small steps, unless the market is extremely unstable. 
 
-**Hunter:**
+### Hunter-rule
+
 The *hunter*-rule is a trial-and-error type of decision rule. The firm continues in the same direction, if it previously proved fruitful, and otherwise the firm heads in the opposite direction. At each iterations the firms move what corresponds to 0.1 standard deviation of the population distribution. If the previous move did not increase the market share, then the firm turns around and heads in a random direction drawn from the 180 degree arc in front of it. 
 
 Firms using the *hunter*-rule never settle down. The firm endlessly hunts higher market shares with the same speed and intensity. For a firm with this decision rule there is no comfortable threshold share of the market that suffice or slows exploration. In the trade-off between exploration and exploitation the firm always chooses the first option. 
@@ -98,7 +100,7 @@ The only information used in the decision process of a *hunter* firm is the curr
 
 The *hunter* firm moves 0.1 standard deviations each iteration. This is the *speed of adaption*. It is beyond the scope of this paper to investigate the effects of changing the speed parameter. However Laver and Sergenti (2011, chapter 7, pp. 150-151) find evidence that a speed parameter of 0.1 standard deviations results the in largest market shares for a *hunter* firm. They argue that this speed strikes the balance between quickly reaching better locations without overshooting these location when moving around. 
 
------
+### Deliberate reaction to competitors
 
 The above described heuristic decision rules are good first approximation on how firms might choose to locate. Especially in  a simultaneous multi-agent location model where the future location of other firms is unknown. Later on we would like to investigate how foresights affects our results. But before doing so we need to return to the deliberate process of maximising market share. That is, before we can answer how a firm locates given the *predicted* locations of competing firms, we need a new decision rule on how the firm locates given *any* location of competing firms. And none of the above mentioned decision rule take the location of competing firms into consideration. We will start with a decision rule that assumes that the other competing firms stay at their current location. Later on we will extend the decision rule so it includes location predictions and learning. In the end we will have reintroduced strategic considerations in the simultaneous location model.
 
@@ -108,7 +110,8 @@ None of the currently existing methods are applicable to the models used in this
 
 ![Example with five competing firms (blue markers). The Voronoi diagram illustrating the market areas of the competing firms. The Delaunay Triangulation of the competing firms and the boundaries. Red marker is the centroid of the triangle with the largest share of customers indicating the ideal position of the firm. The Voronoi diagram when including the ideal position of the firm.](Graphics/temp_maxcov.png)
 
-**Maxcov:**
+### Maxcov-rule
+
 Firms using the *maxcov* decision rule aim for the optimal location that will maximise the number of customers. The firm assumes that the ideal location lies in the gaps between competing firms. The firm considers all the gaps and picks the one with the most consumers. Each gap is a triangle in the Delaunay Triangulation. The Delaunay Triangulation is constructed using the competing firms and it includes the boundary points. The latter insures that the firm can also locate outside the area spanned by competing firms (Cheong, Efrat and Har-Peled 2007 p. 556). The triangle with most consumers is selected, and the ideal location is the mean ideal point of all customers within that triangle.[^mostcustomers] 
 
 [^mostcustomers]: _[The triangle with the most consumers is a proxy of the actual market share obtained. The consumers that the firm attracts will not necessarily be all the ones in the triangle. Therefore the triangle with most consumers may not always be the triangle that gives the firm the largest market share. However the method is correct 40-90% of the cases depending on the parameter settings and the number of firms. If the triangle was randomly selected which the triangle would only be correct in 4-16% of all cases.]_
@@ -122,96 +125,7 @@ In determining its location the *maxcov* firm uses information on the location o
 [^knowdist]: Alternatively -- and perhaps more realistically -- the firm could approximate which gaps contained the largest number of customers by using the market share of the surrounding firms (Fowler and Laver, 2008 p.75). However to avoid effects arising from approximation I assume the *maxcov* firm have perfect knowledge of the distribution of customers.
 
 
-## 3.3 Markov Chain Monte Carlo
-
-Analytical models are solved mathematically. Results, sensitivity to parameter changes and verification of the procedure follows directly from the derivation of key equations. Whereas computer simulated models such as an agent-based model requires some pre-planning to be able to analyse results and to insure that results are trustworthy. This type of pre-planning resembles what takes place in an experimental study and therefore the following outline of the procedure is also known as the *experimental design*. And like experimental studies we rely on randomisation to validate estimated effects.
-
-To initiate the models we need to set the initial position of firms. The credibility of the results hinges on results that are independent of the initial positions. Any initial position of the firms should produce the same end results. First of, we draw the initial positions randomly. The position of a firm is drawn uniformly random from a disc centred at (0,0) and with a 3 standard deviation radius. Secondly, we execute several *repetitions* of the model with identical parameter values, but with varying randomly selected initial positions. We compare the results from these *repetitions* to insure that the location of firms converges to the same limited set of locations. If this is the case we satisfied that end results are independent of the initial position of firms. The end of this section discuss *burn in*, that is how long the model needs to run in order to converge.
-**[CONSIDER MOVING THIS — TO AVOID CONFUSION WITH THE STOCHASTIC PROCESS SECTION BELOW]**
-
-The *experimental design* should be such that we can evaluate how the parameters of the model affect results. Therefore the models are executed with different combinations of parameter values and subsequently compared. To set the parameter values we employ two different methods. In the first set of models, where all firms use the same decision rule, the model only has two parameters — the decision rule and number of firms. There are 4 decision rules and 11 different values for the number of firms, since $N \in [2, 12]$. The parameter values are integer numbers and the entire parameter space spans 44 cells or 44 combinations, so for these models we use the simple *grid sweep* method. This method *runs* through the entire parameter space executing each combination of parameters in turn. The last set of models have two additional parameters — the polarisation of the subpopulations $\mu \in [0, 1.5]$ and the relative size of the subpopulations $n_l/n_r \in [1, 2]$. The full parameter space is huge and these parameter values are real numbers with no “natural” increment, that is there is no intrinsic reason for a grid representation to fairly represent the full parameter space, even less so for nonlinear models. This makes the *grid sweep* method unsuitable, instead we use the *Monte Carlo parameterisation* method. For every *run* this method draws the value of each parameter uniformly random and with sufficiently many *runs* the method is able to map out results for the entire parameter space. 
-
-In sum we execute several *runs* to evaluate the effect of the parameters. In each *run* we execute several *repetitions* with the same parameter values, but with varying random initial positions. For every *repetition* the model goes through numerous *iterations* enabling the location of firms to converge. And at each *iteration* the decision rule of the firm determines how that firm locates.
-
-**Estimating output variables**
-
-We have laid out the specifications of our model and now turn to the methods used to estimate the output variables of the model. In choosing the appropriate method it is important to distinguish between the underlying process of a *run* of the model. We use different methods depending on whether the *run* constitutes a *deterministic process* or a *stochastic process*. We first show that a stochastic component in our model allows us to view a *run* of the model as a *stochastic process*. Laver and Sergenti (2011) note that most computational models can be represented by a particular *stochastic process* known as the *time-homogenous Markov chain*. We present the necessary conditions for a *time-homogenous Markov chain*. We have prior knowledge of the dynamics of the process — in particular convergence and steady state — when the model satisfy these conditions. And knowing the dynamics of the process lets us construct methods that give accurate estimates of the output variables.
-
-**Stochastic process**
-The model generates a vector with the values for all output variables at each iteration in every repetition. The values of the vector could fore instance be the coordinates of the firm, the market share of firms, a measure of the effective number of firms (ENP), a measure of the eccentricity of locations and a measure of the firms representation of consumers’ ideal points. We follow Laver and Sergenti (2011) and use the following notation, $y_t^{(n)}$, where $y$ is the vector of values, $t$ is the iteration number and $n$ the repetition number. One repetition of the model with ten iterations would produce a series of ten vectors; $( y_1^{(1)}, y_2^{(1)}, … y_{10}^{(1)} )$. If the model contains a random component, then the exact values of these ten vectors depend on the *random seed*[^pseudorandom] and another repetition with a different random seed returns different values of the vectors. We can use this to our advantage if we use a different random seed for each repetition. Then the vector $y_t^{(n)}$ represents a single realisation of a *random vector* $Y_t$, where $Y_t$ is all possible realisations of $y$ at iteration $t$. That is $y_1^{(1)}$ is a realisation of $Y_1$ associated with repetition 1. Similarly the series of vectors $( y_1^{(1)}, y_2^{(1)}, … y_{10}^{(1)} )$ is a realisation of $( Y_1, Y_2, … Y_{10} )$ associated with repetition 1. And so the series of random vectors $( Y_1, Y_2, … Y_{10} )$ is a *stochastic process*.
-One *repetition* gives a series of vectors, eg. $( y_1^{(1)}, y_2^{(1)}, … y_{10}^{(1)} )$. While a *run*, which consists of multiple *repetitions*, constitutes a *stochastic process* when the model contains a random component.
-
-[^pseudorandom]: Computers are deterministic machine incapable of generating truly random numbers. Instead they use a pseudorandom number generator that approximates random numbers. The pseudorandom numbers are completely determined by the *random seed*. The random seed is the number used to initialise the pseudorandom number generator. Initiating the generator with the same random seed will produce the same sequences of random numbers. While initiating the generator with different random seeds produce different sequences of random numbers. Although the numbers stemming from a pseudorandom number generator are not truly random, they are sufficiently random for most applications including the models in this paper.
-
-There are three factors that distinguish different stochastic processes. One factor is the range of all the possible values that the random vector might take. This is also known as the *state space*. Another factor is the iteration *index set*. In the example above with ten iterations the index set is $\{1, 2, … 10\}$. We will only focus on discrete-time processes in this paper. The last factor is the dependency between the random vectors $Y_t$ in the process. 
-
-**Time-homogenous Markov chain**
-The Markov process is a particular stochastic process that satisfies the Markov property. The Markov property places restrictions on the dependencies in the process. These restrictions are such that the future state of the process may depend on the current state, but cannot depend on any of the previous states of the process. In other words the Markov process, with a vector of the state space $X_t$, satisfies the Markov property if:
-
-$$Prob\left[ {X_{t+1} = j} \left| {X_t = i, X_{t-1} = i_{t-1}, ... X_0 = i_0} \right. \right] = Prob\left[ {X_{t+1} = j} \left| {X_t = i} \right. \right] \quad \forall t$$
-
-for all states of the process $i_0, ... i_{t-1}, i$, and $j$. For a finite state space, we can write the one-step transition probability as $P_{ij}^{t,t+1} = Prob\left[ {X_{t+1} = j} \left| {X_t = i} \right. \right]$. That is the probability for $X_{t+1}$ being in state $j$, given that $X_t$ is in state $i$. A time-homogenous Markov chain further requires that the transition probabilities are independent of the iteration parameter, $P_{ij}^{t,t+1} = P_{ij}$. This is also known as a Markov chain with *stationary transition probabilities*. Only the current state affects the probability of the next state in the process — probabilities stay constant over time. We use matrix notation to shorten the equations describing the evolution of the process[^dimension]. We can represent all of the stationary *one-step transition probabilities* using the *transition probability matrix* $\rm P$. The *state space distribution vector* $\pi_t$ represents the unconditional probability distribution of the state space at time $t$. Each element $i$ in the vector describe the probability that the process will be in state $i$ at iteration $t$. The *state space distribution* then evolves as given by $\pi'_{t+1} = \pi'_t \rm P$. And knowing the initial state space distribution, $\pi_0$, we can derive the vector $\pi_t$ using $\pi'_t = \pi'_0 {\rm P}^t$.
-
-[^dimension]: We let $s$ denote the dimension of the state space, that is the number of possible states. The transition probability matrix $\rm P$ is a $s \times s$ sized matrix. The size of the *state space distribution vector* $\pi_t$ is $s \times 1$.
-
-We have argued how a *run* of our model constitutes a stochastic process and linked it to the dynamics of Markov chains. We are now at a point where we can look closer at convergence and steady state. The state space distribution vector is *stationary* when $\pi_{t+1} = \pi_t$. Because of the random start the initial state space distribution, $\pi_0$, is seldom stationary and several iterations are need. The process reaches steady state once the state space distribution becomes stationary. That is $\lim_{t \to \infty} \pi_t = \pi_\infty$ where the stationary state space distribution, $\pi_\infty$, solves $\pi_{t+1} = \pi_t$. A process that converges to a unique distribution vector $\pi_\infty$ regardless of the initial distribution vector $\pi_0$ is known as an *ergodic* process. Laver and Sergenti (2011, chapter 4, p. 64) note all time-homogenous Markov chains are *ergodic*. With a random component in the process each state has strictly positive probability of being reached in a finite number of iterations, thus the process avoids “getting stuck” and eventually converges to a unique distribution vector (Laver and Sergeant, 2011 chapter 4, p. 71). Recall that a hunter-firm turns around and heads in randomly selected direction. A random component such as this insures that the process is *ergodic*.
-
-It is often possible to construct several Markov representations. When choosing the vector of the state space, $X_t$, one need to insure that the output variables, $Y_t$, can be derived from the vector of the state space, ie. $Y_t = f(X_t)$. In addition the vector of the state space, $X_t$, has to satisfy the Markov property. In most of the models in this paper the vector of the state space only needs to contain the coordinates of the firms, since we can calculate the remaining output variables from the coordinates[^discretecoord]. Once the vector of state space, $X_t$, reaches steady state so will the output variables, $Y_t$.
-
-[^discretecoord]: Although the coordinates take on real numbers in theory, in practice when executed on a computer there is a limit to the precision of the coordinates. This limited precision is enough for us to say that the coordinates are discrete (to a high level of precision), and thus the state space is finite (all though very large). Matlab stores values using up to 64-bits ([MathWorks 2016](http://se.mathworks.com/help/matlab/matlab_prog/floating-point-numbers.html)).
-
-
-
-
-
-
-
-Our goal is to calculate the mean value for each of the output variables in steady state. None of values of the output variables obtained in transient states can be used to estimate the steady state. We discard the *burn in* iterations, that is the iterations needed to reach the steady state. 
-
-**Deterministic process**
-To evaluate whether a process has “burnt in” or not we need to distinguish between deterministic processes that converge to a single state, and stochastic processes that converge to a distribution of states. Deterministic processes are a subset of stochastic processes where the probability that the random vector $Y_t$ takes on particular values is 1. In general there is no guarantee that a deterministic process will converge to a single state, it could oscillate between several states. However all deterministic process in this paper are non-ergodic and converge to a single state. 
-
-determining whether 
-
-
-
-
-
-We cannot use the output variables in
-
-This prohibits us from using any of the output variables in transient states. We discard the
-
-The Markov property requires that the probability of a future state of the process depend on the current state and not on any of the previous state of the process.
-
-… random component such as when the a hunter-firm turns around and heads in a random direction (not the random initial position) …
-
-
-
-So the iteration parameter does not affect the probability: 
-
-The *deterministic process* is a subset of the stochastic process, where the random vector takes particular values with probability equal 1. 
-
-
-
-
-**convergence / burn in**
-
-
-_[(Visually show the movement / iterations over time to the reader)]_
-_[runs, repetitions, iterations.]_
-
-For each iteration $t$, t
-In the experimental design we use
-The random seed is the number used to initialise the pseudorandom number generator, that in turn is used to randomly draw initial positions of firms.
-relation 
-that is the range of possible values of the random vector. 
-
-When the condition of the time-homogenous Markov chain are satisfied, we have prior knowledge of the dynamics of the *run*. 
-
-
-
-
-### Summary variables
+## 3.3 Summary variables
 
 There are three main perspectives we want to analyses in the competitive location model. One perspective is the location of the firms. Do firms agglomerate or cluster at particular locations or do firms disperse across the market space? Another perspective is the competitive environment. Is competition a *winner-take-all* game in which one firms is able to capture a predominant share of customers, or are customers evenly shared among firms? The last perspective concerns *social welfare*. How does the competition among firms affect the wellbeing of customers? To investigate these perspectives we construct three summary variables. These variables aggregate the state of the market into a single measure that is comparable across parameter settings and models.
 
@@ -227,6 +141,110 @@ The ENP is the inverse of the Herfindahl-Hirschman Index (Laakso and Taagepera 1
 
 **Mean Representation:**
 It is straightforward to create a measure that summarises the consumer welfare given our utility function (see equation _[##]_). By taking the average over all customers we get the mean utility or mean representation in every stage.
+
+
+## 3.4 Executing the model
+
+We have now gone through the basic setup of the economic model. We have discussed the economical rational underlying consumers and the behaviour of firms. We have specified the variables of interest and how these should be interpreted. The following section gets slightly more technical as we delve into the methodology for solving the model and estimating the variables.
+
+Analytical models are solved mathematically. Results, sensitivity to parameter changes and verification of the procedure follows directly from the derivation of key equations. Whereas computer simulated models such as an agent-based model requires some pre-planning and multiple executions to be able to analyse results and to insure that results are trustworthy. This type of pre-planning resembles what takes place in an experimental study and therefore the following outline of the procedure is also known as the *experimental design*.
+
+### Model parameterisation
+
+To initiate the models we need to set the initial position of firms. The credibility of the results hinges on results that are independent of the initial positions. The model should produce the same end results regardless of the initial position of firms. First of, we draw the initial positions randomly[^initpos]. Secondly, we execute several *repetitions* of the model with identical parameter values, but with varying randomly selected initial positions. We compare the results across *repetitions* to insure that the location of firms converge to the same limited set of locations. With this being the case in all the models we have satisfied that the end results are independent of the initial position of firms.
+
+[^initpos]: The position of a firm is drawn uniformly random from a disc centred at (0,0) and with a 3 standard deviation radius.
+
+We want an *experimental design* such that we can evaluate how the parameters of the model affect results. So the models are executed with different combinations of parameter values and subsequently compared. To set the parameter values we employ two different methods. In the first set of models, where all firms use the same decision rule, the model only has two parameters — the decision rule and number of firms. There are 4 decision rules and the number of firms can take on 11 different values, since $N \in [2, 12]$. The parameter values are integer numbers and the entire parameter space spans 44 cells or 44 combinations, so for these models we use the simple *grid sweep* method. This method *runs* through the entire parameter space executing each combination of parameters in turn. The last set of models have two additional parameters — the polarisation of the subpopulations $\mu \in [0, 1.5]$ and the relative size of the subpopulations $n_l/n_r \in [1, 2]$. The full parameter space is huge and these parameter values are real numbers with no “natural” increments. And so there is no intrinsic reason for a grid representation to be a fair representation the full parameter space, and even less so considering the nonlinearity of the models. This makes the *grid sweep* method unsuitable, instead we use the *Monte Carlo parameterisation* method. For every *run* this method draws the values of parameters uniformly random. With sufficiently many *runs* the method is able to map out results spanning the entire parameter space.
+
+![Stylised outline of the experimental design.](Graphics/ExperimentalDesign.png)
+
+To summarise we execute several *runs* to evaluate the effect of the different parameters. In each *run* we execute several *repetitions* with the same parameter values, but with varying random drawn initial positions. In every *repetition* the model goes through numerous *iterations* enabling the location of firms to converge. And at each *iteration* the decision rule of the firm determines how that firm locates.
+
+### 3.3.2 Markov chain
+
+We have laid out the specifications of our model and will shortly turn to the methods used to estimate the output variables of the model. But first we take a look at the underlying process of a *run* of the model. We show that a *run* of the model constitutes a *stochastic process*. Laver and Sergenti (2011) note that most computational models can be represented by a particular *stochastic process* known as the *time-homogenous Markov chain*. We present the necessary conditions for a *time-homogenous Markov chain*. When the model satisfy these conditions we have prior knowledge of the dynamics of the process — in particular convergence and steady state. Knowing the dynamics of the process lets us construct methods that give accurate estimates of the output variables.
+
+#### Stochastic process
+
+The model generates a vector with the values for all output variables at each iteration in every repetition. The values of the vector could fore instance be the coordinates of the firm, the market share of firms, a measure of the effective number of firms (ENP), a measure of the eccentricity of locations and a measure of the firms representation of consumers’ ideal points. We follow Laver and Sergenti (2011) and use the following notation, $y_t^{(n)}$, where $y$ is the vector of values, $t$ is the iteration number and $n$ the repetition number. One repetition of the model with ten iterations would produce a series of ten vectors; $( y_1^{(1)}, y_2^{(1)}, … y_{10}^{(1)} )$. Because of the randomly drawn initial positions of firms, the exact values of these ten vectors depend on the *random seed*[^pseudorandom] and another *repetition* with a different random seed returns different values of the vectors. We can use this to our advantage if we use a different random seed for each repetition. Then the vector $y_t^{(n)}$ represents a single realisation of a *random vector* $Y_t$, where $Y_t$ is all possible realisations of $y$ at iteration $t$. That is $y_1^{(1)}$ is a realisation of $Y_1$ associated with repetition 1. Similarly the series of vectors $( y_1^{(1)}, y_2^{(1)}, … y_{10}^{(1)} )$ is a realisation of $( Y_1, Y_2, … Y_{10} )$ associated with repetition 1. The series of random vectors $( Y_1, Y_2, … Y_{10} )$ represents a *stochastic process*. And so one *repetition* gives a series of vectors, eg. $( y_1^{(1)}, y_2^{(1)}, … y_{10}^{(1)} )$. While a *run*, which consists of multiple *repetitions*, constitutes a *stochastic process*.
+
+[^pseudorandom]: Computers are deterministic machine incapable of generating truly random numbers. Instead they use a pseudorandom number generator that approximates random numbers. The pseudorandom numbers are completely determined by the *random seed*. The random seed is the number used to initialise the pseudorandom number generator. Initiating the generator with the same random seed will produce the same sequences of random numbers. While initiating the generator with different random seeds produce different sequences of random numbers. Further note that the different sequence of numbers are independent and identically distributed (IID) across the random seeds. Although the numbers stemming from a pseudorandom number generator are not truly random, they are sufficiently random for most applications including the models in this paper.
+
+There are three factors that distinguish different stochastic processes. One factor is the range of all the possible values that the random vector might take. This is also known as the *state space*. Another factor is the iteration *index set*. In the example above with ten iterations the index set is $\{1, 2, … 10\}$. This paper will only focus on discrete-time processes. The last factor is the dependency between the random vectors, $Y_t$, in the process.
+
+#### Time-homogenous Markov chain
+
+The Markov process is a particular stochastic process that satisfies the Markov property. The Markov property places restrictions on the dependencies in the process, namely that the future state of the process may depend on the current state, but cannot depend on any of the previous states of the process. In other words the Markov process, with a vector of the state space, $X_t$, satisfies the Markov property if:
+
+$$Prob\left[ {X_{t+1} = j} \left| {X_t = i, X_{t-1} = i_{t-1}, ... X_0 = i_0} \right. \right] = Prob\left[ {X_{t+1} = j} \left| {X_t = i} \right. \right] \quad \forall t$$
+
+for all states of the process $i_0, ... i_{t-1}, i$, and $j$. For a finite state space, we can write the one-step transition probability as $P_{ij}^{t,t+1} = Prob\left[ {X_{t+1} = j} \left| {X_t = i} \right. \right]$, which is the probability for $X_{t+1}$ being in state $j$, given that $X_t$ is in state $i$. A time-homogenous Markov chain further requires that the transition probabilities are independent of the iteration parameter; $P_{ij}^{t,t+1} = P_{ij}$. This is also known as a Markov chain with *stationary transition probabilities*. Only the current state affects the probability of the next state in the process and probabilities stay constant over time. We use matrix notation to shorten the equations describing the evolution of the process[^dimension]. We can represent all of the stationary *one-step transition probabilities* using the *transition probability matrix*, $\rm P$. The *state space distribution vector*, $\pi_t$, represents the unconditional probability distribution of the state space at time $t$. Each element $i$ in the vector describe the probability that the process will be in state $i$ at iteration $t$. The *state space distribution* then evolves as given by $\pi'_{t+1} = \pi'_t \rm P$. From this equation it follows that if we know the initial state space distribution, $\pi_0$, we can derive the state space distribution vector, $\pi_t$, using $\pi'_t = \pi'_0 {\rm P}^t$.
+
+[^dimension]: We let $s$ denote the dimension of the state space, that is the number of possible states. The transition probability matrix $\rm P$ is a $s \times s$ sized matrix. The size of the *state space distribution vector* $\pi_t$ is $s \times 1$.
+
+We have argued how a *run* of our model constitutes a stochastic process and linked it to the dynamics of Markov chains. We are now at a point where we can look closer at convergence and steady state. The state space distribution vector is *stationary* when $\pi_{t+1} = \pi_t$. Because of the random starting position of firms the initial state space distribution, $\pi_0$, is seldom stationary and several iterations are need. The process reaches steady state once the state space distribution becomes stationary. That is $\lim_{t \to \infty} \pi_t = \pi_\infty$, where the stationary state space distribution, $\pi_\infty$, solves $\pi_{t+1} = \pi_t$. All time-homogenous Markov chains converge to at least one steady state distribution. A process that converges to a unique distribution vector, $\pi_\infty$, regardless of the initial distribution vector, $\pi_0$, is known as an *ergodic* process. There are two types of time-homogenous Markov chains; *stochastic time-homogenous Markov chains* that contain a random component (besides the randomly drawn initial positions), and *deterministic time-homogenous Markov chains* that do not contain any random component and where the probability that the random vector, $Y_t$, takes on a particular values is 1. This distinction is useful since not all time-homogenous Markov chains are *ergodic*, but as Laver and Sergenti (2011, chapter 4, p. 64) note all *stochastic time-homogenous Markov chains* with a finite state space are *ergodic*. With a random component in the process each state has strictly positive probability of being reached in a finite number of iterations, thus the process avoids “getting stuck” and eventually converges to the unique distribution vector (Laver and Sergeant, 2011 chapter 4, p. 71). Recall that a hunter-firm turns around and heads in randomly selected direction. A random component such as this insures that the process is *ergodic*. We know that this process will converge to a unique state space distribution, $\pi_\infty$, and that this distribution is independent of the initial state space distribution. In general there is no guarantee that a *deterministic time-homogenous Markov chain* converges to a single state, since it might oscillate between several states. However all the deterministic process in this paper converge to a single state. _[HOW ABOUT ALL-MAXCOV? CAN IT OSCILLATE??]_. However all the *deterministic time-homogenous Markov chain* in this paper are non-ergodic. The arguments are provided in appendix _[###]_. This means that although the process converges to a single state, this state is not unique, but depends on the initial position of firms. The method used to estimate the values of the output variables takes this into account.
+
+It is often possible to construct several Markov representations. When choosing the vector of the state space, $X_t$, one need to insure that the output variables, $Y_t$, can be derived from the vector of the state space, ie. $Y_t = f(X_t)$. In addition the vector of the state space, $X_t$, has to satisfy the Markov property. In most of the models in this paper the vector of the state space only needs to contain the coordinates of the firms, since we can calculate the remaining output variables from the coordinates[^discretecoord]. Once the vector of state space, $X_t$, reaches steady state so will the output variables, $Y_t$.
+
+[^discretecoord]: Although the coordinates take on real numbers in theory, in practice when executed on any computer there is a limit to the precision of the coordinates. Matlab stores values using up to 64-bits [MathWorks 2016](http://se.mathworks.com/help/matlab/matlab_prog/floating-point-numbers.html). This limited precision is enough for us to say that the coordinates are discrete (to a high level of precision), and thus the state space is finite (although very large).
+
+#### Estimating output variables
+
+We calculate a mean estimate for each of the values in the output variable. We want an accurate estimate of the of the output variable in steady state, and so none of the output variables obtained in transient states can be used to estimate the steady state. We discard all *burn-in* iterations, that is the iterations needed to reach the steady state. Later we return to the empirical issue of determining the number of *burn-in* iterations, but for now assume that the process has burnt in.
+
+Define $\mu_t^{(n)}$ as the expected value of the output variable $Y_t$ at repetition $n$ and iteration $t$. We know that in steady state the state space distribution vector is *stationary*. Thus in steady state the expected values of any of the output variables, $Y_t, Y_{t+1}, Y_{t+2}$, et cetera, must also be stationary, $\mu_t^{(n)} = \mu_{t+1}^{(n)} = \mu_{t+2}^{(n)}$ and so forth, for repetition $n$. Removing the time subscript we have that $\mu^{(n)}$ is the expected value of $Y_t$ for repetition $n$ over all iterations $t$ in steady state. Using this we can define the process of the output variable as the sum of expected value and disturbance term, 
+
+$$Y_t = \mu^{(n)} + \varepsilon_t$$
+
+The disturbance term, $\varepsilon_t$, is serially correlated across iterations and therefore indexed with $t$. We execute several repetitions not just repetition $n$. For each repetition we may have a different expected value, ie. a different value of $\mu^{(n)}$. So we model $\mu^{(n)}$ as the realised value of a random variable, where $\mu^{(n)}$ is drawn from a distribution with mean $\mu$ and standard deviations $\sigma_\mu$. Consequently $\mu$ is the expected value of $Y_t$ over all repetitions and all iterations in steady state. 
+
+To estimate $\mu$ we can use the *ensemble average*. This entails executing several repetitions of a run, up until a pre-specified iteration $t$ that is within the steady state. And then taking the average over all repetitions of the realised values, $y_t^{(n)}$, of the output variable, $Y_t$, at iteration $t$:
+
+$$\mbox{Ensemble Average}_t \mbox{ of } Y_t = \sum\limits_{n = 1}^N {\frac{ y_t^{(n)} }{ N }}$$
+
+where $N$ is the total number of repetitions. The ensemble average converges to $\mu$ as the total number of repetitions go to infinity:
+
+$$\mu = \mbox{plim} \sum\limits_{n = 1}^N {\frac{ y_t^{(n)} }{ N }}$$
+
+The disadvantage of using the *ensemble average* to estimate $\mu$ is that we discard a lot of *burn-in* iterations. Fore instance if we determine that it takes 251 iterations for the process to burn in and we execute 100 repetitions. Then the first 250 *burn-in* iterations of each repetition are of no use when estimating the output variables in steady state. In total we discarding 250.000 iterations and only use information from 100 iterations (the last iteration from each repetition) in our estimate. By any stretch this is highly ineffective use of computational resources. For this reason, when possible, we would prefer to use the *time average* to estimate $\mu$. This entails executing a single repetition of a run, up until a pre-specified number of post-burn-in iteration. And then taking the average of $y_t^{(n)}$ over all post-burn-in iterations:
+
+$$\mbox{Time Average}^{(n)} \mbox{ of } Y_t = \sum\limits_{t = 1}^T {\frac{ y_t^{(n)} }{ T }}$$
+
+where $T$ is the total number of post-burn-in iterations and all iterations, $t \in \{1,2, … T\}$, are within the steady state. As the total number of iterations go to infinity, the time average converges to $\mu^{(n)}$, ie. the expected value of $Y_t$ for repetition $n$. Recall that an *ergodic* process converges to the same unique state space distribution regardless of the initial distribution. And since the only difference between different repetitions within the same run is the initial positions of firms, it implies that the limiting state space distribution is independent of the particular repetition when the process is *ergodic*. So for a *ergodic* process we have that $\mu^{(n)}$ is equal to $\mu$, in which case:
+
+$$\mu = \mbox{plim} \sum\limits_{t = 1}^T {\frac{ y_t^{(n)} }{ T }}$$
+
+Recall the example from above where it takes 251 iterations for the process to burn in. We further assume that the process is ergodic and execute 100 post-burn-in iterations. Using the time average we execute a single repetition with an overall of 351 iterations. In total we only discard 250 *burn-in* iterations, and use information from the last 100 iterations to estimate $\mu$. In this example we reduced the number of discarded iterations by a factor 1.000 when using the *time average* instead of the *ensemble average*. However with a high degree of autocorrelation in the process it might not be possible to use the *time average* — which is what we show below.
+
+The disturbance term in equation [##] is independent and identically distributed (IID) across repetitions, because we use a different random seed for each repetition. As previously noted different random seeds give different sequences of numbers, and these sequences are IID, which in turn produce disturbance terms that at any given iteration are IID across repetitions. So when executing several repetitions the observed values at iteration $t$ will be reasonably equally spread around the true mean, and the *ensemble average* gives a representative mean estimate of $\mu$. The *time average* may not give a reasonably representative estimate, because the disturbance term is serially correlated across iterations. While a ergodic process will eventually map out the entire steady state distribution vector, $\pi_\infty$, the process is slow to map out the distribution if there is a high degree of autocorrelation. A fully mapped out distribution assures that the *time average* gives a representative estimate of $\mu$. To check whether enough observations have been collected to map out the steady state distribution vector we run several test repetitions. For each output variable we calculate the *R-hat statistics*[^rhat] (Laver and Sergenti 2011, Brooks and Gelman 1998). The R-hat statistic is a relative measure of the between-repetition variance and the total within-repetition variance. And thus the measure reveals whether there is potential to trim the state space distribution further by increasing the number of iterations. A low R-hat statistic indicates less potential to trim. In the limit the measure tends to 1. This paper uses the common cutoff level of 1.05. If the R-hat statistic for every output variables is lower than 1.05, then we feel confident that the steady state distribution has been mapped out and proceed to using the *time average* in the final execution of the model. If the R-hat statistic is above 1.05 we can try to increase the number of iterations and re-run the test, or we will determine that the speed of converges is prohibitively slow and resort to using the *ensemble average* in the final execution of the model. In the following section we distinguish between *stochastic time-homogenous Markov chains* where the *time average* provides a representative estimate of $\mu$ and those that do not. Ie. whether the R-hat statistic is below the cutoff level for all the output variables, or not. 
+
+[^rhat]: The *R-hat statistics* is also known as the *potential scale reduction factor*. When running our test repetitions we calculate the *R-hat statistic* using the second half of all iterations. 
+
+[TO-DO: make density plots (include in paper — DON’T INCLUDE SINCE DENSITY PLOTS WILL ALSO CONTAIN TRANSIENT STATES). Switch MCP all-hunter model to ensemble average instead. ].
+
+#### Determining burn in
+
+We want to an estimate of our output variables in steady state. So for each model we need to empirically determine the number of *burn-in* iterations. In the deterministic time-homogenous Markov chain this is fairly straightforward, since the process converges to a single state. The process has burnt in once the values no longer change, ie. once the process becomes stationary. Empirically we set the *burnin* period to the maximum number of iterations it takes before the output variables flatline[^deterburn]. A stochastic time-homogenous Markov chain converges to a distribution of states rather than a single state, which make it slightly more difficult to empirically determine burn in. In the processes where the *time average* provides a representative estimate of $\mu$ we first identify the runs that require most iterations to converge. This is done by executing a few repetitions from different runs (ie. different parameter values) of the model and then visually inspecting the trace plots of the output variables[^traceplot]. Secondly, we execute several test repetitions with many iterations of these extreme cases. We focus on the extreme cases, since we want to find the number of *burn-in* iterations where all runs of the model have burnt in. For each test repetition we calculate the time average and corresponding standard deviation using the second half of all iterations[^secondhalf]. And finally, with our estimate of $\mu$ we determine that a particular test repetition has burnt in once the output variable is within one standard deviation of the estimated $\mu$. We set the *burn-in* period to the maximum number of iterations it takes for each of the test repetitions to burn in. In the stochastic time-homogenous Markov chains where the *time average* does not provide a representative estimate of $\mu$ the first two steps are identical; first identifying runs that require most iterations to converge, and secondly we execute several test repetitions. However since we cannot use the *time average* to calculate a representative estimate of $\mu$ we must rely on a less rigorous method to determine the number of *burn-in* iterations. For each test repetition we inspect the trace plots of all the output variables to determine when the test repetition appears to have reached steady state. We set the *burn-in* period to the maximum number of iterations it takes for each of the test repetitions to burn in.
+
+[^deterburn]: We execute the model. In each run we find the first iteration where the value of the output variable is equal to the value at the last iteration. From all the repetitions we select the largest of these iterations. This is then the number of iterations needed for all the repetitions in the the model to burn in. In the final execution of the model we err on the side of caution and set the *burnin* period slightly higher — often rounding up to the nearest 50, ie. 50, 100, 150, etc.
+
+[^traceplot]: A trace plot displays the iterative history of a repetition, ie. a time series plot of one value of the vector $y_t^{(n)}$ for all iterations $t$ for a given repetition $n$. A plot of one value of the vector $y_t^{(n)}$ by iteration.
+
+[^secondhalf]: The second half procedure is a sufficient although not a necessary condition for the process to burn in (Laver and Sergenti 2011, chapter 4, page. 73). We use this procedure to get a representative estimate of $\mu$, when we have yet to determine the actual number of *burn-in* iterations.
+
+
+_[MACCOV]_
+_[(Visually show the movement / iterations over time to the reader, ie. 2D market over time)]_
+_[Include example of trace plots / a graph from the filter-time tool.]_
+_[Breif summary of section 3. and possible ‘bridge’ to section 4. … In sum we have used an experimental design that allows us to evaluate the effect of parameter changes, and insure the validity of our results. We have identified the appropriate methods to estimate the our summary variables. As seen above, wnowing the underlying process of the run provides us with prior knowledge — it still requires some effort and test repetitions to determine the number of burn in iterations and whether the *time average* provides representative estimates. However once we have determined this the final execution of the model is straight forward/a matter of pressing ‘enter’ and waiting for the results.]_
+
+
+
+
+
+
+
 
 
 # 4. ANALYSIS
@@ -387,6 +405,25 @@ _[decision rule with foresight]_
 
 
 # A. APPENDIX 
+
+## A.1 Model overview
+
+**Homogenous firms:**
+
+* **All-sticker:** non-ergodic deterministic time-homogenous Markov chain. [The firms never move, so the process “converges” to a single state, which “depends”/is the initial position of the firm, thus the “process is non-ergodic.]
+* **All-hunter:** ergodic stochastic time-homogenous Markov chain. [When market share of a hunter firm decreases the firm turns around and heads in a randomly drawn opposite direction. This random component, makes the underlying process ergodic. In the model with a symmetric distribution of consumers the *time average* provide a representative estimate of $\mu$, ie. the only free parameter in the model is the number of firms, N. While this is not the case in the model with an asymmetric distribution of consumers, thus the *ensemble average* is used. Several R-hat statistics are above 1.05 even when executing the test repetitions with 20.000 iterations.]
+* **All-aggregator:** non-ergodic deterministic time-homogenous Markov chain. [Each repetition is an implementation of the Lloyd-algorithm, which always converges to a single state. However the state is not unique, a different initial position of the firms might result in a different CVT. Hence the process is non-ergodic.]
+* **All-maxcov:** deterministic time-homogenous Markov chain. ergodic?? single state or oscillates?
+
+**Hetrogenous firms:**
+
+* **Maxcov-inductor:** Does not fulfil Markov property. In the *trending bits* we use the moving average, thus the probability of the future state will depend on past states, and only the current state. Random set of hypothesis (however this is not a random component in the process, but only affects the initial state space distribution $\pi_0$).
+* **Maxcov-inductor-GA:** Does not fulfil Markov property. Random component (when forming new hypothesis).
+
+
+
+
+## A.2 Hypothesis & GA
 
 The number of hypotheses is set to $M=100$. 
 

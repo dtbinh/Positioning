@@ -78,6 +78,8 @@ In the *Santa Fe Artificial Stock Market* discussed by Arthur (2014, chapter 11,
 
 ## Agent-based modelling
 
+_[Definition of agent based model]_
+
 Laver and Sergenti (2011) also construct an agent-based model. They use this model to investigate the competitive location behaviour of political parties competing for voters on a two dimensional policy space. Political parties choose a policy and the voters vote for the party whose policy is closest to the voter’s ideal policy. They argue that the policy preferences of voters in many countries can be reduced to 2-3 fundamental dimensions. 
 
 To study multiparty competition they assume that political parties use heuristics or rules of thumb to determine their location. They have 5 different types of political parties. Each type of party uses one of the following decision rules:
