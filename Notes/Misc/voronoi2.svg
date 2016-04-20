@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="283.46px" height="283.46px" viewBox="0 0 283.46 283.46" enable-background="new 0 0 283.46 283.46" xml:space="preserve">
+<g id="Voronoi" display="none">
+	<line display="inline" fill="none" stroke="#231F20" stroke-miterlimit="10" x1="65" y1="0" x2="127.28" y2="183.975"/>
+	<line display="inline" fill="none" stroke="#231F20" stroke-miterlimit="10" x1="28.5" y1="283.461" x2="127.28" y2="183.975"/>
+	<line display="inline" fill="none" stroke="#231F20" stroke-miterlimit="10" x1="127.28" y1="183.975" x2="226.469" y2="283.459"/>
+</g>
+<g id="Boundary_circle">
+	<path fill="none" stroke="#939393" stroke-width="0.25" stroke-miterlimit="10" d="M443.982,283.458
+		c0-88.651-71.868-160.523-160.522-160.523s-160.523,71.872-160.523,160.523c0,88.657,71.869,160.526,160.523,160.526
+		S443.982,372.115,443.982,283.458z"/>
+	<circle fill="none" stroke="#939393" stroke-width="0.25" stroke-miterlimit="10" cx="0" cy="283.459" r="120.131"/>
+	<circle fill="none" stroke="#FF0000" stroke-width="0.25" stroke-miterlimit="10" cx="283.46" cy="0" r="204"/>
+	<circle fill="none" stroke="#FF0000" stroke-width="0.25" stroke-miterlimit="10" cx="0" cy="0" r="216"/>
+</g>
+<g id="Circle_intersect_boundary">
+	<circle fill="none" stroke="#FCD6E3" stroke-width="0.25" stroke-miterlimit="10" cx="226.469" cy="283.459" r="127.297"/>
+	<path fill="none" stroke="#FF0000" stroke-width="0.25" stroke-miterlimit="10" d="M265.297-0.001
+		c0-110.617-89.679-200.296-200.297-200.296s-200.297,89.68-200.297,200.296c0,110.624,89.679,200.298,200.297,200.298
+		S265.297,110.623,265.297-0.001z"/>
+	<circle fill="none" stroke="#FCD6E3" stroke-width="0.25" stroke-miterlimit="10" cx="28.5" cy="283.46" r="102.351"/>
+</g>
+<g id="Dekaunay_circle">
+	<circle fill="none" stroke="#939393" stroke-width="0.25" stroke-miterlimit="10" cx="127.28" cy="183.975" r="44.837"/>
+</g>
+<g id="Points">
+	<circle fill="#231F20" cx="85.04" cy="198.425" r="1.417"/>
+	<circle fill="#231F20" cx="113.386" cy="226.771" r="1.417"/>
+	<circle fill="#231F20" cx="170.079" cy="170.078" r="1.417"/>
+</g>
+<g id="Labels" display="none">
+	<text transform="matrix(1 0 0 1 4 9)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">P1</text>
+	<text transform="matrix(1 0 0 1 53.5 7.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">Q1</text>
+	<text transform="matrix(1 0 0 1 272 7.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">P2</text>
+	<text transform="matrix(1 0 0 1 272 277.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">P3</text>
+	<text transform="matrix(1 0 0 1 228 277.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">Q2</text>
+	<text transform="matrix(1 0 0 1 22 277.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">Q3</text>
+	<text transform="matrix(1 0 0 1 5.5 277.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">P4</text>
+	<text transform="matrix(1 0 0 1 78 192.5)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">A1</text>
+	<text transform="matrix(1 0 0 1 173.5 182)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">A3</text>
+	<text transform="matrix(1 0 0 1 112.5 235)" display="inline" font-family="'MyriadPro-Regular'" font-size="7">A2</text>
+</g>
+</svg>
