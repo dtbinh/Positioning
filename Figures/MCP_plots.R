@@ -133,9 +133,9 @@ gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggre
 
 
 # 3.2 ALL-HUNTER MODEL
-mcp_ex_h1 = read.csv("data/MCP_hunter_mean_eccentricity_20160202_112509_i250_b150.csv")
-mcp_ex_h2 = read.csv("data/MCP_hunter_ENP_20160202_112509_i250_b150.csv")
-mcp_ex_h3 = read.csv("data/MCP_hunter_mean_representation_20160202_112509_i250_b150.csv")
+mcp_ex_h1 = read.csv("data/MCP_hunter2_mean_eccentricity_20160420_104505_i151_b150_r100.csv")
+mcp_ex_h2 = read.csv("data/MCP_hunter2_ENP_20160420_104505_i151_b150_r100.csv")
+mcp_ex_h3 = read.csv("data/MCP_hunter2_mean_representation_20160420_104505_i151_b150_r100.csv")
 
 # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
 mcp_ex_h1[, "polarization"] = NA
