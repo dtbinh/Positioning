@@ -2,6 +2,7 @@
 Articles/**.pdf
 Articles/**.alias
 Articles/**.nlogo
+Articles/**.pptx
 
 # Output files
 Models/ABM/data/**
