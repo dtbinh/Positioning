@@ -931,3 +931,13 @@ _[runs, repetitions, iterations.]_
 _[Similarly to experimental studies we rely on randomisation to validate estimated effects.]_
 
 _[The end of this section discuss *burn in*, that is how long the model needs to run in order to converge.]_
+
+ $y_t^{(n)}$ for all iterations $t$ for a given repetition $n$. A plot of one value of the vector $y_t^{(n)}$ by iteration.
+
+[TO-DO: make density plots (include in paper — DON’T INCLUDE SINCE DENSITY PLOTS WILL ALSO CONTAIN TRANSIENT STATES). Switch MCP all-hunter model to ensemble average instead. ].
+
+In addition because of the symmetry and zero covariance ($\rho = 0$) between x and y, we can use the mixed univariate normal distribution, $f_x$, to determine the x coordinates of peaks and saddle points.
+
+$$= \frac{2e^{-2(x-\mu_{x,i})^2 - 2(y-\mu_{y,i})^2}}{\pi}$
+
+, and to discover new insights, such as out-of-equilibrium and transitional location behaviour.
