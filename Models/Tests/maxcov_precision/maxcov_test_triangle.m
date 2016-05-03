@@ -16,7 +16,7 @@ bvx = [ bbox(1:end-1,1)'; circshift( bbox(1:end-1,1)', [0,-1] ) ];
 bvy = [ bbox(1:end-1,2)'; circshift( bbox(1:end-1,2)', [0,-1] ) ];
 
 %% Population
-pref.boundary = 12; % Number of standard deviations
+pref.boundary = 10; % Number of standard deviations
 pref.resolution = 50; % Length of the square (even number to include (0,0))
 
 sd = 0.5; % Standard deviation of each subpopulation
@@ -31,6 +31,7 @@ b = pref.boundary/2;
 xy_test = NaN(12, 2, pref.repetitions);
 %correct = NaN(pref.repetitions,1);
 error_share = NaN(pref.repetitions,1);
+%time = NaN(pref.repetitions,1);
 
 for rep=1:pref.repetitions
     
@@ -71,8 +72,10 @@ for rep=1:pref.repetitions
     
     
     %% Maxcov
+    %tic;
     [xy_centroid_tri, xy_new_idx] = maxcov_delaunay_test(xy_test(1:pref.N,:,rep), [X(:) Y(:)], F);
-
+    %time(rep) = toc;
+    
     %% Market share
     triangles = size(xy_centroid_tri,1);
     shares = NaN(triangles, 1);
@@ -106,6 +109,7 @@ mean_error_distance = mean(error_distance(~correct));
 
 summary = table(random_corrent_pct, corrent_pct, max_error_share, mean_error_share, max_error_distance, mean_error_distance)
 
+%mean(time)
 
 
 
