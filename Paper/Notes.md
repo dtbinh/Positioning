@@ -169,6 +169,115 @@ GACH, Multinomial distribution with Dirichlet prior distribution.
 
 _[Voronoi diagrams and Delaunay Triangulation.]_
 
+  depends on the distance metric used. can be constructed with different distance metrics, each resulting in a different Voronoi diagram.]_
+
+ note that equilibrium “sometimes exists on multidimensional policy space but existence is undependable”.
+
+_[Quote from book/paper with author that propose two alternative models (one which he developed himself which is sequential rather than simulanoues)]_
+
+_[One might then ask, why the model appeals to researchers and why the continued interest in the Hotelling model?]_
+
+In relation to the models with multidimensional space, Roemer (2006, p. 1018) note that equilibrium sometimes exists, but *“existence is undependable”*. And goes on to write that many researchers *“took the non-existence of multidimensional equilibrium in the known models to mean that in reality there was no equilibrium … and hence one should observe cycling”* (like the *dancing equilibria* mentioned above). Roemer is highly critical of this line of reasoning, writing that an equilibrium theorist *“does not conclude that if her model fails to produce equilibrium, there is no equilibrium in the real world; this would be a last resort. Instead, she looks for another model”*[^othermodel]. 
+
+_[Agent-based model might be this other model. … We reject cycling as an equilibrium, since it violates our assumption that of anticipation. Something I try to correct for by assuming that agents use inductive reasoning.]_
+_[(Paradigm shift? Lack of alternative model/explanation?)]_
+
+[^othermodel]: Roemer (2006) himself points to two alternative models in the literature on political science — the *party-faction model* and the *citizen-candidate model*. Neither of which are particularly suitable to settings outside of political science.
+
+This further implies
+This further implies that the methods used to construct Voronoi diagrams do not easily generalise to other 
+The methods used to construct Voronoi diagrams are often exclusive to one distance metric. 
+Unfortunately the methods that use one distance metric to construct Voronoi diagram, do not easily generalise to other
+Unfortunately the methods for constructing Voronoi diagrams that rely on one distance metric, do not easily generalise to other distance metrics.
+
+Methods that construct Voronoi diagrams for one type of distance metric do not easily generalise to other distance metrics
+
+used choice of distance metric
+
+In the line market with three firms, the Delaunay tessellation will not link the two firms on the perimeters together, since they do not share a market boundary, however both these firms are linked to the firm in the middle.
+
+In a bounded two-dimensional space, each Voronoi set creates a polygon[^poly]. The number of sides, the area and the perimeter of the polygon are measures that can be used to characterise the Voronoi set (Okabe, et. al. 2009). In terms of firm location these three measures would be the number of direct competitors, the market size, and length of the market boundaries. _[The latter is a proxy for the surface tension/energy of the market. The points on the market boundary exhibits higher energy than interior points.]_ The properties of the polygon provide descriptive statistics on each firm. However they contain less information on the intrinsic interaction between firms that is an integral part of competition. The network formed by *Delaunay tessellation* provides insights on interaction. The number of direct competitors can also be obtained from the network by counting the number of links emanating from a firm. But more importantly the links tell which specific firms are in direct competition with one-another, and in a dynamic setting they tell how the competitive setting changes over time. As earlier noted, Eaton and Lipsey (1975) find that the hexagonal, square and rectangular pattern break up because firms on the perimeter will pair up with neighbours. The *Delaunay tessellation* provides an easy method to analyse such behaviour and a method to generalise the findings. _[The *Delaunay tessellation* seem to be under-explored in the contemporary literature on competitive location of firms.]_
+
+[^poly]: Strictly speaking, the Voronoi set is only a polygon for certain distance metrics. Only distance metrics where the boundaries of Voronoi sets are line segments will lead to polygons. Commonly used distance metrics -- such as *Manhattan*, *Euclidean* and *Chebyshev* -- all fulfil this requirement (Eiselt and Marianov, 2011, chapter 19).
+
+##Price competition
+
+_[Although this paper does not consider price competition I would no the less like to highlight a couple of papers that may indicate how the results in this paper might change if price competition was included ...]_
+_[Irmen and Thisse (1998) : multiple dimensions. Equilibrium with maximum differentiation along one dimension (the dominant), and minimum differentiation along all others.]_
+_[Liu and Shuai (2012) : Find results that contrasts with Irmen and Thisse (1998).]_
+
+Another string of papers part with Euclidean space altogether, and considers firm location or product differentiation in discrete space, such as on networks. Gaskin (2008) provides a review of discrete spatial competition models.
+
+ is  
+Arthur (2014) describe *inductive rationality* as the process of acting upon the most suitable hypotheses and update hypothesis in response to new information that falsifies currently held hypothesis. Investors use *inductive rationality*, as opposed to deductive reasoning which a rational expectations approach would prescribe. 
+
+. dictates that firms deduce firms are said to use  in their decision process to derive the optimal location. 
+
+Firms 
+The location model in this paper is ext will incorporate inductive 
+A modified version of this model is incorporate into the location model This paper will incorporate The location model in this paper incorporates the 
+
+They argue that the policy preferences of voters in many countries can be reduced to 2-3 fundamental dimensions. 
+
+ distributed  This allows them to get two separate subpopulation of voters, by varying the relative size and means of the bivariate distributions.
+
+number of political parties in their baseline model 
+
+Their baseline models has many free model parameters, such as the number of firms, relative size of the subpopulation, and polarisation of the mean ideal points of the subpopulation. 
+The parameter space is huge and they use a *Monte Carlo parameterisation* technique to set, that randomly draws a sample from the parameter space. They make 1,000 repeated draws from the parameter space.
+so using a *grid search* technique to survey each and every parameter configuration is computationally exhausting. Instead
+
+ Political parties exit the   The decision rule of firms is randomly selected in these model. By analysing these  models they see how decision
+
+ ... trade-off between exploration and exploitation ... ]_
+
+political parties with respectively the 
+ are pre-entered into the tournament ... The decision rules fall into the following categories;
+count towards and are only evaluated based on their votes elections periods are   
+
+The only decision rule that approaches  
+ 
+It is worth noting that none of the submitted decision rules use foresight. 
+
+The genetic algorithm used Arthur (2014) by 
+
+The model uses a genetic algorithm[^GA] to create new hypothesis. The new hypothesis are created by “mutating” and “recombining” existing hypothesis. 
+
+[^GA]: A genetic algorithm mimics an evolutionary process, ie. hypothesis are developed from earlier hypothesis with randomly occurring mutations and by crossbreeding “parent” hypothesis.
+
+conditional probability of  then the probability of that event occurring in the future increases.
+_[Learning]_
+
+way of overcoming
+ numerical sim   The macro-behaviour of the system is often I’m emerges from   not the same as solve numerically … agent-based model or out-of-equlibrimm economics is generalisation of equilibrium economics. As seen in the Santa Fe Artificial Stock Market model where standard equilibrium behaviour is a special case of the model.]_
+pursuing these by using decision rule,
+often simple
+
+_[Definition of agent based model]_
+
+
+using conventional analytical techniques the problem is very complex, perhaps intractable
+
+solve the model analytical is intractable.
+While there are settings in which trade agent-based models provide results in settings
+
+_[Different distance metrics. Manhattan, Euclidean, etc.]_
+
+or relocation
+
+In the field of asset pricing agents with *inductive rationality* is an alternative that has more realistic assumptions.
+In addition the agent-based model from the literature on political science allow researchers to analyse the two-dimensional multi-age
+In the field of asset pricing agents with *inductive rationality* is an alternative that has more realistic assumptions. This paper will use *inductive rationality* to analyse firm location behaviour.
+
+_[**Firm behaviour:** ]_
+
+This literature review has gone through the different behaviours which might choose when choosing their location in a competitive  location behaviour
+
+This literature review looked at different firm location behaviours. The simplest being firms without foresight (zero conjectural variation). 
+
+_[aka. MAXCOV.]_
+
+
 ## From Draft.md
 
 Therefore the other side of the market -- consumers and their purchasing behaviour -- has been greatly simplified.
@@ -941,3 +1050,81 @@ In addition because of the symmetry and zero covariance ($\rho = 0$) between x a
 $$= \frac{2e^{-2(x-\mu_{x,i})^2 - 2(y-\mu_{y,i})^2}}{\pi}$
 
 , and to discover new insights, such as out-of-equilibrium and transitional location behaviour.
+
+When analysing the model we execute many repetitions of the model with varying combinations of input parameters. Executing one model can easily entail hundreds of thousands of iterations and thus millions of calculations.
+
+  calculations
+A thus model will easily into
+
+The model is analysed by executing hundreds of repetitions of the model hundreds of different combinations of input parameters. The computational resources needed to execute this number 
+
+With no overlap we are at the edge of what constitutes a single market[^singlemarket], and it might be more appropriate to describe this setting as two separate markets, at least in terms of the customers.
+
+[^singlemarket]: _[Definition of market: ... When is it a single market and when is it two separate markets ...]_
+
+_[Short recap of the definition of a agent-based model]_
+ The model executes several iteration and analyses how the interaction of the firms affect the overall location of firms.
+
+Our point of departure is that each firm chooses the location that maximises its market share, given the location of the other firms. 
+
+ since t  These rule are described in detail below. _[rational vs. rule of thumb]_
+_[Why these three rules? No exploration, social optimum, and high on exploration.]_
+
+would result in the largest market share.
+
+Comparing this to one where the triangle which the firm locates within is selected randomly  be correct in 4-16% of all cases. The exact percentage depends on the parameter settings and the number of firms. 
+
+selected which the triangle would only
+the method is correct 40-90% of the cases 
+
+ends up gives the firm the largest market share.
+
+The actual market area or consumers that the firm attracts by locating within the triangle, does not
+
+The consumers that the firm attracts will not necessarily be all the ones in the triangle. Therefore the triangle with most consumers may not always be the triangle that gives the firm the largest market share. However the method is correct 40-90% of the cases depending on the parameter settings and the number of firms. If the triangle was randomly selected which the triangle would only be correct in 4-16% of all cases.
+
+Each firm has to calculate the market share of at most 24 triangles. If 12 firms all use the *MAXCOV*-rule the total number of triangles in each iteration would be 288.
+
+ We opt for the gradual adjustment for two reasons: 
+ 
+The *maxcov* firm does not move directly to the ideal position, but moves 0.1 standard deviations in the direction.
+
+ ,  may oscillate between several states.
+
+We see that each firm can gain a higher makes  When firms are located 0.44 standard deviations from the population centre, 
+
+We
+By moving closer to the population centre the firm can capture the high density area, but the losses clearly outweighs this gain. _[A firm that attempts to wedge its market area closer to the centre will often find as a result that the far end of its wedged market area becomes increasingly thinner. This is the lost market area.]_ 
+
+_[Although Núñez and Scarsini (2014) investigates a discrete competitive location model we find similar results. Namely that as the number of firms increase the location of firms converges to the distribution of consumers’ preferences. In this model we see that as the number of firms in the market increases the mean representation converges towards the social optimal level.]_
+
+With each crowd of firms fiercely competing for the customers in the respective subpopulation. 
+
+locate around the peak of the customer distribution.
+
+ Firms locate close to the centre of one of the subpopulations
+
+The firm loses market shares when it moves too far away from the centre of a subpopulation. Thus this acts as a punishment for the *hunter* firm discouraging it from locating between the subpopulations and close to the average ideal point of all customers.
+
+A highly polarised market with two firms solely focused on increasing their market shares, leads the firms to locate in a position where fierce competition is present. That is the firms cluster and compete for the same locations, rather than disperse across the market space. Note that this behaviour is a combination of the polarisation and the hunt for market shares. 
+
+ the inter
+The other decision rules also show that firms cluster when there is little to no polarisation, but only the *hunter* firms maintain this clustering when the polarisation among the subpopulations increases. The effect depends upon the interplay between decision rule and population distribution.
+
+With a high degree of polarisation the *maxcov* firms always separate, also with two or three firms in the market. And the firms locate around the centre of each subpopulation. 
+
+which imply that the ENP increases.
+The low effective number of firms in the *aggregator* model with many firms and low polarisation the centre of the symmetric distribution easily overcrowds. In the *aggregator* model where firms locate to please their current customer base overcrowding leads to firms locating on different orbits around the centre. Firms located on the inner orbits attract a larger share of the customers than the firms located on the orbits further away from the centre. Polarisation of the subpopulations spreads the ideal points over a greater area which in turn reduce the overcrowding of firms. This is why in the *aggregator* model with many firms the ENP increases when going from low polarisation to medium or high degree of polarisation.
+
+ The crowd competes for the customers in each subpopulation.
+
+_[ ... Simultaneous ... heterogeneous agents ... infinite regress ... Note that the lack of a solution to the maximisation problem is not the result of bounded rationality, ie. mental capacity of the agents need to calculate the correct solution. We have make no such restriction. Agents have unbounded rationality. ... ]_
+
+_[ ... Is it possible to adequately describe the state of all competing firms using a single measure, rather than one measure for each competing firm. Possible something based on the Delaunay triangulation/graph (graph properties such as eccentricity/radius, circumference/geodesic, diameter, degree) ... ]_
+
+In addition it is easy to expand the current *maxcov-inductor* decision rule to include
+
+Instead of using *condition/forecast*-rules to predict the future location of competing firms, one could also use a *neural network*.
+_[... why use this method rather than for instance neural net/machine learning method? ... easy to expand to include the evolutionary process used in the next decision rule ... clear to see which information is used to make forecasts / how firms make forecast, while the neural net is a black box (it would work, but difficult to analysis how it works) ... ]_
+
+ not. Each *maxcov-inductor* firm has a unique set of hypotheses.
