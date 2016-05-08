@@ -270,7 +270,28 @@ for i = 1:pref.iterations*pref.psi
                     else
                         xy(n,:,i) = xy_new; % don't overshoot
                     end
+                
+                
+                case 'MAXCOVRND'
+                    % Locate to maximise market share based on delaunay
+                    % triagulation of the other firms.
+                    firms_other = firms; firms_other(n) = [];
                     
+                    % New firm position based on the centroid of the 
+                    % delaunay triangle with largest market share.
+                    xy_new = maxcov_delaunay(xy(firms_other,:,i-1), [X(:) Y(:)], F);
+                    
+                    % Move in direction of delaunay triangle centroid.
+                    [direction, rho] = cart2pol(xy_new(:,1)-xy(n,1,i-1), xy_new(:,2)-xy(n,2,i-1));
+                    % On average 0.1 std. dev. move in direction of centroid, 
+                    % if distance is less than 0.1 std. dev.
+                    [dx_in, dy_in] = pol2cart(direction, rand/5);
+                    if(rho>0.1)    
+                        xy(n,:,i) = xy(n,:,i-1) + [dx_in dy_in];
+                    else
+                        xy(n,:,i) = xy_new; % don't overshoot
+                    end
+                
 
                 case 'MAXCOV-INDUCTOR'
                     % Locate to maximise market share but subject to the predicted movements of other firms.

@@ -36,6 +36,15 @@ rqss_ci_bands = function(dd, y, x, group) {
   bands = Reduce("rbind", group_bands)
 }
 
+n_ratio_break = function(mu) {
+  #if( mu < 0.5 ) {
+  #  return(NaN)
+  #} else {
+    breakpoint = -(sqrt(4*mu^2-1)-2*mu) / (sqrt(4*mu^2-1)+2*mu) * exp(4*sqrt(4*mu^2-1)*mu)
+    return(breakpoint)
+  #}
+}
+
 # 2. GRID SWEEP: SAME DECISION RULE MODELS --------------------------------
 
 gs_s1 = read.csv("data/GS_sticker_mean_eccentricity_20160203_211455_r1000.csv")
@@ -77,7 +86,6 @@ gs_3 = as.data.frame(mapply(c,
                             data.frame(gs_m3[,1:3], 4)  ))
 colnames(gs_3)[4] = "Rule"
 gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggregator", "All-maxcov"))
-
 
   # 2.1 Mean eccentricity
   fig21a = ggplot(gs_1, aes(y = MeanEst, x = N, colour = factor(Rule))) + 
@@ -124,7 +132,6 @@ gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggre
   ggsave("fig23a.pdf", width = 21, height = 16, units = "cm")
   
 
-
 # 3. MCP: SAME DECISION RULE WITH EXOGENOUS NUMBER OF FIRMS ---------------
 
 # 3.1 ALL-STICKER MODEL
@@ -156,6 +163,17 @@ mcp_ex_h3[0.5 < mcp_ex_h3$mu & mcp_ex_h3$mu < 1, ][, "polarization"] = 2
 mcp_ex_h3[1 <= mcp_ex_h3$mu, ][, "polarization"] = 3
 mcp_ex_h3$polarization = ordered(mcp_ex_h3$polarization, labels = c("Polarization ≤ 0.5", "0.5 < Polarization < 1", "1 ≤ Polarization"))
 
+# Grouping polarization into unimodal and bimodal
+mcp_ex_h1$n_ratio_break = n_ratio_break(mcp_ex_h1$mu);
+mcp_ex_h1[, "unimodal"] = 0
+mcp_ex_h1[is.na(mcp_ex_h1$n_ratio_break) | mcp_ex_h1$n_ratio >= mcp_ex_h1$n_ratio_break, ][, "unimodal"] = 1
+mcp_ex_h1$unimodal = ordered(mcp_ex_h1$unimodal, labels = c("Bimodal", "Unimodal"))
+
+mcp_ex_h3$n_ratio_break = n_ratio_break(mcp_ex_h3$mu);
+mcp_ex_h3[, "unimodal"] = 0
+mcp_ex_h3[is.na(mcp_ex_h3$n_ratio_break) | mcp_ex_h3$n_ratio >= mcp_ex_h3$n_ratio_break, ][, "unimodal"] = 1
+mcp_ex_h3$unimodal = ordered(mcp_ex_h3$unimodal, labels = c("Bimodal", "Unimodal"))
+
 # Subset of data only consisting 2, 3, 4 and 12 firms.
 mcp_ex_h1_subset = subset(mcp_ex_h1, N %in% c(2,3,4,12))
 cfirm4 = c("#253494", "#2c7fb8", "#41b6c4", "#a1dab4") # YlGnBu 5 reversed (but only using first 4). http://colorbrewer2.org
@@ -175,6 +193,18 @@ cfirm4 = c("#253494", "#2c7fb8", "#41b6c4", "#a1dab4") # YlGnBu 5 reversed (but 
     scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
     labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL)
   ggsave("fig321a.pdf", width = 21, height = 16, units = "cm")
+  
+  fig321b = ggplot(mcp_ex_h1, aes(y = MeanEst, x = N, colour = factor(unimodal))) + 
+    theme_minimal() +
+    theme(legend.position = "top", 
+          legend.box = "horizontal", 
+          legend.key = element_rect(fill = NA, colour = NA) )
+  fig321b + stat_smooth() + 
+    geom_point(size = 1) + 
+    scale_colour_brewer(palette = "Dark2") +
+    scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+    scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
+    labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL)
   
   # All-hunter mean eccentricity as function the relative subpopulation size for a subset number of firms.
   fig321b = ggplot(mcp_ex_h1_subset, aes(y = MeanEst, x = n_ratio, colour = factor(N))) +
@@ -223,6 +253,22 @@ cfirm4 = c("#253494", "#2c7fb8", "#41b6c4", "#a1dab4") # YlGnBu 5 reversed (but 
     scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
     labs(y = "Mean representation", x = "Number of firms", colour = NULL)  
   ggsave("fig323a.pdf", width = 21, height = 16, units = "cm")
+  
+  fig323b_bands = rqss_ci_bands(mcp_ex_h3, y="MeanEst", x="N", group="unimodal")
+  fig323b = ggplot(mcp_ex_h3, aes(y = MeanEst, x = N, colour = factor(unimodal))) + 
+    theme_minimal() +
+    theme(legend.position = "top", 
+          legend.box = "horizontal", 
+          legend.key = element_rect(fill = NA, colour = NA) )
+  fig323b + stat_quantile(quantiles=0.5, formula = y ~ qss(x), method = "rqss", size = 1) +
+    geom_ribbon(data = fig323b_bands, 
+                aes(x = N, ymin = MeanEstBLo, ymax = MeanEstBHi, group = factor(unimodal), y = NULL, color = NULL), 
+                alpha = 0.15) +
+    geom_point(size = 1) + 
+    scale_colour_brewer(palette = "Dark2") +
+    scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+    scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
+    labs(y = "Mean representation", x = "Number of firms", colour = NULL)  
 
 #   fig323a = ggplot(mcp_ex_h3, aes(y = MeanEst, x = N, colour = factor(polarization))) + 
 #     theme_minimal() +
@@ -750,4 +796,176 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
       scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
       labs(y = "Mean representation", x = "Number of firms", colour = NULL)  
     #ggsave("fig623a.pdf", width = 21, height = 16, units = "cm")
+    
+    
+    
+# APPENDIX A -- MAXCOVRND COMPARISON
+    
+    # A.1 Symmetric distribution
+    gs_m1 = read.csv("data/GS_maxcov_mean_eccentricity_20160203_231850_r1000_b99.csv")
+    gs_mr1 = read.csv("data/GS_maxcovrnd_mean_eccentricity_20160504_221217_r1000_b99.csv")
+    gs_m2 = read.csv("data/GS_maxcov_ENP_20160203_231850_r1000_b99.csv")
+    gs_mr2 = read.csv("data/GS_maxcovrnd_ENP_20160504_221217_r1000_b99.csv")
+    gs_m3 = read.csv("data/GS_maxcov_mean_representation_20160203_231850_r1000_b99.csv")
+    gs_mr3 = read.csv("data/GS_maxcovrnd_mean_representation_20160504_221217_r1000_b99.csv")
+    
+    # Merge the grid-sweep datasets of every decision rule into one.
+    gs_1 = as.data.frame(mapply(c, 
+                                data.frame(gs_m1[,1:3], 4),
+                                data.frame(gs_mr1[,1:3], 5) ))
+    colnames(gs_1)[4] = "Rule"
+    gs_1$Rule = factor(gs_1$Rule, labels = c("All-maxcov", "All-maxcovrnd"))
+    
+    gs_2 = as.data.frame(mapply(c, 
+                                data.frame(gs_m2[,1:3], 4),
+                                data.frame(gs_mr2[,1:3], 5) ))
+    colnames(gs_2)[4] = "Rule"
+    gs_2$Rule = factor(gs_2$Rule, labels = c("All-maxcov", "All-maxcovrnd"))
+    
+    gs_3 = as.data.frame(mapply(c, 
+                                data.frame(gs_m3[,1:3], 4),
+                                data.frame(gs_mr3[,1:3], 5) ))
+    colnames(gs_3)[4] = "Rule"
+    gs_3$Rule = factor(gs_3$Rule, labels = c("All-maxcov", "All-maxcovrnd"))
+    
+    
+    # A.1.1 Mean eccentricity
+    figA11 = ggplot(gs_1, aes(y = MeanEst, x = N, linetype = factor(Rule))) + 
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    figA11 + geom_line(size=1) + 
+      #geom_ribbon(aes(x = N, ymin = MeanEst-StdDev, ymax = pmin(gs_1$MeanEst+gs_1$StdDev, rep(1.7, nrow(gs_1))), group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
+      scale_fill_discrete(guide=FALSE) +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
+      labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL, linetype = NULL)
+    ggsave("figA11.pdf", width = 21, height = 16, units = "cm")
+    
+    # A.1.2 ENP
+    figA12 = ggplot(gs_2, aes(y=MeanEst, x=N, linetype=factor(Rule))) +
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    figA12 + geom_line(size=1) + 
+      #geom_ribbon(aes(x = N, ymin = pmax(gs_2$MeanEst-gs_2$StdDev, rep(1, nrow(gs_2))), ymax = pmin(gs_2$MeanEst+gs_2$StdDev, rep(12, nrow(gs_2))), group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
+      scale_fill_discrete(guide=FALSE) +
+      geom_abline(intercept = 0, slope = 1, color="gray") +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
+      labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL, linetype = NULL)
+    ggsave("figA12.pdf", width = 21, height = 16, units = "cm")
+    
+    # A.1.3 Mean representation
+    #fig23a_bands = rqss_ci_bands(gs_3, y="MeanEst", x="N", group="Rule")
+    figA13 = ggplot(gs_3, aes(y = MeanEst, x = N, linetype = factor(Rule))) + 
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    figA13 + geom_line(size=1) + 
+      #geom_ribbon(aes(x = N, ymin = MeanEst-StdDev, ymax = MeanEst+StdDev, group = factor(Rule), fill = Rule, color = NULL), alpha = 0.1) +
+      scale_fill_discrete(guide=FALSE) +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
+      labs(y = "Mean representation", x = "Number of firms", colour = NULL, linetype = NULL)
+    ggsave("figA13.pdf", width = 21, height = 16, units = "cm")
+    
+    
+    # A.2 Asymmetric distribution
+    mcp_ex_m1 = read.csv("data/MCP_maxcov_mean_eccentricity_20160203_121329_i151_b150_r50.csv")
+    mcp_ex_m2 = read.csv("data/MCP_maxcov_ENP_20160203_121329_i151_b150_r50.csv")
+    mcp_ex_m3 = read.csv("data/MCP_maxcov_mean_representation_20160203_121329_i151_b150_r50.csv")
+    mcp_ex_mr1 = read.csv("data/MCP_maxcovrnd_mean_eccentricity_20160505_093227_i151_b150_r50.csv")
+    mcp_ex_mr2 = read.csv("data/MCP_maxcovrnd_ENP_20160505_093227_i151_b150_r50.csv")
+    mcp_ex_mr3 = read.csv("data/MCP_maxcovrnd_mean_representation_20160505_093227_i151_b150_r50.csv")
+    
+    mcp_ex1 = as.data.frame(mapply(c, 
+                                data.frame(mcp_ex_m1[,1:5], 4),
+                                data.frame(mcp_ex_mr1[,1:5], 5) ))
+    colnames(mcp_ex1)[6] = "Rule"
+    mcp_ex1$Rule = factor(mcp_ex1$Rule, labels = c("All-maxcov", "All-maxcovrnd"))
+    
+    mcp_ex2 = as.data.frame(mapply(c, 
+                                   data.frame(mcp_ex_m2[,1:5], 4),
+                                   data.frame(mcp_ex_mr2[,1:5], 5) ))
+    colnames(mcp_ex2)[6] = "Rule"
+    mcp_ex2$Rule = factor(mcp_ex2$Rule, labels = c("All-maxcov", "All-maxcovrnd"))
+    
+    mcp_ex3 = as.data.frame(mapply(c, 
+                                   data.frame(mcp_ex_m3[,1:5], 4),
+                                   data.frame(mcp_ex_mr3[,1:5], 5) ))
+    colnames(mcp_ex3)[6] = "Rule"
+    mcp_ex3$Rule = factor(mcp_ex3$Rule, labels = c("All-maxcov", "All-maxcovrnd"))
+    
+    # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
+    mcp_ex1[, "polarization"] = NA
+    mcp_ex1[mcp_ex1$mu <= 0.5, ][, "polarization"] = 1
+    mcp_ex1[0.5 < mcp_ex1$mu & mcp_ex1$mu < 1, ][, "polarization"] = 2
+    mcp_ex1[1 <= mcp_ex1$mu, ][, "polarization"] = 3
+    mcp_ex1$polarization = ordered(mcp_ex1$polarization, labels = c("Polarization ≤ 0.5", "0.5 < Polarization < 1", "1 ≤ Polarization"))
+    
+    mcp_ex2[, "polarization"] = NA
+    mcp_ex2[mcp_ex2$mu <= 0.5, ][, "polarization"] = 1
+    mcp_ex2[0.5 < mcp_ex2$mu & mcp_ex2$mu < 1, ][, "polarization"] = 2
+    mcp_ex2[1 <= mcp_ex2$mu, ][, "polarization"] = 3
+    mcp_ex2$polarization = ordered(mcp_ex2$polarization, labels = c("Polarization ≤ 0.5", "0.5 < Polarization < 1", "1 ≤ Polarization"))
+    
+    mcp_ex3[, "polarization"] = NA
+    mcp_ex3[mcp_ex3$mu <= 0.5, ][, "polarization"] = 1
+    mcp_ex3[0.5 < mcp_ex3$mu & mcp_ex3$mu < 1, ][, "polarization"] = 2
+    mcp_ex3[1 <= mcp_ex3$mu, ][, "polarization"] = 3
+    mcp_ex3$polarization = ordered(mcp_ex3$polarization, labels = c("Polarization ≤ 0.5", "0.5 < Polarization < 1", "1 ≤ Polarization"))
+    
+    # A.2.1 Mean eccentricity
+    # All-maxcov mean eccentricity as function of number of firms in market.
+    figA21 = ggplot(mcp_ex1, aes(y = MeanEst, x = N, colour = factor(polarization), linetype=factor(Rule))) + 
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    figA21 + stat_smooth(se = FALSE) + 
+      #geom_point(size = 1) + 
+      scale_colour_brewer(palette = "Dark2") +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
+      labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL, linetype = NULL)
+    ggsave("figA21.pdf", width = 21, height = 16, units = "cm")
+    
+    # A.2.2 ENP
+    # All-maxcov effective number of firms compared to actual number of firms in market.
+    figA22 = ggplot(mcp_ex2, aes(y=MeanEst, x=N, colour=factor(polarization), linetype=factor(Rule))) +
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    figA22 + stat_smooth(se = FALSE) + 
+      scale_colour_brewer(palette = "Dark2") +
+      geom_abline(intercept = 0, slope = 1, color="gray") +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
+      labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL, linetype = NULL)
+    ggsave("figA22.pdf", width = 21, height = 16, units = "cm")
+    
+    # A.2.3 Mean representation
+    # All-maxcov mean representation as function of number of firms in market.
+    #fig343a_bands = rqss_ci_bands(mcp_ex3, y="MeanEst", x="N", group="polarization")
+    figA23 = ggplot(mcp_ex3, aes(y = MeanEst, x = N, colour = factor(polarization), linetype=factor(Rule))) +
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    figA23 + stat_quantile(quantiles=0.5, formula = y ~ qss(x), method = "rqss", size = 1) +
+      #geom_ribbon(data = fig343a_bands, 
+      #            aes(x = N, ymin = MeanEstBLo, ymax = MeanEstBHi, group = factor(polarization), y = NULL, color = NULL), 
+      #            alpha = 0.15) +
+      #geom_point(size = 1) + 
+      scale_colour_brewer(palette = "Dark2") +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
+      labs(y = "Mean representation", x = "Number of firms", colour = NULL, linetype = NULL)
+    ggsave("figA23.pdf", width = 21, height = 16, units = "cm")
+    
     

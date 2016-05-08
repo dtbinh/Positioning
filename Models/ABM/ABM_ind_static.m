@@ -14,11 +14,11 @@ clearvars;
 %pref.seed = rng(17796749, 'twister');
 pref.boundary = 10; % Number of standard deviations
 pref.resolution = 50; % Length of the square (even number to include (0,0))
-pref.N = 5; % Number of firms
-pref.mu = .5; % Mean of subpopulation
-pref.n_ratio = 2; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-pref.iterations = 4; % Number of system ticks / iterations.
-pref.psi = 250; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
+pref.N = 12; % Number of firms
+pref.mu = 0; % Mean of subpopulation
+pref.n_ratio = 1; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
+pref.iterations = 5; % Number of system ticks / iterations.
+pref.psi = 200; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
 pref.M = 100; % Number of condition/forecast rules that each firm holds.
 pref.a_a = 1-1/75; % Accuracy mememory paramenter.
 pref.C = 0.005; % Cost of specificity.
@@ -29,8 +29,9 @@ pref.crossover = 0.3; % Probability that the offspring condition/forecast rule i
 %pref.rules = repmat({'AGGREGATOR'},1,pref.N);
 %pref.rules = repmat({'HUNTER'},1,pref.N);
 %pref.rules = repmat({'MAXCOV'},1,pref.N);
+pref.rules = repmat({'MAXCOVRND'},1,pref.N);
 %pref.rules = repmat({'MAXCOV-INDUCTOR'},1,pref.N);
-pref.rules = repmat({'MAXCOV-INDUCTOR-GA'},1,pref.N);
+%pref.rules = repmat({'MAXCOV-INDUCTOR-GA'},1,pref.N);
 %pref.rules = repmat({'PREDATOR'},1,pref.N);
 %pref.rules = [{'PREDATOR'} {'STICKER'} {'STICKER'} {'STICKER'} {'STICKER'}];
 
@@ -270,7 +271,26 @@ for i = 1:pref.iterations*pref.psi
                     else
                         xy(n,:,i) = xy_new; % don't overshoot
                     end
+
+                case 'MAXCOVRND'
+                    % Locate to maximise market share based on delaunay
+                    % triagulation of the other firms.
+                    firms_other = firms; firms_other(n) = [];
                     
+                    % New firm position based on the centroid of the 
+                    % delaunay triangle with largest market share.
+                    xy_new = maxcov_delaunay(xy(firms_other,:,i-1), [X(:) Y(:)], F);
+                    
+                    % Move in direction of delaunay triangle centroid.
+                    [direction, rho] = cart2pol(xy_new(:,1)-xy(n,1,i-1), xy_new(:,2)-xy(n,2,i-1));
+                    % On average 0.1 std. dev. move in direction of centroid, 
+                    % if distance is less than 0.1 std. dev.
+                    [dx_in, dy_in] = pol2cart(direction, rand/5);
+                    if(rho>0.1)    
+                        xy(n,:,i) = xy(n,:,i-1) + [dx_in dy_in];
+                    else
+                        xy(n,:,i) = xy_new; % don't overshoot
+                    end
 
                 case 'MAXCOV-INDUCTOR'
                     % Locate to maximise market share but subject to the predicted movements of other firms.
