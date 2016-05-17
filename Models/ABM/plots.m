@@ -21,7 +21,7 @@ for i = 1:pref.iterations
     end
     scatter( xy(:,1,i,:)' , xy(:,2,i,:)' , [], color, 'filled'); % Plot the firms with respective colors.
     hold off; % Don't place anymore plots on top of figure.
-    pause(.02);
+    pause(.01);
 end
 
 
@@ -177,9 +177,9 @@ title('ENP'); % Add title
 hold on;
 m2nd_ENP = mean(ENP(length(mean_eccentricity)/2:end));
 sd2nd_ENP = std(ENP(length(mean_eccentricity)/2:end));
-plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
-plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
-plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
+%plot(repmat( m2nd_ENP , 1, pref.iterations), 'k');
+%plot(repmat( m2nd_ENP + sd2nd_ENP , 1, pref.iterations), 'k:');
+%plot(repmat( m2nd_ENP - sd2nd_ENP , 1, pref.iterations), 'k:');
 hold off;
 
 
@@ -447,16 +447,33 @@ hold off;
 accuracy_final = squeeze(cf_i(:, 24, :));
 accuracy_final(accuracy_final==0) = NaN; % Non-zero accuracy.
 
-figure(901);
-histogram(accuracy_final);
-title('Accuracy at final iteration');
-
-accuracy = squeeze(cf(:, 24, :, :));
-accuracy_positive = accuracy;
+accuracy_i = squeeze(cf(:, 24, :, :));
+accuracy_positive = accuracy_i;
 accuracy_positive(accuracy_positive==0) = NaN; % Non-zero accuracy.
 
 accuracy_positive_mean_iter = mean(accuracy_positive, 3, 'omitnan');  % Mean over all iterations.
 accuracy_positive_mean_firm = squeeze(mean(accuracy_positive, 1, 'omitnan'));  % Mean over all firm's condition/forcast rules.
+
+% Active
+active_i = squeeze(cf(:, 25, :, :));
+active_positive = active_i;
+active_positive(accuracy_positive==0) = NaN; % Non-zero accuracy.
+active_positive_mean_firm = squeeze(mean(active_positive, 1, 'omitnan'));  % Mean over all firm's condition/forcast rules.
+
+% accuracy "per times active".
+accuracy_active_positive = accuracy_positive./(1+active_positive);
+accuracy_active_positive_mean_firm = squeeze(mean(accuracy_active_positive, 1, 'omitnan'));
+
+% Accuracy excluding default rule
+accuracyd_i = squeeze(cf(2:end, 24, :, :));
+accuracyd_positive = accuracyd_i;
+accuracyd_positive(accuracyd_positive==0) = NaN; % Non-zero accuracy.
+accuracyd_positive_mean_firm = squeeze(mean(accuracyd_positive, 1, 'omitnan'));  % Mean over all firm's condition/forcast rules.
+
+
+figure(901);
+histogram(accuracy_final);
+title('Accuracy at final iteration');
 
 figure(902);
 histogram(accuracy_positive_mean_iter);
@@ -475,9 +492,27 @@ clf reset; % Reset figure.
 plot(mean(accuracy_positive_mean_firm,1), 'k');
 title('Mean accuracy of all condition/forecast rules'); % Add title
 
+figure(913);
+clf reset; % Reset figure.
+hold on;
+plot(mean_forecasterror);
+hold off;
+title('Mean forecast error of all firm'); % Add title
+
+figure(914);
+clf reset; % Reset figure.
+plot(accuracy_active_positive_mean_firm');
+title('Mean accuracy/(1+active) of all the firm´s condition/forecast rules');
+
+figure(915);
+clf reset; % Reset figure.
+plot(accuracyd_positive_mean_firm');
+title('Mean accuracy of all the firm´s condition/forecast rules (excluding default)'); % Add title
+
+
+
+
 % Which conditions are being used?
-
-
 
 % % Total number of times that a state is active.
 sum(~isnan(accuracy_final)) % Percentage of conditions that have been used.

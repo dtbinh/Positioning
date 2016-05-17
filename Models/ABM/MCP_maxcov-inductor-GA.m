@@ -257,8 +257,8 @@ clearvars;
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
     export_mean_representation = table(export_param_fmt(:,1), export_param_fmt(:,2), export_param_fmt(:,3), squeeze(est_mean_representation), squeeze(est_std_mean_representation), squeeze(est_se_mean_representation), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), NaN(pref.runs,1), SESD_ratio_mean_representation, ...
                       'VariableNames', {'N' 'mu' 'n_ratio' 'MeanEst' 'StdDev' 'StdError' 'Check1_Rhat' 'Check2_Ftest' 'Check3_PowerZero' 'Check4_PowerDiff', 'Check5_SESD'});
-    writetable(export_mean_eccentricity, strcat('data/MCP_maxcov-inductor-GA_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
-    writetable(export_ENP, strcat('data/MCP_maxcov-inductor-GA_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
-    writetable(export_mean_representation, strcat('data/MCP_maxcov-inductor-GA_mean_representation_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
+    writetable(export_mean_eccentricity, strcat('data/MCP_maxcov-inductor-GA_mean_eccentricity_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_psi', num2str(pref.psi), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
+    writetable(export_ENP, strcat('data/MCP_maxcov-inductor-GA_ENP_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_i', num2str(pref.iterations), '_psi', num2str(pref.psi), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
+    writetable(export_mean_representation, strcat('data/MCP_maxcov-inductor-GA_mean_representation_', char(pref.timestamp, 'yyyyMMdd_HHmmss'), '_psi', num2str(pref.psi), '_i', num2str(pref.iterations), '_b', num2str(pref.burnin), '_r', num2str(pref.repetitions), '.csv'),'Delimiter',',');
 
 

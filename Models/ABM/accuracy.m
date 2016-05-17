@@ -1,4 +1,4 @@
-function U = accuracy( xy_i, active_cf, cf, a_a)
+function [U, fe] = accuracy( xy_i, xy_past, active_cf, cf, a_a)
 %ACCURACY
 %   Updates the accuracy of all the active condition/forecast rules.
 %   
@@ -14,6 +14,7 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     idx_cf = idx(:,3);
     
     % Expand the coordinates set so it fits the index.
+    xy_past_target = xy_past( idx_target, : );
     xy_i_target = xy_i( idx_target, : );
     
     %% Forecasts
@@ -32,7 +33,7 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     intercepts = values(:,1:2);
     coeffecients = values(:,3:6);
     % f(x, y) = (a, b) + (x, y)*(e, f; g, h) = (a, b) + (x*e+y*g, x*f+y*h)
-    xy_i_forecast = intercepts + [sum(xy_i_target.*coeffecients(:,[1 3]), 2) sum(xy_i_target.*coeffecients(:,[2 4]), 2)];
+    xy_i_forecast = intercepts + [sum(xy_past_target.*coeffecients(:,[1 3]), 2) sum(xy_past_target.*coeffecients(:,[2 4]), 2)];
     
     
     %% Distance from forecast to actual position.
@@ -62,4 +63,5 @@ function U = accuracy( xy_i, active_cf, cf, a_a)
     
     %% Output variables
     U = cf_updated;
+    fe = mean(distance);
 end

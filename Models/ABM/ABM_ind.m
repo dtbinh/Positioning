@@ -118,16 +118,15 @@ b = pref.boundary/2;
     end
     cf_0_condition(cf_0_condition==2) = NaN;
 
-    cf_range = [-1.5 1.5; -1.5 1.5; -1.2 1.2; -0.2 0.2; -0.2 0.2; -1.2 1.2];
-    %cf_range = [-1.5 1.5; -1.2 1.2; -0.2 0.2];
-    % Intercept drawn uniformly from [-1.5, 1.5] std. dev. Each row of
+    cf_range = [-0.005 0.005; -0.005 0.005; 0.99 1.01; -0.01 0.01; -0.01 0.01; 0.99 1.01];
+    % Intercept drawn uniformly from [-0.005, 0.005] std. dev. Each row of
     % intercepts have the form [B_x1, B_y1].
-    cf_0_intercept = cf_range(1,1) + rand(pref.M, 2, pref.N) * cf_range(1,2)*2;
-    % Coeffecients along same dimension drawn uniformly from [-1.2, 1.2],
+    cf_0_intercept = cf_range(1,1) + rand(pref.M, 2, pref.N) * diff(cf_range(1,:));
+    % Coeffecients along same dimension drawn uniformly from [0.99, 1.01],
     % while coeffecients along opposing dimension drawn uniformly from 
-    % [-0.2, 0.2]. Each row of betas have the form [B_xx B_xy B_yx B_yy].
-    cf_0_coefficients(:,[1 4 3 2],:) = [cf_range(3,1) + rand(pref.M, 2, pref.N) * cf_range(3,2)*2 ...
-                                        cf_range(4,1) + rand(pref.M, 2, pref.N) * cf_range(4,2)*2 ];
+    % [-0.01, 0.01]. Each row of betas have the form [B_xx B_xy B_yx B_yy].
+    cf_0_coefficients(:,[1 4 3 2],:) = [cf_range(3,1) + rand(pref.M, 2, pref.N) * diff(cf_range(3,:)) ...
+                                        cf_range(4,1) + rand(pref.M, 2, pref.N) * diff(cf_range(4,:)) ];
 
     % Covariance matrix is initially set such that the variance along same the 
     % dimension is 0.005 and the variance along the opposing dimension is 0. 
@@ -172,7 +171,7 @@ b = pref.boundary/2;
     cf                      = NaN([size(cf_i) pref.iterations*pref.psi]);
     J_states                = NaN(pref.N, 13, pref.iterations*pref.psi);
     cf_used                 = NaN(pref.N, size(cf_i, 2), pref.N-1, pref.iterations*pref.psi);
-    ga = 0;
+    ga = strcmp(pref.rules{1}, 'MAXCOV-INDUCTOR-GA');
 
 %% 3. EVOLUTION
 for i = 1:pref.iterations*pref.psi
@@ -371,7 +370,7 @@ for i = 1:pref.iterations*pref.psi
         active_cf_i(active_count+1:end,:) = []; % Delete excess rows.
         
         % Update accuracy
-        cf_i = accuracy(xy(:,:,i), active_cf_i, cf_i, pref.a_a);
+        [cf_i, ~] = accuracy(xy(:,:,i), xy(:,:,i-1), active_cf_i, cf_i, pref.a_a);
         
         % Save states
         J_states(:,:,i) = J;

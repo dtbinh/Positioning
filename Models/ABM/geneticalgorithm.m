@@ -15,11 +15,21 @@ function cf_new = geneticalgorithm(cf_i, C, prob_crossover, cf_range)
     cf_n = cf_i;
     
     %% 2.  Find rules for replacement (worst), and the parent rules (elite).
+    % Calculate specificity of each condition (count the number of 0s and 
+    % 1s in the condition).
+    specificity = sum( ~isnan( cf_i(:, 1:13, : )), 2);
+    
+    % Calculate fitness of remaining condition/forecast rules as
+    % function of the forecast variance/accurracy and with a cost on
+    % the specificity of the condition. The latter creates a slow drift
+    % towards conditions with many wildcard characters (#/NaN).
+    fitness = -cf_i(:, 24, :) - C*specificity;
+        
     % Sort condition/forecast rules based on their accuracy.
     % We exclude the first rule (that matches any state) for the possible 
     % worst case candidates. We add it to the elite (so it may be parent).
     % The special case / first rule is handled at the end of the loop. 
-    [~, order] = sort(cf_i(2:end,24,:));
+    [~, order] = sort(fitness(2:end,:,:));
     order = order+1;
     order = squeeze(order);
     % Identify the 20% worst performing condition/forecast rules.
@@ -31,15 +41,7 @@ function cf_new = geneticalgorithm(cf_i, C, prob_crossover, cf_range)
         
         
         %% 3.1 Fitness
-        % Calculate specificity of each condition (count the number of 0s and 
-        % 1s in the condition).
-        specificity = sum( ~isnan( cf_i(idx_elite(:,n), 1:13, n )), 2);
-        % Calculate fitness of remaining condition/forecast rules as
-        % function of the forecast variance/accurracy and with a cost on
-        % the specificity of the condition. The latter creates a slow drift
-        % towards conditions with many wildcard characters (#/NaN).
-        fitness = -cf_i(idx_elite(:,n), 24, n) - C*specificity;
-        
+        fitness_n = fitness(idx_elite(:,n), :, n);
         
         %% 3.2 Replacement procedure
         
@@ -59,7 +61,7 @@ function cf_new = geneticalgorithm(cf_i, C, prob_crossover, cf_range)
             mutation = (num_crossover+1) : M/5;
 
             % Selecting the most fit parrent.
-            [~, fit_parent] = max( fitness(parents(mutation,:)), [], 2);
+            [~, fit_parent] = max( fitness_n(parents(mutation,:)), [], 2);
             parent = parents( mutation' + M/5*(fit_parent - 1) );
             parent_bits = cf_i(parent, 1:13, n);
             
