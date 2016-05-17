@@ -186,7 +186,7 @@ We have argued how a *run* of our model constitutes a stochastic process and lin
 
 It is often possible to construct several Markov representations. When choosing the vector of the state space, $X_t$, one need to insure that the output variables, $Y_t$, can be derived from the vector of the state space, i.e. $Y_t = f(X_t)$. In addition the vector of the state space, $X_t$, has to satisfy the Markov property. In most of the models in this paper the vector of the state space only needs to contain the coordinates of the firms, since we can calculate the remaining output variables from the coordinates[^discretecoord]. Once the vector of the state space, $X_t$, reaches steady state so will the output variables, $Y_t$.
 
-[^discretecoord]: Although the coordinates take on real numbers in theory, in practice when executed on any computer there is a limit to the precision of the coordinates. Matlab stores values using up to 64-bits ([MathWorks 2016](http://se.mathworks.com/help/matlab/matlab_prog/floating-point-numbers.html)). This limited precision is enough for us to say that the coordinates are discrete (to a high level of precision), and thus the state space is finite (although very large).
+[^discretecoord]: Although the coordinates take on real numbers in theory, in practice when executed on any computer there is a limit to the precision of the coordinates. Matlab stores values using up to 64-bits ([MathWorks 2016](http://se.mathworks.com/help/matlab/matlab_prog/floating-point-numbers.html)). This limited precision is enough for us to say that the coordinates are discrete (to a high level of precision), and thus the state space is finite (although quite large).
 
 #### Estimating output variables
 
