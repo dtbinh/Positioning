@@ -651,9 +651,9 @@ crule3p1 = c("#000000", "#F8766D", "#00BA38", "#619CFF") # Three decisions rules
 
 # 6. MCP: MAXCOV-INDUCTOR & MAXCOV-INDUCTOR-GA MODEL ----------------------
 
-mcp_ex_mi1 = read.csv("data/MCP_maxcov-inductor_mean_eccentricity_20160128_221954_i1001_b1000_r50.csv")
-mcp_ex_mi2 = read.csv("data/MCP_maxcov-inductor_ENP_20160128_221954_i1001_b1000_r50.csv")
-mcp_ex_mi3 = read.csv("data/MCP_maxcov-inductor_mean_representation_20160128_221954_i1001_b1000_r50.csv")
+mcp_ex_mi1 = read.csv("data/MCP_maxcov-inductor_mean_eccentricity_20160513_231917_i1001_psi1_b1000_r50.csv")
+mcp_ex_mi2 = read.csv("data/MCP_maxcov-inductor_ENP_20160513_231917_i1001_psi1001_b1000_r50.csv")
+mcp_ex_mi3 = read.csv("data/MCP_maxcov-inductor_mean_representation_20160513_231917_i1001_psi1001_b1000_r50.csv")
   
 # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
 mcp_ex_mi1[, "polarization"] = NA
@@ -674,6 +674,17 @@ mcp_ex_mi3[0.5 < mcp_ex_mi3$mu & mcp_ex_mi3$mu < 1, ][, "polarization"] = 2
 mcp_ex_mi3[1 <= mcp_ex_mi3$mu, ][, "polarization"] = 3
 mcp_ex_mi3$polarization = ordered(mcp_ex_mi3$polarization, labels = c("Polarization ≤ 0.5", "0.5 < Polarization < 1", "1 ≤ Polarization"))
 
+# Grouping polarization into unimodal and bimodal
+mcp_ex_mi1$n_ratio_break = n_ratio_break(mcp_ex_mi1$mu);
+mcp_ex_mi1[, "unimodal"] = 0
+mcp_ex_mi1[is.na(mcp_ex_mi1$n_ratio_break) | mcp_ex_mi1$n_ratio >= mcp_ex_mi1$n_ratio_break, ][, "unimodal"] = 1
+mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimodal"))
+
+# Grouping polarization into unimodal and bimodal
+mcp_ex_mi1$n_ratio_break = n_ratio_break(mcp_ex_mi1$mu);
+mcp_ex_mi1[, "unimodal"] = 0
+mcp_ex_mi1[is.na(mcp_ex_mi1$n_ratio_break) | mcp_ex_mi1$n_ratio >= mcp_ex_mi1$n_ratio_break, ][, "unimodal"] = 1
+mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimodal"))
 
     # 6.1.1 Mean eccentricity
     # Maxcov-inductor mean eccentricity as function of number of firms in market.
@@ -689,6 +700,30 @@ mcp_ex_mi3$polarization = ordered(mcp_ex_mi3$polarization, labels = c("Polarizat
       scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
       labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL)
     ggsave("fig611a.pdf", width = 21, height = 16, units = "cm")
+    
+    fig611b = ggplot(mcp_ex_mi1, aes(y = MeanEst, x = N, colour = factor(unimodal))) + 
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    fig611b + stat_smooth() + 
+      geom_point(size = 1) + 
+      scale_colour_brewer(palette = "Dark2") +
+      scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
+      labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL)
+    
+    fig611c = ggplot(mcp_ex_mi1[which(mcp_ex_mi1$unimodal=="Unimodal"), ], aes(y = MeanEst, x = n_ratio, colour = factor(N))) + 
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    fig611c + stat_smooth(se=FALSE) + 
+      geom_point(size = 1) + 
+      scale_colour_brewer(palette = "Dark2") +
+      scale_x_continuous(limits = c(1, 2), minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
+      labs(y = "Mean eccentricity", x = "Relative size of subpopulation", colour = NULL)  
     
     # 6.1.2 ENP
     # Maxcov-inductor effective number of firms compared to actual number of firms in market.
@@ -722,7 +757,7 @@ mcp_ex_mi3$polarization = ordered(mcp_ex_mi3$polarization, labels = c("Polarizat
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
       labs(y = "Mean representation", x = "Number of firms", colour = NULL)  
-    #ggsave("fig613a.pdf", width = 21, height = 16, units = "cm")
+    ggsave("fig613a.pdf", width = 21, height = 16, units = "cm")
     
     
 mcp_ex_miga1 = read.csv("data/MCP_maxcov-inductor-GA_mean_representation_20160129_154530_i50_b49_r50.csv")
