@@ -651,9 +651,9 @@ crule3p1 = c("#000000", "#F8766D", "#00BA38", "#619CFF") # Three decisions rules
 
 # 6. MCP: MAXCOV-INDUCTOR & MAXCOV-INDUCTOR-GA MODEL ----------------------
 
-mcp_ex_mi1 = read.csv("data/MCP_maxcov-inductor_mean_eccentricity_20160513_231917_i1001_psi1_b1000_r50.csv")
-mcp_ex_mi2 = read.csv("data/MCP_maxcov-inductor_ENP_20160513_231917_i1001_psi1001_b1000_r50.csv")
-mcp_ex_mi3 = read.csv("data/MCP_maxcov-inductor_mean_representation_20160513_231917_i1001_psi1001_b1000_r50.csv")
+mcp_ex_mi1 = read.csv("data/MCP_maxcov-inductor_mean_eccentricity_20160517_142009_i1001_psi1_b1000_r50.csv")
+mcp_ex_mi2 = read.csv("data/MCP_maxcov-inductor_ENP_20160517_142009_i1001_psi1001_b1000_r50.csv")
+mcp_ex_mi3 = read.csv("data/MCP_maxcov-inductor_mean_representation_20160517_142009_i1001_psi1001_b1000_r50.csv")
   
 # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
 mcp_ex_mi1[, "polarization"] = NA
@@ -743,7 +743,7 @@ mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimod
     # 6.1.3 Mean representation
     # Maxcov-inductor mean representation as function of number of firms in market.
     #fig613a_bands = rqss_ci_bands(mcp_ex_mi3, y="MeanEst", x="N", group="polarization")
-    fig613a = ggplot(mcp_ex_mi3, aes(y = -MeanEst^2, x = N, colour = factor(polarization))) + 
+    fig613a = ggplot(mcp_ex_mi3, aes(y = MeanEst, x = N, colour = factor(polarization))) + 
       theme_minimal() +
       theme(legend.position = "top", 
             legend.box = "horizontal", 
@@ -760,9 +760,9 @@ mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimod
     ggsave("fig613a.pdf", width = 21, height = 16, units = "cm")
     
     
-mcp_ex_miga1 = read.csv("data/MCP_maxcov-inductor-GA_mean_representation_20160129_154530_i50_b49_r50.csv")
-mcp_ex_miga2 = read.csv("data/MCP_maxcov-inductor-GA_ENP_20160129_154530_i50_b49_r50.csv")
-mcp_ex_miga3 = read.csv("data/MCP_maxcov-inductor-GA_mean_eccentricity_20160129_154530_i50_b49_r50.csv")
+mcp_ex_miga1 = read.csv("data/MCP_maxcov-inductor-GA_mean_eccentricity_20160518_095112_i50_psi50_b49_r50.csv")
+mcp_ex_miga2 = read.csv("data/MCP_maxcov-inductor-GA_ENP_20160518_095112_i50_psi50_b49_r50.csv")
+mcp_ex_miga3 = read.csv("data/MCP_maxcov-inductor-GA_mean_representation_20160518_095112_psi50_i50_b49_r50.csv")
 
 # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
 mcp_ex_miga1[, "polarization"] = NA
@@ -816,7 +816,7 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
     # 6.2.3 Mean representation
     # Maxcov-inductor-GA mean representation as function of number of firms in market.
     #fig623a_bands = rqss_ci_bands(mcp_ex_miga3, y="MeanEst", x="N", group="polarization")
-    fig623a = ggplot(mcp_ex_miga3, aes(y = -MeanEst^2, x = N, colour = factor(polarization))) + 
+    fig623a = ggplot(mcp_ex_miga3, aes(y = MeanEst, x = N, colour = factor(polarization))) + 
       theme_minimal() +
       theme(legend.position = "top", 
             legend.box = "horizontal", 
@@ -830,7 +830,7 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(-4, 0), expand = c(0, 0)) +
       labs(y = "Mean representation", x = "Number of firms", colour = NULL)  
-    #ggsave("fig623a.pdf", width = 21, height = 16, units = "cm")
+    ggsave("fig623a.pdf", width = 21, height = 16, units = "cm")
     
     
     

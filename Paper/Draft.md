@@ -98,6 +98,8 @@ _[ENP: falls since some firms are endowed with more accurate condition/forecast 
 
 ![Effective number of firms (ENP) for maxcov-inductor-GA model. Bands indicate +/- standard deviation.](Graphics/fig622a.png)
 
+![Mean representation for maxcov-inductor-GA model. Bands indicate +/- standard deviation.](Graphics/fig623a.png)
+
 _[Mean eccentricity: When there are few firms in the market then the firms locate further from the population centre. [Closer to y=0. The location perimeter / boundary of where firms locate has along the x-axis has not changed. The firms will only locate out to a certain point/distance, that is not too far away from the centres of the subpopulations. Thus the mean eccentricity tells us that firms to a greater extend locate in between the subpopulations, and that this behaviour increases as the number of firms increase. This is why we see a decline in the mean eccentricity as the number of firms increase. This is not a stable location pattern, but instead it reflects that firms in transition -- relocating from one subpopulation to the other.]]_
 _[ENP: low. The firms end up locating at the subpopulation centre.  The firms separate into two crowds: the crowds are uneven in size. => low ENP. When firms locate on top of each other ==> the firms very likely to lock into position.]_
 
