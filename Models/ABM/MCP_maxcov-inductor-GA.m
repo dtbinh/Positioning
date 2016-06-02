@@ -47,7 +47,7 @@ clearvars;
     pref.psi = 50; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
     pref.M = 100; % Number of condition/forecast rules that each firm holds.
     pref.a_a = 1-1/75; % Accuracy mememory paramenter.
-    pref.C = 0.005; % Cost of specificity.
+    pref.C = 0.0005; % Cost of specificity.
     pref.crossover = 0.3; % Probability that the offspring condition/forecast rule is created by crossover operations (rather than mutation).    
 
     % Creating empty matrixes for summary variable 
@@ -130,7 +130,7 @@ clearvars;
     pref.burnin = 49; % Number of system iterations before we have burnin 
     pref.seed = rng(59493519, 'twister'); % Seed such that the randomly generated results are repeatable (from random.org)
     pref.timestamp = datetime('now');  % Create time stamp so exported files don't overwrite exsisting files.
-    pref.runs = 250; % Number of runs of the experiment
+    pref.runs = 500; % Number of runs of the experiment
     pref.export_data = 0; % Exports the data
     pref.export_fig = 0; % Exports figures
     pref.iterations = pref.burnin + 1; % Number of post-burnin system iterations
@@ -138,7 +138,7 @@ clearvars;
     pref.psi = 50; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
     pref.M = 100; % Number of condition/forecast rules that each firm holds.
     pref.a_a = 1-1/75; % Accuracy mememory paramenter.
-    pref.C = 0.005; % Cost of specificity.
+    pref.C = 0.0005; % Cost of specificity.
     pref.crossover = 0.3; % Probability that the offspring condition/forecast rule is created by crossover operations (rather than mutation).    
     
     % Creating empty matrixes for summary variable 

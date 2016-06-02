@@ -123,7 +123,7 @@ clearvars;
     pref.burnin = 1000; % Number of iterations before we have burnin 
     pref.seed = rng(63824788, 'twister'); % Seed such that the randomly generated results are repeatable (from random.org)
     pref.timestamp = datetime('now');  % Create time stamp so exported files don't overwrite exsisting files.
-    pref.runs = 250; % Number of runs of the experiment
+    pref.runs = 500; % Number of runs of the experiment
     pref.export_data = 0; % Exports the data
     pref.export_fig = 0; % Exports figures
     pref.iterations = pref.burnin + 1; % Number of post-burnin iterations
