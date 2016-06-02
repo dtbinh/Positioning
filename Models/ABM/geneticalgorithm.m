@@ -113,7 +113,7 @@ function cf_new = geneticalgorithm(cf_i, C, prob_crossover, cf_range)
             % Randomly choose new value from range.
             values_replace_idx = find(values_draw <= 0.2);
             [~, values_replace_value] = ind2sub(size(parent_values), values_replace_idx);
-            offspring_values(values_replace_idx) = cf_range(values_replace_value, 1) + rand(length(values_replace_value),1) .* cf_range(values_replace_value, 2)*2;
+            offspring_values(values_replace_idx) = cf_range(values_replace_value, 1) + rand(length(values_replace_value),1) .* diff(cf_range(values_replace_value, :), 1, 2);
             
             % Change value with small uniformly randomly drawn amount from -0.5% to +0.5% of range.
             values_change_idx = find(values_draw > 0.2 & values_draw <= 0.4);
