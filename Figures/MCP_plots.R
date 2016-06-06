@@ -766,9 +766,9 @@ mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimod
     ggsave("fig613a.pdf", width = 21, height = 16, units = "cm")
     
     
-mcp_ex_miga1 = read.csv("data/MCP_maxcov-inductor-GA_mean_eccentricity_20160518_095112_i50_psi50_b49_r50.csv")
-mcp_ex_miga2 = read.csv("data/MCP_maxcov-inductor-GA_ENP_20160518_095112_i50_psi50_b49_r50.csv")
-mcp_ex_miga3 = read.csv("data/MCP_maxcov-inductor-GA_mean_representation_20160518_095112_psi50_i50_b49_r50.csv")
+mcp_ex_miga1 = read.csv("data/MCP_maxcov-inductor-GA_mean_eccentricity_20160602_225249_i50_psi50_b49_r50.csv")
+mcp_ex_miga2 = read.csv("data/MCP_maxcov-inductor-GA_ENP_20160602_225249_i50_psi50_b49_r50.csv")
+mcp_ex_miga3 = read.csv("data/MCP_maxcov-inductor-GA_mean_representation_20160602_225249_psi50_i50_b49_r50.csv")
 
 # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
 mcp_ex_miga1[, "polarization"] = NA
@@ -827,7 +827,7 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
     fig622a + stat_smooth() + 
       scale_colour_brewer(palette = "Dark2") +
       geom_abline(intercept = 0, slope = 1, color="gray") +
-      stat_function(fun = eqcond1_ENP, colour = "black") + 
+      #stat_function(fun = eqcond1_ENP, colour = "black") + 
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
       labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL)
