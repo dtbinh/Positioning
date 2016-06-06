@@ -4,6 +4,147 @@ _[While writing I will consider multiple versions of the same line/paragraph/wor
 
 -----
 
+## From introduction.md
+
+*****
+
+The assortment of products offered by manufactures is a response to the diversity of consumers preferences. 
+
+The array of locations
+The product range
+The array of products offered by the firms, 
+The range of available products is a response to the diversity of consumers preferences.
+The array of products is a response to the diversity of consumers tastes
+
+While consumers prefer retailers located in their vicinity to distantly located retailers.
+
+Every consumer has a preferred variant.
+The idiosyncratic preferences of consumers.
+
+Similarly every consumer has a preferred location that would reduce the costs associated with retailer ping.
+
+preferred location that reduce the consumers costs
+
+Consumers have distinctive preferences
+Consumers have idiosyncratic 
+ — whether it be product or location.
+ 
+ Consumers have idiosyncratic tastes about their most preferred variants.
+ 
+ The product range is a response to the diversity of consumer preferences.
+ 
+ , and is the source of the market power of firms. 
+the source of market power
+The premiums give rise to the market power of firms.
+
+The market power of firms arise from these types of premiums.
+The source 
+The firm gains market power of firms 
+These types of premiums is the sources of the market power of firms.
+The market power of firms 
+ and diffusion of retailer location.
+The intraindividual heterogeneity
+
+This intra- and inter individual heterogeneity generates a demand for product diversity in the aggregate.
+It follows that consumers pay more for variants that are better suited to their own tastes. These premiums are the source of market power of firms.
+
+and so it is unlikely that each individual can sustain producing his or her preferred product.
+
+Although the market exhibits a wide diversity in consumer preferences, the market is
+
+Inspire of the wide diversity in consumer preferences, the market  is unlikely to support a large number of firms, because of increasing returns to scale in production, distribution, R&D etc.
+
+Despite wide diversity in tastes, the market is unlikely to support a large number of products because of increasing returns to scale in R&D, productions, marketing, and distribution. Otherwise each individual would produce his or her own preferred product. Each firm must capture a sufficiently large fraction of demand to cover its fixed costs. Competition takes place among the few remaining firms.
+When competition is among few firms, the assumption of competitive price-taking firms becomes untenable. The interaction among firms is strategic.
+
+When a profit maximising firm evaluates different locations or product characteristics, it should take account of the potential demand associated with . 
+
+Profit maximising firms should take into account the potential demand of different
+
+Profit maximisation dictates the firm should account for the potential demand of providing different packages of characteristics. The firm with foresight should also consider the implications of introducing a particular product on (possible) product repositioning of other firms.
+
+ once we analyse the model.
+ 
+In sum, when discussing
+
+ the long-term profitability is contingent on the firm's ability appropriately incorporate the action of competing firms.  
+Since firms compete for the same consumers,
+Several firms compete for the same segments, and so 
+
+The firms compete for the same segments of the market
+The Tactical
+Navigating in a market with competing firms ... 
+Capture a sufficiently large share of the market.
+The strategic non-cooperative behaviour of firms, imply that several firms are likely to compete for the same segments of the market. And so it is not enough that the choice of the firm is profitable given the current state, its actions should be profitable in   
+The choice of the firm should not only be profitable given the current state, but  _[FORESIGHT. Why? Why interesting?]_
+
+Not only profitable given the current state, but continue to be profitable ... 
+Niche ... 
+
+less well understood. M
+
+ .appearance dimension.
+
+that specify the clean differentiate their product along several product -- such as a two dimensional geographical space, or when products differentiation takes places along multiple dimensions
+ a product space with multiple  product differentiation  how firms locate in a two dimensional space or which product characteristics firms cho   along multidimensional product characteristic. 
+ 
+   With little knowledge of how these decisions are made, or how they affect the overall market. Without a solid theoretical understanding
+
+ _[In a market with fixed prices, consumers view variants that better mirror their preferences as less costly, allowing firms to maintain an excess demand, which also give rise to market power.]_
+ 
+  and the analysis framed in terms of geographical location or product differentiation. 
+This paper
+Out-compete
+The aim of this paper is not to aid or guide firms in their decision process, but rather to develop a theoretical fundament that can be used to understand the decision process of firms. The theoretical foundation is of little practical use in itself. 
+
+Moreover consumer preferences are not necessarily distributed uniformly or symmetrically, and might no be single peaked. ... Convenient 
+
+ Making it imperative to also consider distributions that are not necessarily symmetric or unimodal.  
+When analysing this s also consider distributions which are not necessarily symmetric nor unimodal. 
+ the distribution of consumer preferences might be asymmetric and multi-modal.  
+market not necessarily restricted to a single dimension and where
+
+the market power   
+A theoretical model opens the field to more practical applications and.  
+A thorough theoretical   
+
+However developing a theoretical understanding allows us to answer more practical useful questions, such as ... 
+
+... try to mitigate the inefficient locations or product range by adjusting incentives accordingly. 
+  
+- When firms compete via the product they choose to produce, an additional possible source of market failure can arise in the product selection process. I.e having too many, too few, or the wrong products. ... endogenous product selection. Whether firms choose the right products from the spectrum of possible variants.
+
+- Market power --> relevant for competition laws/anti-trust laws
+
+This type of reasoning  
+
+In this paper we extend the agent-based model of Laver and Sergeant (2011) to include a decision rule
+ 
+ *Santa Fe Artificial Stock Market* discussed by Arthur (2014, chapter 11, chapter 3) 
+ 
+This paper uses a modified version of the forecast method advanced by the
+ Forecasts are
+The way this paper models incorporates forecasts is a modified version of
+The method used *Santa Fe Artificial Stock Market* discussed by Arthur (2014, chapter 11, chapter 3)
+ 
+However the lack of foresight prohibits any type of strategic considerations. That is, each agent is oblivious to the future behaviour of the other agents and does not take their behaviour into account when deciding its own location. Strategic considerations are fundamental to the equilibrium concept of the earlier competitive location models.
+
+Price may also have been fixed earlier in the distribution channel, if firms
+Prices may also have been fixed earlier in the distribution channel, e.g. by manufactures or wholesalers, if firms enter a *retail price maintenance* agreement.  
+
+Price competition greatly increases the complexity of the model. 
+, and is therefore beyond the scope of this paper.
+   In the models we assume that all firms charge the same price, and thus we disregard price competition altogether. Price competition greatly increases the complexity of the model, and is therefore beyond the scope of this paper.
+
+The term firm, retailer, manufacturer and political party 
+
+While the models in this paper are
+We reformulate the model in terms of firms competing for customers, when they choose their geographic location. It is simply shorter to write ‘firms’ and ‘relocate’ rather than ‘political parties’ and ‘shift policy position’ and it reads more naturally. The results of the model are still valid in a political context, as well as in the context where manufacturers competing for customers through product differentiation when choosing product characteristic along two dimensions.
+
+Instead of jumping right in, the paper gradually introduces decision rules and extensions, starting from the most simple and adding extra layers. Decision rules are gradually introduced, starting with the most simple 
+
+section The decision rules are gradually introduced starting with the simplest decision rules and distribution of consumers, advancing into asymmetric distributions, and finally covering the decision rules with foresight.
+
 ## From Literature review.md
 
 in the Hotelling model
@@ -1128,3 +1269,66 @@ Instead of using *condition/forecast*-rules to predict the future location of co
 _[... why use this method rather than for instance neural net/machine learning method? ... easy to expand to include the evolutionary process used in the next decision rule ... clear to see which information is used to make forecasts / how firms make forecast, while the neural net is a black box (it would work, but difficult to analysis how it works) ... ]_
 
  not. Each *maxcov-inductor* firm has a unique set of hypotheses.
+
+That is each crowds reach their critical level of maxcov-firms that they can stably sustain with a total of seven firms in the market. 
+
+ a less uneven subpopulations is needed for 
+
+implying a lower critical level. When the left subpopulation is half as large as the right, we still observe oscillation in the maxcov-model, while the maxcov-inductor firms are more likely to locate in the triangle configuration.
+
+As the relative size of the left subpopulation increases the centre firms oscillate between locations that are closer and closer to the peak of the left subpopulation.
+
+   From this it is clear that as the relative size of the subpopulation increases and the two
+
+  and we see a decrease in mean eccentricity as some firms start to them
+
+ than it was in the maxcov model.   that tops with seven firms in the market is slight more evident 
+as the number of firms firms in the market is increased is 
+With a low and medium degree of polarisation of the subpopulations the maxcov-inductor firms locate at similar distance to the ideal point of all consumers as the maxcov model. With a high degree of polarisation in the maxcov-inductor model the mean eccentricity increases steadily and tops with seven firms in the market. 
+
+in market with highly polarised subpopulation ($\mu=1.5$) and where left subpopulation is half as large as right subpopulations ($n_l/n_r = 1.5$). The black cross indicates the mean ideal point of all consumers.
+
+_[Not locked into position. The average distance to the population centre is about the same. Locates closer the average ideal point along the dimension with no disagreement (that is closer to y=0).]_
+_[Mean eccentricity: no change compared to *maxcov* model.]_
+_[ENP: falls since some firms are endowed with more accurate condition/forecast rules.]_
+
+The mean representation is largely unchanged from the maxcov model and maxcov-inductor model.
+
+ 2 and more, then oscillation would 
+That is from the auto correlation function of respectively x any y coordinates the firm only uses information from the 1-lag operator
+
+ The current state descriptor of competing firms calculates the auto correlation function of  the 1 lag operator in  Firms only use the 1 lag operator in the auto-correlation . In interesting extension to the model might include multiple lag operators, such that firms were also capable of recognising oscillations with frequencies of 2 or 3 periods. … 
+
+   in particular influences the location of  In sum … a maxcov-inductor firm observes the oscillation of competing firms and uses this information to make predicts. The firm locates based not the predicted future location of competing firms, which precludes the most obvious suboptimal actions of the firm. 
+, but the most rudimentary oscillation patterns does.
+
+This implies that the switch from oscillation to triangular configuration takes place at more equal-sized subpopulation   requires a less uneven subpopulations to take place in the maxcov-inductor model. 
+
+This is also evident from figure _[##]_, where we, for both models, plot the trajectories from four firms with $\mu=1.5$ and $n_l/n_r = 1.5$. 
+
+And so competition among firms do not
+, and not just . So firms are not force
+When firms are 
+The continuous competition for these consumers,  
+The continuous competition for these consumers, eliminates the clustering of firms.
+
+A firm  tactic
+can temporarily strategy
+
+The firms 
+The location Firms may lock in, however
+The firms are unlikely to lock in to
+
+The firms recognise  the oscillation 
+ 
+there are several different location configurations which the two firms on the left might lock into. Additionally the location of the two firms on the left often oscillates. 
+
+_[Mean eccentricity: When there are few firms in the market then the firms locate further from the population centre. [Closer to y=0. The location perimeter / boundary of where firms locate has along the x-axis has not changed. The firms will only locate out to a certain point/distance, that is not too far away from the centres of the subpopulations. Thus the mean eccentricity tells us that firms to a greater extend locate in between the subpopulations, and that this behaviour increases as the number of firms increase. This is why we see a decline in the mean eccentricity as the number of firms increase. This is not a stable location pattern, but instead it reflects that firms in transition -- relocating from one subpopulation to the other.]]_
+_[ENP: low. The firms end up locating at the subpopulation centre.  The firms separate into two crowds: the crowds are uneven in size. => low ENP. When firms locate on top of each other ==> the firms very likely to lock into position.]_
+
+ any particular firms … has been eliminated … In the maxcov-inductor model a
+
+We focus on the market with three firms, since no pure strategy equilibrium[^threeequilibrium].
+[^threeequilibrium]: Shaked (1975) proved this
+
+_[In the all-hunter, all-aggregator and all-maxcov models all firms use the same decision rule. So no firm had a long-run advantage of its competitors. This will not be the case in the all-maxcov-inductor model, since one firm might be endowed with a more competitively advantageous set of hypotheses, than its competitors.]_ Additionally the information used to update the accuracy of hypotheses also differ from firm to firm, because it is based on their respective hypotheses. 
