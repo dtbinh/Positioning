@@ -36,6 +36,7 @@ rqss_ci_bands = function(dd, y, x, group) {
   bands = Reduce("rbind", group_bands)
 }
 
+# The n_ratio breaking point seperating unimodal and bimodal distributions.
 n_ratio_break = function(mu) {
   #if( mu < 0.5 ) {
   #  return(NaN)
@@ -44,6 +45,9 @@ n_ratio_break = function(mu) {
     return(breakpoint)
   #}
 }
+
+# Equlibrium condition 1: ENP at the limit of 'No firm has market twice as large as any other firm's market'.
+eqcond1_ENP = function(N) {(1+N)^2/(3+N)}
 
 # 2. GRID SWEEP: SAME DECISION RULE MODELS --------------------------------
 
@@ -111,6 +115,7 @@ gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggre
     geom_ribbon(aes(x = N, ymin = pmax(gs_2$MeanEst-gs_2$StdDev, rep(1, nrow(gs_2))), ymax = pmin(gs_2$MeanEst+gs_2$StdDev, rep(12, nrow(gs_2))), group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
     scale_fill_discrete(guide=FALSE) +
     geom_abline(intercept = 0, slope = 1, color="gray") +
+    stat_function(fun = eqcond1_ENP, colour = "black") + 
     scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
     scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
     labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL)
@@ -651,9 +656,9 @@ crule3p1 = c("#000000", "#F8766D", "#00BA38", "#619CFF") # Three decisions rules
 
 # 6. MCP: MAXCOV-INDUCTOR & MAXCOV-INDUCTOR-GA MODEL ----------------------
 
-mcp_ex_mi1 = read.csv("data/MCP_maxcov-inductor_mean_eccentricity_20160517_142009_i1001_psi1_b1000_r50.csv")
-mcp_ex_mi2 = read.csv("data/MCP_maxcov-inductor_ENP_20160517_142009_i1001_psi1001_b1000_r50.csv")
-mcp_ex_mi3 = read.csv("data/MCP_maxcov-inductor_mean_representation_20160517_142009_i1001_psi1001_b1000_r50.csv")
+mcp_ex_mi1 = read.csv("data/MCP_maxcov-inductor_mean_eccentricity_20160521_130042_i1001_psi1_b1000_r50.csv")
+mcp_ex_mi2 = read.csv("data/MCP_maxcov-inductor_ENP_20160521_130042_i1001_psi1001_b1000_r50.csv")
+mcp_ex_mi3 = read.csv("data/MCP_maxcov-inductor_mean_representation_20160521_130042_i1001_psi1001_b1000_r50.csv")
   
 # Grouping polarization into three categories (less than 0.5. between 0.5-1. above 1).
 mcp_ex_mi1[, "polarization"] = NA
@@ -694,7 +699,7 @@ mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimod
             legend.box = "horizontal", 
             legend.key = element_rect(fill = NA, colour = NA) )
     fig611a + stat_smooth() + 
-      geom_point(size = 1) + 
+      geom_point(size=1) + #geom_point(aes(size = n_ratio)) + 
       scale_colour_brewer(palette = "Dark2") +
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(0, 1.7), expand = c(0, 0)) +
@@ -735,6 +740,7 @@ mcp_ex_mi1$unimodal = ordered(mcp_ex_mi1$unimodal, labels = c("Bimodal", "Unimod
     fig612a + stat_smooth() + 
       scale_colour_brewer(palette = "Dark2") +
       geom_abline(intercept = 0, slope = 1, color="gray") +
+      #stat_function(fun = eqcond1_ENP, colour = "black") + 
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
       labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL)
@@ -798,6 +804,19 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
       labs(y = "Mean eccentricity", x = "Number of firms", colour = NULL)
     ggsave("fig621a.pdf", width = 21, height = 16, units = "cm")
     
+    fig621c = ggplot(mcp_ex_miga1, aes(y = MeanEst, x = n_ratio, colour = factor(N))) +
+      theme_minimal() +
+      theme(legend.position = "top", 
+            legend.box = "horizontal", 
+            legend.key = element_rect(fill = NA, colour = NA) )
+    fig621c + stat_smooth(aes(fill = factor(N)), se=F) + 
+      geom_point(size = 1) + 
+      #scale_color_manual(values=cfirm4) +
+      #scale_fill_manual(values = cfirm4, guide="none") +
+      scale_x_continuous(limits = c(1, 2), minor_breaks = NULL) + 
+      scale_y_continuous(limits = c(0, 1.3), expand = c(0, 0)) +
+      labs(y = "Mean eccentricity", x = "Relative size of left subpopulation", colour = "Number of firms")
+    
     # 6.2.2 ENP
     # Maxcov-inductor-GA effective number of firms compared to actual number of firms in market.
     fig622a = ggplot(mcp_ex_miga2, aes(y=MeanEst, x=N, colour=factor(polarization))) +
@@ -808,6 +827,7 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
     fig622a + stat_smooth() + 
       scale_colour_brewer(palette = "Dark2") +
       geom_abline(intercept = 0, slope = 1, color="gray") +
+      stat_function(fun = eqcond1_ENP, colour = "black") + 
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
       labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL)

@@ -17,6 +17,8 @@ library(grid)
 library(gridExtra)
 library('quantreg')
 require(scales)
+library(deldir)
+
 
 
 # 1.2 Working directory
@@ -118,6 +120,7 @@ ggsave("figb22a.pdf", width = 21, height = 16, units = "cm")
 
 # 3. FIRM MOVEMENT --------------------------------------------------------
 
+# 3.1 -- ALL-HUNTER
 moves = read.csv("data/xy_all-hunter_N5_mu15_nratio2_i100.csv")
 
 move_panel = function(df, start, end, tick) {
@@ -135,7 +138,7 @@ move_panel = function(df, start, end, tick) {
           axis.text.y = element_text(colour = ticklabelcolor),
           plot.title = element_text(size=10, hjust = 0),
           plot.margin = unit(c(0.2, 0, -0.4, 0), "lines") ) + 
-    geom_point(data = subset(moves[((start-1)*N+1):(end*N),], iteration == end), size = 2) +
+    geom_point(data = subset(df[((start-1)*N+1):(end*N),], iteration == end), size = 2) +
     geom_line() +
     scale_x_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1.5), minor_breaks = NULL, name="") + 
     scale_y_continuous(limits = c(-2, 2), expand = c(0, 0), breaks = seq(-2, 2, by = 1), minor_breaks = NULL, name="") +
@@ -167,8 +170,110 @@ figm = arrangeGrob(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, ncol=2, layout_matri
 ggsave(file="figm.pdf", figm, width = 16, height = 21, units = "cm") #saves g
 
 
+# 3.2 -- MAXCOV VS MAXCOV-INDUCTOR
 
-# 3. Median spline - Eccentricity vs. share -------------------------------
+moves_m = read.csv("data/xy_maxcov_N4_mu15_nratio15_pbi49.csv")
+
+move_panel2 = function(df, start, end, tick, burnin) {
+  # Number of firms
+  N = 4
+  # Hide or show the tick labes on the x and y-axis.
+  if (tick) ticklabelcolor = "black" else ticklabelcolor = "white"
+  
+  endpoints = subset(df[((start-1)*N+1):(end*N),], iteration == burnin+end)
+  #voronoi = deldir(endpoints$x, endpoints$y, rw = c(-3, 3, -2, 2))
+  
+  figure = ggplot(df[((start-1)*N+1):(end*N),], aes(y = y, x = x, colour = factor(firm))) + 
+    theme_minimal() +
+    theme(legend.position = "top", 
+          legend.box = "horizontal", 
+          legend.key = element_rect(fill = NA, colour = NA),
+          axis.text.x = element_text(colour = ticklabelcolor), 
+          axis.text.y = element_text(colour = ticklabelcolor),
+          plot.title = element_text(size=10, hjust = 0),
+          plot.margin = unit(c(0.2, 0, -0.4, 0), "lines") ) + 
+    geom_point(data = endpoints, size = 2) +
+    geom_line() +
+    scale_x_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1.5), minor_breaks = NULL, name="") + 
+    scale_y_continuous(limits = c(-2, 2), expand = c(0, 0), breaks = seq(-2, 2, by = 1), minor_breaks = NULL, name="") +
+    scale_colour_discrete(guide = FALSE) +
+    geom_point(aes(x = -0.3, y = 0), shape = 3, colour = "black") +
+    #geom_segment(data = voronoi$dirsgs, aes(x = x1, y = y1, xend = x2, yend = y2), size = 0.3, linetype = 1, color= "#000000") + 
+    labs(title = paste("Iteration", sprintf("%1.0f", burnin+end), sep =" "))
+  
+  return(figure)
+}
+
+moves_m$firm = rep(c(1, 4, 3, 2), 50) # matching colors
+figm1 = move_panel2(moves_m, 1, 5, TRUE, 150) # line is location at the last 4 iterations.
+figm1
+ggsave(file="figm_maxcov.pdf", figm1, width = 21, height = 16, units = "cm") #saves g
+
+
+moves_mi = read.csv("data/xy_maxcov-inductor_N4_mu15_nratio15_pbi49.csv")
+moves_mi$firm = rep(c(3, 4, 1, 2), 50) # match colors with MAXCOV
+figmi1 = move_panel2(moves_mi, 1, 7, TRUE, 1000) # line is location at the last 6 iterations.
+figmi1
+ggsave(file="figm_maxcov-inductor.pdf", figmi1, width = 21, height = 16, units = "cm") #saves g
+
+
+# 3.3 -- CLUSTERING
+
+moves_cmu = read.csv("data/xy_clustering_maxcov_N12_mu0_nratio1_pbi50.csv")
+moves_cmb = read.csv("data/xy_clustering_maxcov_N12_mu15_nratio2_pbi50.csv")
+moves_cmiu = read.csv("data/xy_clustering_maxcov-inductor_N12_mu0_nratio1_pbi50.csv")
+moves_cmib = read.csv("data/xy_clustering_maxcov-inductor_N12_mu15_nratio2_pbi50.csv")
+
+move_panel3 = function(df, start, end, tick, burnin) {
+  # Number of firms
+  N = 12
+  # Hide or show the tick labes on the x and y-axis.
+  if (tick) ticklabelcolor = "black" else ticklabelcolor = "white"
+  
+  endpoints = subset(df[((start-1)*N+1):(end*N),], iteration == burnin+end)
+  voronoi = deldir(endpoints$x, endpoints$y, rw = c(-3, 3, -2, 2))
+  
+  figure = ggplot(df[((start-1)*N+1):(end*N),], aes(y = y, x = x, colour = factor(firm))) + 
+    theme_minimal() +
+    theme(legend.position = "top", 
+          legend.box = "horizontal", 
+          legend.key = element_rect(fill = NA, colour = NA),
+          axis.text.x = element_text(colour = ticklabelcolor), 
+          axis.text.y = element_text(colour = ticklabelcolor),
+          plot.title = element_text(size=10, hjust = 0),
+          plot.margin = unit(c(0.2, 0, -0.4, 0), "lines") ) + 
+    geom_segment(data = voronoi$dirsgs, aes(x = x1, y = y1, xend = x2, yend = y2), size = 0.3, linetype = 1, color= "#000000") + 
+    geom_line(alpha = 0.5) +
+    geom_point(data = endpoints, size = 2) +
+    scale_x_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1.5), minor_breaks = NULL, name="") + 
+    scale_y_continuous(limits = c(-2, 2), expand = c(0, 0), breaks = seq(-2, 2, by = 1), minor_breaks = NULL, name="") +
+    scale_colour_discrete(guide = FALSE) +
+    #geom_point(aes(x = -0.3, y = 0), shape = 3, colour = "black") +
+    labs(title = paste("Iteration", sprintf("%1.0f", burnin+end), sep =" "))
+  
+  return(figure)
+}
+
+figm_cmu = move_panel3(moves_cmu, 1, 10, TRUE, 150) # line is location at the last 6 iterations.
+figm_cmu
+ggsave(file="figm_cmu.pdf", figm_cmu, width = 21, height = 16, units = "cm")
+
+figm_cmb = move_panel3(moves_cmb, 1, 10, TRUE, 150) # line is location at the last 6 iterations.
+figm_cmb
+ggsave(file="figm_cmb.pdf", figm_cmb, width = 21, height = 16, units = "cm")
+
+figm_cmiu = move_panel3(moves_cmiu, 1, 10, TRUE, 1000) # line is location at the last 6 iterations.
+figm_cmiu
+ggsave(file="figm_cmiu.pdf", figm_cmiu, width = 21, height = 16, units = "cm")
+
+figm_cmib = move_panel3(moves_cmib, 1, 10, TRUE, 1000) # line is location at the last 6 iterations.
+figm_cmib
+ggsave(file="figm_cmib.pdf", figm_cmib, width = 21, height = 16, units = "cm")
+
+
+
+
+# 4. Median spline - Eccentricity vs. share -------------------------------
 
 allhunter = read.csv("data/All-hunter_20160502_231508_N5_mu0_n1_b150_i6150.csv")
 cfirm5 = c("#000000", "#000000", "#000000", "#000000", "#000000")#, "#000000")
@@ -190,3 +295,113 @@ ggsave("fig3ms.pdf", width = 21, height = 12, units = "cm")
 #geom_quantile(quantiles=0.5, formula = y ~ qss(x, lambda=5), method = "rqss", size = 1) +
 #geom_point(size = 0.1) + 
 
+
+
+# 5. Long-run market share (three firms) -------------------------------
+
+s_m = read.csv("data/three_maxcov_shares_N3_mu15_nratio2_i250.csv", header = FALSE)
+s_mi = read.csv("data/three_maxcov-inductor_shares_N3_mu15_nratio2_i2500.csv", header = FALSE)
+s_miga = read.csv("data/three_maxcov-inductor-ga_shares_N3_mu15_nratio2_i2500.csv", header = FALSE)
+cf_mi_1 = read.csv("data/three_maxcov-inductor_cf_N3_mu15_nratio2_i2500_1.csv", header = FALSE)
+cf_mi_2 = read.csv("data/three_maxcov-inductor_cf_N3_mu15_nratio2_i2500_2.csv", header = FALSE)
+cf_mi_3 = read.csv("data/three_maxcov-inductor_cf_N3_mu15_nratio2_i2500_3.csv", header = FALSE)
+
+colnames(s_m) = c("iteration","firm","share")
+colnames(s_mi) = c("iteration","firm","share")
+colnames(s_miga) = c("iteration","firm","share")
+colnames(cf_mi_1) = c("iteration","cf", "used")
+colnames(cf_mi_2) = c("iteration","cf", "used")
+colnames(cf_mi_3) = c("iteration","cf", "used")
+
+color3 = c("#f35e5a", "#17b12b", "#5086ff")
+
+# MAXCOV
+s_m$firm = rep(c(2, 3, 1), each=250) # match colors with MAXCOV-INDUCTOR
+fig5s_m = ggplot(s_m, aes(y = share, x =iteration, colour = factor(firm)))  + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) )
+fig5s_m + geom_line() +
+  scale_x_continuous(limits = c(0, 250), expand = c(0, 5), minor_breaks = NULL) + 
+  scale_y_continuous(limits = c(0, 0.7), expand = c(0, 0), labels=percent) +
+  labs(y = "Share of market", x = "Iteration", colour = NULL)
+ggsave("fig5s_m.pdf", width = 21, height = 16, units = "cm")
+
+# MAXCOV-INDUCTOR
+fig5s_mi = ggplot(s_mi, aes(y = share, x = iteration, colour = factor(firm)))  + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) )
+fig5s_mi + geom_line() +
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20), minor_breaks = NULL) + 
+  scale_y_continuous(limits = c(0, 0.7), expand = c(0, 0), labels=percent) +
+  labs(y = "Share of market", x = "Iteration", colour = NULL)
+ggsave("fig5s_mi.pdf", width = 21, height = 16, units = "cm")
+
+fig5cf_mi_1 = ggplot(cf_mi_1, aes(x = iteration, y = cf, fill = used)) + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) ) + 
+  geom_raster() +
+  scale_fill_gradientn(colours=rep(color3[1],3)) +
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20)) + 
+  scale_y_continuous(limits = c(1, 100), expand = c(0, 0), minor_breaks = NULL) +
+  labs(y = " ", x = " ", colour = NULL)
+fig5cf_mi_1
+
+fig5cf_mi_2 = ggplot(cf_mi_2, aes(x = iteration, y = cf, fill = used)) + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) ) +
+  geom_raster() +
+  scale_fill_gradientn(colours=rep(color3[2],3)) +
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20)) + 
+  scale_y_continuous(limits = c(1, 100), expand = c(0, 0), minor_breaks = NULL) +
+  labs(y = "Condition/forecast rule", x = " ", colour = NULL)
+fig5cf_mi_2
+
+fig5cf_mi_3 = ggplot(cf_mi_3, aes(x = iteration, y = cf, fill = used)) + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) ) +
+  geom_raster() +
+  scale_fill_gradientn(colours=rep(color3[3],3)) +
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20)) + 
+  scale_y_continuous(limits = c(1, 100), expand = c(0, 0), minor_breaks = NULL) +
+  labs(y = " ", x = "Iteration", colour = NULL)
+fig5cf_mi_3
+
+cf_lay = t(matrix(seq(1,3), 1, 3, byrow = T))
+grid.arrange(fig5cf_mi_1, fig5cf_mi_2, fig5cf_mi_3, ncol=3, layout_matrix = cf_lay)
+
+fig5cf_mi = arrangeGrob(fig5cf_mi_1, fig5cf_mi_2, fig5cf_mi_3, ncol=3, layout_matrix = cf_lay)
+ggsave(file="fig5cf_mi.pdf", fig5cf_mi, width = 21, height = 16, units = "cm") #saves g
+
+# MAXCOV-INDUCTOR-GA
+#s_miga$firm = rep(c(1, 3, 2), each=2500) # match colors with MAXCOV-INDUCTOR
+fig5s_miga = ggplot(s_miga, aes(y = share, x = iteration, colour = factor(firm)))  + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) )
+fig5s_miga + geom_line() +
+  scale_x_continuous(limits = c(0, 2500), expand = c(0, 20), minor_breaks = NULL) + 
+  scale_y_continuous(limits = c(0, 0.7), expand = c(0, 0), labels=percent) +
+  labs(y = "Share of market", x = "Iteration", colour = NULL)
+ggsave("fig5s_miga.pdf", width = 21, height = 16, units = "cm")
+
+#library(R.matlab)
+#path = system.file("data", package="R.matlab")
+#pathname = file.path(path, "three_maxcov-inductor-ga_xy_N3_mu15_nratio2_i2500.mat")
+#xy_miga_mat = readMat("data/three_maxcov-inductor-ga_xy_N3_mu15_nratio2_i2500.mat")
+#library (plyr)
+#xy_miga = t(ldply(xy_miga_mat, data.frame))
+#xy_miga = xy_miga[-1,]
+
+xy_miga = read.csv("data/three_maxcov-inductor-ga_xy_N3_mu15_nratio2_i2500.csv", header = FALSE)
+colnames(xy_miga) = c("iteration","firm","x", "y")
