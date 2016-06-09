@@ -1332,3 +1332,65 @@ We focus on the market with three firms, since no pure strategy equilibrium[^thr
 [^threeequilibrium]: Shaked (1975) proved this
 
 _[In the all-hunter, all-aggregator and all-maxcov models all firms use the same decision rule. So no firm had a long-run advantage of its competitors. This will not be the case in the all-maxcov-inductor model, since one firm might be endowed with a more competitively advantageous set of hypotheses, than its competitors.]_ Additionally the information used to update the accuracy of hypotheses also differ from firm to firm, because it is based on their respective hypotheses. 
+
+Increasing the degree of polarisation increases
+When completely symmetric firms locate around 
+When the consumer distribution is sufficiently asymmetric (when $n_l/n_r$ is not too close to 1), the five firms will split into two crowds. With the degree of polarisation close to 1.5 the firms tend to locate in a three-two split, when the degree of polarisation is close to 1, the split tends to be four-one.
+With a sufficiently uneven subpopulations five firms will 
+
+  is not the results of a overall break down  Thus during the transition for the three-two split to the four-one split they predict
+While the acc
+ , but at
+  should be viewed as a
+
+, a new set of hypotheses that more accurately predict the future location of all competing firms
+
+With many firms competition lead firms to locate around the peaks of the distri
+
+ The exempt is the *all-sticker* model where firms do not interact. And *hunter* firms in certain settings. 
+
+ The mean representation in almost all models where firms Very little effect on 
+
+Some the degree of c
+ The preferences of consumers are often correlated, making it more appropriate to assume that consumers are lump together subpopulations. Subpopulations may arise due to social interaction among consumers. Social conformity
+
+Natural setting:
+
+The locations that firms choose to locate at are mainly determined by the method the firm use locate. to pick the location that maximises market share.
+
+_[decision rule with foresight]_
+
+Strategic consideration
+
+, and not just in terms of the location they choose. the firms are heterogeneous in terms of their location and the information and knowledge.
+
+The exception 
+The exception in this paper was the market with less than four *hunter* firms and a bimodal distribution of consumers. 
+
+If the firms in the market solely focus on increasing their market share, and there is less firms than peaks in the distribution function, then competing significantly reduces the welfare of consumers.
+
+ disperse the density of consumers over a larger area
+
+In the limit as the   dispersed over a larger 
+  seems to be the main explanation for
+ The explanation for these differences is the choice of distribution function. 
+The choice of distribution function is most like the 
+Part of the explanation is due to the non-uniform distribution of consumer preferences. 
+
+We investigate how the average utility of consumers compare with the model where all firms use the *aggregator* decision rules, which minimises the average distance between consumers and firms. 
+
+firms when the number of firms is less than twice the number of peaks in the distribution f
+
+in the *hunter* and all the *maxcov* models 
+
+Further methods are need to find the optimal location of firms already in the the market, that consider relocating.
+
+ to find the location that maximises the market share of the firm.
+
+The model would benefit ennui
+
+the number of firms in the market through the, and
+The natural next step: 
+* price competition
+* Engdonenoise the number of firms in the market.
+* we use a rough approximation in all the *maxcov* decision rules to find the location that maximises the market share of the firm, in lack of methods developed to find optimal location. Further methods are need to find the optimal location of firms already in the the market, that consider relocating.
