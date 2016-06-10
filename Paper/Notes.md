@@ -1394,3 +1394,31 @@ The natural next step:
 * price competition
 * Engdonenoise the number of firms in the market.
 * we use a rough approximation in all the *maxcov* decision rules to find the location that maximises the market share of the firm, in lack of methods developed to find optimal location. Further methods are need to find the optimal location of firms already in the the market, that consider relocating.
+
+The randomly drawn set of hypothesis affects the initial state space distribution $\pi_0$, and should not be considered a random component in the process.
+
+ All the condition/forecast rules that matches the current state of firm $j$, are said to be active. 
+
+That is where the condition of the rule is satisfied by the current state descriptor, $J_j$.
+all the conditions that
+
+Since a hypothesis might only be relevant to a narrow set of situations, the firm
+With condition part of the *condition/forecast* rule, the firm is able to recognise different location patterns of competing firms, and apply .  
+
+Among these active condition/forecast rules, the rule with the best accuracy is used to forecast the future location of firm $j$. 
+
+ by matching the conditions with the current state descriptor of competing firms.
+
+At every iteration and for each competing firm $j$, the firms selects the *condition/forecast* rules that match the current state descriptor, $J_j$.
+
+When the conditions in the *condition/forecast* rule matches the current state descriptor, $J_j$, of competing firm $j$, the *condition/forecast* rule
+
+  is assume to be is 
+
+$\alpha_a$ is the memory parameter and
+
+ And $s_m$ is the specificity of rule $m$ calculated as the number of ones and zeros in the condition part of the rule (i.e. all the # are not counted).
+
+Where $M$ is the number of *condition/forecast* held by firm $i$, since this is constant and identical across firms the term can be left out. 
+
+ if crossover or mutation is used to create the new condition/forecast rule. The crossover method is used with probability $p$, and mutation method with probability $1-p$. 

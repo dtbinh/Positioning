@@ -105,7 +105,7 @@ Comparing the *effective number of firms* (ENP) in the *maxcov-inductor* model t
 
 In the maxcov model with many firms and a low degree of polarisation, a handful of firms will cluster together at the same location, as seen in figure _[##a]_. The clustered firms move in tandem. Each of the clustered firms assume that the other firms remain at their current position, and given this relocates to maximise its market share. However all the other firms in the cluster make the same decision, and they all end up at the same location. Once a cluster of firms is formed, it sometimes absorbs additional firms, but seldomly breaks apart. Similarly with a high degree of polarisation and uneven sized subpopulations, see figure _[##b]_. This reduces the ENP in the maxcov model with many firms, since the clustered firms compete for the same customers reducing their average market share. The clustering of maxcov firms in the models with low or high degrees of polarisation occurs, because there is a high concentration of consumers around only one or two points. Competition for these high density areas forces firms closer together and clusters emerge. In the maxcov-inductor model two firms may temporarily pair up, but any pairing of firms is short-lived and eventually breaks up, see figure _[##c]_ and _[##d]_. In turn, the long-run share of customers is more evenly distributed among firms and we observe a higher ENP. One or both of the paired firms will predict the future location of its competitor and distance itself to increase its share of the market. With a medium degree of polarisation, clustering and pairing of firms is short-lived in both models. There is a non-neglige number of consumers with ideal points in between the peaks of the distribution function. Consumers are not just concentrated around one or two points, but the density of consumers is spread over a larger area. Competition no longer forces firms together which eliminates the clustering of firms.
 
-The difference in mean representation between the *maxcov* and *maxcov-inductor* model is minuscule. The mean representation plot for the *maxcov-inductor* model is therefore not included.
+The difference in mean representation between the *maxcov* and *maxcov-inductor* model is minuscule. The mean representation plot for the *maxcov-inductor* model is therefore not included in the main text (see appendix _[##]_).
 
 From the comparison above we learn that introducing firms with the ability to forecast the future location of competing firms has a limited effect on the how fare away firms locate from the average ideal point of all consumers. This distance is largely determined by the method with which the firm determines its optimal location, in this case the firm locates in the Delaunay triangle that encompasses most consumers. Forecast however play an important role in shaping the location behaviour of firms in cases with oscillation. We see that *maxcov-inductor* firms observe the oscillation of competing firms and uses this information to form its predictions. This precludes the most rudimentary oscillation patterns. Oscillation does not completely disappear with the introduction of *maxcov-inductor* firms. In this paper firms are only able to recognise periodic oscillation with period 2. That is firms only use information about the autocorrelation between two consecutive periods. If firms were also able to recognise oscillation with a higher period, it would likely reduce oscillation even further. Furthermore we learn that several *maxcov-inductor* firms are unlikely to cluster at the same location. Two firms may pair up, but the this is often short-lived. One or both firms will anticipate the future movement of the other firm, and realise that it can increase its share of the market by distancing itself.
 
@@ -162,54 +162,5 @@ The paper is a first attempt at laying down the foundation for a competitive loc
 
 # A. APPENDIX 
 
+{{Appendix.md}}
 
-## A.1 Model overview
-
-**Homogenous firms:**
-
-* **All-sticker:** non-ergodic deterministic time-homogenous Markov chain. [The firms never move, so the process “converges” to a single state, which “depends”/is the initial position of the firm, thus the “process is non-ergodic.]
-* **All-hunter:** ergodic stochastic time-homogenous Markov chain. [When market share of a hunter firm decreases the firm turns around and heads in a randomly drawn opposite direction. This random component, makes the underlying process ergodic. In the model with a symmetric distribution of consumers the *time average* provide a representative estimate of $\psi$, i.e. the only free parameter in the model is the number of firms, N. While this is not the case in the model with an asymmetric distribution of consumers, thus the *ensemble average* is used. Several R-hat statistics are above 1.05 even when executing the test repetitions with 20.000 iterations.]
-* **All-aggregator:** non-ergodic deterministic time-homogenous Markov chain. [Each repetition is an implementation of the Lloyd-algorithm, which always converges to a single state. However the state is not unique, a different initial position of the firms might result in a different CVT. Hence the process is non-ergodic.]
-* **All-maxcov:** deterministic time-homogenous Markov chain. ergodic?? single state or oscillates?
-
-**Heterogeneous firms:**
-
-* **Maxcov-inductor:** Does not fulfil Markov property. In the *trending bits* we use the moving average, thus the probability of the future state will depend on past states, and only the current state. Random set of hypothesis (however this is not a random component in the process, but only affects the initial state space distribution $\pi_0$).
-* **Maxcov-inductor-GA:** Does not fulfil Markov property. Random component (when forming new hypothesis).
-
-## A.2 Maxcov vs maxcovrnd
-
-![Maxcov vs maxcovrnd in market with symmetric and unimodal distribution of consumers ($\mu = 0$ and $n_l/n_r = 1$).](Graphics/temp_maxcovrnd_sym.png)
-
-![Maxcov vs maxcovrnd in market with asymmetric and bimodal distribution of consumers ($\mu \in [0,1.5]$ and $n_l/n_r \in [1,2]$).](Graphics/temp_maxcovrnd_asym.png)
-
-## A.2 Maxcov-inductor mean representation
-
-![Mean representation for maxcov-inductor model.](Graphics/fig613a.png)
-
-## A.3 Hypothesis & GA
-
-The number of hypotheses is set to $M=100$. 
-
------
-
-To **update the accuracy** of a *condition/forecast* rule we use the inverse of the moving average of squared forecast errors. The accuracy of firm $i$ using hypothesis $m$ at iteration $t$ is:
-
-$$e^2_{t,i,m} = \alpha_a e^2_{t-1,i,m} + (1-\alpha_a) \left( X_{t+1,j} - E_{t,i,m} [X_{t+1,j}] \right)^2, \quad \forall j \ne i$$
-
-where $\alpha_a$ is the memory parameter and $X_{t+1,j}$ is the future location of competing firm $j$. The memory parameter is set to $\alpha_a = 1-1/75 = 74/75$.
-
------
-
-**Fitness measure** of rule $m$ at iteration $t$ for firm $i$ is:
-
-$$f_{t,i,m} = M - e^2_{t,i,m} - Cs_m$$
-
-Where $M$ is the number of *condition/forecast* held by firm $i$, since this is constant and identical across firms the term can be left out. $e^2_{t,i,m}$ is the forecast error variance, and $C$ is the cost levied on the specificity. And $s_m$ is the specificity of rule $m$ calculated as the number of ones and zeros in the condition part of the rule (i.e. all the # are not counted).
-
------
-
-It is randomly decided if crossover or mutation is used to create the new condition/forecast rule. The crossover method is used with probability $p$, and mutation method with probability $1-p$. This paper uses $p = 0.3$.
-
-**Mutation method:**
-Each position in the condition is mutated or flipped with probability 0.03. The probability that 0 or 1 is flipped to # is 2/3. The probability that 0 is flipped to 1 and visa versa is 1/3. The probability that # is flipped to 1 or 0 is 1/3 respectively, with the remaining 1/3 probability that # is not flipped. With these flip-probabilities on average maintain the number of 1, 0 and # in the rule. Each forecast parameter value is either replaced or changed, each with probability 0.2. Leaving 0.6 probability that the parameter value is unchanged. If replaced then the new parameter value is drawn randomly from the same ranges as the initial parameter values (see _[page ##]_). If changed then the new parameter values altered with a random amount in the range plus/minus 0.5% of the initial parameter range.
