@@ -86,7 +86,7 @@ figb21a + geom_line(size=1, colour="#f35e5a") +
   scale_x_continuous(limits = c(1, 100), minor_breaks = NULL) + 
   scale_y_continuous(limits = c(0, 2.5), expand = c(0, 0), minor_breaks = NULL) +
   labs(y = "Mean eccentricity", x = "Iteration")
-ggsave("figb21a.pdf", width = 21, height = 16, units = "cm")
+ggsave("figb21a.pdf", width = 12, height = 9.6, units = "cm")
 
 
 # 2.2 Stocastic time-homogenous Markov chain - All-hunter
@@ -94,7 +94,7 @@ burn_stc = read.csv("data/All-hunter_N12_mu0_nratio1_i500.csv")
 burn_stc_2nd_mean = mean(burn_stc[c(251:500),3])
 burn_stc_2nd_std = sd(burn_stc[c(251:500),3])
 
-burn_stc$mean_eccentricity > burn_stc_2nd_mean+burn_stc_2nd_std
+#burn_stc$mean_eccentricity > burn_stc_2nd_mean+burn_stc_2nd_std
 
 figb22a = ggplot(burn_stc, aes(y = mean_eccentricity, x = iteration)) + 
   theme_minimal() +
@@ -108,7 +108,7 @@ figb22a + geom_line(size=1, colour="#f35e5a") +
   geom_hline(yintercept=burn_stc_2nd_mean, colour="black") +
   geom_hline(yintercept=burn_stc_2nd_mean-burn_stc_2nd_std, colour="black", linetype="dashed") +
   geom_hline(yintercept=burn_stc_2nd_mean+burn_stc_2nd_std, colour="black", linetype="dashed")
-ggsave("figb22a.pdf", width = 21, height = 16, units = "cm")
+ggsave("figb22a.pdf", width = 12, height = 9.6, units = "cm")
 
 
 # 2.3 Stocastic time-homogenous Markov chain (time average not representative) - All-hunter
@@ -167,7 +167,7 @@ lay = t(matrix(seq(1,10), 2, 5, byrow = T))
 grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, ncol=2, layout_matrix = lay)
 
 figm = arrangeGrob(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, ncol=2, layout_matrix = lay)
-ggsave(file="figm.pdf", figm, width = 16, height = 21, units = "cm") #saves g
+ggsave(file="figm.pdf", figm, width = 22, height = 25.5, units = "cm") #saves g
 
 
 # 3.2 -- MAXCOV VS MAXCOV-INDUCTOR
@@ -207,14 +207,14 @@ move_panel2 = function(df, start, end, tick, burnin) {
 moves_m$firm = rep(c(1, 4, 3, 2), 50) # matching colors
 figm1 = move_panel2(moves_m, 1, 5, TRUE, 150) # line is location at the last 4 iterations.
 figm1
-ggsave(file="figm_maxcov.pdf", figm1, width = 21, height = 16, units = "cm") #saves g
+ggsave(file="figm_maxcov.pdf", figm1, width = 10, height = 6.6, units = "cm") #saves g
 
 
 moves_mi = read.csv("data/xy_maxcov-inductor_N4_mu15_nratio15_pbi49.csv")
 moves_mi$firm = rep(c(3, 4, 1, 2), 50) # match colors with MAXCOV
 figmi1 = move_panel2(moves_mi, 1, 7, TRUE, 1000) # line is location at the last 6 iterations.
 figmi1
-ggsave(file="figm_maxcov-inductor.pdf", figmi1, width = 21, height = 16, units = "cm") #saves g
+ggsave(file="figm_maxcov-inductor.pdf", figmi1, width = 10, height = 6.6, units = "cm") #saves g
 
 
 # 3.3 -- CLUSTERING
@@ -256,21 +256,21 @@ move_panel3 = function(df, start, end, tick, burnin) {
 
 figm_cmu = move_panel3(moves_cmu, 1, 10, TRUE, 150) # line is location at the last 6 iterations.
 figm_cmu
-ggsave(file="figm_cmu.pdf", figm_cmu, width = 21, height = 16, units = "cm")
+ggsave(file="figm_cmu.pdf", figm_cmu, width = 10, height = 6.6, units = "cm")
 
 figm_cmb = move_panel3(moves_cmb, 1, 10, TRUE, 150) # line is location at the last 6 iterations.
 figm_cmb
-ggsave(file="figm_cmb.pdf", figm_cmb, width = 21, height = 16, units = "cm")
+ggsave(file="figm_cmb.pdf", figm_cmb, width = 10, height = 6.6, units = "cm")
 
 figm_cmiu = move_panel3(moves_cmiu, 1, 10, TRUE, 1000) # line is location at the last 6 iterations.
 figm_cmiu
-ggsave(file="figm_cmiu.pdf", figm_cmiu, width = 21, height = 16, units = "cm")
+ggsave(file="figm_cmiu.pdf", figm_cmiu, width = 10, height = 6.6, units = "cm")
 
 figm_cmib = move_panel3(moves_cmib, 1, 10, TRUE, 1000) # line is location at the last 6 iterations.
 figm_cmib
-ggsave(file="figm_cmib.pdf", figm_cmib, width = 21, height = 16, units = "cm")
+ggsave(file="figm_cmib.pdf", figm_cmib, width = 10, height = 6.6, units = "cm")
 
-
+#width = 10, height = 6.6
 
 
 # 4. Median spline - Eccentricity vs. share -------------------------------
@@ -289,7 +289,7 @@ fig3ms + geom_vline(xintercept=0.4416208, colour="red") +
   scale_x_continuous(limits = c(0, 1.55), minor_breaks = NULL) + 
   scale_y_continuous(expand = c(0, 0), labels=percent) +
   labs(y = "Share of market", x = "Eccentricity", colour = NULL)
-ggsave("fig3ms.pdf", width = 21, height = 12, units = "cm")
+ggsave("fig3ms.pdf", width = 14, height = 12, units = "cm")
 
 #geom_segment(aes(x = 0.4416208, y = 0, xend = 0.4416208, yend = 0.216), color = "red") +
 #geom_quantile(quantiles=0.5, formula = y ~ qss(x, lambda=5), method = "rqss", size = 1) +
@@ -326,7 +326,7 @@ fig5s_m + geom_line() +
   scale_x_continuous(limits = c(0, 250), expand = c(0, 5), minor_breaks = NULL) + 
   scale_y_continuous(limits = c(0, 0.7), expand = c(0, 0), labels=percent) +
   labs(y = "Share of market", x = "Iteration", colour = NULL)
-ggsave("fig5s_m.pdf", width = 21, height = 16, units = "cm")
+ggsave("fig5s_m.pdf", width = 24, height = 5.3, units = "cm")
 
 # MAXCOV-INDUCTOR
 fig5s_mi = ggplot(s_mi, aes(y = share, x = iteration, colour = factor(firm)))  + 
@@ -338,16 +338,19 @@ fig5s_mi + geom_line() +
   scale_x_continuous(limits = c(0, 1000), expand = c(0, 20), minor_breaks = NULL) + 
   scale_y_continuous(limits = c(0, 0.7), expand = c(0, 0), labels=percent) +
   labs(y = "Share of market", x = "Iteration", colour = NULL)
-ggsave("fig5s_mi.pdf", width = 21, height = 16, units = "cm")
+ggsave("fig5s_mi.pdf", width = 24, height = 5.3, units = "cm")
 
 fig5cf_mi_1 = ggplot(cf_mi_1, aes(x = iteration, y = cf, fill = used)) + 
   theme_minimal() +
   theme(legend.position = "none", 
         legend.box = "horizontal", 
-        legend.key = element_rect(fill = NA, colour = NA) ) + 
+        legend.key = element_rect(fill = NA, colour = NA),
+        panel.grid.major.y = element_blank(),
+        plot.margin=unit(c(0.2,0.4,-0.4,0), "cm"),
+        axis.line = element_line(colour = "grey90") ) +
   geom_raster() +
   scale_fill_gradientn(colours=rep(color3[1],3)) +
-  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20)) + 
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 0)) + 
   scale_y_continuous(limits = c(1, 100), expand = c(0, 0), minor_breaks = NULL) +
   labs(y = " ", x = " ", colour = NULL)
 fig5cf_mi_1
@@ -356,10 +359,13 @@ fig5cf_mi_2 = ggplot(cf_mi_2, aes(x = iteration, y = cf, fill = used)) +
   theme_minimal() +
   theme(legend.position = "none", 
         legend.box = "horizontal", 
-        legend.key = element_rect(fill = NA, colour = NA) ) +
+        legend.key = element_rect(fill = NA, colour = NA),
+        panel.grid.major.y = element_blank(),
+        plot.margin=unit(c(0.2,0.4,-0.4,0), "cm"),
+        axis.line = element_line(colour = "grey90") ) +
   geom_raster() +
   scale_fill_gradientn(colours=rep(color3[2],3)) +
-  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20)) + 
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 0)) + 
   scale_y_continuous(limits = c(1, 100), expand = c(0, 0), minor_breaks = NULL) +
   labs(y = "Condition/forecast rule", x = " ", colour = NULL)
 fig5cf_mi_2
@@ -368,10 +374,13 @@ fig5cf_mi_3 = ggplot(cf_mi_3, aes(x = iteration, y = cf, fill = used)) +
   theme_minimal() +
   theme(legend.position = "none", 
         legend.box = "horizontal", 
-        legend.key = element_rect(fill = NA, colour = NA) ) +
+        legend.key = element_rect(fill = NA, colour = NA),
+        panel.grid.major.y = element_blank(),
+        plot.margin=unit(c(0.2,0.4,0,0), "cm"),
+        axis.line = element_line(colour = "grey90") ) +
   geom_raster() +
   scale_fill_gradientn(colours=rep(color3[3],3)) +
-  scale_x_continuous(limits = c(0, 1000), expand = c(0, 20)) + 
+  scale_x_continuous(limits = c(0, 1000), expand = c(0, 0)) + 
   scale_y_continuous(limits = c(1, 100), expand = c(0, 0), minor_breaks = NULL) +
   labs(y = " ", x = "Iteration", colour = NULL)
 fig5cf_mi_3
@@ -380,7 +389,7 @@ cf_lay = t(matrix(seq(1,3), 1, 3, byrow = T))
 grid.arrange(fig5cf_mi_1, fig5cf_mi_2, fig5cf_mi_3, ncol=3, layout_matrix = cf_lay)
 
 fig5cf_mi = arrangeGrob(fig5cf_mi_1, fig5cf_mi_2, fig5cf_mi_3, ncol=3, layout_matrix = cf_lay)
-ggsave(file="fig5cf_mi.pdf", fig5cf_mi, width = 21, height = 16, units = "cm") #saves g
+ggsave(file="fig5cf_mi.pdf", fig5cf_mi, width = 21, height = 12, units = "cm") #saves g
 
 # MAXCOV-INDUCTOR-GA
 #s_miga$firm = rep(c(1, 3, 2), each=2500) # match colors with MAXCOV-INDUCTOR
@@ -393,7 +402,7 @@ fig5s_miga + geom_line() +
   scale_x_continuous(limits = c(0, 2500), expand = c(0, 20), minor_breaks = NULL) + 
   scale_y_continuous(limits = c(0, 0.7), expand = c(0, 0), labels=percent) +
   labs(y = "Share of market", x = "Iteration", colour = NULL)
-ggsave("fig5s_miga.pdf", width = 21, height = 16, units = "cm")
+ggsave("fig5s_miga.pdf", width = 24, height = 5.3, units = "cm")
 
 #library(R.matlab)
 #path = system.file("data", package="R.matlab")
@@ -405,3 +414,82 @@ ggsave("fig5s_miga.pdf", width = 21, height = 16, units = "cm")
 
 xy_miga = read.csv("data/three_maxcov-inductor-ga_xy_N3_mu15_nratio2_i2500.csv", header = FALSE)
 colnames(xy_miga) = c("iteration","firm","x", "y")
+
+
+
+# 6. Accuracy (five firms) -------------------------------
+
+a_moves_miga = read.csv("data/xy_accuracy_maxcov-inductor-ga_N5_mu13_nratio15_psi50_i50.csv")
+a_miga = read.csv("data/accuracy_maxcov-inductor-ga_N5_mu13_nratio15_psi50_i50.csv")
+a_mi_same = read.csv("data/accuracy_maxcov-inductor_N5_mu13_nratio15_psi50_i50_same.csv")
+a_miga$forecasterror = sqrt(a_miga$accuracy)
+a_mi_same$forecasterror = sqrt(a_miga$accuracy)
+a_miga_500 = a_miga[ which(a_miga$iteration <= 500), ]
+a_mi_same_500 = a_mi_same[ which(a_mi_same$iteration <= 500), ]
+
+
+fig6a_miga = ggplot(a_miga_500, aes(y = accuracy, x = iteration, colour = factor(firm)))  + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) )
+fig6a_miga + geom_line() +
+  annotate("rect", xmin=271, xmax=320, ymin=0, ymax=0.004, alpha=0.1, fill="black")  + 
+  scale_x_continuous(limits = c(1, 500), expand = c(0, 5), breaks = seq(0, 500, 50), minor_breaks = NULL) + 
+  scale_y_continuous(limits = c(0, 0.004), expand = c(0, 0), breaks = seq(0, 0.004, 0.002)) +
+  labs(y = "Average forecast error variance", x = "Iteration", colour = NULL)
+ggsave(file="fig6a_miga.pdf", width = 12, height = 14, units = "cm")
+
+fig6a_mi_same = ggplot(a_mi_same_500, aes(y = accuracy, x = iteration, colour = factor(firm)))  + 
+  theme_minimal() +
+  theme(legend.position = "none", 
+        legend.box = "horizontal", 
+        legend.key = element_rect(fill = NA, colour = NA) )
+fig6a_mi_same + geom_line() +
+  scale_x_continuous(limits = c(1, 500), expand = c(0, 5), breaks = seq(0, 500, 50), minor_breaks = NULL) + 
+  scale_y_continuous(limits = c(0, 0.008), expand = c(0, 0)) +
+  labs(y = "Average forecast error variance", x = "Iteration", colour = NULL)
+ggsave(file="fig6a_mi_same.pdf", width = 12, height = 14, units = "cm")
+
+
+move6 = function(df, start, end, tick) {
+  # Number of firms
+  N = 5
+  # Hide or show the tick labes on the x and y-axis.
+  if (tick) ticklabelcolor = "black" else ticklabelcolor = "white"
+  
+  #endpoints = subset(df[((start-1)*N+1):(end*N),], iteration == end)
+  #voronoi = deldir(endpoints$x, endpoints$y, rw = c(-3, 3, -2, 2))
+  
+  figure = ggplot(df[((start-1)*N+1):(end*N),], aes(y = y, x = x, colour = factor(firm))) + 
+    theme_minimal() +
+    theme(legend.position = "top", 
+          legend.box = "horizontal", 
+          legend.key = element_rect(fill = NA, colour = NA),
+          axis.text.x = element_text(colour = ticklabelcolor), 
+          axis.text.y = element_text(colour = ticklabelcolor),
+          plot.title = element_text(size=10, hjust = 0),
+          plot.margin = unit(c(0.2, 0, -0.4, 0), "lines") ) + 
+    geom_line(alpha = 0.5) +
+    geom_point(data = subset(df[((start-1)*N+1):(end*N),], iteration == end), size = 2) +
+    #geom_segment(data = voronoi$dirsgs, aes(x = x1, y = y1, xend = x2, yend = y2), size = 0.3, linetype = 1, color= "#000000") + 
+    scale_x_continuous(limits = c(-3, 3), breaks = seq(-3, 3, by = 1.5), minor_breaks = NULL, name="") + 
+    scale_y_continuous(limits = c(-2, 2), expand = c(0, 0), breaks = seq(-2, 2, by = 1), minor_breaks = NULL, name="") +
+    scale_colour_discrete(guide = FALSE) +
+    geom_point(aes(x = -0.26, y = 0), shape = 3, colour = "black")+
+    labs(title = paste("Iteration", sprintf("%1.0f", start), "to", sprintf("%1.0f", end), sep =" "))
+  
+  return(figure)
+}
+
+fig6m_miga1 = move6(a_moves_miga, 50, 270, TRUE)
+fig6m_miga1
+ggsave(file="fig6m_miga1.pdf", fig6m_miga1, width = 7.5, height = 6.6, units = "cm")
+fig6m_miga2 = move6(a_moves_miga, 271, 320, TRUE)
+fig6m_miga2
+ggsave(file="fig6m_miga2.pdf", fig6m_miga2, width = 7.5, height = 6.6, units = "cm")
+fig6m_miga3 = move6(a_moves_miga, 321, 2500, TRUE)
+fig6m_miga3
+ggsave(file="fig6m_miga3.pdf", fig6m_miga3, width = 7.5, height = 6.6, units = "cm")
+
+#width = 10, height = 6.6

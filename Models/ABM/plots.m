@@ -418,6 +418,7 @@ for i = 1:pref.iterations*pref.psi
 %     end
     scatter( xy(:,1,i,:)' , xy(:,2,i,:)' , [], color, 'filled'); % Plot the firms with respective colors.
     hold off; % Don't place anymore plots on top of figure.
+    xlim([-5 5]); ylim([-5 5]);
     pause(.01);
 end
 
@@ -481,7 +482,8 @@ title('Mean accuracy over all iteration');
 
 figure(903);
 clf reset; % Reset figure.
-plot(accuracy_positive_mean_firm');
+%plot(accuracy_positive_mean_firm');
+hold on; for n=1:pref.N plot(accuracy_positive_mean_firm(n,1:500), 'Color', color(n,:)); end; hold off;
 title('Mean accuracy of all the firm´s condition/forecast rules'); % Add title
 %hold on;
 %plot(mean(accuracy_positive_mean_firm,1), 'k');
@@ -495,7 +497,7 @@ title('Mean accuracy of all condition/forecast rules'); % Add title
 figure(913);
 clf reset; % Reset figure.
 hold on;
-plot(mean_forecasterror);
+plot(sqrt(mean_forecasterror(1:500,:)));
 hold off;
 title('Mean forecast error of all firm'); % Add title
 
@@ -528,10 +530,12 @@ figure(905);
 stem(state_occurrences_total);
 title('Total number of states occurrences'); % Add title
 
-state_occurrences_type = [mean(state_occurrences(1:5,:)); mean(state_occurrences(6:11,:)); state_occurrences(12,:); state_occurrences(13,:)];
+state_occurrences_type = [mean(state_occurrences(1:5,:)); mean(state_occurrences(6:9,:)); mean(state_occurrences(10:11,:)); state_occurrences(12,:); state_occurrences(13,:)];
 figure(906);
-plot(state_occurrences_type');
+plot(state_occurrences_type(:,1:500)');
 title('State occurrences over time'); % Add title
+
+size(state_occurrences_type)
 
 % figure(9060);
 % plot(state_occurrences(6:8,1:50)');
@@ -548,12 +552,154 @@ figure(907);
 stem(state2nd_occurrences_total);
 title('Total number of states occurrences'); % Add title
 
-state2nd_occurrences_type = [mean(state2nd_occurrences(1:5,:)); mean(state2nd_occurrences(6:11,:)); state2nd_occurrences(12,:); state2nd_occurrences(13,:)];
+state2nd_occurrences_type = [mean(state2nd_occurrences(1:5,:)); mean(state2nd_occurrences(6:9,:)); mean(state2nd_occurrences(10:11,:)); state2nd_occurrences(12,:); state2nd_occurrences(13,:)];
 figure(908);
 plot(state2nd_occurrences_type');
 title('State occurrences over time'); % Add title
 
 
+
+size(J_states) % firm, bits, iteration
+size(cf) % cf-rule, conditions/values, firms, iteration
+
+bitsset = mean(~isnan(cf(:,1:13,:,:)), 1);
+size(bitsset)
+
+bitsset_funda = mean(bitsset(:,1:5,:,:), 2);
+bitsset_trend = mean(bitsset(:,6:9,:,:), 2);
+bitsset_ocsil = mean(bitsset(:,10:11,:,:), 2);
+bitsset_allon = mean(bitsset(:,12,:,:), 2);
+bitsset_aloff = mean(bitsset(:,13,:,:), 2);
+
+% Faction of condition bits set to respectively fundamental, trending
+% ocsillation and on/off.
+figure(1001);
+clf reset; hold on; for n=1:pref.N plot(squeeze(bitsset_funda(:,:,n,:)), 'Color', color(n,:)); end; hold off;
+figure(1002);
+clf reset; hold on; for n=1:pref.N plot(squeeze(bitsset_trend(:,:,n,:)), 'Color', color(n,:)); end; hold off;
+figure(1003);
+clf reset; hold on; for n=1:pref.N plot(squeeze(bitsset_ocsil(:,:,n,:)), 'Color', color(n,:)); end; hold off;
+figure(1004);
+plot(squeeze(bitsset_allon)');
+figure(1005);
+plot(squeeze(bitsset_aloff)');
+% Decrease due to specificity cost.
+
+cf_used_change = diff(cf(:,25,:,:), 1, 4);
+cf_used_list = (cf_used_change > 0);
+
+%size(cf_used_list)
+figure(1011);
+imagesc( squeeze(cf_used_list(:,:,1,1:500)) );
+set(gca,'ydir', 'normal');
+
+figure(1012);
+imagesc( squeeze(cf_used_list(:,:,2,1:500)) );
+set(gca,'ydir', 'normal');
+
+figure(1013);
+imagesc( squeeze(cf_used_list(:,:,3,1:500)) );
+set(gca,'ydir', 'normal');
+
+figure(1014);
+imagesc( squeeze(cf_used_list(:,:,4,1:500)) );
+set(gca,'ydir', 'normal');
+
+figure(1015);
+imagesc( squeeze(cf_used_list(:,:,5,1:500)) );
+set(gca,'ydir', 'normal');
+
+
+
+% If want to compare with maxcov-inductor-GA, then count the number of
+% unique CF-rules used in each interval of psi interations. If used
+% CF-rules converge to a limited set, then the number of unique rules
+% should decrease.
+
+
+% cf2 = cf;
+% cf2(:,27,:,2:end) = cf_used_list;
+% %size(cf_used_change)
+% 
+% cf_used = nan(1, size(cf2,2), size(cf2,3), size(cf2,4));
+% for c=1:size(cf2,1)
+%     for n=1:size(cf2,3)
+%         for i=1:size(cf2,4)
+%             if (cf2(c,27,n,i) == 1)
+%               cf_used(1,:,n,i) = cf2(c,:,n,i);
+%             end
+%         end
+%     end
+% end
+
+used_bitsset = ~isnan(cf_used(:,1:13,:,:));
+used_bitsset_funda = mean(used_bitsset(:,1:5,:,:), 2);
+used_bitsset_trend = mean(used_bitsset(:,6:9,:,:), 2);
+used_bitsset_ocsil = mean(used_bitsset(:,10:11,:,:), 2);
+
+figure(1011);
+plot(squeeze(used_bitsset_funda)');
+figure(1012);
+plot(squeeze(used_bitsset_trend)');
+figure(1013);
+plot(squeeze(used_bitsset_ocsil)');
+
+
+% % Find used cf
+% I = find(cf_used_change > 0);
+% dims = size(cf_used_change);
+% smax = cell(size(dims));
+% [smax{:}] = ind2sub(dims, I);
+% %smax{1}
+% %smax{4}
+% dims2 = size(cf);
+% dims2([1 3 4])
+% idx_used = sub2ind(dims2([1 3 4]), smax{1}, smax{3}, smax{4});
+
+cf_used_change = diff(cf(:,25,:,:), 1, 4);
+cf_used_list = (cf_used_change > 0);
+cf2 = cf;
+cf2(:,27,:,2:end) = cf_used_list;
+j = 1;
+test_used = nan(1, 29);
+for c=1:size(cf2,1)
+    for n=1:size(cf2,3)
+        for i=1:size(cf2,4)
+            if (cf2(c,27,n,i) == 1)
+              test_used(j,:) = [cf2(c,1:26,n,i) i n c];
+              j = j+1;
+            end
+        end
+    end
+end
+
+csvwrite(strcat('data/maxcov-inductor-ga_N5_mu12_n15_usedcf.csv'), test_used);
+
+
+
+%cf_used2 = cf_used;
+
+%delete_cf = zeros(size(cf_used,1), size(cf_used,3), size(cf_used,4));
+%size(delete_cf)
+%size(cf_used2)
+
+%[~, idx] = sort(cf_used, 2);
+%size(idx)
+%iv = zeros(1, size(cf_used,2));
+%size(iv)
+%iv(:) = idx(1,:,1,1);
+%cf_used_sorted = cf_used(:,iv,:,:);
+
+%[cf_used_cf, ~, cf_used_n, cf_used_i] = ind2sub(size(cf_used), find(cf_used(:,27,:,:) ~= 1));
+
+%[cf_used_cf, ~, cf_used_n, cf_used_i] = ind2sub(size(cf_used_change), find(cf_used_change > 0) );
+%max(cf_used_cf)
+%max(cf_used_n)
+%max(cf_used_i)
+
+%cf_used = sub2ind(size(cf), cf_used_cf, ones(length(cf_used_cf), 1), 1)
+%size(cf_used_cf)
+%size( ones(length(cf_used_cf), 1) )
 % diff_xy = diff(xy(:,:,:), 1, 3);
 % %size(xy)
 % %size(diff_xy)
@@ -676,14 +822,14 @@ plot(repmat(mean(squeeze(xy(n,2,:))), 1, pref.iterations), 'Color', 'k', 'LineSt
 hold off;
 
 
-state_used = squeeze(sum(cf_used(:,1:13,:,:),3,'omitnan'));
+state_used = squeeze(sum(cf2(:,1:13,:,:),3,'omitnan'));
 state_used_total = sum(sum(state_used,1,'omitnan'),3);
 figure(914);
 stem(state_used_total);
 title('Total number of states occurrences'); % Add title
 
 
-state_used = squeeze(sum(cf_used(:,1:13,:,:),3,'omitnan'));
+state_used = squeeze(sum(cf2(:,1:13,:,:),3,'omitnan'));
 state_used_total = sum(sum(state_used,1,'omitnan'),3);
 figure(914);
 stem(state_used_total);

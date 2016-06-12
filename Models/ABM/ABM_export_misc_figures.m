@@ -321,4 +321,46 @@ export_xy = [repelem((1:pref.iterations*pref.psi)', pref.N) repmat((1:pref.N)', 
 csvwrite(strcat('data/three_maxcov-inductor-ga_xy_N3_mu15_nratio2_i2500.csv'), export_xy);
 
 
-xy(:,:,1:2)
+
+% Five firms -- accuracy
+
+% MAXCOV-INDUCTOR-GA
+% N = 5;
+% mu = 1.3;
+% n_ratio = 1.5;
+% iterations = 50;
+% psi = 50;
+% M = 100;
+% a_a = 1-1/75;
+% C = 0.0005;
+% crossover = 0.3;
+% rules = repmat({'MAXCOV-INDUCTOR-GA'},1,pref.N);
+
+xy_extend = reshape(permute(xy, [1 3 2]), [], 2);
+export_xy = table(repelem(1:pref.iterations*pref.psi,pref.N)', repmat(1:pref.N,1,pref.iterations*pref.psi)', xy_extend(:,1), xy_extend(:,2), ...
+                      'VariableNames', {'iteration' 'firm' 'x' 'y'});
+writetable(export_xy, strcat('data/xy_accuracy_maxcov-inductor-ga_N5_mu13_nratio15_psi50_i50.csv'),'Delimiter',',');
+
+accuracy_i = squeeze(cf(:, 24, :, :));
+accuracy_i_positive = accuracy_i;
+accuracy_i_positive(accuracy_i_positive==0) = NaN; % Non-zero accuracy.
+accuracy_i_positive_mean_firm = squeeze(mean(accuracy_i_positive, 1, 'omitnan'));  % Mean over all firm's condition/forcast rules.
+accuracy_list = reshape(accuracy_i_positive_mean_firm, pref.iterations*pref.psi*pref.N, 1);
+export_accuracy = table(repelem(1:pref.iterations*pref.psi,pref.N)', repmat(1:pref.N,1,pref.iterations*pref.psi)', accuracy_list, ...
+                      'VariableNames', {'iteration' 'firm' 'accuracy'});
+writetable(export_accuracy, strcat('data/accuracy_maxcov-inductor-ga_N5_mu13_nratio15_psi50_i50.csv'),'Delimiter',',');
+
+% MAXCOV-INDUCTOR-GA
+% Using the same initial settings (xy_0 and cf_0). But re-runing model with
+% rules = repmat({'MAXCOV-INDUCTOR'},1,pref.N);
+
+accuracy_i = squeeze(cf(:, 24, :, :));
+accuracy_i_positive = accuracy_i;
+accuracy_i_positive(accuracy_i_positive==0) = NaN; % Non-zero accuracy.
+accuracy_i_positive_mean_firm = squeeze(mean(accuracy_i_positive, 1, 'omitnan'));  % Mean over all firm's condition/forcast rules.
+accuracy_list = reshape(accuracy_i_positive_mean_firm, pref.iterations*pref.psi*pref.N, 1);
+export_accuracy = table(repelem(1:pref.iterations*pref.psi,pref.N)', repmat(1:pref.N,1,pref.iterations*pref.psi)', accuracy_list, ...
+                      'VariableNames', {'iteration' 'firm' 'accuracy'});
+writetable(export_accuracy, strcat('data/accuracy_maxcov-inductor_N5_mu13_nratio15_psi50_i50_same.csv'),'Delimiter',',');
+
+
