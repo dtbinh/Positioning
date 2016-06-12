@@ -18,6 +18,16 @@ Figures/**.png
 **/.Rhistory
 **/.Rapp.history
 
+# Latex system files
+**/.aux
+**/.bbl
+**/.blg
+**/.log
+**/.out
+**/.spl
+**/.synctex.gz
+**/.toc
+
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
 Statement/Images/Structures.psd
