@@ -10,8 +10,9 @@ Models/ABM/fig/**
 Models/ABM/profile/**
 Figures/data/**
 
-# No need for duplicates. Just keep the PDF-files.
+# No need for duplicates.
 Figures/**.png
+Figures/**.pdf
 
 # Rstudio system files
 **/.RData
@@ -28,6 +29,7 @@ Figures/**.png
 **/.synctex.gz
 **/.toc
 **/.sty
+**/.spl
 
 # Miscellaneous 
 Notes/Kindle.Highlights_Complexity.and.the.Economy.pdf
