@@ -17,11 +17,11 @@ pref.resolution = 50; % Length of the square (even number to include (0,0))
 pref.N = 12; % Number of firms
 pref.mu = 0; % Mean of subpopulation
 pref.n_ratio = 1; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-pref.iterations = 5; % Number of system ticks / iterations.
-pref.psi = 200; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
+pref.iterations = 50; % Number of system ticks / iterations.
+pref.psi = 50; % Number of ticks per system ticks. The number of system tick must be integer, thus iterations/psi needs to be integer.
 pref.M = 100; % Number of condition/forecast rules that each firm holds.
 pref.a_a = 1-1/75; % Accuracy mememory paramenter.
-pref.C = 0.005; % Cost of specificity.
+pref.C = 0.0005; %0.005; % Cost of specificity.
 pref.crossover = 0.3; % Probability that the offspring condition/forecast rule is created by crossover operations (rather than mutation).
 
 % Decision rules

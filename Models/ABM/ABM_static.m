@@ -17,7 +17,7 @@ pref.resolution = 50; % Length of the square (even number to include (0,0))
 pref.N = 12; % Number of firms
 pref.mu = 1.5; % Mean of subpopulation
 pref.n_ratio = 2; % Relative size of subpopulation; n_l/n_r how much larger is the left subpopulation than the right subpopulation
-pref.iterations = 5000;
+pref.iterations = 150;
 
 % Decision rules
 %pref.rules = repmat({'STICKER'},1,pref.N);

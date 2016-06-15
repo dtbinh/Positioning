@@ -442,6 +442,13 @@ for i = 1:pref.iterations*pref.psi
 end
 
 
+%% 4. Export
+    %%% 4.2 Save data
+    if(pref.export_data)
+        pref.xy_0 = xy_0;
+        save(strcat('data/all/data_', char(pref.timestamp, 'yyyyMMdd_HHmm'), '_run', sprintf('%04d', pref.run), '_rep', sprintf('%03d', pref.rep) ), 'pref', 'xy');
+    end
+
     %%% 4.4 Function output
     o_mean_eccentricity = mean_eccentricity;
     o_ENP = ENP;
