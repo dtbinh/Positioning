@@ -1422,3 +1422,21 @@ $\alpha_a$ is the memory parameter and
 Where $M$ is the number of *condition/forecast* held by firm $i$, since this is constant and identical across firms the term can be left out. 
 
  if crossover or mutation is used to create the new condition/forecast rule. The crossover method is used with probability $p$, and mutation method with probability $1-p$. 
+
+
+Many have gone this path before.
+Although the there is a lack of equilibrium solutions lack in  
+The motivation is not to 
+The motivation for using the agent based model in this paper ... is discover  not to check Nash-equilibrium conditions, .. The objective is not to check Nash-equilibrium conditions ... equilibrium behaviour vs equilibrium results ... but to ... lag of equilibrium solutions/benchmark, thus risking that fitting the model such that it replicates the eq. in N=2 2D, does not carry over to $N>2$. ... product differentiation is dynamic and evolving process, hard to imagine the process settles down to a static equilibrium state 
+
+	Hypotheses are endogenous in this decision rule
+	
+	 The  And how firm with a majority of consumers one firm is able to capture a predominant share of customers    The paper augment
+	
+	 The paper constructs a agents-based model
+	The paper constructs an agent-based model with fore
+This paper set out to reintroduce foresight and thus strategic consideration into the competitive location model,
+The natural setting when considering competitive location or competitive product differentiation is a market with few firms where firms act strategically and with foresight. The choice of each firm reflects the diversity of consumer preferences and so the aggregated distribution of consumer preferences is likely to be of great importance. Moreover the aggregated distribution of each consumer's preferred product or location does not necessarily follow a convenient uniform, symmetric or even unimodal distribution. The distribution may well be asymmetric and multi-modal.
+With this method firms use \emph{inductive reasoning}, i.e. they hold several hypotheses on how a competing firm chooses to locate, and use the most probable hypothesis given the current state to predict the future location of the competing firm. The firm gradually discard poorly performing hypotheses and form new hypotheses. The model is dynamic and firms act simultaneously. The results of the model are derived by observing how the interaction of firms play out. 
+This paper finds that predictions by themselves have a limited effect on the overall location pattern of firms.
+The interacting effect of firms competing for consumers seems to results in locations that are more or less on par with the social optimal location.

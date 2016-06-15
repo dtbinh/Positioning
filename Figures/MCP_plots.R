@@ -48,6 +48,7 @@ n_ratio_break = function(mu) {
 
 # Equlibrium condition 1: ENP at the limit of 'No firm has market twice as large as any other firm's market'.
 eqcond1_ENP = function(N) {(1+N)^2/(3+N)}
+eqcond2_ENP = function(N) {(2*N-1)^2/(4*N-3)}
 
 # Extract legend
 g_legend <- function(a.gplot){
@@ -107,7 +108,7 @@ gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggre
           legend.key = element_rect(fill = NA, colour = NA) )
   fig21a + geom_line(size=1) + 
     #geom_ribbon(aes(x = N, ymin = MeanEst-StdDev, ymax = pmin(gs_1$MeanEst+gs_1$StdDev, rep(1.7, nrow(gs_1))), group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
-    geom_ribbon(aes(x = N, ymin = MeanEst-StdError*1.96, ymax = MeanEst+StdError*1.96, group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
+    geom_ribbon(aes(x = N, ymin = MeanEst-StdError*1.96, ymax = MeanEst+StdError*1.96, group = factor(Rule), fill=Rule, color = NULL), alpha = 0.2) +
     scale_fill_discrete(guide=FALSE) +
     scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
     scale_y_continuous(limits = c(0, 1.6), expand = c(0, 0)) +
@@ -120,12 +121,14 @@ gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggre
     theme(legend.position = "top", 
           legend.box = "horizontal", 
           legend.key = element_rect(fill = NA, colour = NA) )
-  fig22a + geom_line(size=1) + 
+  fig22a + 
+    stat_function(fun = eqcond1_ENP, colour = "black") + 
+    geom_line(size=1) + 
     #geom_ribbon(aes(x = N, ymin = pmax(gs_2$MeanEst-gs_2$StdDev, rep(1, nrow(gs_2))), ymax = pmin(gs_2$MeanEst+gs_2$StdDev, rep(12, nrow(gs_2))), group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
-    geom_ribbon(aes(x = N, ymin = MeanEst-StdError*1.96, ymax = MeanEst+StdError*1.96, group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
+    geom_ribbon(aes(x = N, ymin = MeanEst-StdError*1.96, ymax = MeanEst+StdError*1.96, group = factor(Rule), fill=Rule, color = NULL), alpha = 0.2) +
     scale_fill_discrete(guide=FALSE) +
     geom_abline(intercept = 0, slope = 1, color="gray") +
-    #stat_function(fun = eqcond1_ENP, colour = "black") + 
+#    stat_function(fun = eqcond2_ENP, colour = "black") + 
     scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
     scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
     labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL)
@@ -140,7 +143,7 @@ gs_3$Rule = factor(gs_3$Rule, labels = c("All-sticker", "All-hunter", "All-aggre
           legend.key = element_rect(fill = NA, colour = NA) )
   fig23a + geom_line(size=1) + 
     #geom_ribbon(aes(x = N, ymin = MeanEst-StdDev, ymax = MeanEst+StdDev, group = factor(Rule), fill = Rule, color = NULL), alpha = 0.1) +
-    geom_ribbon(aes(x = N, ymin = MeanEst-StdError*1.96, ymax = MeanEst+StdError*1.96, group = factor(Rule), fill=Rule, color = NULL), alpha = 0.1) +
+    geom_ribbon(aes(x = N, ymin = MeanEst-StdError*1.96, ymax = MeanEst+StdError*1.96, group = factor(Rule), fill=Rule, color = NULL), alpha = 0.2) +
     scale_fill_discrete(guide=FALSE) +
     scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
     scale_y_continuous(limits = c(-2, 0), expand = c(0, 0)) +
@@ -867,10 +870,12 @@ mcp_ex_miga3$polarization = ordered(mcp_ex_miga3$polarization, labels = c("Polar
       theme(legend.position = "top", 
             legend.box = "horizontal", 
             legend.key = element_rect(fill = NA, colour = NA) )
-    fig622a + stat_smooth() + 
+    fig622a + 
+      stat_function(fun = eqcond1_ENP, colour = "black") + 
+      stat_smooth() + 
       scale_colour_brewer(palette = "Dark2", guide = FALSE) +
       geom_abline(intercept = 0, slope = 1, color="gray") +
-      #stat_function(fun = eqcond1_ENP, colour = "black") + 
+      #stat_function(fun = eqcond2_ENP, colour = "black", linetype="dotted") + 
       scale_x_continuous(limits = c(2, 12), breaks = 2:12, minor_breaks = NULL) + 
       scale_y_continuous(limits = c(1, 12), breaks = 2:12, minor_breaks = NULL, expand = c(0, 0)) +
       labs(y = "Effective number of firms (ENP)", x = "Number of firms", colour = NULL)
