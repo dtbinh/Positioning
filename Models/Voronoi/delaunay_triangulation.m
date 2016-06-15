@@ -143,3 +143,16 @@ hold on;
 scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
 scatter( centroid_tri_i(max_tri,1)' , centroid_tri_i(max_tri,2)', 'filled', 'r');
 hold off;
+
+
+% Voronoi plot
+DT_temp = delaunayTriangulation(xy);
+figure(10);
+voronoi(xy(:,1)' , xy(:,2)', 'k');
+xlim([-5 5]); ylim([-5 5]);
+set(gca,'YTick',(-5:5:5));
+set(gca,'XTick',(-5:5:5));
+hold on;
+s = scatter( xy(:,1)' , xy(:,2)', 'filled', 'b');
+triplot(DT_temp, ':r')
+hold off;

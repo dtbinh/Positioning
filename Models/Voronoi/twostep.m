@@ -125,8 +125,8 @@ end
  
 %% PLOTS
 
-%i=10;
-for i=1:ppn+potentn3
+i=10;
+for i=5:ppn%1:ppn+potentn3
 figure(21);
 scatter(xy(:,1)', xy(:,2)', 'filled');
 hold on;
@@ -134,7 +134,7 @@ patch(potenthx{i}, potenthy{i}, i, 'FaceAlpha', 0.2, 'EdgeColor', 'none');
 scatter(potentialxy(i,1), potentialxy(i,2), 'rd');
 xlim([-6 6]); ylim([-6 6]);
 hold off;
-pause(0.5)
+pause(1)
 end
 
 figure(25);
